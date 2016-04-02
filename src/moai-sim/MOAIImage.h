@@ -21,19 +21,19 @@ namespace MOAIImageTransform {
 //================================================================//
 /**	@lua	MOAIImage
 	@text	Image/bitmap class.
-	
+
 	@const	FILTER_LINEAR
 	@const	FILTER_NEAREST
-	
+
 	@flag	POW_TWO				Adds padding at the right and bottom to make the image dimensions powers of 2.
 	@flag	QUANTIZE			Uses less than 8 bits per channel to reduce memory consumption.
 	@flag	TRUECOLOR			Converts palettized color formats to true color.
 	@flag	PREMULTIPLY_ALPHA	Premultiplies the pixel colors with their alpha values.
-	
+
 	@flag	PIXEL_FMT_TRUECOLOR
 	@flag	PIXEL_FMT_INDEX_4
 	@flag	PIXEL_FMT_INDEX_8
-	
+
 	@flag	COLOR_FMT_A_8
 	@flag	COLOR_FMT_RGB_888
 	@flag	COLOR_FMT_RGB_565
@@ -61,7 +61,7 @@ private:
 
 	u32		mWidth;
 	u32		mHeight;
-	
+
 	void*	mBitmap;
 	void*	mPalette;
 
@@ -115,23 +115,23 @@ private:
 	virtual void	OnImageStatusChanged	( bool isOK );
 
 public:
-	
+
 	DECL_LUA_FACTORY ( MOAIImage )
-	
+
 	GET_CONST ( PixelFormat, PixelFormat, mPixelFormat )
 	GET_CONST ( ZLColor::ColorFormat, ColorFormat, mColorFormat )
 
 	GET_CONST ( u32, Width, mWidth )
 	GET_CONST ( u32, Height, mHeight )
-	
+
 	GET_CONST ( void*, Bitmap, mBitmap );
 	GET_CONST ( void*, Palette, mPalette );
-	
+
 	enum {
 		FILTER_LINEAR,
 		FILTER_NEAREST,
 	};
-	
+
 	//----------------------------------------------------------------//
 	static MOAIImage*		AffirmImage					( MOAILuaState& state, int idx );
 	ZLColorVec				Average						() const;
@@ -175,6 +175,7 @@ public:
 	static bool				IsPow2						( u32 n );
 	bool					Load						( cc8* filename, u32 transform = 0 );
 	bool					Load						( ZLStream& stream, u32 transform = 0 );
+	void					LoadDual					( ZLStream& rgb, ZLStream& alpha, u32 transform );
 	bool					IsOK						();
 	bool					MipReduce					();
 	void					Mix							( const MOAIImage& image, const ZLMatrix4x4& mtx, float K );
