@@ -2,61 +2,58 @@ cmake_minimum_required ( VERSION 2.8.5 )
 project ( crypto )
 
 
-  set ( OPENSSL_ROOT "${MOAI_ROOT}/3rdparty/openssl-1.0.0m")
-  set ( CMAKE_CURRENT_SOURCE_DIR "${OPENSSL_ROOT}/crypto/" )
-  
-  #set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -DOPENSSL_NO_ASM" )
-  set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DL_ENDIAN -DOPENSSL_NO_ASM  -DOPENSSL_NO_RC5 -DOPENSSL_NO_MD2 -DOPENSSL_NO_KRB5 -DOPENSSL_NO_JPAKE -DOPENSSL_NO_STATIC_ENGINE "  )
+set ( OPENSSL_ROOT "${MOAI_ROOT}/3rdparty/openssl-1.0.2g" )
+set ( CMAKE_CURRENT_SOURCE_DIR "${OPENSSL_ROOT}/crypto/" )
 
-  SET_SOURCE_FILES_PROPERTIES( . PROPERTIES LANGUAGE CXX )
+set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DL_ENDIAN -DOPENSSL_NO_ASM -DOPENSSL_NO_RC5 -DOPENSSL_NO_MD2 -DOPENSSL_NO_KRB5 -DOPENSSL_NO_JPAKE -DOPENSSL_NO_STATIC_ENGINE" )
 
-  set ( CRYPTO_INCLUDES 
-    "${OPENSSL_ROOT}/crypto/"
-    "${OPENSSL_ROOT}/include/"
+SET_SOURCE_FILES_PROPERTIES( . PROPERTIES LANGUAGE CXX )
+
+set ( CRYPTO_INCLUDES
     "${OPENSSL_ROOT}/crypto/asn1/"
     "${OPENSSL_ROOT}/crypto/evp/"
-    "${OPENSSL_ROOT}" 
-   )
+    "${OPENSSL_ROOT}/crypto/modes/"
+    "${OPENSSL_ROOT}/crypto/"
+    "${OPENSSL_ROOT}/include/"
+    "${OPENSSL_ROOT}"
+)
 
-    if ( BUILD_OSX )
-        set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DOPENSSL_NO_ASM")
-        set ( PLATFORM_INCLUDE "include-osx")
-    endif ( BUILD_OSX )
-  
-    if ( BUILD_LINUX )
-         set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DOPENSSL_SYSNAME_LINUX"  )
-        set ( PLATFORM_INCLUDE "include-linux")
-    endif ( BUILD_LINUX )
+if ( BUILD_OSX )
+    set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DOPENSSL_NO_ASM" )
+    set ( PLATFORM_INCLUDE "include-osx" )
+endif ( BUILD_OSX )
 
-    if ( BUILD_WINDOWS )
-  	  	set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DL_ENDIAN -DOPENSSL_SYSNAME_WIN32  -DOPENSSL_NO_RC5 -DOPENSSL_NO_MD2 -DOPENSSL_NO_KRB5 -DOPENSSL_NO_JPAKE -DOPENSSL_NO_STATIC_ENGINE -DMK1MF_BUILD" )
-        if (MSVC)
-            set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DWIN32 -DDSO_WIN32 -DWIN32_LEAN_AND_MEAN -D_LIB -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -DMK1MF_PLATFORM_VC_WIN32")
-            set (PLATFORM_INCLUDE "include-win32")
-        else ()
-            set ( PLATFORM_INCLUDE "include-mingw")
-        endif(MSVC)
-    endif ( BUILD_WINDOWS )
+if ( BUILD_LINUX )
+     set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DOPENSSL_SYSNAME_LINUX"  )
+    set ( PLATFORM_INCLUDE "include-linux" )
+endif ( BUILD_LINUX )
 
-    if ( BUILD_ANDROID )
-        set ( PLATFORM_INCLUDE "include-android")
-        set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DOPENSSL_SYSNAME_ANDROID " )
-     endif ( BUILD_ANDROID )
+if ( BUILD_WINDOWS )
+	  	set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DL_ENDIAN -DOPENSSL_SYSNAME_WIN32 -DOPENSSL_NO_RC5 -DOPENSSL_NO_MD2 -DOPENSSL_NO_KRB5 -DOPENSSL_NO_JPAKE -DOPENSSL_NO_STATIC_ENGINE -DMK1MF_BUILD" )
+    if ( MSVC )
+        set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DWIN32 -DDSO_WIN32 -DWIN32_LEAN_AND_MEAN -D_LIB -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -DMK1MF_PLATFORM_VC_WIN32" )
+        set ( PLATFORM_INCLUDE "include-win32" )
+    else ()
+        set ( PLATFORM_INCLUDE "include-mingw" )
+    endif ( MSVC )
+endif ( BUILD_WINDOWS )
 
-    if ( BUILD_IOS )
-        set ( PLATFORM_INCLUDE "include-iphone")
-    endif ( BUILD_IOS)
+if ( BUILD_ANDROID )
+    set ( PLATFORM_INCLUDE "include-android")
+    set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DOPENSSL_SYSNAME_ANDROID" )
+ endif ( BUILD_ANDROID )
 
+if ( BUILD_IOS )
+    set ( PLATFORM_INCLUDE "include-iphone" )
+endif ( BUILD_IOS )
 
-  
-    set( CRYPTO_INCLUDES
-        "${OPENSSL_ROOT}/${PLATFORM_INCLUDE}"
-        ${CRYPTO_INCLUDES}
-    )
-   
+set( CRYPTO_INCLUDES
+    "${OPENSSL_ROOT}/${PLATFORM_INCLUDE}"
+    ${CRYPTO_INCLUDES}
+)
 
+set ( CRYPTO_SOURCES
 
-  set ( CRYPTO_SOURCES 
     ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_cbc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_cfb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_core.c
@@ -66,18 +63,26 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_misc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_ofb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_wrap.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_x86core.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/des/cbc3_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/cbc_cksm.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/cbc_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/cfb64ede.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/cfb64enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/cfb_enc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/des/des.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/des_enc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/des/des_old.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/des/des_old2.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/ecb3_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/ecb_enc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/des/ede_cbcm_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/enc_read.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/enc_writ.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/fcrypt.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/fcrypt_b.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/des/ncbc_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/ofb64ede.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/ofb64enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/ofb_enc.c
@@ -85,31 +90,44 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/des/qud_cksm.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/rand_key.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/read2pwd.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/des/read_pwd.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/rpc_enc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/des/rpw.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/set_key.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/str2key.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/xcbc_enc.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/comp/c_rle.c
     ${CMAKE_CURRENT_SOURCE_DIR}/comp/c_zlib.c
     ${CMAKE_CURRENT_SOURCE_DIR}/comp/comp_err.c
     ${CMAKE_CURRENT_SOURCE_DIR}/comp/comp_lib.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/rc2/rc2_cbc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rc2/rc2_ecb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rc2/rc2_skey.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rc2/rc2cfb64.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rc2/rc2ofb64.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/rc4/rc4_enc.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/rc4/rc4_skey.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/rc2/tab.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/md5/md5.c
     ${CMAKE_CURRENT_SOURCE_DIR}/md5/md5_dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/md5/md5_one.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha1_one.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha1dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha256.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha256t.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha512.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha512t.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha_dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha_one.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/md4/md4.c
     ${CMAKE_CURRENT_SOURCE_DIR}/md4/md4_dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/md4/md4_one.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/rand/md_rand.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rand/rand_egd.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rand/rand_err.c
@@ -117,8 +135,10 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/rand/rand_nw.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rand/rand_os2.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rand/rand_unix.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/rand/rand_vms.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rand/rand_win.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rand/randfile.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/x509/by_dir.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509/by_file.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509/x509_att.c
@@ -143,6 +163,7 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/x509/x509spki.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509/x509type.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509/x_all.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/b_dump.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/b_print.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/b_sock.c
@@ -162,8 +183,13 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/bss_log.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/bss_mem.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/bss_null.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/bio/bss_rtcp.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/bss_sock.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/buffer/buf_err.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/buffer/buf_str.c
     ${CMAKE_CURRENT_SOURCE_DIR}/buffer/buffer.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/bio_b64.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/bio_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/bio_md.c
@@ -173,21 +199,26 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/c_alld.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/digest.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_aes.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_aes_cbc_hmac_sha1.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_aes_cbc_hmac_sha256.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_bf.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_camellia.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_cast.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_des.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_des3.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_dsa.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_idea.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_null.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_old.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_rc2.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_rc4.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_rc4_hmac_md5.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_rc5.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_seed.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_xcbc_d.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/encode.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/evp_acnf.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/evp/evp_cnf.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/evp_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/evp_err.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/evp_key.c
@@ -208,6 +239,7 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/m_sigver.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/m_wp.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/names.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/evp/openbsd_hw.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/p5_crpt.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/p5_crpt2.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/p_dec.c
@@ -220,9 +252,11 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/pmeth_fn.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/pmeth_gn.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/pmeth_lib.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/err/err.c
     ${CMAKE_CURRENT_SOURCE_DIR}/err/err_all.c
     ${CMAKE_CURRENT_SOURCE_DIR}/err/err_prn.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/ocsp/ocsp_asn.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ocsp/ocsp_cl.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ocsp/ocsp_err.c
@@ -232,10 +266,13 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/ocsp/ocsp_prn.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ocsp/ocsp_srv.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ocsp/ocsp_vfy.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/ui/ui_compat.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ui/ui_err.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ui/ui_lib.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ui/ui_openssl.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ui/ui_util.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/asn1/a_bitstr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/asn1/a_bool.c
     ${CMAKE_CURRENT_SOURCE_DIR}/asn1/a_bytes.c
@@ -313,7 +350,9 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/asn1/x_val.c
     ${CMAKE_CURRENT_SOURCE_DIR}/asn1/x_x509.c
     ${CMAKE_CURRENT_SOURCE_DIR}/asn1/x_x509a.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/stack/stack.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/bn/bn_add.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bn/bn_asm.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bn/bn_blind.c
@@ -341,18 +380,27 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/bn/bn_sqr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bn/bn_sqrt.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bn/bn_word.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/bn/bn_x931p.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/bn/rsaz_exp.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/bn/vms-helper.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/lhash/lh_stats.c
     ${CMAKE_CURRENT_SOURCE_DIR}/lhash/lhash.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/objects/o_names.c
     ${CMAKE_CURRENT_SOURCE_DIR}/objects/obj_dat.c
     ${CMAKE_CURRENT_SOURCE_DIR}/objects/obj_err.c
     ${CMAKE_CURRENT_SOURCE_DIR}/objects/obj_lib.c
     ${CMAKE_CURRENT_SOURCE_DIR}/objects/obj_xref.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/buffer/buf_err.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/buffer/buf_str.c
     ${CMAKE_CURRENT_SOURCE_DIR}/buffer/buffer.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/rsa/rsa_ameth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rsa/rsa_asn1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rsa/rsa_chk.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/rsa/rsa_crpt.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rsa/rsa_depr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rsa/rsa_eay.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rsa/rsa_err.c
@@ -369,9 +417,11 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/rsa/rsa_sign.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rsa/rsa_ssl.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rsa/rsa_x931.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/hmac/hm_ameth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/hmac/hm_pmeth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/hmac/hmac.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/pem/pem_all.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pem/pem_err.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pem/pem_info.c
@@ -384,6 +434,7 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/pem/pem_x509.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pem/pem_xaux.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pem/pvkfmt.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsa_ameth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsa_asn1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsa_depr.c
@@ -396,30 +447,45 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsa_prn.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsa_sign.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsa_vrf.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsagen.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_ameth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_asn1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_check.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_depr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_err.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_gen.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_kdf.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_key.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_lib.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_pmeth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_prn.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_rfc5114.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/dh/p1024.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/dh/p192.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/dh/p512.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/bio_pk7.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_asn1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_attr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_doit.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_lib.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_mime.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_smime.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pkcs7err.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/modes/cbc128.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/modes/ccm128.c
     ${CMAKE_CURRENT_SOURCE_DIR}/modes/cfb128.c
     ${CMAKE_CURRENT_SOURCE_DIR}/modes/ctr128.c
     ${CMAKE_CURRENT_SOURCE_DIR}/modes/cts128.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/modes/gcm128.c
     ${CMAKE_CURRENT_SOURCE_DIR}/modes/ofb128.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/modes/wrap128.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/modes/xts128.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/pcy_cache.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/pcy_data.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/pcy_lib.c
@@ -452,10 +518,12 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/v3_pmaps.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/v3_prn.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/v3_purp.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/v3_scts.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/v3_skey.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/v3_sxnet.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/v3_utl.c
     ${CMAKE_CURRENT_SOURCE_DIR}/x509v3/v3err.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/conf/conf_api.c
     ${CMAKE_CURRENT_SOURCE_DIR}/conf/conf_def.c
     ${CMAKE_CURRENT_SOURCE_DIR}/conf/conf_err.c
@@ -463,6 +531,7 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/conf/conf_mall.c
     ${CMAKE_CURRENT_SOURCE_DIR}/conf/conf_mod.c
     ${CMAKE_CURRENT_SOURCE_DIR}/conf/conf_sap.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs12/p12_add.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs12/p12_asn.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs12/p12_attr.c
@@ -478,6 +547,7 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs12/p12_p8e.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs12/p12_utl.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs12/pk12err.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/dso/dso_beos.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dso/dso_dl.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dso/dso_dlfcn.c
@@ -487,6 +557,7 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/dso/dso_openssl.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dso/dso_vms.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dso/dso_win32.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/ts/ts_asn1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ts/ts_conf.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ts/ts_err.c
@@ -498,113 +569,179 @@ project ( crypto )
     ${CMAKE_CURRENT_SOURCE_DIR}/ts/ts_rsp_utils.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ts/ts_rsp_verify.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ts/ts_verify_ctx.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/txt_db/txt_db.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/pqueue/pqueue.c
+
+    # ${CMAKE_CURRENT_SOURCE_DIR}/armcap.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cpt_err.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cryptlib.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cversion.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ebcdic.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ex_data.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/fips_ers.c
     ${CMAKE_CURRENT_SOURCE_DIR}/mem.c
     ${CMAKE_CURRENT_SOURCE_DIR}/mem_clr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/mem_dbg.c
     ${CMAKE_CURRENT_SOURCE_DIR}/o_dir.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/o_fips.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/o_init.c
     ${CMAKE_CURRENT_SOURCE_DIR}/o_str.c
     ${CMAKE_CURRENT_SOURCE_DIR}/o_time.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ppccap.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/s390xcap.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/sparcv9cap.c
     ${CMAKE_CURRENT_SOURCE_DIR}/uid.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_all.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_cnf.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_cryptodev.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_ctrl.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_dyn.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_err.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_fat.c
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_init.c
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_lib.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_table.c
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_list.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_ctrl.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_err.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_openssl.c
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_pkey.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_fat.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_all.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_dyn.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_dh.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_dsa.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_pkmeth.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_rdrand.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_table.c
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_asnmth.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_rsa.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_ecdsa.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_ecdh.c
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_cipher.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_dh.c
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_digest.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_dsa.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_ecdh.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_ecdsa.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_pkmeth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_rand.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_rsa.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/tb_store.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_asn1.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_sd.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_att.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_lib.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_io.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_cd.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_dd.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_env.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_enc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_env.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_err.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_ess.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_io.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_kari.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_lib.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_pwri.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_sd.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cms/cms_smime.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec2_mult.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec2_oct.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec2_smpl.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_ameth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_asn1.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_lib.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_mult.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_key.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_check.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_curve.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_cvt.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_err.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_key.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_lib.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_mult.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_oct.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_pmeth.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_ameth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec_print.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/eck_prn.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec2_smpl.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ec2_mult.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nist.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_smpl.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_mont.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_asn1.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_err.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_vrf.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_lib.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_ossl.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_sign.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nist.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistp224.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistp256.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistp521.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistputil.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistz256.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistz256_table.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_oct.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_smpl.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/ecdh/ech_err.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ecdh/ech_kdf.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ecdh/ech_key.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ecdh/ech_lib.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ecdh/ech_ossl.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/whrlpool/wp_dgst.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_asn1.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_err.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_lib.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_ossl.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_sign.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ecdsa/ecs_vrf.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/whrlpool/wp_block.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/whrlpool/wp_dgst.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/ripemd/rmd160.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ripemd/rmd_dgst.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ripemd/rmd_one.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/mdc2/mdc2dgst.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/seed/seed.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/seed/seed_ecb.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/seed/seed_cfb.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/seed/seed_ofb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/seed/seed_cbc.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_skey.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_cfb64.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_ofb64.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/seed/seed_cfb.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/seed/seed_ecb.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/seed/seed_ofb.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_cbc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_cfb64.c
     ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_ecb.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_skey.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_ofb64.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_skey.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/idea/idea_spd.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_cfb64.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_ofb64.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_ecb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_enc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_ofb64.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_skey.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cast/cast_spd.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cast/castopts.c
+
     ${CMAKE_CURRENT_SOURCE_DIR}/camellia/camellia.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_misc.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_cfb.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_ofb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_cbc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_cfb.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_ctr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_ecb.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_enc.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_skey.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_misc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_ofb.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_utl.c
+
+    # ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_cbc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_cfb64.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_ecb.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_ofb64.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_ecb.c  
-   )
+    ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_opts.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_skey.c
 
-   add_library( crypto STATIC ${CRYPTO_SOURCES} )  
-   target_include_directories ( crypto PUBLIC "$<BUILD_INTERFACE:${CRYPTO_INCLUDES}>" )
-set_target_properties( crypto PROPERTIES FOLDER Third-Party )
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmac/cm_ameth.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmac/cm_pmeth.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmac/cmac.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmac/cmac.h
 
-   if (BUILD_WINDOWS)
-     target_link_libraries( crypto ws2_32 )
-   endif (BUILD_WINDOWS)
+    ${CMAKE_CURRENT_SOURCE_DIR}/rc4/rc4_enc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/rc4/rc4_skey.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/rc4/rc4_utl.c
 
-   install(TARGETS crypto EXPORT libmoai ARCHIVE DESTINATION lib)
+    ${CMAKE_CURRENT_SOURCE_DIR}/srp/srp_lib.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/srp/srp_vfy.c
+)
+
+
+add_library ( crypto STATIC ${CRYPTO_SOURCES} )
+target_include_directories ( crypto PUBLIC "$<BUILD_INTERFACE:${CRYPTO_INCLUDES}>" )
+set_target_properties ( crypto PROPERTIES FOLDER Third-Party )
+
+if ( BUILD_WINDOWS )
+    target_link_libraries ( crypto ws2_32 )
+endif ( BUILD_WINDOWS )
+
+install ( TARGETS crypto EXPORT libmoai ARCHIVE DESTINATION lib )
