@@ -33,6 +33,10 @@
 	#include <moai-fmod-ex/host.h>
 #endif
 
+#if AKU_WITH_FMOD_STUDIO
+	#include <moai-fmod-studio/host.h>
+#endif
+
 #if AKU_WITH_HARNESS
 	#include <moai-harness/host.h>
 #endif

@@ -2,14 +2,14 @@ cmake_minimum_required ( VERSION 2.8.5 )
 project ( moai-sim )
 
 
-set ( MOAI_SIM_INCLUDES 
+set ( MOAI_SIM_INCLUDES
   "${MOAI_ROOT}/src/"
   "${CMAKE_BINARY_DIR}/libmoai/config"
 
   )
 
-include_directories ( 
-  ${MOAI_SIM_INCLUDES} 
+include_directories (
+  ${MOAI_SIM_INCLUDES}
 )
 
 set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/src/moai-sim/" )
@@ -21,12 +21,12 @@ include_directories ( ${MOAI_SIM_INCLUDES} )
 
 add_library ( moai-sim STATIC ${MOAI_SIM_SRC} )
 
-target_link_libraries ( moai-sim moai-core moai-util contrib zlcore tess)
+target_link_libraries ( moai-sim moai-core moai-util contrib zlcore tess )
 
 #always point to freetype includes so the generated project is easy to turn freetype back on!
 get_target_property ( FREETYPE_INCLUDES freetype INCLUDE_DIRECTORIES )
 
-target_include_directories (moai-sim PUBLIC 
+target_include_directories (moai-sim PUBLIC
     "$<BUILD_INTERFACE:${MOAI_SIM_INCLUDES} ${FREETYPE_INCLUDES}>"
      $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>
      $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include/freetype>

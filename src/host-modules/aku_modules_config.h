@@ -21,6 +21,10 @@
 		#define AKU_WITH_FMOD_EX 0
 	#endif
 
+    #ifndef AKU_WITH_FMOD_STUDIO
+		#define AKU_WITH_FMOD_STUDIO 1
+	#endif
+
 	#ifndef AKU_WITH_HARNESS
 		#define AKU_WITH_HARNESS 0
 	#endif

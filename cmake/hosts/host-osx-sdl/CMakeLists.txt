@@ -1,41 +1,40 @@
 cmake_minimum_required(VERSION 2.8.5)
 
-project(host-sdl)
-set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../cmake-modules")
+project ( host-sdl )
+set ( CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../cmake-modules" )
 
-set (LUA_LIB_DIR  "")
-set (MOAI_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../..")
+set ( LUA_LIB_DIR  "" )
+set ( FMOD_LIB_DIR  "" )
+set ( MOAI_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../.." )
 
-  find_library ( APPLICATION_SERVICES_LIBRARY ApplicationServices )
-  find_library ( CORE_SERVICES_LIBRARY CoreServices )
+find_library ( APPLICATION_SERVICES_LIBRARY ApplicationServices )
+find_library ( CORE_SERVICES_LIBRARY CoreServices )
 
+if ( LIB_PATH )
+  get_filename_component ( LIB_PATH ${LIB_PATH} ABSOLUTE )
+endif ( LIB_PATH )
 
-if (LIB_PATH)
-  get_filename_component(LIB_PATH ${LIB_PATH} ABSOLUTE)
-endif(LIB_PATH)
+if ( HOST_ROOT )
+  get_filename_component ( HOST_ROOT ${HOST_ROOT} ABSOLUTE )
+else ( HOST_ROOT )
+  set ( HOST_ROOT ${MOAI_ROOT}/src )
+endif ( HOST_ROOT )
 
-if (HOST_ROOT)
-  get_filename_component(HOST_ROOT ${HOST_ROOT} ABSOLUTE)
-else (HOST_ROOT)
-  set (HOST_ROOT ${MOAI_ROOT}/src)
-endif(HOST_ROOT)
-
-
-
-include(../../cmake-modules/platform-osx.cmake)
-include(../../cmake-modules/platform-common.cmake)
-include(../../cmake-modules/module-setup.cmake)
-include(../../cmake-modules/libmoai-setup.cmake)
-install(EXPORT libmoai DESTINATION cmake )
+include ( ../../cmake-modules/platform-osx.cmake )
+include ( ../../cmake-modules/platform-common.cmake )
+include ( ../../cmake-modules/module-setup.cmake )
+include ( ../../cmake-modules/libmoai-setup.cmake )
+install ( EXPORT libmoai DESTINATION cmake )
 
 
-add_subdirectory(../host-modules host-modules)
+add_subdirectory ( ../host-modules host-modules )
 
 include_directories ( ${OPENGL_INCLUDE_DIRS} ${HOST_ROOT} )
 
-#fix lua lib path
-if (NOT LIB_PATH)
-  link_directories(${LUA_LIB_DIR})
+#fix lua and fmod lib path
+if  ( NOT LIB_PATH )
+  link_directories ( ${LUA_LIB_DIR} )
+  link_directories ( ${FMOD_LIB_DIR} )
 endif (NOT LIB_PATH)
 
 # Use all cpp files in directory as source code
@@ -44,7 +43,7 @@ file ( GLOB HOST_SDL_SRC "${HOST_ROOT}/host-sdl/*.cpp" "${HOST_ROOT}/host-sdl/*.
 find_package ( OpenGL REQUIRED )
 
 add_executable ( moai ${HOST_SDL_SRC} )
-install(TARGETS moai DESTINATION bin)
+install ( TARGETS moai DESTINATION bin )
 
 target_link_libraries ( moai
   host-modules
@@ -58,10 +57,11 @@ target_link_libraries ( moai
     ${APPLICATION_SERVICES_LIBRARY}
     ${CORE_SERVICES_LIBRARY}
     ${OPENGL_LIBRARIES}
-  )
-set_target_properties( moai PROPERTIES
+)
+set_target_properties ( moai PROPERTIES
    XCODE_ATTRIBUTE_INSTALL_PATH "$(LOCAL_APPS_DIR)"
    XCODE_ATTRIBUTE_SKIP_INSTALL "NO"
+   INSTALL_RPATH "@loader_path/../lib"
 )
 
   macro(ADD_FRAMEWORK fwname appname)

@@ -14,7 +14,7 @@ file ( GLOB HOST_MODULES_SRC
 add_library ( host-modules STATIC ${HOST_MODULES_SRC} )
 set_target_properties( host-modules PROPERTIES FOLDER Modules )
  target_include_directories(host-modules PUBLIC ${HOST_ROOT})
- 
+
 # link against all of these if we have a lib path since there are no speed gains to be made
 # and so that the project can rely on the defines in aku_modules_config
 # and let the linker sort out the redundant entries
@@ -27,6 +27,11 @@ endif (MOAI_CRYPTO OR LIB_PATH)
 if ( MOAI_BOX2D OR LIB_PATH)
   target_link_libraries ( host-modules moai-box2d )
 endif ( MOAI_BOX2D OR LIB_PATH)
+
+#UNTZ
+if ( MOAI_FMOD_STUDIO OR LIB_PATH )
+  target_link_libraries ( host-modules moai-fmod-studio )
+endif ( MOAI_FMOD_STUDIO OR LIB_PATH )
 
 #UNTZ
 if ( MOAI_UNTZ OR LIB_PATH)
@@ -67,6 +72,3 @@ if ( MOAI_TEST )
 endif (MOAI_TEST)
 
 target_link_libraries ( host-modules moai-core )
-
-
-

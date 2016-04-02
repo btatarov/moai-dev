@@ -74,6 +74,10 @@ void AKUModulesAppFinalize () {
 		AKUFmodExAppFinalize ();
 	#endif
 
+	#if AKU_WITH_FMOD_STUDIO
+		AKUFmodStudioAppFinalize ();
+	#endif
+
 	#if AKU_WITH_HARNESS
 		AKUHarnessAppFinalize ();
 	#endif
@@ -105,15 +109,15 @@ void AKUModulesAppFinalize () {
 	#if AKU_WITH_UTIL
 		AKUUtilAppFinalize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS
 		AKUModulesIosAppFinalize ();
 	#endif
-	
+
 	#if AKU_WITH_ANDROID
 		AKUModulesAndroidAppFinalize ();
 	#endif
-	
+
 	#if AKU_WITH_PLUGINS
 		AKUPluginsAppFinalize ();
 	#endif
@@ -144,6 +148,10 @@ void AKUModulesAppInitialize () {
 
 	#if AKU_WITH_FMOD_EX
 		AKUFmodExAppInitialize ();
+	#endif
+
+	#if AKU_WITH_FMOD_STUDIO
+		AKUFmodStudioAppInitialize ();
 	#endif
 
 	#if AKU_WITH_HARNESS
@@ -181,7 +189,7 @@ void AKUModulesAppInitialize () {
 	#if AKU_WITH_IOS
 		AKUModulesIosAppInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_ANDROID
 		AKUModulesAndroidAppInitialize ();
 	#endif
@@ -218,6 +226,10 @@ void AKUModulesContextInitialize () {
 		AKUFmodExContextInitialize ();
 	#endif
 
+	#if AKU_WITH_FMOD_STUDIO
+		AKUFmodStudioContextInitialize ();
+	#endif
+
 	#if AKU_WITH_HARNESS
 		AKUHarnessContextInitialize ();
 	#endif
@@ -249,15 +261,15 @@ void AKUModulesContextInitialize () {
 	#if AKU_WITH_UTIL
 		AKUUtilContextInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS
 		AKUModulesIosContextInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_ANDROID
 		AKUModulesAndroidContextInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_PLUGINS
 		AKUPluginsContextInitialize ();
 	#endif
@@ -265,23 +277,27 @@ void AKUModulesContextInitialize () {
 
 //----------------------------------------------------------------//
 void AKUModulesPause ( bool pause ) {
-	
+
 	#if AKU_WITH_SIM
 		AKUPause ( pause );
 	#endif
-	
+
+	#if AKU_WITH_FMOD_STUDIO
+		AKUFmodStudioPause ( pause );
+	#endif
+
 	#if AKU_WITH_UNTZ
 		AKUUntzPause ( pause );
 	#endif
-	
+
 	#if AKU_WITH_IOS
 		AKUModulesIosPause ( pause );
 	#endif
-	
+
 	#if AKU_WITH_ANDROID
 		AKUModulesAndroidPause ( pause );
 	#endif
-	
+
 	#if AKU_WITH_PLUGINS
 		AKUPluginsPause ( pause );
 	#endif
@@ -309,15 +325,15 @@ void AKUModulesUpdate () {
 	#if AKU_WITH_SIM
 		AKUUpdate ();
 	#endif
-	
+
 	#if AKU_WITH_IOS
 		AKUModulesIosUpdate ();
 	#endif
-	
+
 	#if AKU_WITH_ANDROID
 		AKUModulesAndroidUpdate ();
 	#endif
-	
+
 	#if AKU_WITH_PLUGINS
 		AKUPluginsUpdate ();
 	#endif
