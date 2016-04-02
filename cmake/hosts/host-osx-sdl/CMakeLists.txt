@@ -8,7 +8,7 @@ set (MOAI_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../..")
 
   find_library ( APPLICATION_SERVICES_LIBRARY ApplicationServices )
   find_library ( CORE_SERVICES_LIBRARY CoreServices )
-  
+
 
 if (LIB_PATH)
   get_filename_component(LIB_PATH ${LIB_PATH} ABSOLUTE)
@@ -19,7 +19,7 @@ if (HOST_ROOT)
 else (HOST_ROOT)
   set (HOST_ROOT ${MOAI_ROOT}/src)
 endif(HOST_ROOT)
-  
+
 
 
 include(../../cmake-modules/platform-osx.cmake)
@@ -46,7 +46,7 @@ find_package ( OpenGL REQUIRED )
 add_executable ( moai ${HOST_SDL_SRC} )
 install(TARGETS moai DESTINATION bin)
 
-target_link_libraries ( moai 
+target_link_libraries ( moai
   host-modules
   moai-sim
   moai-util
@@ -72,7 +72,7 @@ set_target_properties( moai PROPERTIES
     if( ${FRAMEWORK_${fwname}} STREQUAL FRAMEWORK_${fwname}-NOTFOUND)
         MESSAGE(ERROR ": Framework ${fwname} not found")
     else()
-        TARGET_LINK_LIBRARIES(${appname} "${FRAMEWORK_${fwname}}/${fwname}")
+        TARGET_LINK_LIBRARIES(${appname} "${FRAMEWORK_${fwname}}/${fwname}.tbd")
         MESSAGE(STATUS "Framework ${fwname} found at ${FRAMEWORK_${fwname}}")
     endif()
   endmacro(ADD_FRAMEWORK)
@@ -97,9 +97,8 @@ set_target_properties( moai PROPERTIES
   )
 
   ADD_FRAMEWORKS(moai "${FWORKS}")
-  
+
 #64 bit macs should add this to keep luajit happy
 if (CMAKE_SIZEOF_VOID_P EQUAL 8)
      set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pagezero_size 10000 -image_base 100000000 ")
 endif (CMAKE_SIZEOF_VOID_P EQUAL 8)
-  
