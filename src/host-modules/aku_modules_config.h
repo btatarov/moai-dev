@@ -53,6 +53,10 @@
 		#define AKU_WITH_SIM 1
 	#endif
 
+    #ifndef AKU_WITH_SPINE
+		#define AKU_WITH_SPINE 1
+	#endif
+
 	#ifndef AKU_WITH_UNTZ
 		#define AKU_WITH_UNTZ 1
 	#endif

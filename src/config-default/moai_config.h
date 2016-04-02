@@ -100,16 +100,20 @@
 		#define MOAI_WITH_OPENSSL 1
 	#endif
 
-	#ifndef MOAI_WITH_TINYXML
-		#define MOAI_WITH_TINYXML 1
-	#endif
-
 	#ifndef MOAI_WITH_SFMT
 		#define MOAI_WITH_SFMT 1
 	#endif
 
+	#ifndef MOAI_WITH_SPINE
+		#define MOAI_WITH_SPINE 1
+	#endif
+
 	#ifndef MOAI_WITH_SQLITE
 		#define MOAI_WITH_SQLITE 1
+	#endif
+
+	#ifndef MOAI_WITH_TINYXML
+		#define MOAI_WITH_TINYXML 1
 	#endif
 
 	#ifndef MOAI_WITH_TLSF

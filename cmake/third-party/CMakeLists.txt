@@ -21,7 +21,20 @@ add_subdirectory ( curl )
 if ( BUILD_IOS OR BUILD_ANDROID )
 	add_subdirectory ( cares )
 endif ( BUILD_IOS OR BUILD_ANDROID )
+
 add_subdirectory ( expat )
+
+# Fmod
+set ( FMOD_HEADERS "" )
+set ( FMOD_LIB "" )
+set ( FMOD_LIB_DIR "" )
+
+add_subdirectory ( fmod )
+
+set ( FMOD_HEADERS ${FMOD_HEADERS} PARENT_SCOPE )
+set ( FMOD_LIB ${FMOD_LIB} PARENT_SCOPE )
+set ( FMOD_LIB_DIR ${FMOD_LIB_DIR} PARENT_SCOPE )
+
 add_subdirectory ( freetype )
 add_subdirectory ( jansson )
 add_subdirectory ( jpg )
@@ -29,7 +42,8 @@ add_subdirectory ( jpg )
 set ( LUA_HEADERS "" )
 set ( LUA_LIB "" )
 set ( LUA_LIB_DIR "" )
-#Lua or LuaJit?
+
+#Lua or LuaJIT?
 if ( MOAI_LUAJIT )
 #	if ( BUILD_IOS )#
 #		set ( LUAJIT_DISABLE_JIT CACHE bool "Disable JIT." OFF )
@@ -38,6 +52,7 @@ if ( MOAI_LUAJIT )
 else ()
 	add_subdirectory ( lua )
 endif ( MOAI_LUAJIT )
+
 set ( LUA_HEADERS ${LUA_HEADERS} PARENT_SCOPE )
 set ( LUA_LIB ${LUA_LIB} PARENT_SCOPE )
 set ( LUA_LIB_DIR ${LUA_LIB_DIR} PARENT_SCOPE )
@@ -48,6 +63,7 @@ add_subdirectory ( ogg )
 add_subdirectory ( png )
 add_subdirectory ( pvr )
 add_subdirectory ( sfmt )
+add_subdirectory ( spine )
 add_subdirectory ( sqlite3 )
 add_subdirectory ( ssl )
 add_subdirectory ( tess )
@@ -56,16 +72,6 @@ add_subdirectory ( tlsf )
 add_subdirectory ( vorbis )
 add_subdirectory ( webp )
 add_subdirectory ( zlib )
-
-set ( FMOD_HEADERS "" )
-set ( FMOD_LIB "" )
-set ( FMOD_LIB_DIR "" )
-
-add_subdirectory ( fmod )
-
-set ( FMOD_HEADERS ${FMOD_HEADERS} PARENT_SCOPE )
-set ( FMOD_LIB ${FMOD_LIB} PARENT_SCOPE )
-set ( FMOD_LIB_DIR ${FMOD_LIB_DIR} PARENT_SCOPE )
 
 #SDL is for pc only
 if (BUILD_LINUX OR BUILD_OSX OR BUILD_WINDOWS)

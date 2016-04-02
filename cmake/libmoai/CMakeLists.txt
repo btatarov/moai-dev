@@ -20,35 +20,39 @@ add_subdirectory ( moai-http-server )
 add_subdirectory ( moai-luaext )
 
 if ( MOAI_FMOD_STUDIO )
-   add_subdirectory ( moai-fmod-studio )
+    add_subdirectory ( moai-fmod-studio )
 endif ( MOAI_FMOD_STUDIO )
 
 if ( MOAI_UNTZ )
-   add_subdirectory ( moai-untz )
-   add_subdirectory ( moai-audiosampler )
+    add_subdirectory ( moai-untz )
+    add_subdirectory ( moai-audiosampler )
 endif ( MOAI_UNTZ )
 
+if ( MOAI_SPINE )
+    add_subdirectory ( moai-spine )
+endif ( MOAI_SPINE )
+
 if ( MOAI_TEST )
-   add_subdirectory ( moai-test )
+    add_subdirectory ( moai-test )
 endif ( MOAI_TEST )
 
 if ( MOAI_PLUGINS )
-  add_subdirectory ( moai-plugins )
+    add_subdirectory ( moai-plugins )
 endif ( MOAI_PLUGINS )
 
 #platform specific libs
 if ( BUILD_LINUX OR BUILD_OSX OR BUILD_WINDOWS )
-  add_subdirectory ( moai-sdl )
+    add_subdirectory ( moai-sdl )
 endif ( BUILD_LINUX OR BUILD_OSX OR BUILD_WINDOWS )
 
 if ( BUILD_OSX OR BUILD_IOS )
-  add_subdirectory ( moai-apple )
+    add_subdirectory ( moai-apple )
 endif ( BUILD_OSX OR BUILD_IOS )
 
 if ( BUILD_IOS )
-  add_subdirectory ( moai-iphone )
+    add_subdirectory ( moai-iphone )
 endif ( BUILD_IOS )
 
 if ( BUILD_ANDROID )
     add_subdirectory ( moai-android )
-endif (BUILD_ANDROID)
+endif (BUILD_ANDROID )
