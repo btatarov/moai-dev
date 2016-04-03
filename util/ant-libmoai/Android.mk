@@ -5,9 +5,9 @@
 #================================================================#
 
 	LOCAL_PATH := $(call my-dir)
-	
+
 	include $(CLEAR_VARS)
-	
+
 	MOAI_SDK_HOME	:= @MOAI_SDK_HOME@
 	MY_ARM_MODE		:= @MY_ARM_MODE@
 	MY_ARM_ARCH		:= @MY_ARM_ARCH@
@@ -21,7 +21,7 @@
 
 	LOCAL_MODULE 		:= @LIB_NAME@
 	LOCAL_ARM_MODE 		:= $(MY_ARM_MODE)
-	LOCAL_LDLIBS 		:= -llog -lGLESv1_CM -lGLESv2
+	LOCAL_LDLIBS 		:= -llog -lGLESv1_CM -lGLESv2 -lEGL
 	LOCAL_CFLAGS		:=
 	MY_LOCAL_CFLAGS		:=
 	MY_INCLUDES			:=
@@ -46,10 +46,10 @@
 	# ANDROID-APP
 
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-android.mk
-	
+
 	#----------------------------------------------------------------#
 	# MOAI
-	
+
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-core.mk
 
 #================================================================#
@@ -93,11 +93,14 @@
 
 	LOCAL_CFLAGS		:= $(MY_LOCAL_CFLAGS) -DAKU_WITH_PLUGINS=1 -include $(MOAI_SDK_HOME)/src/zl-vfs/zl_replace.h
 	LOCAL_C_INCLUDES 	:= $(MY_HEADER_SEARCH_PATHS)
-	
+
 	LOCAL_SRC_FILES 	+= src/jni.cpp
-	LOCAL_SRC_FILES 	+= $(wildcard $(MOAI_SDK_HOME)src/host-modules/*.cpp)
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/src/host-modules/aku_modules_android.cpp
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/src/host-modules/aku_modules_util.cpp
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/src/host-modules/aku_modules.cpp
 	LOCAL_SRC_FILES 	+= src/aku_plugins.cpp
 
+	LOCAL_SHARED_LIBRARIES := @SHARED_LIBRARIES@
 	LOCAL_STATIC_LIBRARIES := @STATIC_LIBRARIES@
 	LOCAL_WHOLE_STATIC_LIBRARIES := @WHOLE_STATIC_LIBRARIES@
 
@@ -110,5 +113,5 @@
 #----------------------------------------------------------------#
 # include submodules
 #----------------------------------------------------------------#
-	
+
 	include $(MY_INCLUDES)

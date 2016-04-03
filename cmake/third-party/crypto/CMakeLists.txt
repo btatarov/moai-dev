@@ -63,7 +63,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_misc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_ofb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_wrap.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/aes/aes_x86core.c
 
     ${CMAKE_CURRENT_SOURCE_DIR}/des/cbc3_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/cbc_cksm.c
@@ -71,7 +70,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/des/cfb64ede.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/cfb64enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/cfb_enc.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/des/des.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/des_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/des_old.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/des_old2.c
@@ -82,7 +80,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/des/enc_writ.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/fcrypt.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/fcrypt_b.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/des/ncbc_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/ofb64ede.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/ofb64enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/ofb_enc.c
@@ -90,9 +87,7 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/des/qud_cksm.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/rand_key.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/read2pwd.c
-    # ${CMAKE_CURRENT_SOURCE_DIR}/des/read_pwd.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/rpc_enc.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/des/rpw.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/set_key.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/str2key.c
     ${CMAKE_CURRENT_SOURCE_DIR}/des/xcbc_enc.c
@@ -107,24 +102,17 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/rc2/rc2_skey.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rc2/rc2cfb64.c
     ${CMAKE_CURRENT_SOURCE_DIR}/rc2/rc2ofb64.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/rc2/tab.c
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/md5/md5.c
     ${CMAKE_CURRENT_SOURCE_DIR}/md5/md5_dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/md5/md5_one.c
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha1_one.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha1dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha256.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha256t.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha512.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha512t.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha_dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sha/sha_one.c
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/md4/md4.c
     ${CMAKE_CURRENT_SOURCE_DIR}/md4/md4_dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/md4/md4_one.c
 
@@ -183,7 +171,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/bss_log.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/bss_mem.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/bss_null.c
-    # ${CMAKE_CURRENT_SOURCE_DIR}/bio/bss_rtcp.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bio/bss_sock.c
 
     ${CMAKE_CURRENT_SOURCE_DIR}/buffer/buf_err.c
@@ -206,7 +193,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_cast.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_des.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_des3.c
-    # ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_dsa.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_idea.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_null.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_old.c
@@ -217,7 +203,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_seed.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/e_xcbc_d.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/encode.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/evp/evp_acnf.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/evp_cnf.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/evp_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/evp/evp_err.c
@@ -447,7 +432,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsa_prn.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsa_sign.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsa_vrf.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/dsa/dsagen.c
 
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_ameth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_asn1.c
@@ -461,16 +445,12 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_pmeth.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_prn.c
     ${CMAKE_CURRENT_SOURCE_DIR}/dh/dh_rfc5114.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/dh/p1024.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/dh/p192.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/dh/p512.c
 
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/bio_pk7.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_asn1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_attr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_doit.c
-    # ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_lib.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_mime.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs7/pk7_smime.c
@@ -530,7 +510,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/conf/conf_lib.c
     ${CMAKE_CURRENT_SOURCE_DIR}/conf/conf_mall.c
     ${CMAKE_CURRENT_SOURCE_DIR}/conf/conf_mod.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/conf/conf_sap.c
 
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs12/p12_add.c
     ${CMAKE_CURRENT_SOURCE_DIR}/pkcs12/p12_asn.c
@@ -574,7 +553,6 @@ set ( CRYPTO_SOURCES
 
     ${CMAKE_CURRENT_SOURCE_DIR}/pqueue/pqueue.c
 
-    # ${CMAKE_CURRENT_SOURCE_DIR}/armcap.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cpt_err.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cryptlib.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cversion.c
@@ -589,9 +567,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/o_init.c
     ${CMAKE_CURRENT_SOURCE_DIR}/o_str.c
     ${CMAKE_CURRENT_SOURCE_DIR}/o_time.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ppccap.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/s390xcap.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/sparcv9cap.c
     ${CMAKE_CURRENT_SOURCE_DIR}/uid.c
 
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/eng_all.c
@@ -657,8 +632,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistp256.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistp521.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistputil.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistz256.c
-    # ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_nistz256_table.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_oct.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ec/ecp_smpl.c
 
@@ -678,7 +651,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/whrlpool/wp_block.c
     ${CMAKE_CURRENT_SOURCE_DIR}/whrlpool/wp_dgst.c
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/ripemd/rmd160.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ripemd/rmd_dgst.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ripemd/rmd_one.c
 
@@ -695,15 +667,12 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_ecb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_ofb64.c
     ${CMAKE_CURRENT_SOURCE_DIR}/idea/i_skey.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/idea/idea_spd.c
 
     ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_cfb64.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_ecb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_enc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_ofb64.c
     ${CMAKE_CURRENT_SOURCE_DIR}/cast/c_skey.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/cast/cast_spd.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/cast/castopts.c
 
     ${CMAKE_CURRENT_SOURCE_DIR}/camellia/camellia.c
     ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_cbc.c
@@ -714,7 +683,6 @@ set ( CRYPTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_ofb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/camellia/cmll_utl.c
 
-    # ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_cbc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_cfb64.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_ecb.c
     ${CMAKE_CURRENT_SOURCE_DIR}/bf/bf_enc.c

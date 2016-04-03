@@ -1,3 +1,29 @@
+set -e
+
+# check for command line switches
+usage="usage: $0 [--clean]"
+
+while [ $# -gt 0 ];	do
+    case "$1" in
+		--clean)  clean=true; break;;
+		*)
+	    	echo >&2 \
+	    		$usage
+	    	exit 1;;
+    esac
+    shift
+done
+if [ "$clean" == "true" ]; then
+    rm -rf libmoai/obj
+    rm -rf libmoai/libs
+
+    ../util/moaiutil ant-libmoai -d FMOD_EX
+
+    build_cmd="ndk-build -j4 -B"
+else
+    build_cmd="ndk-build -j4"
+fi
+
 pushd libmoai/jni > /dev/null
-ndk-build
+$build_cmd
 popd > /dev/null

@@ -16,13 +16,13 @@ DISABLE_ALL			= false
 
 ----------------------------------------------------------------
 for i, escape, param, iter in util.iterateCommandLine ( arg or {}) do
-	
+
 	if escape == 'D' or escape == 'disable-all' then
 		DISABLE_ALL = true
 	end
-	
+
 	if param then
-	
+
 		if escape == 'c' or escape == 'config' then
 			table.insert ( CONFIGS, MOAIFileSystem.getAbsoluteFilePath ( INVOKE_DIR .. param ))
 		end
@@ -38,8 +38,8 @@ for i, escape, param, iter in util.iterateCommandLine ( arg or {}) do
 		if escape == 'o' or escape == 'out' then
 			if ( param [ 1 ] ~= '/' ) and ( param [ 1 ] ~= '\\' ) then
 				param = INVOKE_DIR .. param
-			end 
-			
+			end
+
 			OUTPUT_DIR = MOAIFileSystem.getAbsoluteDirectoryPath ( param )
 		end
 	end
@@ -60,6 +60,7 @@ PLUGINS						= {}
 ALL_LIBRARIES				= {}
 STATIC_LIBRARIES			= {} -- set of all static libraries
 WHOLE_STATIC_LIBRARIES		= {}
+SHARED_LIBRARIES			= {}
 
 --==============================================================
 -- util
@@ -96,7 +97,7 @@ end
 
 ----------------------------------------------------------------
 cleanTempFiles = function ()
-	
+
 	MOAIFileSystem.deleteFile ( GLOBALS_TMP_FILENAME )
 	MOAIFileSystem.deleteFile ( MODULES_TMP_FILENAME )
 end
@@ -118,7 +119,7 @@ getGlobalsString = function ()
 
 	local file = io.open ( TEMP_FILENAME, 'w' )
 	local first = true
-	
+
 	for k, v in pairs ( GLOBALS ) do
 		if not first then file:write ( '\n\t' ) end
 		file:write ( string.format ( '%s\t:= %s', k, v ))
@@ -128,7 +129,7 @@ getGlobalsString = function ()
 
 	local str = util.readFileAll ( TEMP_FILENAME )
 	MOAIFileSystem.deleteFile ( TEMP_FILENAME )
-	
+
 	return str
 end
 
@@ -142,7 +143,7 @@ getLibrariesString = function ( libraries )
 			str = ( str and ( str .. ' ' ) or '' ) .. v
 		end
 	end
-	
+
 	return str or ''
 end
 
@@ -151,17 +152,17 @@ getModulesString = function ()
 
 	local file = io.open ( TEMP_FILENAME, 'w' )
 	local first = true
-	
+
 	for name, module in pairs ( MODULES ) do
 		if not first then file:write ( '\n\t' ) end
 		writeModule ( file, name, module )
 		first = false
 	end
 	file:close ()
-	
+
 	local str = util.readFileAll ( TEMP_FILENAME )
 	MOAIFileSystem.deleteFile ( TEMP_FILENAME )
-	
+
 	return str
 end
 
@@ -170,20 +171,20 @@ getPluginsString = function ( key, format, spacer )
 
 	local file = io.open ( TEMP_FILENAME, 'w' )
 	local first = true
-	
+
 	for name, plugin in pairs ( PLUGINS ) do
 		if isEnabled ( name ) then
-		
+
 			local value = plugin [ key ]
-		
+
 			if type ( value ) == 'string' then
 				if not first then file:write ( spacer ) end
 				file:write ( string.format ( format, value ))
 				first = false
 			end
-		
+
 			if type ( value ) == 'table' then
-			
+
 				for i, v in ipairs ( value ) do
 					if not first then file:write ( spacer ) end
 					file:write ( string.format ( format, v ))
@@ -193,10 +194,10 @@ getPluginsString = function ( key, format, spacer )
 		end
 	end
 	file:close ()
-	
+
 	local str = util.readFileAll ( TEMP_FILENAME )
 	MOAIFileSystem.deleteFile ( TEMP_FILENAME )
-	
+
 	return str
 end
 
@@ -216,6 +217,7 @@ processConfigFile = function ( filename )
 
 	STATIC_LIBRARIES = util.joinTables ( config.STATIC_LIBRARIES, STATIC_LIBRARIES )
 	WHOLE_STATIC_LIBRARIES = util.joinTables ( config.WHOLE_STATIC_LIBRARIES, WHOLE_STATIC_LIBRARIES )
+	SHARED_LIBRARIES = util.joinTables ( config.SHARED_LIBRARIES, SHARED_LIBRARIES )
 
 	if config.CONFIG_NAME then
 		local configPath = util.getFolderFromPath ( filename )
@@ -249,9 +251,13 @@ processConfigFile = function ( filename )
 			GLOBALS [ k ] = v
 		end
 	end
-	
+
 	if config.EXTERNAL_LIBRARIES then
 		addStaticLibraries ( config.EXTERNAL_LIBRARIES )
+	end
+
+	if config.SHARED_LIBRARIES then
+		addStaticLibraries ( config.SHARED_LIBRARIES )
 	end
 end
 
@@ -265,7 +271,7 @@ end
 
 ----------------------------------------------------------------
 writeList = function ( file, prefix, list, multiline )
-	
+
 	if multiline and type ( list ) == 'table' and #list > 0 then
 		for i, v in ipairs ( list ) do
 			file:write ( string.format ( '%s%s\n', prefix, v ))
@@ -285,17 +291,17 @@ writeModule = function ( file, name, module )
 	file:write ( string.format ( '\t# %s\n\n', name ))
 
 	if isEnabled ( name ) then
-		
+
 		if module.MODULE_DEFINE then
 			writeList ( file, '\tMY_LOCAL_CFLAGS += ', string.format ( '-D%s=1', module.MODULE_DEFINE ))
 		end
-		
+
 		writeList ( file, '\tMY_LOCAL_CFLAGS += ',				module.LOCAL_CFLAGS )
 		writeList ( file, '\tMY_HEADER_SEARCH_PATHS += ',		module.HEADER_SEARCH_PATHS, true )
 		writeList ( file, '\tMY_INCLUDES += ',					module.INCLUDES, true )
 		writeList ( file, '\tMY_LOCAL_STATIC_LIBRARIES += ',	module.LOCAL_STATIC_LIBRARIES )
 	else
-		
+
 		if module.MODULE_DEFINE then
 			writeList ( file, '\tMY_LOCAL_CFLAGS += ', string.format ( '-D%s=0', module.MODULE_DEFINE ))
 		else
@@ -324,13 +330,14 @@ end
 
 util.replaceInFile ( JNI_DIR .. 'Android.mk', {
 	[ '@MOAI_SDK_HOME@' ]				= MOAIFileSystem.getRelativePath ( MOAI_SDK_HOME, JNI_DIR ),
-	[ '@LIB_NAME@' ]					= LIB_NAME,	
+	[ '@LIB_NAME@' ]					= LIB_NAME,
 	[ '@MY_ARM_MODE@' ]					= MY_ARM_MODE,
 	[ '@MY_ARM_ARCH@' ]					= MY_ARM_ARCH,
 	[ '@GLOBALS@' ] 					= getGlobalsString (),
 	[ '@MODULES@' ] 					= getModulesString (),
 	[ '@STATIC_LIBRARIES@' ] 			= getLibrariesString ( STATIC_LIBRARIES ),
 	[ '@WHOLE_STATIC_LIBRARIES@' ] 		= getLibrariesString ( WHOLE_STATIC_LIBRARIES ),
+	[ '@SHARED_LIBRARIES@' ] 			= getLibrariesString ( SHARED_LIBRARIES ),
 })
 
 util.replaceInFile ( JNI_DIR .. 'Application.mk', {
