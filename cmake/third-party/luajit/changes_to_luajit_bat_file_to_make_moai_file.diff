@@ -1,4 +1,4 @@
---- K:/dev/mobile/moaiforge/sdks/moaiforge/3rdparty/LuaJIT-2.0.3/src/msvcbuild.bat	Sat Apr 19 09:15:31 2014
+--- K:/dev/mobile/moaiforge/sdks/moaiforge/3rdparty/LuaJIT-2.0.4/src/msvcbuild.bat	Sat Apr 19 09:15:31 2014
 +++ K:/dev/mobile/moaiforge/sdks/moaiforge/cmake/third-party/luajit/msvcbuild.bat	Sat Apr 19 09:17:42 2014
 @@ -68,6 +68,8 @@
  @set LJCOMPILE=%LJCOMPILE% /Zi
@@ -18,7 +18,7 @@
 +@rem --not wanted for moai
 +@rem if exist %LJDLLNAME%.manifest^
 +@rem  %LJMT% -manifest %LJDLLNAME%.manifest -outputresource:%LJDLLNAME%;2
- 
+
 -%LJCOMPILE% luajit.c
 -@if errorlevel 1 goto :BAD
 -%LJLINK% /out:luajit.exe luajit.obj %LJLIBNAME%
@@ -31,6 +31,6 @@
 +@rem @if errorlevel 1 goto :BAD
 +@rem if exist luajit.exe.manifest^
 +@rem %LJMT% -manifest luajit.exe.manifest -outputresource:luajit.exe
- 
+
  @del *.obj *.manifest minilua.exe buildvm.exe
  @echo.

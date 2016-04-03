@@ -6,8 +6,11 @@ OUTPUT_DIR			= INVOKE_DIR .. 'libmoai/'
 
 LIB_NAME			= 'moai'
 MY_ARM_MODE			= 'arm'
-MY_ARM_ARCH			= 'armeabi-v7a'
+MY_ARM_ARCH			= 'armeabi-v7a x86'
 MY_APP_PLATFORM		= 'android-10'
+
+-- Modules
+MOAI_WITH_LUAJIT	= false
 
 CONFIGS				= {}
 
@@ -231,6 +234,10 @@ processConfigFile = function ( filename )
 		MY_APP_PLATFORM = config.SETTINGS.MY_APP_PLATFORM or MY_APP_PLATFORM
 	end
 
+	if config.OPTIONAL_COMPONENTS then
+		MOAI_WITH_LUAJIT = config.OPTIONAL_COMPONENTS.MOAI_WITH_LUAJIT or MOAI_WITH_LUAJIT
+	end
+
 	if config.MODULES then
 		for k, v in pairs ( config.MODULES ) do
 			MODULES [ k ] = v
@@ -318,6 +325,7 @@ MOAIFileSystem.affirmPath ( JNI_DIR )
 
 MOAIFileSystem.copy ( 'Android.mk', JNI_DIR .. 'Android.mk' )
 MOAIFileSystem.copy ( 'Application.mk', JNI_DIR .. 'Application.mk' )
+MOAIFileSystem.copy ( 'OptionalComponents.mk', JNI_DIR .. 'OptionalComponentsDefined.mk' )
 MOAIFileSystem.copy ( 'src/', JNI_DIR .. 'src/' )
 MOAIFileSystem.copy ( MOAI_SDK_HOME .. 'src/host-modules/aku_plugins.cpp.in', JNI_DIR .. 'src/aku_plugins.cpp' )
 
@@ -343,6 +351,10 @@ util.replaceInFile ( JNI_DIR .. 'Android.mk', {
 util.replaceInFile ( JNI_DIR .. 'Application.mk', {
 	[ '@MY_ARM_ARCH@' ]				= MY_ARM_ARCH,
 	[ '@MY_APP_PLATFORM@' ] 		= MY_APP_PLATFORM,
+})
+
+util.replaceInFile ( JNI_DIR .. 'OptionalComponentsDefined.mk', {
+	[ '@MOAI_WITH_LUAJIT@' ]		= tostring(MOAI_WITH_LUAJIT),
 })
 
 util.replaceInFile ( JNI_DIR .. 'src/aku_plugins.cpp', {

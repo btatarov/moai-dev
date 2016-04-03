@@ -26,7 +26,7 @@ fi
 if [ "x$2" != "x" ]; then
     SRCDIR="$2"
 else
-    SRCDIR=$MOAI_ROOT/3rdparty/LuaJIT-2.0.3
+    SRCDIR=$MOAI_ROOT/3rdparty/LuaJIT-2.0.4
 fi
 
 if [ "x$3" != "x" ]; then
@@ -78,9 +78,9 @@ crossCompile()
     fi
 }
 
-compile() 
-{   
-    
+compile()
+{
+
     #  make HOST_CC="$CC_ARGS" clean
     make -C src -j BUILDTYPE=static CC="clang" HOST_CC="$CC_ARGS" HOST_CFLAGS="-arch i386" BUILDMODE=static HOST_LDFLAGS="-arch i386" STATIC_CC="clang" TARGET_SYS=iOS TARGET=x86 CROSS="xcrun --sdk iphonesimulator " TARGET_FLAGS="-isysroot $SIMDIR/SDKs/$SIMVER -arch i386"  TARGET_CONLY_FLAGS="$CFLAGS" clean
     make -C src -j BUILDTYPE=static CC="clang" HOST_CC="$CC_ARGS" HOST_CFLAGS="-arch i386" BUILDMODE=static HOST_LDFLAGS="-arch i386" STATIC_CC="clang" TARGET_SYS=iOS TARGET=x86 CROSS="xcrun --sdk iphonesimulator " TARGET_FLAGS="-isysroot $SIMDIR/SDKs/$SIMVER -arch i386"  TARGET_CONLY_FLAGS="$CFLAGS" libluajit.a
@@ -107,4 +107,3 @@ $STRIP -S "$DESTDIR"/$PRODUCT_NAME
 $LIPO -info "$DESTDIR"/$PRODUCT_NAME
 
 rm "$DESTDIR"/libluajit-*.a
-

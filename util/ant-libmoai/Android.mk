@@ -7,6 +7,7 @@
 	LOCAL_PATH := $(call my-dir)
 
 	include $(CLEAR_VARS)
+	include OptionalComponentsDefined.mk
 
 	MOAI_SDK_HOME	:= @MOAI_SDK_HOME@
 	MY_ARM_MODE		:= @MY_ARM_MODE@
@@ -63,7 +64,6 @@
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/expat-2.1.0/xmlwf
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/jansson-2.1/src
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/libpvr-3.4
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/lua-5.1.3/src
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/ooid-0.99
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/sfmt-1.4
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/sqlite-3.6.16
@@ -71,10 +71,19 @@
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/tlsf-2.0
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/zlib-1.2.3
 
+	ifeq ($(MOAI_WITH_LUAJIT),true)
+		MY_LOCAL_CFLAGS += -DMOAI_WITH_LUAJIT=1
+		MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/LuaJIT-2.0.4/include
+		MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-luajit.mk
+	else
+		MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/lua-5.1.3/src
+		MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-lua.mk
+	endif
+
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-contrib.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-expat.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-json.mk
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-lua.mk
+
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-pvr.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-sfmt.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-sqlite.mk
