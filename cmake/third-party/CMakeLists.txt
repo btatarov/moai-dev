@@ -25,15 +25,17 @@ endif ( BUILD_IOS OR BUILD_ANDROID )
 add_subdirectory ( expat )
 
 # Fmod
-set ( FMOD_HEADERS "" )
-set ( FMOD_LIB "" )
-set ( FMOD_LIB_DIR "" )
+if ( MOAI_FMOD_STUDIO )
+    set ( FMOD_HEADERS "" )
+    set ( FMOD_LIB "" )
+    set ( FMOD_LIB_DIR "" )
 
-add_subdirectory ( fmod )
+    add_subdirectory ( fmod )
 
-set ( FMOD_HEADERS ${FMOD_HEADERS} PARENT_SCOPE )
-set ( FMOD_LIB ${FMOD_LIB} PARENT_SCOPE )
-set ( FMOD_LIB_DIR ${FMOD_LIB_DIR} PARENT_SCOPE )
+    set ( FMOD_HEADERS ${FMOD_HEADERS} PARENT_SCOPE )
+    set ( FMOD_LIB ${FMOD_LIB} PARENT_SCOPE )
+    set ( FMOD_LIB_DIR ${FMOD_LIB_DIR} PARENT_SCOPE )
+endif ( MOAI_FMOD_STUDIO )
 
 add_subdirectory ( freetype )
 add_subdirectory ( jansson )

@@ -28,7 +28,7 @@ if ( MOAI_BOX2D OR LIB_PATH)
   target_link_libraries ( host-modules moai-box2d )
 endif ( MOAI_BOX2D OR LIB_PATH)
 
-#UNTZ
+#FMOD
 if ( MOAI_FMOD_STUDIO OR LIB_PATH )
   target_link_libraries ( host-modules moai-fmod-studio )
 endif ( MOAI_FMOD_STUDIO OR LIB_PATH )
