@@ -8,7 +8,7 @@ export PATH=$PATH:$UTIL_PATH
 
 echo "getting latest cmake"
 pushd ~
-wget http://www.cmake.org/files/v3.1/cmake-3.1.3-Linux-x86_64.tar.gz
+wget http://www.cmake.org/files/v3.1/cmake-3.1.3-Linux-x86_64.tar.gz --no-check-certificate
 tar xvf cmake-3.1.3-Linux-x86_64.tar.gz
 cd cmake-3.1.3-Linux-x86_64/bin
 export PATH=$(pwd):$PATH
@@ -19,8 +19,3 @@ pushd `dirname $0`
 bash build-linux.sh
 echo Linux Build Successful
 popd
-
-
-
-
-
