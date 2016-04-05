@@ -24,7 +24,7 @@ if ( BUILD_OSX )
 endif ( BUILD_OSX )
 
 if ( BUILD_LINUX )
-     set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DOPENSSL_SYSNAME_LINUX"  )
+     set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DOPENSSL_SYSNAME_LINUX -DOPENSSL_NO_MDC2"  )
     set ( PLATFORM_INCLUDE "include-linux" )
 endif ( BUILD_LINUX )
 
