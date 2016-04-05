@@ -11,7 +11,7 @@
 
 	MOAI_SDK_HOME	:= ../../../
 	MY_ARM_MODE		:= arm
-	MY_ARM_ARCH		:= armeabi-v7a
+	MY_ARM_ARCH		:= armeabi-v7a x86
 	MOAI_MODULES	:= ../../../util/ant-libmoai/
 
 	#----------------------------------------------------------------#
