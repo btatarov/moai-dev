@@ -1,20 +1,21 @@
 # My MOAI (v1.6 Stable) playground
 
 Forked from: [moaiforge](https://github.com/moaiforge/moai-sdk).
+Original Readme: [here](https://github.com/moaiforge/moai-sdk/blob/1.6-stable/README.md).
 
 Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?branch=postmorph)](https://travis-ci.org/btatarov/moai-sdk)
 
 ## New features
 
 ### Core (libmoai)
-* fmod as module
-* spine as module
+* fmod as module (from [moai-fmod-studio](https://github.com/Vavius/moai-fmod-studio))
+* spine as module (from [plugin-moai-spine](https://github.com/Vavius/plugin-moai-spine))
 * openssl 1.0.2g
 * luajit 2.0.4
-* MOAIImage::loadDual (from stirfire)
+* MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
 
 ### Android
-* util/host-android
+* util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
 * chartboost-6.4.1 (interstitial)
 * revmob-9.0.8 (interstitial and rewarded video)
 * heyzap-9.4.4 (interstitial and rewarded video)
