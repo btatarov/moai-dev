@@ -17,3 +17,4 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * util/host-android
 * chartboost-6.4.1 (interstitial)
 * revmob-9.0.8 (interstitial and rewarded video)
+* heyzap-9.4.4 (interstitial and rewarded video)

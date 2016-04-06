@@ -7,9 +7,9 @@ HOST_SETTINGS = {
             PACKAGE_NAME = 'com.ziplinegames.moaisample',
             VERSION_CODE = '1',
             VERSION_NAME = '1.0',
-            LUA_MAIN_DIR = '[path to lua sources]',
+            LUA_MAIN_DIR = '< path to lua sources >',
 
-            DEFAULT_ORIENTATION = '[landscape|portrait]',
+            DEFAULT_ORIENTATION = '< landscape|portrait >',
             GOOGLE_PLAY_APP_ID  = '< YOUR GOOGLE PLAY SERVICES APP ID >',
             REVMOB_APP_ID       = '< YOUR REVMOB MEDIA ID >',
 
@@ -25,6 +25,11 @@ HOST_SETTINGS = {
                 chartboost = {
                     lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost-6.4.1',
                     src		= MOAI_SDK_HOME .. 'src/moai-android-chartboost',
+                },
+
+                heyzap = {
+                    lib		= MOAI_SDK_HOME .. '3rdparty-android/heyzap-9.4.4',
+            		src		= MOAI_SDK_HOME .. 'src/moai-android-heyzap',
                 },
 
                 revmob = {

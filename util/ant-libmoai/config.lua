@@ -108,6 +108,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	HEYZAP = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_HEYZAP',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-heyzap.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-heyzap',
+	},
+
+	----------------------------------------------------------------
 	HTTP_CLIENT = {
 
 		MODULE_DEFINE = 'AKU_WITH_HTTP_CLIENT',
@@ -283,6 +295,7 @@ EXTERNAL_LIBRARIES = {
 STATIC_LIBRARIES = {
 
 	'libmoai-chartboost',
+	'libmoai-heyzap',
 	'libmoai-revmob',
 
 	-- moai

@@ -177,10 +177,35 @@
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-luaext.mk
 
 	#--------------------------------------------------------------#
+	# CHARTBOOST
+
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_CHARTBOOST=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-chartboost.mk
+
+	#--------------------------------------------------------------#
 	# UTIL
 
 	MY_LOCAL_CFLAGS += -DAKU_WITH_UTIL=1
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-util.mk
+
+	#--------------------------------------------------------------#
+	# FMOD_EX
+
+	MY_LOCAL_CFLAGS += -DAKU_WITH_FMOD_EX=0
+
+	#--------------------------------------------------------------#
+	# SPINE
+
+	MY_LOCAL_CFLAGS += -DAKU_WITH_SPINE=1
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/spine-c/include
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-spine.mk
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-spine.mk
+
+	#--------------------------------------------------------------#
+	# HEYZAP
+
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_HEYZAP=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-heyzap.mk
 
 	#--------------------------------------------------------------#
 	# CRYPTO
@@ -193,25 +218,6 @@
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-crypto.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/zl-crypto.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-crypto.mk
-
-	#--------------------------------------------------------------#
-	# SPINE
-
-	MY_LOCAL_CFLAGS += -DAKU_WITH_SPINE=1
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/spine-c/include
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-spine.mk
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-spine.mk
-
-	#--------------------------------------------------------------#
-	# CHARTBOOST
-
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_CHARTBOOST=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-chartboost.mk
-
-	#--------------------------------------------------------------#
-	# FMOD_EX
-
-	MY_LOCAL_CFLAGS += -DAKU_WITH_FMOD_EX=0
 
 	#--------------------------------------------------------------#
 	# FMOD_STUDIO
@@ -237,7 +243,7 @@
 	LOCAL_SRC_FILES 	+= src/aku_plugins.cpp
 
 	LOCAL_SHARED_LIBRARIES := fmod
-	LOCAL_STATIC_LIBRARIES := libmoai-chartboost libmoai-revmob libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-untz libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libuntz libvorbis libogg libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
+	LOCAL_STATIC_LIBRARIES := libmoai-chartboost libmoai-heyzap libmoai-revmob libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-untz libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libuntz libvorbis libogg libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
 	LOCAL_WHOLE_STATIC_LIBRARIES := libmoai-android libmoai-sim libmoai-core libcrypto
 
 #----------------------------------------------------------------#

@@ -35,6 +35,10 @@ void AKUModulesAndroidAppFinalize () {
 		AKUAndroidGooglePlayServicesAppFinalize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_HEYZAP
+		AKUAndroidHeyZapAppFinalize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_REVMOB
 		AKUAndroidRevMobAppFinalize ();
 	#endif
@@ -80,6 +84,10 @@ void AKUModulesAndroidAppInitialize () {
 		AKUAndroidGooglePlayServicesAppInitialize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_HEYZAP
+		AKUAndroidHeyZapAppInitialize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_REVMOB
 		AKUAndroidRevMobAppInitialize ();
 	#endif
@@ -123,6 +131,10 @@ void AKUModulesAndroidContextInitialize () {
 
 	#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES
 		AKUAndroidGooglePlayServicesContextInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_HEYZAP
+		AKUAndroidHeyZapContextInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_REVMOB
