@@ -22,10 +22,15 @@ HOST_SETTINGS = {
             },
 
             MODULES = {
+                adcolony = {
+            		lib		= MOAI_SDK_HOME .. '3rdparty-android/adcolony-2.3.4',
+            		src		= MOAI_SDK_HOME .. 'src/moai-android-adcolony',
+            	},
+
                 chartboost = {
-                    lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost-6.4.1',
-                    src		= MOAI_SDK_HOME .. 'src/moai-android-chartboost',
-                },
+            		lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost-6.4.1',
+            		src		= MOAI_SDK_HOME .. 'src/moai-android-chartboost',
+            	},
 
                 heyzap = {
                     lib		= MOAI_SDK_HOME .. '3rdparty-android/heyzap-9.4.4',

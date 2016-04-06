@@ -14,6 +14,19 @@ OPTIONAL_COMPONENTS = {
 MODULES = {
 
 	----------------------------------------------------------------
+	ADCOLONY = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_ADCOLONY',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-adcolony.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-adcolony',
+	},
+
+
+	----------------------------------------------------------------
 	BOX2D = {
 
 		MODULE_DEFINE = 'AKU_WITH_BOX2D',
@@ -293,7 +306,8 @@ EXTERNAL_LIBRARIES = {
 }
 
 STATIC_LIBRARIES = {
-
+	-- platform specific
+	'libmoai-adcolony',
 	'libmoai-chartboost',
 	'libmoai-heyzap',
 	'libmoai-revmob',
