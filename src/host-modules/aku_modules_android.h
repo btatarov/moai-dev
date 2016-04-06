@@ -31,6 +31,10 @@
 	#include <moai-android-google-play-services/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_REVMOB
+	#include <moai-android-revmob/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_TAPJOY
 	#include <moai-android-tapjoy/host.h>
 #endif

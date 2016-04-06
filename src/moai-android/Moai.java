@@ -122,7 +122,7 @@ public class Moai {
 		ACTIVITY_ON_RESTART,
 		BACK_BUTTON_PRESSED,
 		UNKNOWN;
-		
+
         public static ListenerEvent valueOf ( int index ) {
 
             ListenerEvent [] values = ListenerEvent.values ();
@@ -145,6 +145,7 @@ public class Moai {
 		"com.ziplinegames.moai.MoaiGooglePush",
 		"com.ziplinegames.moai.MoaiKeyboard",
 		"com.ziplinegames.moai.MoaiMoviePlayer",
+		"com.ziplinegames.moai.MoaiRevMob",
 		"com.ziplinegames.moai.MoaiTapjoy",
 		"com.ziplinegames.moai.MoaiVungle",
 	};
@@ -366,7 +367,7 @@ public class Moai {
 
 	//----------------------------------------------------------------//
 	public static boolean onBackPressed () {
-		
+
 		for ( Class < ? > theClass : sAvailableClasses ) {
 			Object result = executeMethod ( theClass, null, "onBackPressed", new Class < ? > [] { }, new Object [] { });
 			if ( Boolean.TRUE.equals ( result )) return true;
@@ -471,7 +472,7 @@ public class Moai {
 
 	//----------------------------------------------------------------//
 	public static void setCacheDirectory ( String path ) {
-	
+
 		synchronized ( sAkuLock ) {
 			AKUSetCacheDirectory ( path );
 		}
@@ -503,7 +504,7 @@ public class Moai {
 
 	//----------------------------------------------------------------//
 	public static void setScreenDpi ( int dpi ) {
-		
+
 		synchronized ( sAkuLock ) {
 			AKUSetScreenDpi ( dpi );
 		}
@@ -574,7 +575,7 @@ public class Moai {
 
 	//----------------------------------------------------------------//
 	public static Activity getActivity () {
-		
+
 		return sActivity;
 	}
 
@@ -644,7 +645,7 @@ public class Moai {
 
 		MoaiLog.i ( String.format ( "Moai openURL: %s", url ));
 		//sActivity.startActivity ( new Intent ( Intent.ACTION_VIEW, Uri.parse ( url )));
-		
+
 		Intent intent = new Intent ( Intent.ACTION_VIEW );
 		intent.setData ( Uri.parse( url ));
 		sActivity.startActivity ( intent );
@@ -717,7 +718,7 @@ public class Moai {
 			}
 		});
 	}
-	
+
 	//----------------------------------------------------------------//
 	public static String takePicture () {
 		mPictureLocation = "this is #neuland";

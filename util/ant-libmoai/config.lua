@@ -152,6 +152,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	REVMOB = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_REVMOB',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-revmob.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-revmob',
+	},
+
+	----------------------------------------------------------------
 	SIM = {
 
 		MODULE_DEFINE = 'AKU_WITH_SIM',
@@ -271,6 +283,7 @@ EXTERNAL_LIBRARIES = {
 STATIC_LIBRARIES = {
 
 	'libmoai-chartboost',
+	'libmoai-revmob',
 
 	-- moai
 	'libmoai-box2d',

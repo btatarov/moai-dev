@@ -10,21 +10,27 @@ HOST_SETTINGS = {
             LUA_MAIN_DIR = '[path to lua sources]',
 
             DEFAULT_ORIENTATION = '[landscape|portrait]',
-            GOOGLE_PLAY_APP_ID  = '0',
+            GOOGLE_PLAY_APP_ID  = '< YOUR GOOGLE PLAY SERVICES APP ID >',
+            REVMOB_APP_ID       = '< YOUR REVMOB MEDIA ID >',
 
             ICONS = {
-                hdpi = '[path to 72px png]',
-                ldpi = '[path to 36px png]',
-                mdpi = '[path to 48px png]',
-                xhdpi = '[path to 36px png]',
-                xxhdpi = '[path to 144px png]',
+                hdpi = '< path to 72px png >',
+                ldpi = '< path to 36px png >',
+                mdpi = '< path to 48px png >',
+                xhdpi = '< path to 36px png >',
+                xxhdpi = '< path to 144px png >',
             },
 
             MODULES = {
                 chartboost = {
-            		lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost',
-            		src		= MOAI_SDK_HOME .. 'src/moai-android-chartboost',
-            	},
+                    lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost-6.4.1',
+                    src		= MOAI_SDK_HOME .. 'src/moai-android-chartboost',
+                },
+
+                revmob = {
+                    lib		= MOAI_SDK_HOME .. '3rdparty-android/revmob-9.0.8',
+            		src		= MOAI_SDK_HOME .. 'src/moai-android-revmob',
+                },
             },
 
             KEYSTORE_NAME = 'moaisample.keystore',
