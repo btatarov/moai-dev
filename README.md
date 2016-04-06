@@ -15,3 +15,4 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 
 ### Android
 * util/host-android
+* chartboost-6.4.1

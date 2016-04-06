@@ -207,6 +207,7 @@ end
 
 MOAIFileSystem.copy('project', MOAI_PROJECT_PATH)
 MOAIFileSystem.copy('run-host.sh', OUTPUT_DIR .. 'run-host.sh')
+util.makeExecutable(OUTPUT_DIR .. 'run-host.sh')
 
 for icon_name, icon_path in pairs(config.ICONS) do
 	MOAIFileSystem.copy(icon_path, string.format('%s/res/drawable-%s/icon.png', MOAI_PROJECT_PATH, icon_name))

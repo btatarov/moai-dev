@@ -1,7 +1,7 @@
 print ( "hello, Android!" )
 
 MOAIChartBoostAndroid.init ( '<YOUR-APP-ID>', '<YOUR-APP-SIGNATURE>' )
-MOAIChartBoostAndroid.loadInterstitial ()
+MOAIChartBoostAndroid.cacheInterstitial ()
 
 ----------------------------------------------------------------
 
