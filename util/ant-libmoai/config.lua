@@ -25,7 +25,6 @@ MODULES = {
 		STATIC_LIBRARIES = 'libmoai-adcolony',
 	},
 
-
 	----------------------------------------------------------------
 	BOX2D = {
 
@@ -269,6 +268,18 @@ MODULES = {
 
 		STATIC_LIBRARIES = 'libmoai-util',
 	},
+
+	----------------------------------------------------------------
+	VUNGLE = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_VUNGLE',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-vungle.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-vungle',
+	},
 }
 
 PLUGINS = {
@@ -311,6 +322,7 @@ STATIC_LIBRARIES = {
 	'libmoai-chartboost',
 	'libmoai-heyzap',
 	'libmoai-revmob',
+	'libmoai-vungle',
 
 	-- moai
 	'libmoai-box2d',

@@ -15,6 +15,10 @@ class MOAIVungleAndroid :
 	public JniUtils {
 private:
 
+	jmethodID	mJava_Init;
+	jmethodID	mJava_IsVideoAvailable;
+	jmethodID	mJava_DisplayAdvert;
+
 	//----------------------------------------------------------------//
 	static int	_displayAdvert		( lua_State* L );
 	static int	_init				( lua_State* L );

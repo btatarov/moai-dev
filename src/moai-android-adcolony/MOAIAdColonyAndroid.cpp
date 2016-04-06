@@ -26,8 +26,6 @@
 int MOAIAdColonyAndroid::_init ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIAdColonyAndroid, "" )
 
-	ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAdColonyAndroid::_init\n" );
-
 	jstring jidentifier		= self->GetJString ( lua_tostring ( state, 1 ));
 	jstring joptions		= self->GetJString ( lua_tostring ( state, 2 ));
 	jobjectArray jzones		= self->StringArrayFromLua ( state, 3 );
@@ -43,7 +41,7 @@ int MOAIAdColonyAndroid::_init ( lua_State* L ) {
 
 	@in 	string	zone			The zone from which to play a video ad.
 	@opt	bool	prompt			Determines whether the user is asked whether they want to play a video ad or not. Default is true.
-	@opt	bool	confirm			Determines whether the user is presented with a confirmation dialog after video ad playback completes. Default is true.
+	@opt	bool	confirm			Determines whether the useris presented with a confirmation dialog after video ad playback completes. Default is true.
 	@out 	nil
 */
 int MOAIAdColonyAndroid::_playVideo ( lua_State* L ) {
@@ -68,7 +66,7 @@ int MOAIAdColonyAndroid::_playVideo ( lua_State* L ) {
 */
 int MOAIAdColonyAndroid::_videoReadyForZone ( lua_State *L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIAdColonyAndroid, "" )
-	
+
 	jstring jzone = self->GetJString ( lua_tostring ( state, 1 ));
 	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_IsVideoReady, jzone ));
 	return 1;
@@ -82,9 +80,9 @@ int MOAIAdColonyAndroid::_videoReadyForZone ( lua_State *L ) {
 MOAIAdColonyAndroid::MOAIAdColonyAndroid () {
 
 	RTTI_SINGLE ( MOAILuaObject )
-	
+
 	this->SetClass ( "com/ziplinegames/moai/MoaiAdColony" );
-	
+
 	this->mJava_Init			= this->GetStaticMethod ( "init", "(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V" );
 	this->mJava_IsVideoReady	= this->GetStaticMethod ( "isVideoReady", "(Ljava/lang/String;)Z" );
 	this->mJava_PlayVideo		= this->GetStaticMethod ( "playVideo", "(Ljava/lang/String;ZZ)V" );
@@ -123,4 +121,3 @@ extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiAdColony_AKUInv
 	ZLLog::LogF ( ZLLog::CONSOLE, "Java_com_ziplinegames_moai_MOAIAdColonyAndroid_AKUInvokeListener\n" );
 	MOAIAdColonyAndroid::Get ().InvokeListener (( u32 )eventID );
 }
-

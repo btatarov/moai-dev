@@ -41,6 +41,11 @@ HOST_SETTINGS = {
                     lib		= MOAI_SDK_HOME .. '3rdparty-android/revmob-9.0.8',
             		src		= MOAI_SDK_HOME .. 'src/moai-android-revmob',
                 },
+
+                vungle = {
+                    lib		= MOAI_SDK_HOME .. '3rdparty-android/vungle-3.3.4',
+            		src		= MOAI_SDK_HOME .. 'src/moai-android-vungle',
+                },
             },
 
             KEYSTORE_NAME = 'moaisample.keystore',
