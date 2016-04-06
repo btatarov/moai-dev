@@ -1,0 +1,40 @@
+HOST_SETTINGS = {
+
+    ANDROID = {
+        googleplay = {
+            APP_NAME     = 'Moai Sample',
+            PROJECT_NAME = 'MoaiSample',
+            PACKAGE_NAME = 'com.ziplinegames.moaisample',
+            VERSION_CODE = '1',
+            VERSION_NAME = '1.0',
+            LUA_MAIN_DIR = '[path to lua sources]',
+
+            DEFAULT_ORIENTATION = '[landscape|portrait]',
+            GOOGLE_PLAY_APP_ID  = '0',
+
+            ICONS = {
+                hdpi = '[path to 72px png]',
+                ldpi = '[path to 36px png]',
+                mdpi = '[path to 48px png]',
+                xhdpi = '[path to 36px png]',
+                xxhdpi = '[path to 144px png]',
+            },
+
+            MODULES = {
+                chartboost = {
+            		lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost',
+            		src		= MOAI_SDK_HOME .. 'src/moai-android-chartboost',
+            	},
+            },
+
+            KEYSTORE_NAME = 'moaisample.keystore',
+            KEYSTORE_ALIAS = 'moaisample',
+            KEYSTORE_PASSWORD = '',
+            KEYSTORE_ALIAS_PASSWORD = '',
+        },
+
+        amazon = {
+            -- ...
+        },
+    },
+}

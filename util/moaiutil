@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 INVOKE_DIR=$(pwd)
-MOAI_SDK_HOME=$(dirname "${0}")/../
+MOAI_SDK_HOME="$(cd "$(dirname "${0}")/../" && pwd)"
 MOAI_CMD=${1}
+PARAM=${2}
 
 export PATH=$PATH:$MOAI_SDK_HOME/util
 
 shift
-set $INVOKE_DIR $MOAI_SDK_HOME $MOAI_CMD $@
+set $INVOKE_DIR $MOAI_SDK_HOME $MOAI_CMD $PARAM $@
 
 pushd $MOAI_SDK_HOME/util > /dev/null
 moai moaiutil.lua $@
