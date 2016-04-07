@@ -147,6 +147,7 @@ public class Moai {
 		"com.ziplinegames.moai.MoaiKeyboard",
 		"com.ziplinegames.moai.MoaiMoviePlayer",
 		"com.ziplinegames.moai.MoaiRevMob",
+		"com.ziplinegames.moai.MoaiStartApp",
 		"com.ziplinegames.moai.MoaiTapjoy",
 		"com.ziplinegames.moai.MoaiVungle",
 	};

@@ -43,6 +43,10 @@ void AKUModulesAndroidAppFinalize () {
 		AKUAndroidRevMobAppFinalize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_STARTAPP
+		AKUAndroidStartAppAppFinalize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_TAPJOY
 		AKUAndroidTapjoyAppFinalize ();
 	#endif
@@ -92,6 +96,10 @@ void AKUModulesAndroidAppInitialize () {
 		AKUAndroidRevMobAppInitialize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_STARTAPP
+		AKUAndroidStartAppAppInitialize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_TAPJOY
 		AKUAndroidTapjoyAppInitialize ();
 	#endif
@@ -139,6 +147,10 @@ void AKUModulesAndroidContextInitialize () {
 
 	#if AKU_WITH_ANDROID_REVMOB
 		AKUAndroidRevMobContextInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_STARTAPP
+		AKUAndroidStartAppContextInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_TAPJOY

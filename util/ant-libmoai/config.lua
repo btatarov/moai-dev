@@ -176,6 +176,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	STARTAPP = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_STARTAPP',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-startapp.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-startapp',
+	},
+
+	----------------------------------------------------------------
 	REVMOB = {
 
 		MODULE_DEFINE = 'AKU_WITH_ANDROID_REVMOB',
@@ -322,6 +334,7 @@ STATIC_LIBRARIES = {
 	'libmoai-chartboost',
 	'libmoai-heyzap',
 	'libmoai-revmob',
+	'libmoai-startapp',
 	'libmoai-vungle',
 
 	-- moai

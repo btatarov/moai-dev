@@ -19,4 +19,5 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * chartboost-6.4.1 (interstitial)
 * heyzap-9.4.5 (interstitial and rewarded video)
 * revmob-9.0.8 (interstitial and rewarded video)
+* startapp-3.3.2 (interstitial, rewarded video, return ad and exit ad)
 * vungle-3.3.4 (rewarded video)
