@@ -30,17 +30,17 @@ thread:run( function ()
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 
-    MOAIAdColonyAndroid.init ( appId, "version:1.0,store:google", { adcolonyZone } )
-
-    MOAICoroutine.blockOnAction ( delay_timer:start () )
-    coroutine:yield ()
-
     MOAIAdColonyAndroid.setListener (
         MOAIAdColonyAndroid.VIDEO_SHOWN,
         function ()
             print ( "Rewarded video successfully completed." )
         end
     )
+
+    MOAIAdColonyAndroid.init ( appId, "version:1.0,store:google", { adcolonyZone } )
+
+    MOAICoroutine.blockOnAction ( delay_timer:start () )
+    coroutine:yield ()
 
     if MOAIAdColonyAndroid.videoReadyForZone ( adcolonyZone ) then
     	print ( "Showing AdColony rewarded video." )

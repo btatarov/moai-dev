@@ -18,21 +18,11 @@ layer:insertProp ( prop )
 
 prop:moveRot ( 720, 2.0 )
 
--- wait 10 seconds between interactions
+-- wait 15 seconds between interactions
 local thread = MOAICoroutine.new ()
 thread:run( function ()
     local delay_timer = MOAITimer:new ()
-    delay_timer:setSpan ( 10 )
-
-    MOAICoroutine.blockOnAction ( delay_timer:start () )
-    coroutine:yield ()
-
-    MOAIHeyZapAndroid.init ( '< YOUR PUBLISHER ID >' )
-
-    MOAICoroutine.blockOnAction ( delay_timer:start () )
-    coroutine:yield ()
-
-    MOAIHeyZapAndroid.cacheRewardedVideo ()
+    delay_timer:setSpan ( 15 )
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
@@ -43,6 +33,16 @@ thread:run( function ()
             print ( "Rewarded video successfully completed." )
         end
     )
+
+    MOAIHeyZapAndroid.init ( '< YOUR PUBLISHER ID >' )
+
+    MOAICoroutine.blockOnAction ( delay_timer:start () )
+    coroutine:yield ()
+
+    MOAIHeyZapAndroid.cacheRewardedVideo ()
+
+    MOAICoroutine.blockOnAction ( delay_timer:start () )
+    coroutine:yield ()
 
     if MOAIHeyZapAndroid.hasCachedRewardedVideo () then
     	print ( "Showing HeyZap rewarded video." )

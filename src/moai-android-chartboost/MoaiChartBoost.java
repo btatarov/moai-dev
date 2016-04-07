@@ -1,6 +1,6 @@
 //----------------------------------------------------------------//
-// Copyright (c) 2010-2011 Zipline Games, Inc. 
-// All Rights Reserved. 
+// Copyright (c) 2010-2011 Zipline Games, Inc.
+// All Rights Reserved.
 // http://getmoai.com
 //----------------------------------------------------------------//
 
@@ -24,56 +24,56 @@ public class MoaiChartBoost extends ChartboostDelegate {
     }
 
 	private static Activity sActivity = null;
-	
+
 	protected static native void AKUInvokeListener ( int eventID );
-	
+
 	//----------------------------------------------------------------//
-	public static void onBackPressed ( Activity activity ) {
-		
+	public static void onBackPressed () {
+
         MoaiLog.i ( "MoaiChartBoost: onBackPressed" );
 		Chartboost.onBackPressed ();
     }
-	
+
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
-	
+
 		MoaiLog.i ( "MoaiChartBoost: onCreate" );
 		sActivity = activity;
 	}
 
 	//----------------------------------------------------------------//
-	public static void onDestroy ( Activity activity ) {
- 
+	public static void onDestroy () {
+
 		MoaiLog.i ( "MoaiChartBoost: onDestroy" );
-    	Chartboost.onDestroy ( activity );
+    	Chartboost.onDestroy ( sActivity );
 	}
 
 	//----------------------------------------------------------------//
-	public static void onPause ( Activity activity ) {
- 
+	public static void onPause () {
+
 		MoaiLog.i ( "MoaiChartBoost: onPause" );
-    	Chartboost.onPause ( activity );
+    	Chartboost.onPause ( sActivity );
 	}
 
 	//----------------------------------------------------------------//
-	public static void onResume ( Activity activity ) {
- 
+	public static void onResume () {
+
 		MoaiLog.i ( "MoaiChartBoost: onResume" );
-    	Chartboost.onResume ( activity );
+    	Chartboost.onResume ( sActivity );
 	}
-		
+
 	//----------------------------------------------------------------//
-	public static void onStart ( Activity activity ) {
-		
+	public static void onStart () {
+
 		MoaiLog.i ( "MoaiChartBoost: onStart" );
-    	Chartboost.onStart ( activity );
+    	Chartboost.onStart ( sActivity );
 	}
-	
+
 	//----------------------------------------------------------------//
-	public static void onStop ( Activity activity ) {
+	public static void onStop () {
 
 		MoaiLog.i ( "MoaiChartBoost: onStop" );
-    	Chartboost.onStop ( activity );
+    	Chartboost.onStop ( sActivity );
 	}
 
 	//================================================================//
@@ -82,9 +82,7 @@ public class MoaiChartBoost extends ChartboostDelegate {
 
 	//----------------------------------------------------------------//
 	public static void cacheInterstitial ( String location ) {
-		
-		MoaiLog.i ( "MoaiChartBoost: cacheInterstitial" );
-		
+
 		if ( location != null ) {
 		 	Chartboost.cacheInterstitial ( location );
 		}
@@ -95,9 +93,7 @@ public class MoaiChartBoost extends ChartboostDelegate {
 
 	//----------------------------------------------------------------//
 	public static boolean hasCachedInterstitial ( String location ) {
-		
-		MoaiLog.i ( "MoaiChartBoost: hasCachedInterstitial" );
-		
+
 		if ( location != null ) {
 		 	return Chartboost.hasInterstitial ( location );
 		}
@@ -106,18 +102,16 @@ public class MoaiChartBoost extends ChartboostDelegate {
 
 	//----------------------------------------------------------------//
 	public static void init ( String appId, String appSignature ) {
-		
-		MoaiLog.i ( "MoaiChartBoost: init" );
 
 		Chartboost.startWithAppId ( sActivity, appId, appSignature );
     	Chartboost.setDelegate ( new MoaiChartBoost () );
-    	Chartboost.onCreate ( sActivity );	
+    	Chartboost.onCreate ( sActivity );
+		Chartboost.onStart ( sActivity );
 	}
 
 	//----------------------------------------------------------------//
 	public static void showInterstitial ( String location ) {
-				
-		MoaiLog.i ( "MoaiChartBoost: showInterstitial" );
+
 		if ( location != null ) {
 		 	Chartboost.showInterstitial ( location );
 		}
@@ -134,25 +128,25 @@ public class MoaiChartBoost extends ChartboostDelegate {
 	public void didDismissInterstitial ( String location ) {
 
 		MoaiLog.i ( "MoaiChartBoost: didDismissInterstitial" );
-		AKUInvokeListener ( ListenerEvent.INTERSTITIAL_DISMISSED.ordinal ());
+		AKUInvokeListener ( ListenerEvent.INTERSTITIAL_DISMISSED.ordinal () );
 	}
 
 	//----------------------------------------------------------------//
 	public void didFailToLoadInterstitial ( String location ) {
-		
+
 		MoaiLog.i ( "MoaiChartBoost: didFailToLoadInterstitial" );
-		AKUInvokeListener ( ListenerEvent.INTERSTITIAL_LOAD_FAILED.ordinal ());
+		AKUInvokeListener ( ListenerEvent.INTERSTITIAL_LOAD_FAILED.ordinal () );
 	}
 
 	//----------------------------------------------------------------//1
 	public boolean shouldDisplayMoreApps () {
-		
+
 		return false;
 	}
-	
+
 	//----------------------------------------------------------------//1
 	public boolean shouldRequestMoreApps () {
-		
+
 		return false;
 	}
 }

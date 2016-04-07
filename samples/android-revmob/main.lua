@@ -27,6 +27,13 @@ thread:run( function ()
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 
+    MOAIRevMobAndroid.setListener (
+        MOAIRevMobAndroid.REWARDEDVIDEOAD_COMPLETED,
+        function ()
+            print ( "Rewarded video successfully completed." )
+        end
+    )
+
     MOAIRevMobAndroid.init ()
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
@@ -36,13 +43,6 @@ thread:run( function ()
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
-
-    MOAIRevMobAndroid.setListener (
-        MOAIRevMobAndroid.REWARDEDVIDEOAD_COMPLETED,
-        function ()
-            print ( "Rewarded video successfully completed." )
-        end
-    )
 
     if MOAIRevMobAndroid.hasCachedRewardedVideo () then
     	print ( "Showing RevMob rewarded video." )

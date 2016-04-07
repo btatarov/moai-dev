@@ -5,6 +5,8 @@
 #include "moai-core/pch.h"
 #include "moai-sim/pch.h"
 
+#include <jni.h>
+
 #include <moai-android/moaiext-jni.h>
 #include <moai-android-chartboost/MOAIChartBoostAndroid.h>
 
@@ -15,11 +17,10 @@
 //----------------------------------------------------------------//
 int MOAIChartBoostAndroid::_cacheInterstitial ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIChartBoostAndroid, "" )
-	
-	jstring jlocation = self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
-	
-	jmethodID cacheInterstitial = self->GetStaticMethod ( "cacheInterstitial", "(Ljava/lang/String;)V" );
-	self->CallStaticVoidMethod ( cacheInterstitial, jlocation );
+
+	jstring jlocation = self->GetJString ( lua_tostring ( state, 1 ) );
+	self->CallStaticVoidMethod ( self->mJava_CacheInterstitial, jlocation );
+
 	return 0;
 }
 
@@ -27,22 +28,20 @@ int MOAIChartBoostAndroid::_cacheInterstitial ( lua_State* L ) {
 int MOAIChartBoostAndroid::_hasCachedInterstitial ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIChartBoostAndroid, "" )
 
-	jstring jlocation = self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
+	jstring jlocation = self->GetJString ( lua_tostring ( state, 1 ) );
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_HasCachedInterstitial, jlocation ) );
 
-	jmethodID cacheInterstitial = self->GetStaticMethod ( "hasCachedInterstitial", "(Ljava/lang/String;)Z" );
-	state.Push ( self->CallStaticBooleanMethod ( cacheInterstitial, jlocation ));
 	return 1;
 }
 
 //----------------------------------------------------------------//
 int MOAIChartBoostAndroid::_init ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIChartBoostAndroid, "" )
-	
-	jstring jappID			= self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
-	jstring jappSignature	= self->GetJString ( state.GetValue < cc8* >( 2, 0 ));
-	
-	jmethodID init = self->GetStaticMethod ( "init", "(Ljava/lang/String;Ljava/lang/String;)V" );
-	self->CallStaticVoidMethod ( init, jappID, jappSignature );
+
+	jstring jappID			= self->GetJString ( lua_tostring ( state, 1 ) );
+	jstring jappSignature	= self->GetJString ( lua_tostring ( state, 2 ) );
+	self->CallStaticVoidMethod ( self->mJava_Init, jappID, jappSignature );
+
 	return 0;
 }
 
@@ -50,10 +49,8 @@ int MOAIChartBoostAndroid::_init ( lua_State* L ) {
 int MOAIChartBoostAndroid::_showInterstitial ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIChartBoostAndroid, "" )
 
-	jstring jlocation = self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
-
-	jmethodID showInterstitial = self->GetStaticMethod ( "showInterstitial", "(Ljava/lang/String;)V" );
-	self->CallStaticVoidMethod ( showInterstitial, jlocation );
+	jstring jlocation = self->GetJString ( lua_tostring ( state, 1 ) );
+	self->CallStaticVoidMethod ( self->mJava_ShowInterstitial, jlocation );
 	return 0;
 }
 
@@ -65,8 +62,13 @@ int MOAIChartBoostAndroid::_showInterstitial ( lua_State* L ) {
 MOAIChartBoostAndroid::MOAIChartBoostAndroid () {
 
 	RTTI_SINGLE ( MOAIGlobalEventSource )
-	 
+
 	this->SetClass ( "com/ziplinegames/moai/MoaiChartBoost" );
+
+	this->mJava_CacheInterstitial		= this->GetStaticMethod ( "cacheInterstitial", "(Ljava/lang/String;)V" );
+	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;Ljava/lang/String;)V" );
+	this->mJava_HasCachedInterstitial	= this->GetStaticMethod ( "hasCachedInterstitial", "(Ljava/lang/String;)Z" );
+	this->mJava_ShowInterstitial		= this->GetStaticMethod ( "showInterstitial", "(Ljava/lang/String;)V" );
 }
 
 //----------------------------------------------------------------//

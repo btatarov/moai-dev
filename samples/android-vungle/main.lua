@@ -27,17 +27,17 @@ thread:run( function ()
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 
-    MOAIVungleAndroid.init ( '< YOUR APP ID >' )
-
-    MOAICoroutine.blockOnAction ( delay_timer:start () )
-    coroutine:yield ()
-
     MOAIVungleAndroid.setListener (
         MOAIVungleAndroid.AD_VIEWED,
         function ()
             print ( "Rewarded video successfully completed." )
         end
     )
+
+    MOAIVungleAndroid.init ( '< YOUR APP ID >' )
+
+    MOAICoroutine.blockOnAction ( delay_timer:start () )
+    coroutine:yield ()
 
     if MOAIVungleAndroid.isVideoAvailable () then
     	print ( "Showing Vungle rewarded video." )

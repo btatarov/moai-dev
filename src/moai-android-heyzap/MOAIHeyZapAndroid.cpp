@@ -16,8 +16,8 @@
 int MOAIHeyZapAndroid::_cacheInterstitial ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIHeyZapAndroid, "" )
 
-	jmethodID cacheInterstitial = self->GetStaticMethod ( "cacheInterstitial", "()V" );
-	self->CallStaticVoidMethod ( cacheInterstitial );
+	self->CallStaticVoidMethod ( self->mJava_CacheInterstitial );
+
 	return 0;
 }
 
@@ -25,8 +25,8 @@ int MOAIHeyZapAndroid::_cacheInterstitial ( lua_State* L ) {
 int MOAIHeyZapAndroid::_cacheRewardedVideo ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIHeyZapAndroid, "" )
 
-	jmethodID cacheRewardedVideo = self->GetStaticMethod ( "cacheRewardedVideo", "()V" );
-	self->CallStaticVoidMethod ( cacheRewardedVideo );
+	self->CallStaticVoidMethod ( self->mJava_CacheRewardedVideo );
+
 	return 0;
 }
 
@@ -34,8 +34,8 @@ int MOAIHeyZapAndroid::_cacheRewardedVideo ( lua_State* L ) {
 int MOAIHeyZapAndroid::_hasCachedInterstitial ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIHeyZapAndroid, "" )
 
-	jmethodID hasCachedInterstitial = self->GetStaticMethod ( "hasCachedInterstitial", "()Z" );
-	state.Push ( self->CallStaticBooleanMethod ( hasCachedInterstitial ) );
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_HasCachedInterstitial ) );
+
 	return 1;
 }
 
@@ -43,8 +43,8 @@ int MOAIHeyZapAndroid::_hasCachedInterstitial ( lua_State* L ) {
 int MOAIHeyZapAndroid::_hasCachedRewardedVideo ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIHeyZapAndroid, "" )
 
-	jmethodID hasCachedRewardedVideo = self->GetStaticMethod ( "hasCachedRewardedVideo", "()Z" );
-	state.Push ( self->CallStaticBooleanMethod ( hasCachedRewardedVideo ) );
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_HasCachedRewardedVideo ) );
+
 	return 1;
 }
 
@@ -52,10 +52,9 @@ int MOAIHeyZapAndroid::_hasCachedRewardedVideo ( lua_State* L ) {
 int MOAIHeyZapAndroid::_init ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIHeyZapAndroid, "" )
 
-	jstring jpublisherID = self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
+	jstring jpublisherID = self->GetJString ( lua_tostring ( state, 1 ) );
+	self->CallStaticVoidMethod ( self->mJava_Init, jpublisherID );
 
-	jmethodID init = self->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
-	self->CallStaticVoidMethod ( init, jpublisherID );
 	return 0;
 }
 
@@ -63,8 +62,8 @@ int MOAIHeyZapAndroid::_init ( lua_State* L ) {
 int MOAIHeyZapAndroid::_showInterstitial ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIHeyZapAndroid, "" )
 
-	jmethodID showInterstitial = self->GetStaticMethod ( "showInterstitial", "()V" );
-	self->CallStaticVoidMethod ( showInterstitial );
+	self->CallStaticVoidMethod ( self->mJava_ShowInterstitial );
+
 	return 0;
 }
 
@@ -72,8 +71,8 @@ int MOAIHeyZapAndroid::_showInterstitial ( lua_State* L ) {
 int MOAIHeyZapAndroid::_showRewardedVideo ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIHeyZapAndroid, "" )
 
-	jmethodID showRewardedVideo = self->GetStaticMethod ( "showRewardedVideo", "()V" );
-	self->CallStaticVoidMethod ( showRewardedVideo );
+	self->CallStaticVoidMethod ( self->mJava_ShowRewardedVideo );
+
 	return 0;
 }
 
@@ -87,6 +86,14 @@ MOAIHeyZapAndroid::MOAIHeyZapAndroid () {
 	RTTI_SINGLE ( MOAIGlobalEventSource )
 
 	this->SetClass ( "com/ziplinegames/moai/MoaiHeyZap" );
+
+	this->mJava_CacheInterstitial		= this->GetStaticMethod ( "cacheInterstitial", "()V" );
+	this->mJava_CacheRewardedVideo		= this->GetStaticMethod ( "cacheRewardedVideo", "()V" );
+	this->mJava_HasCachedInterstitial	= this->GetStaticMethod ( "hasCachedInterstitial", "()Z" );
+	this->mJava_HasCachedRewardedVideo	= this->GetStaticMethod ( "hasCachedRewardedVideo", "()Z" );
+	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
+	this->mJava_ShowInterstitial		= this->GetStaticMethod ( "showInterstitial", "()V" );
+	this->mJava_ShowRewardedVideo		= this->GetStaticMethod ( "showRewardedVideo", "()V" );
 }
 
 //----------------------------------------------------------------//
