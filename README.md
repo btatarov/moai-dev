@@ -1,7 +1,8 @@
 # My MOAI (v1.6 Stable) playground
 
 Forked from: [moaiforge](https://github.com/moaiforge/moai-sdk).
-Original Readme: [here](https://github.com/moaiforge/moai-sdk/blob/1.6-stable/README.md).
+
+Original readme: [here](https://github.com/moaiforge/moai-sdk/blob/1.6-stable/README.md).
 
 Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?branch=postmorph)](https://travis-ci.org/btatarov/moai-sdk)
 
@@ -22,3 +23,21 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * revmob-9.0.8 (interstitial and rewarded video)
 * startapp-3.3.2 (interstitial, rewarded video, return ad and exit ad)
 * vungle-3.3.4 (rewarded video)
+
+### iOS
+* TODO
+
+### Samples
+* android-adcolony
+* android-chartboost
+* android-heyzap
+* android-revmob
+* android-startapp
+* android-vungle
+* fmod
+* spine-attachment-vertices
+* spine-boy
+* spine-events
+* spine-ffd
+* spine-procedural
+* spine-skins
