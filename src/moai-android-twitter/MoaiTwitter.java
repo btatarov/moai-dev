@@ -1,6 +1,6 @@
 //----------------------------------------------------------------//
-// Copyright (c) 2010-2011 Zipline Games, Inc. 
-// All Rights Reserved. 
+// Copyright (c) 2010-2011 Zipline Games, Inc.
+// All Rights Reserved.
 // http://getmoai.com
 //----------------------------------------------------------------//
 
@@ -42,7 +42,7 @@ public class MoaiTwitter {
     private static enum ResultCode {
 		RESULT_SUCCESS,
         RESULT_ERROR;
-						
+
         public static ResultCode valueOf ( int index ) {
             ResultCode [] values = ResultCode.values ();
             if (( index < 0 ) || ( index >= values.length )) {
@@ -53,7 +53,7 @@ public class MoaiTwitter {
     }
 
 	private static Activity sActivity = null;
-    
+
     // Used to perform operations that benefit from asynchronous requests. (Login, tweet, etc)
 	private static AsyncTwitter	asyncTwitter = getAsyncTwitterInstance();
     // Used to determine if the user is authenticated in a synchronous manner
@@ -71,13 +71,13 @@ public class MoaiTwitter {
         MoaiLog.d ( "MoaiTwitter: onActivityResult, " + Integer.toString(resultCode));
         String token = "";
         String tokenSecret = "";
-        
+
         if (ResultCode.valueOf(resultCode) == ResultCode.RESULT_SUCCESS) {
                 token = data.getExtras().getString("token");
                 tokenSecret = data.getExtras().getString("tokenSecret");
                 asyncTwitter.setOAuthAccessToken(new AccessToken(token, tokenSecret));
                 syncTwitter.setOAuthAccessToken(new AccessToken(token, tokenSecret));
-        } 
+        }
         synchronized ( Moai.sAkuLock ) {
             AKUNotifyTwitterLoginComplete (resultCode, token, tokenSecret );
         }
@@ -88,7 +88,7 @@ public class MoaiTwitter {
 		MoaiLog.i ( "MoaiTwitter onCreate: Initializing Twitter" );
 		sActivity = activity;
 	}
-	
+
     private static AsyncTwitter getAsyncTwitterInstance() {
         AsyncTwitter twitter = AsyncTwitterFactory.getSingleton();
         twitter.addListener(new TwitterAdapter() {
@@ -111,8 +111,8 @@ public class MoaiTwitter {
 	//================================================================//
 	// Twitter JNI callback methods
 	//================================================================//
-	
-	//----------------------------------------------------------------//	
+
+	//----------------------------------------------------------------//
 	public static void init ( String consumerKey, String consumerSecret, String callbackUrl ) {
         asyncTwitter.setOAuthConsumer ( consumerKey, consumerSecret );
         syncTwitter.setOAuthConsumer ( consumerKey, consumerSecret );
@@ -121,7 +121,7 @@ public class MoaiTwitter {
         MoaiTwitter.callbackUrl = callbackUrl;
 	}
 
-	//----------------------------------------------------------------//	
+	//----------------------------------------------------------------//
 	public static void login () {
         sActivity.runOnUiThread( new Runnable () {
             public void run () {
@@ -135,30 +135,30 @@ public class MoaiTwitter {
         });
     }
 
-	//----------------------------------------------------------------//	
+	//----------------------------------------------------------------//
     public static boolean isLoggedIn () {
         boolean isLoggedIn = false;
         try {
             syncTwitter.verifyCredentials();
-            isLoggedIn = true; 
+            isLoggedIn = true;
         } catch (TwitterException ex) {
             MoaiLog.d ( "MoaiTwitter: Not Authenticated - " + ex.getMessage());
         } catch (IllegalStateException ex) {
             MoaiLog.d ( "MoaiTwitter: Not Authenticated - " + ex.getMessage());
         }
 
-        return isLoggedIn; 
+        return isLoggedIn;
     }
 
-    //----------------------------------------------------------------//	
+    //----------------------------------------------------------------//
 	public static void setAccessToken (String token, String tokenSecret) {
         asyncTwitter.setOAuthAccessToken(new AccessToken(token, tokenSecret));
         syncTwitter.setOAuthAccessToken(new AccessToken(token, tokenSecret));
 	}
 
-	//----------------------------------------------------------------//	
+	//----------------------------------------------------------------//
 	public static void sendTweet ( String text ) {
-        asyncTwitter.updateStatus(text); 
+        asyncTwitter.updateStatus(text);
 	}
-	
+
 }

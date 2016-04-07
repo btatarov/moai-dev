@@ -281,6 +281,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	TWITTER = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_TWITTER',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-twitter.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-twitter',
+	},
+
+	----------------------------------------------------------------
 	UNTZ = {
 
 		MODULE_DEFINE = 'AKU_WITH_UNTZ',
@@ -374,6 +386,7 @@ STATIC_LIBRARIES = {
 	'libmoai-heyzap',
 	'libmoai-revmob',
 	'libmoai-startapp',
+	'libmoai-twitter',
 	'libmoai-vungle',
 
 	-- moai

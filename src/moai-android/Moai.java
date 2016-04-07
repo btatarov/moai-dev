@@ -150,6 +150,7 @@ public class Moai {
 		"com.ziplinegames.moai.MoaiRevMob",
 		"com.ziplinegames.moai.MoaiStartApp",
 		"com.ziplinegames.moai.MoaiTapjoy",
+		"com.ziplinegames.moai.MoaiTwitter",
 		"com.ziplinegames.moai.MoaiVungle",
 	};
 

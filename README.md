@@ -17,15 +17,17 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 
 ### Android
 * adcolony-2.3.4 (rewarded video)
-* admob-8.4.0
+* admob-8.4.0 (interstitial)
 * chartboost-6.4.1 (interstitial)
 * crittercism-5.5.5
 * heyzap-9.4.5 (interstitial and rewarded video)
 * google-play-services-8.4.0 (currently stripped; todo)
 * revmob-9.0.8 (interstitial and rewarded video)
 * startapp-3.3.2 (interstitial, rewarded video, return ad and exit ad)
+* twitter4j-4.0.4
 * vungle-3.3.4 (rewarded video)
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
+* TODO: banner ads
 
 ### iOS
 * TODO
@@ -34,10 +36,11 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * android-adcolony
 * android-admob
 * android-chartboost
-* android-google-play-services
 * android-heyzap
+* android-play-services
 * android-revmob
 * android-startapp
+* android-twitter
 * android-vungle
 * fmod
 * spine-attachment-vertices

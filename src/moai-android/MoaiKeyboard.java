@@ -1,6 +1,6 @@
 //----------------------------------------------------------------//
-// Copyright (c) 2010-2011 Zipline Games, Inc. 
-// All Rights Reserved. 
+// Copyright (c) 2010-2011 Zipline Games, Inc.
+// All Rights Reserved.
 // http://getmoai.com
 //----------------------------------------------------------------//
 
@@ -13,7 +13,7 @@ import android.view.Window;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 
-// To support Android Keyboard input 
+// To support Android Keyboard input
 import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
@@ -32,10 +32,10 @@ import android.text.Editable;
 // MoaiLog
 //================================================================//
 public class MoaiKeyboard {
-	
+
 	private static Activity mActivity = null;
 	private static EditText mKeyInTextView = null;
-	
+
 	protected static native void AKUNotifyKeyEvent ();
 	protected static native void AKUNotifyTextDone ();
 
@@ -48,15 +48,15 @@ public class MoaiKeyboard {
 	private static InputMethodManager mInputMethodManager;
 
 	private static LinearLayoutIMETrap mContainer;
-	
+
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
 		mActivity = activity;
 		mContext = activity;
-		
+
 		// input manager is used to pop up the native Android keyboard as needed
 		mInputMethodManager = ( InputMethodManager ) mContext.getSystemService ( Context.INPUT_METHOD_SERVICE );
-		
+
 		// Our main container holds the EGL view as well as our fake TextEdit view for keyboard entry ..
 		mContainer = ( LinearLayoutIMETrap ) new LinearLayoutIMETrap ( mContext );
 		mContainer.setLayoutParams ( new LinearLayout.LayoutParams ( LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT ));
@@ -68,7 +68,7 @@ public class MoaiKeyboard {
 		mKeyInTextView.setText ( "" );
 		mKeyInTextView.setMinLines ( 1 );
 		mKeyInTextView.setMaxLines ( 1 );
-		
+
 		mKeyInTextView.addTextChangedListener ( new TextWatcher () {
 			public void afterTextChanged ( Editable s ) {
 				mKeyString = s.toString ();
@@ -83,7 +83,7 @@ public class MoaiKeyboard {
 				mKeyIsReady = true;
 			}
 		});
-		
+
 		mKeyInTextView.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -93,7 +93,7 @@ public class MoaiKeyboard {
 				return false;
 			}
 		});
-		
+
 		// Create the fake EditText, and push it outside the margins so that its not visible.
 		LinearLayout.LayoutParams paramsKeyInTextView = new LinearLayout.LayoutParams ( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -105,11 +105,11 @@ public class MoaiKeyboard {
 	public static LinearLayoutIMETrap getContainer () {
 		return mContainer;
 	}
-	
+
 	public static EditText getEditText() {
 		return mKeyInTextView;
 	}
-	
+
 	public static void update () {
 		if ( mKeyIsReady ) {
 			AKUNotifyKeyEvent();
@@ -120,14 +120,14 @@ public class MoaiKeyboard {
 			mTextIsReady = false;
 		}
 	}
-	
+
 	//================================================================//
 	// MoaiKeyboard JNI callback methods
 	//================================================================//
 	public static String getString () {
 		return mKeyString;
 	}
-	
+
     public static void _showKeyboard ( final int inputType ) {
          mActivity.runOnUiThread( new Runnable () {
              public void run () {
@@ -139,19 +139,19 @@ public class MoaiKeyboard {
     public static void showKeyboard () {
         showTextKeyboard();
      }
-	
+
 	public static void showTextKeyboard() {
 		_showKeyboard( InputType.TYPE_CLASS_TEXT );
 	}
-	
+
 	public static void showNumberKeyboard() {
 	    _showKeyboard( InputType.TYPE_CLASS_NUMBER );
 	}
-	
+
 	public static void showDateTimeKeyboard() {
 	    _showKeyboard( InputType.TYPE_CLASS_DATETIME );
 	}
-	
+
 	public static void showPhoneKeyboard() {
 	    _showKeyboard( InputType.TYPE_CLASS_PHONE );
 	}
@@ -164,7 +164,7 @@ public class MoaiKeyboard {
 			}
 		});
 	}
-		
+
 	public static void setText ( final String text ) {
 		mActivity.runOnUiThread( new Runnable () {
 			public void run () {
