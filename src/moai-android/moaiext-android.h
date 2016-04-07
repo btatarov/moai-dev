@@ -10,4 +10,8 @@
 #include <moai-android/MOAIKeyboardAndroid.h>
 #include <moai-android/MOAIMoviePlayerAndroid.h>
 
+#ifndef DISABLE_BILLING
+    #include <moai-android/MOAIBillingAndroid.h>
+#endif
+
 #endif

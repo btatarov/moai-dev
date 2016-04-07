@@ -160,10 +160,12 @@ processConfigFile('config.lua')
 local host_config = INVOKE_DIR .. 'hosts.lua'
 assert(MOAIFileSystem.checkFileExists(host_config), "You need to have hosts.lua configured in your project directory.")
 
-local store = string.upper(SCRIPT_PARAM)
+local STORE = string.upper(SCRIPT_PARAM)
 util.dofileWithEnvironment(host_config, config)
-assert(config['HOST_SETTINGS']['ANDROID'][store], "Config file error.") -- always crash here on mistakes
 
+assert(config['HOST_SETTINGS']['ANDROID'][STORE], "Config file error.") -- always crash here on mistakes
+
+-- first copy main params
 for k, v in pairs ( config['HOST_SETTINGS']['ANDROID'] ) do
 
 	-- only simple params or icon tables
@@ -172,10 +174,11 @@ for k, v in pairs ( config['HOST_SETTINGS']['ANDROID'] ) do
 	end
 end
 
-for k, v in pairs (config['HOST_SETTINGS']['ANDROID'][store]) do
+-- copy and override existing host-specific params
+for k, v in pairs (config['HOST_SETTINGS']['ANDROID'][STORE]) do
 
 	if k == 'MODULES' then
-		for i, mod in ipairs(config['HOST_SETTINGS']['ANDROID'][store]['MODULES']) do
+		for i, mod in ipairs(config['HOST_SETTINGS']['ANDROID'][STORE]['MODULES']) do
 			table.insert(config['MODULES'], mod)
 		end
 
@@ -183,16 +186,13 @@ for k, v in pairs (config['HOST_SETTINGS']['ANDROID'][store]) do
     	config[k] = v
 	end
 end
-
 config['HOST_SETTINGS'] = nil
 
+-- convert module list to module LUT
 processModulesFile('modules.lua')
-
-util.printTable(config)
 
 config.COPY = {
 	{ dst = 'assets/lua',		src = config.LUA_MAIN_DIR },
-	-- { dst = 'res/',			src = string.format ( '%sres-%s', TEMPLATE_PATH, TARGET )},
 }
 
 for name, mod in pairs (config['MODULES']) do
@@ -216,6 +216,7 @@ end
 
 MOAIFileSystem.deleteDirectory(OUTPUT_DIR, true)
 MOAIFileSystem.affirmPath(ANT_DIR)
+
 
 MOAIFileSystem.copy(
 	MOAI_SDK_HOME .. '/host-templates/android/studio/MoaiTemplate/app/bootstrap/bootstrap.lua',

@@ -30,10 +30,10 @@ MODULES = {
 		src		= MOAI_SDK_HOME .. 'src/moai-android-crittercism',
 	},
 
-    -- google_billing	= {
-    -- 	lib		= MOAI_SDK_HOME .. '3rdparty-android/google-billing-v3',
-    -- 	src		= MOAI_SDK_HOME .. 'src/moai-android-google-billing',
-    -- },
+    google_billing	= {
+    	lib		= MOAI_SDK_HOME .. '3rdparty-android/google-billing-v3',
+    	src		= MOAI_SDK_HOME .. 'src/moai-android-google-billing',
+    },
 
     google_play_services = {
 		lib		= MOAI_SDK_HOME .. '3rdparty-android/google-play-services-8.4.0',

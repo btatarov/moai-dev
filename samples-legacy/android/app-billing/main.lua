@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
--- Copyright (c) 2010-2011 Zipline Games, Inc. 
--- All Rights Reserved. 
+-- Copyright (c) 2010-2011 Zipline Games, Inc.
+-- All Rights Reserved.
 -- http://getmoai.com
 ----------------------------------------------------------------
 
@@ -13,7 +13,7 @@ function onBillingSupported ( supported )
 	if ( supported ) then
 
 		print ( "billing is supported" )
-		
+
 		if MOAIBilling.requestPurchase ( 'sword_001', 'this is a payload available to developers that is returned as part of the purchase state changed callback' ) then
 --		if MOAIBilling.restoreTransactions () then
 
@@ -33,7 +33,7 @@ end
 function onPurchaseResponseReceived ( code, id )
 
 	print ( "onPurchaseResponseReceived: " .. id )
-	
+
 	if ( code == MOAIBilling.BILLING_RESULT_SUCCESS ) then
 
 		print ( "purchase request received" )
@@ -77,9 +77,9 @@ function onRestoreResponseReceived ( code, more, offset )
 	if ( code == MOAIBilling.BILLING_RESULT_SUCCESS ) then
 
 		print ( "restore request received" )
-	
+
 		if ( more ) then
-	
+
 			MOAIBilling.restoreTransactions ( offset )
 		end
 	else
@@ -92,8 +92,6 @@ MOAIBilling.setListener ( MOAIBilling.CHECK_BILLING_SUPPORTED, onBillingSupporte
 MOAIBilling.setListener ( MOAIBilling.PURCHASE_RESPONSE_RECEIVED, onPurchaseResponseReceived )
 MOAIBilling.setListener ( MOAIBilling.PURCHASE_STATE_CHANGED, onPurchaseStateChanged )
 MOAIBilling.setListener ( MOAIBilling.RESTORE_RESPONSE_RECEIVED, onRestoreResponseReceived )
-
-MOAIBilling.setPublicKey ( "SET YOUR ANDROID MARKET PUBLIC KEY HERE. SEE https://market.android.com/publish/editProfile" )
 
 if not MOAIBilling.setBillingProvider ( MOAIBilling.BILLING_PROVIDER_GOOGLE ) then
 

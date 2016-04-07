@@ -226,7 +226,7 @@
 
 	//----------------------------------------------------------------//
 	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUFinalize	( JNIEnv* env, jclass obj ) {
-        
+
         AKUModulesAndroidAppFinalize ();
         AKUModulesAppFinalize();
         AKUAppFinalize ();
@@ -250,9 +250,14 @@
 		MOAIKeyboardAndroid::Affirm ();
 		REGISTER_LUA_CLASS ( MOAIKeyboardAndroid );
 
+		#ifndef DISABLE_BILLING
+			MOAIBillingAndroid::Affirm ();
+			REGISTER_LUA_CLASS ( MOAIBillingAndroid );
+		#endif
+
 		inputQueue = new LockingQueue < InputEvent > ();
 	}
-	
+
 	//----------------------------------------------------------------//
 	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUModulesContextInitialize ( JNIEnv* env, jclass obj ) {
 
@@ -262,7 +267,7 @@
 
     //----------------------------------------------------------------//
 	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUModulesRunLuaAPIWrapper ( JNIEnv* env, jclass obj ) {
-        
+
         AKUModulesRunLuaAPIWrapper ();
     }
 
@@ -379,7 +384,7 @@
 
 	//----------------------------------------------------------------//
 	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUSetCacheDirectory ( JNIEnv* env, jclass obj, jstring jpath ) {
-		
+
 		JNI_GET_CSTRING ( jpath, path );
 		MOAIEnvironment::Get ().SetValue ( MOAI_ENV_cacheDirectory,	path );
 		JNI_RELEASE_CSTRING ( jpath, path );
@@ -490,7 +495,7 @@
 
 	//----------------------------------------------------------------//
 	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUSetDeviceLocale ( JNIEnv* env, jclass obj, jstring jlangCode, jstring jcountryCode ) {
-	
+
 		JNI_GET_CSTRING ( jlangCode, langCode );
 		JNI_GET_CSTRING ( jcountryCode, countryCode );
 
