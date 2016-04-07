@@ -9,6 +9,7 @@ ANT_DIR							= OUTPUT_DIR .. 'ant/'
 MOAI_PROJECT_PATH				= ANT_DIR .. 'project/'
 
 MODULES							= {}
+ALL_MODULES						= {}
 
 MODULE_APP_DECLARATIONS			= ''
 MODULE_MANIFEST_PERMISSIONS		= ''
@@ -40,6 +41,7 @@ local importBin
 local importLib
 local importSrc
 local processConfigFile
+local processModulesFiles
 
 ----------------------------------------------------------------
 local importBin = function ( path )
@@ -125,6 +127,26 @@ processConfigFile = function ( filename )
 end
 
 ----------------------------------------------------------------
+processModulesFile = function ( filename )
+
+	filename = MOAIFileSystem.getAbsoluteFilePath ( filename )
+	if not MOAIFileSystem.checkFileExists ( filename ) then return end
+	local configPath = util.getFolderFromPath ( filename )
+
+	local modFile = { MOAI_SDK_HOME = MOAI_SDK_HOME }
+	util.dofileWithEnvironment ( filename, modFile )
+
+	local modTable = {
+		MODULES = {}
+	}
+	for i, mod in ipairs(config['MODULES']) do
+		modTable['MODULES'][mod] = modFile['MODULES'][mod]
+	end
+
+	config['MODULES'] = modTable['MODULES']
+end
+
+----------------------------------------------------------------
 local resolvePath = function ( path )
 	return path and ( string.find ( path, '^/' ) and path or SCRIPT_DIR .. path )
 end
@@ -138,20 +160,35 @@ processConfigFile('config.lua')
 local host_config = INVOKE_DIR .. 'hosts.lua'
 assert(MOAIFileSystem.checkFileExists(host_config), "You need to have hosts.lua configured in your project directory.")
 
+local store = string.upper(SCRIPT_PARAM)
 util.dofileWithEnvironment(host_config, config)
-assert(config['HOST_SETTINGS']['ANDROID'][SCRIPT_PARAM], "Config file error.") -- always crash here on mistakes
+assert(config['HOST_SETTINGS']['ANDROID'][store], "Config file error.") -- always crash here on mistakes
 
-for k, v in pairs (config['HOST_SETTINGS']['ANDROID'][SCRIPT_PARAM]) do
+for k, v in pairs ( config['HOST_SETTINGS']['ANDROID'] ) do
+
+	-- only simple params or icon tables
+	if type(v) ~= 'table' or k == 'ICONS' then
+		config[k] = v
+	end
+end
+
+for k, v in pairs (config['HOST_SETTINGS']['ANDROID'][store]) do
+
 	if k == 'MODULES' then
-		for m_k, m_v in pairs(config['HOST_SETTINGS']['ANDROID'][SCRIPT_PARAM]['MODULES']) do
-			config['MODULES'][m_k] = m_v
+		for i, mod in ipairs(config['HOST_SETTINGS']['ANDROID'][store]['MODULES']) do
+			table.insert(config['MODULES'], mod)
 		end
+
 	else
     	config[k] = v
 	end
 end
 
 config['HOST_SETTINGS'] = nil
+
+processModulesFile('modules.lua')
+
+util.printTable(config)
 
 config.COPY = {
 	{ dst = 'assets/lua',		src = config.LUA_MAIN_DIR },

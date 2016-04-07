@@ -1,61 +1,40 @@
 HOST_SETTINGS = {
 
     ANDROID = {
-        googleplay = {
-            APP_NAME     = 'Moai Sample',
-            PROJECT_NAME = 'MoaiSample',
-            PACKAGE_NAME = 'com.ziplinegames.moaisample',
+
+        -- HINT: every param can be overriden from within GOOGLEPLAY/AMAZON
+        APP_NAME             = 'Moai Sample',
+        PROJECT_NAME         = 'MoaiSample',
+        PACKAGE_NAME         = 'com.ziplinegames.moaisample',
+        DEFAULT_ORIENTATION  = '< landscape|portrait >',
+        LUA_MAIN_DIR         = '< path to lua sources >',
+
+        ICONS = {
+            hdpi = '< path to 72px png >',
+            ldpi = '< path to 36px png >',
+            mdpi = '< path to 48px png >',
+            xhdpi = '< path to 36px png >',
+            xxhdpi = '< path to 144px png >',
+        },
+
+        GOOGLEPLAY = {
+
+            APP_NAME     = 'Moai Sample: Summer Edition'
             VERSION_CODE = '1',
             VERSION_NAME = '1.0',
-            LUA_MAIN_DIR = '< path to lua sources >',
 
-            DEFAULT_ORIENTATION = '< landscape|portrait >',
             GOOGLE_PLAY_APP_ID  = '< YOUR GOOGLE PLAY SERVICES APP ID >',
             REVMOB_APP_ID       = '< YOUR REVMOB MEDIA ID >',
 
-            ICONS = {
-                hdpi = '< path to 72px png >',
-                ldpi = '< path to 36px png >',
-                mdpi = '< path to 48px png >',
-                xhdpi = '< path to 36px png >',
-                xxhdpi = '< path to 144px png >',
-            },
-
             MODULES = {
-                adcolony = {
-            		lib		= MOAI_SDK_HOME .. '3rdparty-android/adcolony-2.3.4',
-            		src		= MOAI_SDK_HOME .. 'src/moai-android-adcolony',
-            	},
-
-                admob = {
-                    lib		= MOAI_SDK_HOME .. '3rdparty-android/admob', -- same as gps 8.4.0
-                    src		= MOAI_SDK_HOME .. 'src/moai-android-admob',
-                },
-
-                chartboost = {
-            		lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost-6.4.1',
-            		src		= MOAI_SDK_HOME .. 'src/moai-android-chartboost',
-            	},
-
-                heyzap = {
-                    lib		= MOAI_SDK_HOME .. '3rdparty-android/heyzap-9.4.5',
-            		src		= MOAI_SDK_HOME .. 'src/moai-android-heyzap',
-                },
-
-                revmob = {
-                    lib		= MOAI_SDK_HOME .. '3rdparty-android/revmob-9.0.8',
-            		src		= MOAI_SDK_HOME .. 'src/moai-android-revmob',
-                },
-
-                startapp = {
-                    lib		= MOAI_SDK_HOME .. '3rdparty-android/startapp-3.3.2',
-            		src		= MOAI_SDK_HOME .. 'src/moai-android-startapp',
-                },
-
-                vungle = {
-                    lib		= MOAI_SDK_HOME .. '3rdparty-android/vungle-3.3.4',
-            		src		= MOAI_SDK_HOME .. 'src/moai-android-vungle',
-                },
+                'adcolony',
+                'admob',
+                'google_billing',
+                'chartboost',
+                'heyzap',
+                'revmob',
+                'startapp',
+                'vungle',
             },
 
             KEYSTORE_NAME = 'moaisample.keystore',
@@ -64,8 +43,14 @@ HOST_SETTINGS = {
             KEYSTORE_ALIAS_PASSWORD = '',
         },
 
-        amazon = {
-            -- ...
+        AMAZON = {
+
+            MODULES = {
+                'adcolony',
+                'amazon_billing',
+                'chartboost',
+                'revmob',
+            }
         },
     },
 }
