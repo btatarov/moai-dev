@@ -107,22 +107,32 @@
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-adcolony.mk
 
 	#--------------------------------------------------------------#
-	# LUAEXT
+	# UNTZ
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_LUAEXT=1
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luacrypto-0.2.0/src
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luacurl-1.2.1
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luafilesystem-1.5.0/src
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luasocket-2.0.2/src
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luasocket-2.0.2-embed/src
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luasql-2.2.0/src
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-luaext.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_UNTZ=1
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/src/moai-untz
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/untz/include
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/untz/src
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/untz/src/native/android
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/libvorbis-1.3.2/include
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/libvorbis-1.3.2/lib
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/libogg-1.2.2/include
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-ogg.mk
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-vorbis.mk
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-untz.mk
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-untz.mk
 
 	#--------------------------------------------------------------#
 	# GOOGLE_PLAY_SERVICES
 
 	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES=1
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-google-play-services.mk
+
+	#--------------------------------------------------------------#
+	# ADMOB
+
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_ADMOB=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-admob.mk
 
 	#--------------------------------------------------------------#
 	# HEYZAP
@@ -179,20 +189,9 @@
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-http-client.mk
 
 	#--------------------------------------------------------------#
-	# UNTZ
+	# FMOD_EX
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_UNTZ=1
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/src/moai-untz
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/untz/include
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/untz/src
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/untz/src/native/android
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/libvorbis-1.3.2/include
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/libvorbis-1.3.2/lib
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/libogg-1.2.2/include
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-ogg.mk
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-vorbis.mk
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-untz.mk
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-untz.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_FMOD_EX=0
 
 	#--------------------------------------------------------------#
 	# VUNGLE
@@ -219,9 +218,16 @@
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-util.mk
 
 	#--------------------------------------------------------------#
-	# FMOD_EX
+	# LUAEXT
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_FMOD_EX=0
+	MY_LOCAL_CFLAGS += -DAKU_WITH_LUAEXT=1
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luacrypto-0.2.0/src
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luacurl-1.2.1
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luafilesystem-1.5.0/src
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luasocket-2.0.2/src
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luasocket-2.0.2-embed/src
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luasql-2.2.0/src
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-luaext.mk
 
 	#--------------------------------------------------------------#
 	# SPINE
@@ -267,7 +273,7 @@
 	LOCAL_SRC_FILES 	+= src/aku_plugins.cpp
 
 	LOCAL_SHARED_LIBRARIES := fmod
-	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-chartboost libmoai-googleplayservices libmoai-heyzap libmoai-revmob libmoai-startapp libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-untz libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libuntz libvorbis libogg libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
+	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-admob libmoai-chartboost libmoai-googleplayservices libmoai-heyzap libmoai-revmob libmoai-startapp libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-untz libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libuntz libvorbis libogg libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
 	LOCAL_WHOLE_STATIC_LIBRARIES := libmoai-android libmoai-sim libmoai-core libcrypto
 
 #----------------------------------------------------------------#

@@ -26,6 +26,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	ADMOB = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_ADMOB',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-admob.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-admob',
+	},
+
+	----------------------------------------------------------------
 	BOX2D = {
 
 		MODULE_DEFINE = 'AKU_WITH_BOX2D',
@@ -343,6 +355,7 @@ EXTERNAL_LIBRARIES = {
 STATIC_LIBRARIES = {
 	-- platform specific
 	'libmoai-adcolony',
+	'libmoai-admob',
 	'libmoai-chartboost',
 	'libmoai-googleplayservices',
 	'libmoai-heyzap',

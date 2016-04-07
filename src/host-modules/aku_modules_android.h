@@ -11,6 +11,10 @@
 	#include <moai-android-adcolony/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_ADMOB
+	#include <moai-android-admob/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_CHARTBOOST
 	#include <moai-android-chartboost/host.h>
 #endif

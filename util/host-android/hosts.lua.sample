@@ -27,6 +27,11 @@ HOST_SETTINGS = {
             		src		= MOAI_SDK_HOME .. 'src/moai-android-adcolony',
             	},
 
+                admob = {
+                    lib		= MOAI_SDK_HOME .. '3rdparty-android/admob', -- same as gps 8.4.0
+                    src		= MOAI_SDK_HOME .. 'src/moai-android-admob',
+                },
+
                 chartboost = {
             		lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost-6.4.1',
             		src		= MOAI_SDK_HOME .. 'src/moai-android-chartboost',
