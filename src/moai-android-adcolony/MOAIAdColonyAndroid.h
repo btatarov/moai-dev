@@ -4,8 +4,6 @@
 #ifndef MOAIADCOLONYANDROID_H
 #define MOAIADCOLONYANDROID_H
 
-
-
 #include <moai-core/headers.h>
 #include <moai-android/JniUtils.h>
 

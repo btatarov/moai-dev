@@ -16,6 +16,9 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 
 ### Android
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
+* adcolony-2.3.4 (rewarded video)
 * chartboost-6.4.1 (interstitial)
+* heyzap-9.4.5 (interstitial and rewarded video)
 * revmob-9.0.8 (interstitial and rewarded video)
-* heyzap-9.4.4 (interstitial and rewarded video)
+* startapp-3.3.2 (interstitial, rewarded video, return ad and exit ad)
+* vungle-3.3.4 (rewarded video)

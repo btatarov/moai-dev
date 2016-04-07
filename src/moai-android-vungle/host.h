@@ -1,6 +1,6 @@
 //----------------------------------------------------------------//
-// Copyright (c) 2010-2011 Zipline Games, Inc. 
-// All Rights Reserved. 
+// Copyright (c) 2010-2011 Zipline Games, Inc.
+// All Rights Reserved.
 // http://getmoai.com
 //----------------------------------------------------------------//
 
@@ -10,7 +10,7 @@
 #include <moai-core/host.h>
 
 AKU_API void	AKUAndroidVungleAppFinalize				();
-AKU_API void	AKUAndroidVungleAppInitialize				();
-AKU_API void	AKUAndroidVungleContextInitialize			();
+AKU_API void	AKUAndroidVungleAppInitialize			();
+AKU_API void	AKUAndroidVungleContextInitialize		();
 
 #endif

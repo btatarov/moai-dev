@@ -1,10 +1,3 @@
-print ( "hello, Android!" )
-
-MOAIChartBoostAndroid.init ( '<YOUR-APP-ID>', '<YOUR-APP-SIGNATURE>' )
-MOAIChartBoostAndroid.cacheInterstitial ()
-
-----------------------------------------------------------------
-
 MOAISim.openWindow ( "test", 320, 480 )
 
 viewport = MOAIViewport.new ()
@@ -25,11 +18,22 @@ layer:insertProp ( prop )
 
 prop:moveRot ( 720, 2.0 )
 
--- wait 20 seconds so the Interstitial can properly load
+-- wait 10 seconds between interactions
 local thread = MOAICoroutine.new ()
 thread:run( function ()
     local delay_timer = MOAITimer:new ()
-    delay_timer:setSpan ( 20 )
+    delay_timer:setSpan ( 10 )
+
+    MOAICoroutine.blockOnAction ( delay_timer:start () )
+    coroutine:yield ()
+
+    MOAIChartBoostAndroid.init ( '< YOUR APP ID >', '< YOUR APP SIGNATURE >' )
+
+    MOAICoroutine.blockOnAction ( delay_timer:start () )
+    coroutine:yield ()
+
+    MOAIChartBoostAndroid.cacheInterstitial ()
+
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 

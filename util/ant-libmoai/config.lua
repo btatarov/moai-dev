@@ -14,6 +14,18 @@ OPTIONAL_COMPONENTS = {
 MODULES = {
 
 	----------------------------------------------------------------
+	ADCOLONY = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_ADCOLONY',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-adcolony.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-adcolony',
+	},
+
+	----------------------------------------------------------------
 	BOX2D = {
 
 		MODULE_DEFINE = 'AKU_WITH_BOX2D',
@@ -164,6 +176,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	STARTAPP = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_STARTAPP',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-startapp.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-startapp',
+	},
+
+	----------------------------------------------------------------
 	REVMOB = {
 
 		MODULE_DEFINE = 'AKU_WITH_ANDROID_REVMOB',
@@ -256,6 +280,18 @@ MODULES = {
 
 		STATIC_LIBRARIES = 'libmoai-util',
 	},
+
+	----------------------------------------------------------------
+	VUNGLE = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_VUNGLE',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-vungle.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-vungle',
+	},
 }
 
 PLUGINS = {
@@ -293,10 +329,13 @@ EXTERNAL_LIBRARIES = {
 }
 
 STATIC_LIBRARIES = {
-
+	-- platform specific
+	'libmoai-adcolony',
 	'libmoai-chartboost',
 	'libmoai-heyzap',
 	'libmoai-revmob',
+	'libmoai-startapp',
+	'libmoai-vungle',
 
 	-- moai
 	'libmoai-box2d',

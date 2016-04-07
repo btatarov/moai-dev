@@ -5,6 +5,8 @@
 #include "moai-core/pch.h"
 #include "moai-sim/pch.h"
 
+#include <jni.h>
+
 #include <moai-android/moaiext-jni.h>
 #include <moai-android-vungle/MOAIVungleAndroid.h>
 
@@ -16,23 +18,18 @@
 int MOAIVungleAndroid::_displayAdvert ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
 
-	bool incentivized		= state.GetValue < bool >( 1, true );
-	bool showCloseButton	= state.GetValue < bool >( 2, false );
+	self->CallStaticVoidMethod ( self->mJava_DisplayAdvert );
 
-	jmethodID displayAdvert = self->GetStaticMethod ( "displayAdvert", "(ZZ)Z" );
-	bool result = self->CallStaticBooleanMethod ( displayAdvert, incentivized, showCloseButton );
-	state.Push ( result );
-	return 1;
+	return 0;
 }
 
 //----------------------------------------------------------------//
 int	MOAIVungleAndroid::_init ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
-	
-	jstring appID = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
 
-	jmethodID init = self->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
-	self->CallStaticVoidMethod ( init, appID );
+	jstring jappID = self->GetJString ( lua_tostring ( state, 1 ));
+
+	self->CallStaticVoidMethod ( self->mJava_Init, jappID );
 
 	return 0;
 }
@@ -40,12 +37,9 @@ int	MOAIVungleAndroid::_init ( lua_State* L ) {
 //----------------------------------------------------------------//
 int	MOAIVungleAndroid::_isVideoAvailable ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
-	
-	bool debug		= state.GetValue < bool >( 1, true );
-	
-	jmethodID isVideoAvailable = self->GetStaticMethod ( "isVideoAvailable", "(Z)Z" );
-	bool result = self->CallStaticBooleanMethod ( isVideoAvailable, debug );
-	state.Push ( result );
+
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_IsVideoAvailable ) );
+
 	return 1;
 }
 
@@ -57,8 +51,12 @@ int	MOAIVungleAndroid::_isVideoAvailable ( lua_State* L ) {
 MOAIVungleAndroid::MOAIVungleAndroid () {
 
 	RTTI_SINGLE ( MOAIGlobalEventSource )
-	
+
 	this->SetClass ( "com/ziplinegames/moai/MoaiVungle" );
+
+	this->mJava_Init				= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
+	this->mJava_IsVideoAvailable	= this->GetStaticMethod ( "isVideoAvailable", "()Z" );
+	this->mJava_DisplayAdvert		= this->GetStaticMethod ( "displayAdvert", "()V" );
 }
 
 //----------------------------------------------------------------//
@@ -105,4 +103,3 @@ extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiVungle_AKUOnVie
 		state.DebugCall ( 1, 0 );
 	}
 }
-

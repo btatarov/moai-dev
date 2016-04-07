@@ -61,43 +61,21 @@ public class MoaiAdColony implements AdColonyAdListener {
 	//----------------------------------------------------------------//
 	public static void init ( String appId, String clientOptions, String [] zoneIds ) {
 
-		MoaiLog.i ( "MoaiAdColony: init" );
-		MoaiLog.i ( appId );
-		MoaiLog.i ( clientOptions );
-
-		MoaiLog.i ( "zones:" );
-
-		for ( String zone: zoneIds ) {
-			MoaiLog.i ( zone );
-		}
-
 		AdColony.configure ( sActivity, clientOptions, appId, zoneIds );
 	}
 
 	//----------------------------------------------------------------//
 	public static boolean isVideoReady ( String zoneId ) {
 
-		MoaiLog.i ( "MoaiAdColony: isVideoReady" );
-
 		String zoneStatus = AdColony.statusForZone ( zoneId );
-		MoaiLog.i ( "MoaiAdColony: isVideoReady status for zone: " + zoneStatus );
 
 		boolean result = new AdColonyVideoAd ( zoneId ).isReady ();
-		
-		if ( result ) {
-			MoaiLog.i ( "MoaiAdColony: isVideoReady 'result' is true; video should play" );
-		}
-		else {
-			MoaiLog.i ( "MoaiAdColony: isVideoReady - no video available" );
-		}
-		
+
 		return result;
 	}
 
 	//----------------------------------------------------------------//
 	public static void playVideo ( String zoneId, boolean showPrompt, boolean showConfirmation ) {
-
-		MoaiLog.i ( "MoaiAdColony: playVideo" );
 
 		AdColonyVideoAd ad = new AdColonyVideoAd ( zoneId ).withListener ( new MoaiAdColony ());
 		ad.show ();
@@ -109,8 +87,6 @@ public class MoaiAdColony implements AdColonyAdListener {
 
 	//----------------------------------------------------------------//
 	public void onAdColonyAdAttemptFinished ( AdColonyAd ad ) {
-
-		MoaiLog.i ( "MoaiAdColony: onAdColonyAdAttemptFinished" );
 
 		ListenerEvent eventID = null;
 
@@ -126,8 +102,6 @@ public class MoaiAdColony implements AdColonyAdListener {
 
 	//----------------------------------------------------------------//
 	public void onAdColonyAdStarted ( AdColonyAd ad ) {
-
-		MoaiLog.i ( "MoaiAdColony: onAdColonyAdStarted" );
 
 		synchronized ( Moai.sAkuLock ) {
 			MoaiAdColony.AKUInvokeListener ( ListenerEvent.VIDEO_STARTED.ordinal ());

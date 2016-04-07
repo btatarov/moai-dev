@@ -44,46 +44,10 @@ class MoaiRevMob {
 	protected static native void AKUInvokeListener ( int eventID );
 
 	//----------------------------------------------------------------//
-	public static void onBackPressed ( Activity activity ) {
-
-        MoaiLog.i ( "MoaiRevMob: onBackPressed" );
-    }
-
-	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
 
 		MoaiLog.i ( "MoaiRevMob: onCreate" );
 		sActivity = activity;
-	}
-
-	//----------------------------------------------------------------//
-	public static void onDestroy ( Activity activity ) {
-
-		MoaiLog.i ( "MoaiRevMob: onDestroy" );
-	}
-
-	//----------------------------------------------------------------//
-	public static void onPause ( Activity activity ) {
-
-		MoaiLog.i ( "MoaiRevMob: onPause" );
-	}
-
-	//----------------------------------------------------------------//
-	public static void onResume ( Activity activity ) {
-
-		MoaiLog.i ( "MoaiRevMob: onResume" );
-	}
-
-	//----------------------------------------------------------------//
-	public static void onStart ( Activity activity ) {
-
-		MoaiLog.i ( "MoaiRevMob: onStart" );
-	}
-
-	//----------------------------------------------------------------//
-	public static void onStop ( Activity activity ) {
-
-		MoaiLog.i ( "MoaiRevMob: onStop" );
 	}
 
 	//================================================================//

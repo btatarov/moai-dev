@@ -24,46 +24,10 @@ class MoaiHeyZap {
 	protected static native void AKUInvokeListener ( int eventID );
 
 	//----------------------------------------------------------------//
-	public static void onBackPressed ( Activity activity ) {
-
-        MoaiLog.i ( "MoaiHeyZap: onBackPressed" );
-    }
-
-	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
 
 		MoaiLog.i ( "MoaiHeyZap: onCreate" );
 		sActivity = activity;
-	}
-
-	//----------------------------------------------------------------//
-	public static void onDestroy ( Activity activity ) {
-
-		MoaiLog.i ( "MoaiHeyZap: onDestroy" );
-	}
-
-	//----------------------------------------------------------------//
-	public static void onPause ( Activity activity ) {
-
-		MoaiLog.i ( "MoaiHeyZap: onPause" );
-	}
-
-	//----------------------------------------------------------------//
-	public static void onResume ( Activity activity ) {
-
-		MoaiLog.i ( "MoaiHeyZap: onResume" );
-	}
-
-	//----------------------------------------------------------------//
-	public static void onStart ( Activity activity ) {
-
-		MoaiLog.i ( "MoaiHeyZap: onStart" );
-	}
-
-	//----------------------------------------------------------------//
-	public static void onStop ( Activity activity ) {
-
-		MoaiLog.i ( "MoaiHeyZap: onStop" );
 	}
 
 	//================================================================//
@@ -121,6 +85,7 @@ class MoaiHeyZap {
 
 	//----------------------------------------------------------------//
 	public static void showRewardedVideo () {
+
 
 		if ( IncentivizedAd.isAvailable () ) {
 
