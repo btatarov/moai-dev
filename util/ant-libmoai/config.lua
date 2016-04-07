@@ -83,6 +83,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	GOOGLE_PLAY_SERVICES = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-google-play-services.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-googleplayservices',
+	},
+
+	----------------------------------------------------------------
 	FMOD_EX = {
 
 		MODULE_DEFINE = 'AKU_WITH_FMOD_EX',
@@ -332,6 +344,7 @@ STATIC_LIBRARIES = {
 	-- platform specific
 	'libmoai-adcolony',
 	'libmoai-chartboost',
+	'libmoai-googleplayservices',
 	'libmoai-heyzap',
 	'libmoai-revmob',
 	'libmoai-startapp',

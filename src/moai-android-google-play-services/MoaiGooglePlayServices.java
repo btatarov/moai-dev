@@ -7,182 +7,132 @@
 package com.ziplinegames.moai;
 import com.ziplinegames.moai.*;
 
-import android.accounts.AccountManager;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.os.Bundle;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import com.google.android.gms.auth.*;
+import com.google.android.gms.*;
 import com.google.android.gms.common.*;
-import com.google.android.gms.common.GooglePlayServicesClient.*;
-import com.google.android.gms.games.*;
-import com.google.android.gms.games.GamesClient;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
 
 //================================================================//
 // MoaiGooglePlayServices
 //================================================================//
-public class MoaiGooglePlayServices {
+public class MoaiGooglePlayServices implements
+		GoogleApiClient.ConnectionCallbacks,
+		GoogleApiClient.OnConnectionFailedListener {
 
-	private static Activity 					sActivity = null;
+	public static final int 			RC_SIGN_IN = 9001;
+	public static final int 			LEADERBOARD_REQUEST_CODE = 7337;
+	public static final int				ACHIEVEMENT_REQUEST_CODE = 7557;
 
-	private static GamesClient					sGameClient = null;
-	private static MoaiPlayServicesCallbacks 	sConnectionCallbacks = null;
-	private static MoaiPlayServicesCallbacks 	sFailedCallback = null;
-	private static String						sAccountName = null;
-	private static int							sServicesStatus;
-	private static String						sToken = null;
-
-	public static final int 					ALERT_DIALOG_REQUEST_CODE = 7007;
-	public static final int 					ACCOUNT_PICKER_REQUEST_CODE = 7117;
-	public static final int 					AUTH_REQUEST_CODE = 7227;
-	public static final int 					LEADERBOARD_REQUEST_CODE = 7337;
-	public static final int						CONNECTION_RESOLUTION_CODE = 7447;
-	public static final int						ACHIEVEMENT_REQUEST_CODE = 7557;
+	private static Activity 			sActivity = null;
+	private static GoogleApiClient		sGoogleApiClient = null;
 
 	// AKU callbacks
-	public static native void	 				AKUNotifyConnectionComplete ();
+	public static native void	 		AKUNotifyConnectionComplete ();
+
+	//================================================================//
+	// Callbacks and inner methods
+	//================================================================//
 
 	//----------------------------------------------------------------//
-	public static Activity getActivity () {
+	@Override
+	public void onConnected ( Bundle connectionHint ) {
 
-		return sActivity;
+		MoaiLog.i ( "MoaiPlayServices callbacks: onConnected" );
+		AKUNotifyConnectionComplete ();
 	}
 
 	//----------------------------------------------------------------//
-	public static void onActivityResult ( int requestCode, int resultCode, Intent data ) {
+	@Override
+	public void onConnectionFailed ( ConnectionResult connectionResult ) {
 
-		MoaiLog.i ( "MoaiGooglePlayServices onActivityResult: " + requestCode + " " + resultCode );
-		if ( requestCode == ACCOUNT_PICKER_REQUEST_CODE && resultCode == Activity.RESULT_OK ) {
+		if ( !MoaiPlayServicesUtils.resolveConnectionFailure ( sActivity,
+				sGoogleApiClient, connectionResult,
+				MoaiGooglePlayServices.RC_SIGN_IN,
+				sActivity.getString ( MoaiPlayServicesUtils.getStringResource ( sActivity, "signin_other_error" ) )
+		) ) {
 
-			MoaiLog.i ( "MoaiGooglePlayServices ACCOUNT_PICKER_REQUEST_CODE" );
-			sAccountName = data.getStringExtra ( AccountManager.KEY_ACCOUNT_NAME );
-		} else if ( requestCode == LEADERBOARD_REQUEST_CODE && resultCode == GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED ) {
-
-			MoaiLog.i ( "MoaiGooglePlayServices LEADERBOARD_REQUEST_CODE" );
-			sGameClient.reconnect ();
-		} else if ( requestCode == CONNECTION_RESOLUTION_CODE && resultCode == Activity.RESULT_OK ) {
-
-			MoaiLog.i ( "MoaiGooglePlayServices CONNECTION_RESOLUTION_CODE" );
-			sGameClient.connect ();
+			MoaiLog.i ( "MoaiPlayServices callbacks: connection failure." );
 		}
 	}
+
+	//----------------------------------------------------------------//
+	@Override
+	public void onConnectionSuspended ( int i ) {
+
+	    sGoogleApiClient.connect ();
+	}
+
+	//----------------------------------------------------------------//
+	public static void onActivityResult ( int requestCode, int resultCode, Intent intent ) {
+
+    	if  ( requestCode == MoaiGooglePlayServices.RC_SIGN_IN ) {
+
+			if ( resultCode == sActivity.RESULT_OK ) {
+
+            	sGoogleApiClient.connect ();
+        	} else {
+
+            	MoaiPlayServicesUtils.showActivityResultError (
+					sActivity, requestCode, resultCode,
+					MoaiPlayServicesUtils.getStringResource ( sActivity, "signin_failure" )
+				);
+			}
+        }
+    }
+
+	//----------------------------------------------------------------//
+	public static void buildClient () {
+
+		if ( sGoogleApiClient == null) {
+
+			MoaiGooglePlayServices sConnectionCallbacks = new MoaiGooglePlayServices ();
+			MoaiGooglePlayServices sFailedCallback = new MoaiGooglePlayServices ();
+
+			sGoogleApiClient = new GoogleApiClient.Builder ( sActivity )
+	            .addConnectionCallbacks ( sConnectionCallbacks )
+	            .addOnConnectionFailedListener ( sFailedCallback )
+	            .addApi ( Games.API ).addScope ( Games.SCOPE_GAMES )
+				.build ();
+		}
+	}
+
+	//================================================================//
+	// Default
+	//================================================================//
 
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
 
 		MoaiLog.i ( "MoaiGooglePlayServices onCreate" );
+
 		sActivity = activity;
-
-		sConnectionCallbacks = new MoaiPlayServicesCallbacks ();
-		sFailedCallback = new MoaiPlayServicesCallbacks ();
-		sGameClient = new GamesClient.Builder ( sActivity, sConnectionCallbacks, sFailedCallback ).create ();
-	}
-
-	//----------------------------------------------------------------//
-	public static void onResume () {
-
-		MoaiLog.i ( "MoaiGooglePlayServices onResume: Verify play services is available" );
-
-		sServicesStatus = GooglePlayServicesUtil.isGooglePlayServicesAvailable ( sActivity );
+		buildClient ();
 	}
 
 	//----------------------------------------------------------------//
 	public static void onStart () {
 
 		MoaiLog.i ( "MoaiGooglePlayServices onStart" );
-		//sGameClient.connect ();
+
+		if ( sGoogleApiClient != null ) {
+			sGoogleApiClient.connect ();
+		} else {
+			buildClient ();
+		}
 	}
 
 	//----------------------------------------------------------------//
 	public static void onStop () {
 
 		MoaiLog.i ( "MoaiGooglePlayServices onStop" );
-		sGameClient.disconnect ();
-	}
 
-	//================================================================//
-	// MoaiGooglePlayServices private functions
-	//================================================================//
-
-	//----------------------------------------------------------------//
-	private static void getAndUseAuthTokenBlocking () {
-
-		try {
-
-	    	// Retrieve a token for the given account and scope. It will always return either
-	        // a non-empty String or throw an exception.
-	        sToken = GoogleAuthUtil.getToken ( sActivity, sAccountName, Scopes.PLUS_LOGIN );
-
-
-		 } catch ( GooglePlayServicesAvailabilityException playEx ) {
-
-		     Dialog alert = GooglePlayServicesUtil.getErrorDialog ( playEx.getConnectionStatusCode (), sActivity, AUTH_REQUEST_CODE );
-
-		 } catch ( UserRecoverableAuthException userAuthEx ) {
-
-	          // Start the user recoverable action using the intent returned by getIntent ()
-	          sActivity.startActivityForResult ( userAuthEx.getIntent (), AUTH_REQUEST_CODE );
-	          return;
-
-		 } catch ( IOException transientEx ) {
-
-		      // network or server error, the call is expected to succeed if you try again later.
-	          // Don't attempt to call again immediately - the request is likely to
-	          // fail, you'll hit quotas or back-off.
-	          return;
-
-		 } catch ( GoogleAuthException authEx ) {
-
-		      // Failure. The call is not expected to ever succeed so it should not be
-	          // retried.
-
-	          return;
-	     }
-	}
-
-	//----------------------------------------------------------------//
-	private static boolean isServicesAvailable ( boolean showDialog ) {
-
-		if ( sServicesStatus == ConnectionResult.SUCCESS ) {
-
-			// everything is good
-			return true;
-
-		} else if ( sServicesStatus == ConnectionResult.SERVICE_MISSING ||
-					sServicesStatus == ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED ||
-					sServicesStatus == ConnectionResult.SERVICE_DISABLED ) {
-
-			if ( showDialog ) {
-				// prompt user to update or turn on services
-				Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog ( sServicesStatus, sActivity, ALERT_DIALOG_REQUEST_CODE );
-				errorDialog.show ();
-				return false;
-			}
-
-		} else {
-
-			// log the error
-			MoaiLog.i ( "MoaiGooglePlayServices isServicesAvailable: " + GooglePlayServicesUtil.getErrorString ( sServicesStatus ));
-			return false;
+		if ( sGoogleApiClient != null ) {
+			sGoogleApiClient.disconnect ();
 		}
-
-		return false;
-	}
-
-	//----------------------------------------------------------------//
-	private static void getAccountInfo () {
-
-		Intent intent = AccountPicker.newChooseAccountIntent ( null, null, new String [] { "com.google" }, false, null, null, null, null );
-		sActivity.startActivityForResult ( intent, ACCOUNT_PICKER_REQUEST_CODE );
 	}
 
 	//================================================================//
@@ -192,11 +142,17 @@ public class MoaiGooglePlayServices {
 	//----------------------------------------------------------------//
 	public static boolean connect () {
 
-		MoaiLog.i ( "MoaiGooglePlayServices connect" );
-		if ( isServicesAvailable ( true )) {
+		if ( sGoogleApiClient != null ) {
 
-			sGameClient.connect ();
+			MoaiLog.i ( "MoaiGooglePlayServices: connecting" );
+			sGoogleApiClient.connect ();
+
 			return true;
+
+		} else {
+
+			MoaiLog.i ( "MoaiGooglePlayServices: building client" );
+			buildClient ();
 		}
 
 		return false;
@@ -205,15 +161,15 @@ public class MoaiGooglePlayServices {
 	//----------------------------------------------------------------//
 	public static boolean isConnected () {
 
-		return sGameClient.isConnected ();
+		return ( sGoogleApiClient != null && sGoogleApiClient.isConnected () );
 	}
 
 	//----------------------------------------------------------------//
 	public static void showAchievements ( ) {
 
-		if ( isServicesAvailable ( true )) {
+		if ( sGoogleApiClient != null && sGoogleApiClient.isConnected () ) {
 
-			Intent achIntent = sGameClient.getAchievementsIntent ( );
+			Intent achIntent = Games.Achievements.getAchievementsIntent ( sGoogleApiClient );
 			sActivity.startActivityForResult ( achIntent, ACHIEVEMENT_REQUEST_CODE );
 		}
 	}
@@ -221,9 +177,9 @@ public class MoaiGooglePlayServices {
 	//----------------------------------------------------------------//
 	public static void showLeaderboard ( String leaderboardID ) {
 
-		if ( isServicesAvailable ( true )) {
+		if ( sGoogleApiClient != null && sGoogleApiClient.isConnected () ) {
 
-			Intent lbIntent = sGameClient.getLeaderboardIntent ( leaderboardID );
+			Intent lbIntent = Games.Leaderboards.getLeaderboardIntent ( sGoogleApiClient, leaderboardID );
 			sActivity.startActivityForResult ( lbIntent, LEADERBOARD_REQUEST_CODE );
 		}
 	}
@@ -231,18 +187,18 @@ public class MoaiGooglePlayServices {
 	//----------------------------------------------------------------//
 	public static void submitScore ( String leaderboardID, long score ) {
 
-		if ( isServicesAvailable ( false )) {
+		if ( sGoogleApiClient != null && sGoogleApiClient.isConnected () ) {
 
-			sGameClient.submitScore ( leaderboardID, score );
+			Games.Leaderboards.submitScore ( sGoogleApiClient, leaderboardID, score );
 		}
 	}
 
 	//----------------------------------------------------------------//
 	public static void unlockAchievement ( String achID ) {
 
-		if ( isServicesAvailable ( false )) {
+		if ( sGoogleApiClient != null && sGoogleApiClient.isConnected () ) {
 
-			sGameClient.unlockAchievement ( achID );
+			Games.Achievements.unlock ( sGoogleApiClient, achID );
 		}
 	}
 }

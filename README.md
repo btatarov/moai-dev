@@ -17,6 +17,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 
 ### Android
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
+* google play services 8.4.0 (currently stripped; todo)
 * adcolony-2.3.4 (rewarded video)
 * chartboost-6.4.1 (interstitial)
 * heyzap-9.4.5 (interstitial and rewarded video)
@@ -30,6 +31,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 ### Samples
 * android-adcolony
 * android-chartboost
+* android-google-play-services
 * android-heyzap
 * android-revmob
 * android-startapp
