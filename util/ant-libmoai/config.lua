@@ -74,6 +74,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	CRITTERCISM = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_CRITTERCISM',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-crittercism.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-crittercism',
+	},
+
+	----------------------------------------------------------------
 	CRYPTO = {
 
 		MODULE_DEFINE = 'AKU_WITH_CRYPTO',
@@ -357,6 +369,7 @@ STATIC_LIBRARIES = {
 	'libmoai-adcolony',
 	'libmoai-admob',
 	'libmoai-chartboost',
+	'libmoai-crittercism',
 	'libmoai-googleplayservices',
 	'libmoai-heyzap',
 	'libmoai-revmob',

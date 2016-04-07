@@ -12,6 +12,11 @@ MODULES = {
         bin     = MOAI_SDK_HOME .. 'ant/libmoai/libs/<arch>/libgnustl_shared.so' -- HACK: import gnustl
 	},
 
+    crittercism = {
+		lib		= MOAI_SDK_HOME .. '3rdparty-android/crittercism-5.5.5',
+		src		= MOAI_SDK_HOME .. 'src/moai-android-crittercism',
+	},
+
     google_play_services = {
 		lib		= MOAI_SDK_HOME .. '3rdparty-android/google-play-services-8.4.0',
 		src		= MOAI_SDK_HOME .. 'src/moai-android-google-play-services',
