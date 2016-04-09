@@ -4,8 +4,8 @@
 #ifndef	MOAIGOOGLEPLAYSERVICESANDROID_H
 #define	MOAIGOOGLEPLAYSERVICESANDROID_H
 
-
 #include <moai-core/headers.h>
+#include <moai-android/JniUtils.h>
 
 //================================================================//
 // MOAIGooglePlayServicesAndroid
@@ -14,13 +14,20 @@
 	@text	Wrapper for Google Play services.
 */
 class MOAIGooglePlayServicesAndroid :
-	public MOAIGlobalClass < MOAIGooglePlayServicesAndroid, MOAILuaObject > {
+	public MOAIGlobalClass < MOAIGooglePlayServicesAndroid, MOAIGlobalEventSource >,
+	public JniUtils {
 private:
+
+	jmethodID	mJava_Connect;
+	jmethodID	mJava_IsConnected;
+	jmethodID	mJava_ShowAchievements;
+	jmethodID	mJava_ShowLeaderboard;
+	jmethodID	mJava_SubmitScore;
+	jmethodID	mJava_UnlockAchievement;
 
 	//----------------------------------------------------------------//
 	static int			_connect				( lua_State* L );
 	static int			_isConnected			( lua_State* L );
-	static int			_setListener			( lua_State* L );
 	static int			_showAchievements		( lua_State* L );
 	static int			_showLeaderboard		( lua_State* L );
 	static int			_submitScore			( lua_State* L );
@@ -32,14 +39,11 @@ public:
 
 	enum {
 		CONNECTION_COMPLETE,
-		TOTAL,
+		CONNECTION_FAILED,
 	};
-
-	MOAILuaStrongRef		mListeners [ TOTAL ];
 
 			MOAIGooglePlayServicesAndroid		();
 			~MOAIGooglePlayServicesAndroid		();
-	void 	NotifyConnectionComplete			();
 	void	RegisterLuaClass					( MOAILuaState& state );
 };
 

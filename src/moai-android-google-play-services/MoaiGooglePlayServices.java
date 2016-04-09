@@ -23,6 +23,12 @@ public class MoaiGooglePlayServices implements
 		GoogleApiClient.ConnectionCallbacks,
 		GoogleApiClient.OnConnectionFailedListener {
 
+	public enum ListenerEvent {
+
+		CONNECTION_COMPLETE,
+		CONNECTION_FAILED,
+    }
+
 	public static final int 			RC_SIGN_IN = 9001;
 	public static final int 			LEADERBOARD_REQUEST_CODE = 7337;
 	public static final int				ACHIEVEMENT_REQUEST_CODE = 7557;
@@ -31,7 +37,7 @@ public class MoaiGooglePlayServices implements
 	private static GoogleApiClient		sGoogleApiClient = null;
 
 	// AKU callbacks
-	public static native void	 		AKUNotifyConnectionComplete ();
+	protected static native void		AKUInvokeListener 	( int eventID );
 
 	//================================================================//
 	// Callbacks and inner methods
@@ -41,8 +47,7 @@ public class MoaiGooglePlayServices implements
 	@Override
 	public void onConnected ( Bundle connectionHint ) {
 
-		MoaiLog.i ( "MoaiPlayServices callbacks: onConnected" );
-		AKUNotifyConnectionComplete ();
+		AKUInvokeListener ( ListenerEvent.CONNECTION_COMPLETE.ordinal () );
 	}
 
 	//----------------------------------------------------------------//
@@ -56,6 +61,7 @@ public class MoaiGooglePlayServices implements
 		) ) {
 
 			MoaiLog.i ( "MoaiPlayServices callbacks: connection failure." );
+			AKUInvokeListener ( ListenerEvent.CONNECTION_FAILED.ordinal () );
 		}
 	}
 
@@ -110,7 +116,6 @@ public class MoaiGooglePlayServices implements
 		MoaiLog.i ( "MoaiGooglePlayServices onCreate" );
 
 		sActivity = activity;
-		buildClient ();
 	}
 
 	//----------------------------------------------------------------//
@@ -120,8 +125,6 @@ public class MoaiGooglePlayServices implements
 
 		if ( sGoogleApiClient != null ) {
 			sGoogleApiClient.connect ();
-		} else {
-			buildClient ();
 		}
 	}
 
@@ -140,22 +143,14 @@ public class MoaiGooglePlayServices implements
 	//================================================================//
 
 	//----------------------------------------------------------------//
-	public static boolean connect () {
+	public static void connect () {
 
-		if ( sGoogleApiClient != null ) {
+		if ( sGoogleApiClient == null ) {
 
-			MoaiLog.i ( "MoaiGooglePlayServices: connecting" );
-			sGoogleApiClient.connect ();
-
-			return true;
-
-		} else {
-
-			MoaiLog.i ( "MoaiGooglePlayServices: building client" );
 			buildClient ();
 		}
 
-		return false;
+		sGoogleApiClient.connect ();
 	}
 
 	//----------------------------------------------------------------//

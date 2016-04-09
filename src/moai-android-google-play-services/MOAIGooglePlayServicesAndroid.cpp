@@ -7,7 +7,7 @@
 #include <jni.h>
 
 #include <moai-android/moaiext-jni.h>
-#include "MOAIGooglePlayServicesAndroid.h"
+#include <moai-android-google-play-services/MOAIGooglePlayServicesAndroid.h>
 
 extern JavaVM* jvm;
 
@@ -23,79 +23,26 @@ extern JavaVM* jvm;
 */
 int MOAIGooglePlayServicesAndroid::_connect ( lua_State* L ) {
 
-	JNI_GET_ENV ( jvm, env );
-	MOAILuaState state ( L );
+	MOAI_JAVA_LUA_SETUP ( MOAIGooglePlayServicesAndroid, "" )
 
-	jclass playserv = env->FindClass ( "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    if ( playserv == NULL ) {
+	self->CallStaticVoidMethod ( self->mJava_Connect );
 
-		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    } else {
-
-    	jmethodID connect = env->GetStaticMethodID ( playserv, "connect", "()Z" );
-   		if ( connect == NULL ) {
-
-			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find static java method %s", "connect" );
-		} else {
-
-			bool success = ( bool ) env->CallStaticBooleanMethod ( playserv, connect );
-
-			lua_pushboolean ( state, success );
-			return 1;
-		}
-	}
-
-	lua_pushboolean ( state, false );
-	return 1;
+	return 0;
 }
 
 //----------------------------------------------------------------//
 /**	@lua	isConnected
-	@text	Connects to the Google Play Game Services
+	@text	Checks if services are connected.
 
-	@out	nil
+	@out	boolean
 */
 int MOAIGooglePlayServicesAndroid::_isConnected ( lua_State* L ) {
 
-	JNI_GET_ENV ( jvm, env );
-	MOAILuaState state ( L );
+	MOAI_JAVA_LUA_SETUP ( MOAIGooglePlayServicesAndroid, "" )
 
-	jclass playserv = env->FindClass ( "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    if ( playserv == NULL ) {
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_IsConnected ) );
 
-		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    } else {
-
-    	jmethodID isConnected = env->GetStaticMethodID ( playserv, "isConnected", "()Z" );
-   		if ( isConnected == NULL ) {
-
-			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find static java method %s", "isConnected" );
-		} else {
-
-			bool success = ( bool ) env->CallStaticBooleanMethod ( playserv, isConnected );
-
-			lua_pushboolean ( state, success );
-			return 1;
-		}
-	}
-
-	lua_pushboolean ( state, false );
 	return 1;
-}
-
-//----------------------------------------------------------------//
-int MOAIGooglePlayServicesAndroid::_setListener ( lua_State* L ) {
-
-	MOAILuaState state ( L );
-
-	u32 idx = state.GetValue < u32 >( 1, TOTAL );
-
-	if ( idx < TOTAL ) {
-
-		MOAIGooglePlayServicesAndroid::Get ().mListeners [ idx ].SetRef ( state, 2 );
-	}
-
-	return 0;
 }
 
 //----------------------------------------------------------------//
@@ -106,24 +53,9 @@ int MOAIGooglePlayServicesAndroid::_setListener ( lua_State* L ) {
 */
 int MOAIGooglePlayServicesAndroid::_showAchievements ( lua_State* L ) {
 
-	JNI_GET_ENV ( jvm, env );
-	MOAILuaState state ( L );
+	MOAI_JAVA_LUA_SETUP ( MOAIGooglePlayServicesAndroid, "" )
 
-	jclass playserv = env->FindClass ( "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    if ( playserv == NULL ) {
-
-		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    } else {
-
-    	jmethodID showAchievements = env->GetStaticMethodID ( playserv, "showAchievements", "()V" );
-   		if ( showAchievements == NULL ) {
-
-			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find static java method %s", "showAchievements" );
-		} else {
-
-			env->CallStaticVoidMethod ( playserv, showAchievements );
-		}
-	}
+	self->CallStaticVoidMethod ( self->mJava_ShowAchievements );
 
 	return 0;
 }
@@ -137,28 +69,11 @@ int MOAIGooglePlayServicesAndroid::_showAchievements ( lua_State* L ) {
 */
 int MOAIGooglePlayServicesAndroid::_showLeaderboard ( lua_State* L ) {
 
-	JNI_GET_ENV ( jvm, env );
-	MOAILuaState state ( L );
+	MOAI_JAVA_LUA_SETUP ( MOAIGooglePlayServicesAndroid, "" )
 
-	cc8* board = lua_tostring ( state, 1 );
+	jstring jleaderboardID = self->GetJString ( lua_tostring ( state, 1 ) );
 
-	JNI_GET_JSTRING ( board, jboard );
-
-	jclass playserv = env->FindClass ( "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    if ( playserv == NULL ) {
-
-		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    } else {
-
-    	jmethodID showLeaderboard = env->GetStaticMethodID ( playserv, "showLeaderboard", "(Ljava/lang/String;)V" );
-   		if ( showLeaderboard == NULL ) {
-
-			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find static java method %s", "showLeaderboard" );
-		} else {
-
-			env->CallStaticVoidMethod ( playserv, showLeaderboard, jboard );
-		}
-	}
+	self->CallStaticVoidMethod ( self->mJava_ShowLeaderboard, jleaderboardID );
 
 	return 0;
 }
@@ -173,29 +88,12 @@ int MOAIGooglePlayServicesAndroid::_showLeaderboard ( lua_State* L ) {
 */
 int MOAIGooglePlayServicesAndroid::_submitScore ( lua_State* L ) {
 
-	JNI_GET_ENV ( jvm, env );
-	MOAILuaState state ( L );
+	MOAI_JAVA_LUA_SETUP ( MOAIGooglePlayServicesAndroid, "" )
 
-	cc8* board = lua_tostring ( state, 1 );
+	jstring jleaderboardID = self->GetJString ( lua_tostring ( state, 1 ) );
 	jlong score = lua_tonumber ( state, 2 );
 
-	JNI_GET_JSTRING ( board, jboard );
-
-	jclass playserv = env->FindClass ( "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    if ( playserv == NULL ) {
-
-		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    } else {
-
-    	jmethodID submitScore = env->GetStaticMethodID ( playserv, "submitScore", "(Ljava/lang/String;J)V" );
-   		if ( submitScore == NULL ) {
-
-			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find static java method %s", "submitScore" );
-		} else {
-
-			env->CallStaticVoidMethod ( playserv, submitScore, jboard, score );
-		}
-	}
+	self->CallStaticVoidMethod ( self->mJava_SubmitScore, jleaderboardID, score );
 
 	return 0;
 }
@@ -209,28 +107,11 @@ int MOAIGooglePlayServicesAndroid::_submitScore ( lua_State* L ) {
 */
 int MOAIGooglePlayServicesAndroid::_unlockAchievement ( lua_State* L ) {
 
-	JNI_GET_ENV ( jvm, env );
-	MOAILuaState state ( L );
+	MOAI_JAVA_LUA_SETUP ( MOAIGooglePlayServicesAndroid, "" )
 
-	cc8* ach = lua_tostring ( state, 1 );
+	jstring jachievementID = self->GetJString ( lua_tostring ( state, 1 ) );
 
-	JNI_GET_JSTRING ( ach, jach );
-
-	jclass playserv = env->FindClass ( "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    if ( playserv == NULL ) {
-
-		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGooglePlayServices" );
-    } else {
-
-    	jmethodID unlockAchievement = env->GetStaticMethodID ( playserv, "unlockAchievement", "(Ljava/lang/String;)V" );
-   		if ( unlockAchievement == NULL ) {
-
-			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesAndroid: Unable to find static java method %s", "unlockAchievement" );
-		} else {
-
-			env->CallStaticVoidMethod ( playserv, unlockAchievement, jach );
-		}
-	}
+	self->CallStaticVoidMethod ( self->mJava_UnlockAchievement, jachievementID );
 
 	return 0;
 }
@@ -243,7 +124,16 @@ int MOAIGooglePlayServicesAndroid::_unlockAchievement ( lua_State* L ) {
 //----------------------------------------------------------------//
 MOAIGooglePlayServicesAndroid::MOAIGooglePlayServicesAndroid () {
 
-	RTTI_SINGLE ( MOAILuaObject )
+	RTTI_SINGLE ( MOAIGlobalEventSource )
+
+	this->SetClass ( "com/ziplinegames/moai/MoaiGooglePlayServices" );
+
+	this->mJava_Connect				= this->GetStaticMethod ( "connect", "()V" );
+	this->mJava_IsConnected			= this->GetStaticMethod ( "isConnected", "()Z" );
+	this->mJava_ShowAchievements	= this->GetStaticMethod ( "showAchievements", "()V" );
+	this->mJava_ShowLeaderboard		= this->GetStaticMethod ( "showLeaderboard", "(Ljava/lang/String;)V" );
+	this->mJava_SubmitScore			= this->GetStaticMethod ( "submitScore", "(Ljava/lang/String;J)V" );
+	this->mJava_UnlockAchievement	= this->GetStaticMethod ( "unlockAchievement", "(Ljava/lang/String;)V" );
 }
 
 //----------------------------------------------------------------//
@@ -252,26 +142,16 @@ MOAIGooglePlayServicesAndroid::~MOAIGooglePlayServicesAndroid () {
 }
 
 //----------------------------------------------------------------//
-void MOAIGooglePlayServicesAndroid::NotifyConnectionComplete () {
-
-	MOAILuaRef& callback = this->mListeners [ CONNECTION_COMPLETE ];
-
-	if ( callback ) {
-
-		MOAIScopedLuaState state = callback.GetSelf ();
-		state.DebugCall ( 0, 0 );
-	}
-}
-
-//----------------------------------------------------------------//
 void MOAIGooglePlayServicesAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
 	state.SetField ( -1, "CONNECTION_COMPLETE",		( u32 )CONNECTION_COMPLETE );
+	state.SetField ( -1, "CONNECTION_FAILED",		( u32 )CONNECTION_FAILED );
 
 	luaL_Reg regTable [] = {
 		{ "connect", 				_connect },
+		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIGooglePlayServicesAndroid > },
 		{ "isConnected",			_isConnected },
-		{ "setListener",			_setListener },
+		{ "setListener",			&MOAIGlobalEventSource::_setListener < MOAIGooglePlayServicesAndroid > },
 		{ "showAchievements",		_showAchievements },
 		{ "showLeaderboard",		_showLeaderboard },
 		{ "submitScore",			_submitScore },
@@ -285,9 +165,7 @@ void MOAIGooglePlayServicesAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 // AKU Callbacks
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiGooglePlayServices_AKUNotifyConnectionComplete ( JNIEnv* env, jclass obj ) {
+extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiGooglePlayServices_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
 
-	MOAIGooglePlayServicesAndroid::Get ().NotifyConnectionComplete ();
+	MOAIGooglePlayServicesAndroid::Get ().InvokeListener (( u32 )eventID );
 }
-
-#
