@@ -18,7 +18,7 @@ DISABLED			= {}
 DISABLE_ALL			= false
 
 ----------------------------------------------------------------
-for i, escape, param, iter in util.iterateCommandLine ( arg or {}) do
+for i, escape, param, iter in util.iterateCommandLine ( arg or {} ) do
 
 	if escape == 'D' or escape == 'disable-all' then
 		DISABLE_ALL = true

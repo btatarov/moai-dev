@@ -292,6 +292,7 @@ util.replaceInFiles ({
 		[ '@VERSION_CODE@' ]					= config.VERSION_CODE,
 		[ '@VERSION_NAME@' ]					= config.VERSION_NAME,
 		[ '@DEBUGGABLE@' ]						= config.MANIFEST_DEBUGGABLE,
+		[ '@FACEBOOK_APP_ID@' ]					= config.FACEBOOK_APP_ID,
 		[ '@EXTERNAL_APPLICATION_ENTRIES@' ]	= MODULE_APP_DECLARATIONS,
 		[ '@EXTERNAL_MANIFEST_PERMISSIONS@' ] 	= MODULE_MANIFEST_PERMISSIONS,
 	},
@@ -313,7 +314,8 @@ util.replaceInFiles ({
 
 	[ MOAI_PROJECT_PATH .. 'res/values/strings.xml' ] = {
 		[ '@APP_NAME@' ] 						= config.APP_NAME,
-		[ '@APP_ID@' ] 							= config.GOOGLE_PLAY_APP_ID,
+		[ '@GOOGLE_APP_ID@' ] 					= config.GOOGLE_PLAY_APP_ID,
+		[ '@FACEBOOK_APP_ID@' ]					= config.FACEBOOK_APP_ID,
 	},
 
 	[ util.wrap ( util.iterateFilesAbsPath, MOAI_PROJECT_PATH .. 'src', '.java$' )] = {
@@ -330,7 +332,7 @@ os.execute ( string.format ( 'android update project --target %s --path %s',
 ))
 
 -- TODO: these should come from a table of projects since we might have any number based on the config
--- os.execute ( string.format ( 'android update project --target %s --path %s',
--- 	tostring ( config.ANDROID_PLATFORM_TARGET ),
--- 	ANT_DIR .. 'facebook'
--- ))
+os.execute ( string.format ( 'android update project --target %s --path %s',
+	tostring ( config.ANDROID_PLATFORM_TARGET ),
+	ANT_DIR .. 'facebook'
+))

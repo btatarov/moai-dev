@@ -119,6 +119,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	FACEBOOK = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_FACEBOOK',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-facebook.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-facebook',
+	},
+
+	----------------------------------------------------------------
 	FMOD_EX = {
 
 		MODULE_DEFINE = 'AKU_WITH_FMOD_EX',
@@ -382,6 +394,7 @@ STATIC_LIBRARIES = {
 	'libmoai-admob',
 	'libmoai-chartboost',
 	'libmoai-crittercism',
+	'libmoai-facebook',
 	'libmoai-googleplayservices',
 	'libmoai-heyzap',
 	'libmoai-revmob',

@@ -40,6 +40,11 @@ MODULES = {
 		src		= MOAI_SDK_HOME .. 'src/moai-android-google-play-services',
 	},
 
+    facebook = {
+		lib		= MOAI_SDK_HOME .. '3rdparty-android/facebook-4.5.1',
+		src		= MOAI_SDK_HOME .. 'src/moai-android-facebook',
+	},
+
     fmod = {
         lib     = MOAI_SDK_HOME .. '3rdparty-android/fmod',
         bin     = MOAI_SDK_HOME .. 'ant/libmoai/libs/<arch>/libfmod.so'

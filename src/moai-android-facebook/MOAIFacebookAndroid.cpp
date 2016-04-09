@@ -18,16 +18,40 @@ extern JavaVM* jvm;
 //----------------------------------------------------------------//
 /**	@lua	getToken
 	@text	Retrieve the Facebook login token.
-				
+
 	@out	string	token
 */
 int MOAIFacebookAndroid::_getToken ( lua_State* L ) {
+
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-	
+
 	jstring jtoken = ( jstring )self->CallStaticObjectMethod ( self->mJava_GetToken );
 	cc8* token = self->GetCString ( jtoken );
+
 	lua_pushstring ( state, token );
+
 	self->ReleaseCString ( jtoken, token );
+
+	return 1;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	getUserID
+	@text	Retrieve the Facebook user ID.
+
+	@out	string	userID
+*/
+int MOAIFacebookAndroid::_getUserID ( lua_State* L ) {
+
+	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
+
+	jstring juserID = ( jstring )self->CallStaticObjectMethod ( self->mJava_GetUserID );
+	cc8* userID = self->GetCString ( juserID );
+
+	lua_pushstring ( state, userID );
+
+	self->ReleaseCString ( juserID, userID );
+
 	return 1;
 }
 
@@ -40,9 +64,11 @@ int MOAIFacebookAndroid::_getToken ( lua_State* L ) {
     @out	nil
 */
 int MOAIFacebookAndroid::_graphRequest ( lua_State* L ) {
+
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
 
-	//jstring jpath = self->GetJString ( lua_tostring ( state, 1 ));
+	// TODO:
+	// jstring jpath = self->GetJString ( lua_tostring ( state, 1 ));
 
     //jobject bundle;
     //if ( state.IsType ( 2, LUA_TTABLE ) ) {
@@ -55,130 +81,105 @@ int MOAIFacebookAndroid::_graphRequest ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-/**	@lua	init
-	@text	Initialize Facebook.
-				
-	@in		string	appId			Available in Facebook developer settings.
+/**	@lua	inviteFriends
+	@text	Send an app request to the logged in user's friends.
+
+	@in		string	url				The URL that the invite links to. See Facebook documentation.
+	@in		string	img				The URL of an image to include in the invite. See Facebook documentation.
 	@out 	nil
 */
-int MOAIFacebookAndroid::_init ( lua_State* L ) {
+int MOAIFacebookAndroid::_inviteFriends ( lua_State* L ) {
+
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-	
-	jstring jidentifier = self->GetJString ( lua_tostring ( state, 1 ));
-	self->CallStaticVoidMethod ( self->mJava_Init, jidentifier );		
+
+	jstring jurl = self->GetJString ( lua_tostring ( state, 1 ));
+	jstring jimg = self->GetJString ( lua_tostring ( state, 2 ));
+
+	self->CallStaticVoidMethod ( self->mJava_InviteFriends, jurl, jimg );
+
 	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	isUserLoggedIn
+	@text	Determine whether or not the user is (still) logged in.
+
+	@out 	boolean
+*/
+int MOAIFacebookAndroid::_isUserLoggedIn ( lua_State* L ) {
+
+	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
+
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_IsUserLoggedIn ) );
+
+	return 1;
 }
 
 //----------------------------------------------------------------//
 /**	@lua	login
 	@text	Prompt the user to login to Facebook.
-				
-	@opt	table	permissions			Optional set of required permissions. See Facebook documentation for a full list. Default is nil.
+
+	@opt	table	extra_permissions	Optional set of required permissions. See Facebook documentation for a full list. Default is nil.
+	@opt	boolean allowPubblishing	Optional parameter to allow posting to feed.
 	@out 	nil
 */
 int MOAIFacebookAndroid::_login ( lua_State *L ) {
+
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-	
+
 	jobjectArray jpermissions = NULL;
-	
+
 	if ( state.IsType ( 1, LUA_TTABLE )) {
-        jpermissions = self->StringArrayFromLua ( L, 1 );
+        jpermissions = self->StringArrayFromLua ( state, 1 );
 	}
-	
+
 	if ( jpermissions == NULL ) {
 		jpermissions = self->Env ()->NewObjectArray ( 0, self->Env ()->FindClass( "java/lang/String" ), 0 );
 	}
 
-	self->CallStaticVoidMethod ( self->mJava_Login, jpermissions );				
+	bool allowPubblishing = lua_toboolean ( state, 2 );
+
+	self->CallStaticVoidMethod ( self->mJava_Login, jpermissions, allowPubblishing );
+
 	return 0;
 }
 
 //----------------------------------------------------------------//
 /**	@lua	logout
 	@text	Log the user out of Facebook.
-				
+
 	@out 	nil
 */
 int MOAIFacebookAndroid::_logout ( lua_State *L ) {
+
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-	
+
 	self->CallStaticVoidMethod ( self->mJava_Logout );
+
 	return 0;
 }
 
 //----------------------------------------------------------------//
 /**	@lua	postToFeed
 	@text	Post a message to the logged in users' news feed.
-				
-	@in		string	link			The URL that the post links to. See Facebook documentation.
-	@in		string	picture			The URL of an image to include in the post. See Facebook documentation.
-	@in		string	name			The name of the link. See Facebook documentation.
+
+	@in		string	url				The URL that the post links to. See Facebook documentation.
+	@in		string	img				The URL of an image to include in the post. See Facebook documentation.
 	@in		string	caption			The caption of the link. See Facebook documentation.
 	@in		string	description		The description of the link. See Facebook documentation.
-	@in		string	message			The message for the post. See Facebook documentation.
 	@out 	nil
 */
 int MOAIFacebookAndroid::_postToFeed ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-	
-	jstring jlink			= self->GetJString ( lua_tostring ( state, 1 ));
-	jstring jpicture		= self->GetJString ( lua_tostring ( state, 2 ));
-	jstring jname			= self->GetJString ( lua_tostring ( state, 3 ));
-	jstring jcaption		= self->GetJString ( lua_tostring ( state, 4 ));
-	jstring jdescription	= self->GetJString ( lua_tostring ( state, 5 ));
-	jstring jmessage		= self->GetJString ( lua_tostring ( state, 6 ));
-	
-	self->CallStaticVoidMethod ( self->mJava_PostToFeed, jlink, jpicture, jname, jcaption, jdescription, jmessage );	
-		
-	return 0;
-}
 
-//----------------------------------------------------------------//
-// TODO: doxygen
-int MOAIFacebookAndroid::_restoreSession ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
 
-	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_RestoreSession ));
-	return 1;
-}
+	jstring jurl			= self->GetJString ( lua_tostring ( state, 1 ));
+	jstring jimg			= self->GetJString ( lua_tostring ( state, 2 ));
+	jstring jcaption		= self->GetJString ( lua_tostring ( state, 3 ));
+	jstring jdescription	= self->GetJString ( lua_tostring ( state, 4 ));
 
-//----------------------------------------------------------------//
-/**	@lua	sendRequest
-	@text	Send an app request to the logged in users' friends.
-				
-	@opt	string	message			The message for the request. See Facebook documentation. Default is nil.
-	@out 	nil
-*/
-int MOAIFacebookAndroid::_sendRequest ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-	
-	jstring jmessage = self->GetJString ( lua_tostring ( state, 1 ));
-	self->CallStaticVoidMethod ( self->mJava_SendRequest, jmessage );		
-	return 0;
-}
+	self->CallStaticVoidMethod ( self->mJava_PostToFeed, jurl, jimg, jcaption, jdescription );
 
-//----------------------------------------------------------------//
-/**	@lua	sessionValid
-	@text	Determine whether or not the current Facebook session is valid.
-				
-	@out 	boolean	valid
-*/
-int MOAIFacebookAndroid::_sessionValid ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-
-	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_IsSessionValid ));
-	return 1;
-}
-
-//----------------------------------------------------------------//
-int MOAIFacebookAndroid::_setListener ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-	
-	u32 idx = state.GetValue < u32 >( 1, TOTAL );
-
-	if ( idx < TOTAL ) {
-		MOAIFacebookAndroid::Get ().mListeners [ idx ].SetRef ( state, 2 );
-	}
 	return 0;
 }
 
@@ -189,103 +190,49 @@ int MOAIFacebookAndroid::_setListener ( lua_State* L ) {
 //----------------------------------------------------------------//
 MOAIFacebookAndroid::MOAIFacebookAndroid () {
 
-	RTTI_SINGLE ( MOAILuaObject )
-		
+	RTTI_SINGLE ( MOAIGlobalEventSource )
+
 	this->SetClass ( "com/ziplinegames/moai/MoaiFacebook" );
-	
+
 	this->mJava_GetToken			= this->GetStaticMethod ( "getToken", "()Ljava/lang/String;" );
+	this->mJava_GetUserID			= this->GetStaticMethod ( "getUserID", "()Ljava/lang/String;" );
 	//this->mJava_GraphRequest		= this->GetStaticMethod ( "graphRequest", "(Ljava/lang/String;Landroid/os/Bundle;)V" );
-	this->mJava_Init				= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
-	this->mJava_IsSessionValid		= this->GetStaticMethod ( "isSessionValid", "()Z" );
-	this->mJava_Login				= this->GetStaticMethod ( "login", "([Ljava/lang/String;)V" );
+	this->mJava_InviteFriends		= this->GetStaticMethod ( "inviteFriends", "(Ljava/lang/String;Ljava/lang/String;)V" );
+	this->mJava_IsUserLoggedIn		= this->GetStaticMethod ( "isUserLoggedIn", "()Z" );
+	this->mJava_Login				= this->GetStaticMethod ( "login", "([Ljava/lang/String;Z)V" );
 	this->mJava_Logout				= this->GetStaticMethod ( "logout", "()V" );
-	this->mJava_PostToFeed			= this->GetStaticMethod ( "postToFeed", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
-	this->mJava_RestoreSession		= this->GetStaticMethod ( "restoreSession", "()Z" );
-	this->mJava_SendRequest			= this->GetStaticMethod ( "sendRequest", "(Ljava/lang/String;)V" );
+	this->mJava_PostToFeed			= this->GetStaticMethod ( "postToFeed", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
 }
 
 //----------------------------------------------------------------//
 MOAIFacebookAndroid::~MOAIFacebookAndroid () {
-
 }
 
 //----------------------------------------------------------------//
 void MOAIFacebookAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "DIALOG_DID_COMPLETE",		( u32 ) DIALOG_DID_COMPLETE );
-	state.SetField ( -1, "DIALOG_DID_NOT_COMPLETE",	( u32 ) DIALOG_DID_NOT_COMPLETE );
-	state.SetField ( -1, "REQUEST_RESPONSE", 		( u32 ) REQUEST_RESPONSE );
-	state.SetField ( -1, "REQUEST_RESPONSE_FAILED", ( u32 ) REQUEST_RESPONSE_FAILED );
-	state.SetField ( -1, "SESSION_DID_LOGIN",		( u32 ) SESSION_DID_LOGIN );
-	state.SetField ( -1, "SESSION_DID_NOT_LOGIN",	( u32 ) SESSION_DID_NOT_LOGIN );
+	state.SetField ( -1, "FACEBOOK_LOGIN_SUCCESS",	( u32 ) FACEBOOK_LOGIN_SUCCESS );
+	state.SetField ( -1, "FACEBOOK_LOGIN_CANCEL",	( u32 ) FACEBOOK_LOGIN_CANCEL );
+	state.SetField ( -1, "FACEBOOK_LOGIN_ERROR", 	( u32 ) FACEBOOK_LOGIN_ERROR );
+	state.SetField ( -1, "FACEBOOK_DIALOG_SUCCESS", ( u32 ) FACEBOOK_DIALOG_SUCCESS );
+	state.SetField ( -1, "FACEBOOK_DIALOG_CANCEL",	( u32 ) FACEBOOK_DIALOG_CANCEL );
+	state.SetField ( -1, "FACEBOOK_DIALOG_ERROR",	( u32 ) FACEBOOK_DIALOG_ERROR );
 
 	luaL_Reg regTable [] = {
+		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIFacebookAndroid > },
 		{ "getToken",				_getToken },
+		{ "getUserID",				_getUserID },
 		{ "graphRequest",			_graphRequest },
-		{ "init",					_init },
+		{ "inviteFriends",			_inviteFriends },
+		{ "isUserLoggedIn",			_isUserLoggedIn },
 		{ "login",					_login },
 		{ "logout",					_logout },
 		{ "postToFeed",				_postToFeed },
-		{ "restoreSession",			_restoreSession },
-		{ "sendRequest",			_sendRequest },
-		{ "sessionValid",			_sessionValid },
-		{ "setListener",			_setListener },
+		{ "setListener",			&MOAIGlobalEventSource::_setListener < MOAIFacebookAndroid > },
 		{ NULL, NULL }
 	};
 
 	luaL_register ( state, 0, regTable );
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookAndroid::NotifyDialogComplete ( int code ) {
-	
-	MOAILuaRef& callback = this->mListeners [ DIALOG_DID_NOT_COMPLETE ];
-	if ( code == DIALOG_RESULT_SUCCESS ) {
-		
-		callback = this->mListeners [ DIALOG_DID_COMPLETE ];
-	}
-
-	if ( callback ) {
-
-		MOAIScopedLuaState state = callback.GetSelf ();
-
-		state.DebugCall ( 0, 0 );
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookAndroid::NotifyLoginComplete ( int code ) {
-
-	MOAILuaRef& callback = this->mListeners [ SESSION_DID_NOT_LOGIN ];
-	if ( code == DIALOG_RESULT_SUCCESS ) {
-		callback = this->mListeners [ SESSION_DID_LOGIN ];
-	}
-
-	if ( callback ) {
-		MOAIScopedLuaState state = callback.GetSelf ();
-		state.DebugCall ( 0, 0 );
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookAndroid::NotifyRequestComplete ( cc8* response ) {
-    MOAILuaRef& callback = this->mListeners [ REQUEST_RESPONSE ];
-
-    if ( callback ) {
-		MOAIScopedLuaState state = callback.GetSelf ();
-        lua_pushstring ( state, response );
-		state.DebugCall ( 1, 0 );
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookAndroid::NotifyRequestFailed () {
-    MOAILuaRef& callback = this->mListeners [ REQUEST_RESPONSE_FAILED ];
-
-    if ( callback ) {
-		MOAIScopedLuaState state = callback.GetSelf ();
-		state.DebugCall ( 0, 0 );
-	}
 }
 
 //================================================================//
@@ -293,26 +240,7 @@ void MOAIFacebookAndroid::NotifyRequestFailed () {
 //================================================================//
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiFacebook_AKUNotifyFacebookLoginComplete ( JNIEnv* env, jclass obj, jint code ) {
+extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiFacebook_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
 
-	MOAIFacebookAndroid::Get ().NotifyLoginComplete ( code );
+	MOAIFacebookAndroid::Get ().InvokeListener (( u32 )eventID );
 }
-
-//----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiFacebook_AKUNotifyFacebookDialogComplete ( JNIEnv* env, jclass obj, jint code ) {
-
-	MOAIFacebookAndroid::Get ().NotifyDialogComplete ( code );
-}
-
-extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiFacebook_AKUNotifyFacebookRequestComplete ( JNIEnv* env, jclass obj, jstring jresponse ) {
-
-    JNI_GET_CSTRING ( jresponse, response );
-	MOAIFacebookAndroid::Get ().NotifyRequestComplete ( response );
-	JNI_RELEASE_CSTRING ( jresponse, response );
-}
-
-extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiFacebook_AKUNotifyFacebookRequestFailed ( JNIEnv* env, jclass obj ) {
-
-	MOAIFacebookAndroid::Get ().NotifyRequestFailed ( );
-}
-

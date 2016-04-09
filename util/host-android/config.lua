@@ -4,6 +4,7 @@ ANDROID_PLATFORM_TARGET     = 'android-19'
 MODULES = {
     'contrib',
     'crittercism',
+    'facebook',
     'fmod',
     'google_play_services',
     'moai',

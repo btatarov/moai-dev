@@ -13,11 +13,9 @@ while [ $# -gt 0 ];	do
     esac
     shift
 done
-if [ "$clean" == "true" ]; then
-    rm -rf libmoai/obj
-    rm -rf libmoai/libs
 
-    ../util/moaiutil ant-libmoai -d FMOD_EX
+if [ "$clean" == "true" ]; then
+    source libmoai-clean.sh
 
     build_cmd="ndk-build -j4 -B"
 else

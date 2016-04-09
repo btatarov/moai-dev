@@ -20,6 +20,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * admob-8.4.0 (interstitial)
 * chartboost-6.4.1 (interstitial)
 * crittercism-5.5.5
+* facebook-4.5.1 (4.6 and above require minSdkVersion=15)
 * heyzap-9.4.5 (interstitial and rewarded video)
 * google-play-services-8.4.0 (currently stripped; todo)
 * revmob-9.0.8 (interstitial and rewarded video)
@@ -36,6 +37,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * android-adcolony
 * android-admob
 * android-chartboost
+* android-facebook
 * android-heyzap
 * android-play-services
 * android-revmob
