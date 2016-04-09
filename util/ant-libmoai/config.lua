@@ -395,6 +395,7 @@ STATIC_LIBRARIES = {
 	'libmoai-chartboost',
 	'libmoai-crittercism',
 	'libmoai-facebook',
+	'libmoai-flurry-analytics',
 	'libmoai-googleplayservices',
 	'libmoai-heyzap',
 	'libmoai-revmob',
