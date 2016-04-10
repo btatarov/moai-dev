@@ -3,6 +3,7 @@ libs/
 *.stackdump
 NUL
 jni/src/packaged-moai.cpp
+jni/Android.mk
 jni/ArmModeDefined.mk
 jni/AppPlatformDefined.mk
 jni/OptionalComponentsDefined.mk

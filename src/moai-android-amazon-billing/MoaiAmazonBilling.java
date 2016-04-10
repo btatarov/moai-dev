@@ -1,202 +1,208 @@
 //----------------------------------------------------------------//
-// Copyright (c) 2010-2011 Zipline Games, Inc. 
-// All Rights Reserved. 
+// Copyright (c) 2010-2011 Zipline Games, Inc.
+// All Rights Reserved.
 // http://getmoai.com
 //----------------------------------------------------------------//
 
 package com.ziplinegames.moai;
 
 import android.app.Activity;
-import android.os.Bundle;
 
-import java.util.HashSet;
-import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
-import com.amazon.inapp.purchasing.BasePurchasingObserver;
-import com.amazon.inapp.purchasing.GetUserIdResponse;
-import com.amazon.inapp.purchasing.Item;
-import com.amazon.inapp.purchasing.ItemDataResponse;
-import com.amazon.inapp.purchasing.Offset;
-import com.amazon.inapp.purchasing.PurchaseResponse;
-import com.amazon.inapp.purchasing.PurchasingManager;
-import com.amazon.inapp.purchasing.PurchaseUpdatesResponse;
-import com.amazon.inapp.purchasing.Receipt;
+import com.amazon.device.iap.model.ProductDataResponse;
+import com.amazon.device.iap.model.PurchaseResponse;
+import com.amazon.device.iap.model.PurchaseUpdatesResponse;
+import com.amazon.device.iap.model.Receipt;
+import com.amazon.device.iap.model.RequestId;
+import com.amazon.device.iap.model.UserDataResponse;
+import com.amazon.device.iap.PurchasingListener;
+import com.amazon.device.iap.PurchasingService;
 
 //================================================================//
 // MoaiAmazonBilling
 //================================================================//
-public class MoaiAmazonBilling extends BasePurchasingObserver {
+public class MoaiAmazonBilling implements PurchasingListener {
 
 	private static Activity											sActivity = null;
 	private static boolean											sBillingAvailable = false;
-	private static HashMap < String, HashMap < String, String >> 	sPendingPurchases = new HashMap < String, HashMap < String, String >> ();
-	
+	private static String 											sUserId = null;
+
 	protected static native void AKUNotifyAmazonBillingSupported			( boolean supported );
 	protected static native void AKUNotifyAmazonPurchaseResponseReceived	( int responseCode, String productId );
-	protected static native void AKUNotifyAmazonPurchaseStateChanged		( int purchaseState, String productId, String orderId, String userId, String developerPayload );
 	protected static native void AKUNotifyAmazonRestoreResponseReceived		( int responseCode, boolean more, String offset );
 	protected static native void AKUNotifyAmazonUserIdDetermined			( int responseCode, String userId );
-	
-	//----------------------------------------------------------------//
-    public MoaiAmazonBilling ( Activity activity ) {
-	
-		super ( activity );
-	}
-	
+
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
-		
+
 		MoaiLog.i ( "MoaiAmazonBilling onCreate: Initializing Amazon Billing" );
-		
+
 		sActivity = activity;
+
+		MoaiAmazonBilling purchasingListener = new MoaiAmazonBilling ();
+		PurchasingService.registerListener ( sActivity.getApplicationContext (), purchasingListener );
 	}
 
 	//----------------------------------------------------------------//
 	public static void onStart () {
-	
-		MoaiLog.i ( "MoaiAmazonBilling onStart: Registering billing observer" );
 
-	    PurchasingManager.registerObserver ( new MoaiAmazonBilling ( sActivity ));
+		MoaiLog.i ( "MoaiAmazonBilling onStart: Registering purchasing listener" );
 	}
 
 	//----------------------------------------------------------------//
-	public static void onStop () {
-	
-		MoaiLog.i ( "MoaiAmazonBilling onStop: Unregistering billing observer" );
+	public static void onResume () {
 
-	    PurchasingManager.registerObserver ( null );
+		MoaiLog.i ( "MoaiAmazonBilling onResume: Getting user data." );
+
+		PurchasingService.getUserData ();
 	}
-	
+
 	//================================================================//
-	// Amazon Billing (Amazon App Store) JNI callback methods
+	// Amazon Billing v2 JNI callback methods
 	//================================================================//
 
 	//----------------------------------------------------------------//
 	public static boolean checkBillingSupported () {
-		
-		MoaiLog.i ( "MoaiAmazonBilling checkBillingSupported: Checking if billing is supported" );
-		AKUNotifyAmazonBillingSupported ( sBillingAvailable );
-		
-		return true;
+
+		return sBillingAvailable;
 	}
-	
+
 	//----------------------------------------------------------------//
 	public static boolean confirmNotification ( String notificationId ) {
 
+		// unused
 		return false;
 	}
-	
+
 	//----------------------------------------------------------------//
 	public static boolean getUserId () {
-		
-		return ( PurchasingManager.initiateGetUserIdRequest () != null );
+
+		return ( PurchasingService.getUserData () != null );
 	}
 
 	//----------------------------------------------------------------//
 	public static boolean requestPurchase ( String productId, String developerPayload ) {
 
-		String requestId = PurchasingManager.initiatePurchaseRequest ( productId );
-		if ( requestId != null ) {
-			
-			HashMap < String, String > state = new HashMap < String, String > ();
-			state.put ( MoaiAmazonBillingConstants.PENDING_PURCHASE_STATE_PRODUCT_ID , productId );
-			state.put ( MoaiAmazonBillingConstants.PENDING_PURCHASE_STATE_DEVELOPER_PAYLOAD , developerPayload );
-			
-			sPendingPurchases.put ( requestId, state );
-		}
-		
-		return ( requestId != null );
+		return ( PurchasingService.purchase ( productId ) != null );
 	}
 
 	//----------------------------------------------------------------//
 	public static boolean restoreTransactions ( String offset ) {
 
-		return ( PurchasingManager.initiatePurchaseUpdatesRequest (( offset != null ) ? Offset.fromString ( offset ) : Offset.BEGINNING ) != null );
+		return ( PurchasingService.getPurchaseUpdates ( true ) != null );
 	}
 
 	//----------------------------------------------------------------//
 	public static void setPublicKey ( String key ) {
-	
+
+		// unused
 	}
 
 	//================================================================//
-	// BasePurchasingObserver methods
+	// PurchasingListener overrides
 	//================================================================//
+	@Override
+	public void onProductDataResponse ( final ProductDataResponse productDataResponse ) {
 
-	//----------------------------------------------------------------//
-	@Override
-	public void onGetUserIdResponse ( GetUserIdResponse response ) {
-	
-		AKUNotifyAmazonUserIdDetermined ( response.getUserIdRequestStatus ().ordinal (), response.getUserId ());
+		// unused
 	}
-	
-	//----------------------------------------------------------------//
-	@Override
-	public void onItemDataResponse ( ItemDataResponse response ) {
-		
-		// MoaiLog.i ( "ALREADY_ENTITLED: " + PurchaseResponse.PurchaseRequestStatus.valueOf ("ALREADY_ENTITLED").ordinal());
-		// MoaiLog.i ( "FAILED: " + PurchaseResponse.PurchaseRequestStatus.valueOf ("FAILED").ordinal());
-		// MoaiLog.i ( "INVALID_SKU: " + PurchaseResponse.PurchaseRequestStatus.valueOf ("INVALID_SKU").ordinal());
-		// MoaiLog.i ( "SUCCESSFUL: " + PurchaseResponse.PurchaseRequestStatus.valueOf ("SUCCESSFUL").ordinal());
-		
-		// MoaiLog.i ( "MoaiAmazonBilling onItemDataResponse: " + response.getItemDataRequestStatus ());
-		// 
-		// for ( String sku : response.getItemData ().keySet ()) {
-		// 	
-		// 	Item item = response.getItemData ().get ( sku );
-		// 	
-		// 	MoaiLog.i ( "SKU = " + sku );
-		// 	MoaiLog.i ( "TYPE = " + item.getItemType ());
-		// 	MoaiLog.i ( "PRICE = " + item.getPrice ());
-		// 	MoaiLog.i ( "TITLE = " + item.getTitle ());
-		// 	MoaiLog.i ( "DESCRIPTION = " + item.getDescription ());
-		// }
-	}
-	
-	//----------------------------------------------------------------//
-	@Override
-	public void onPurchaseResponse ( PurchaseResponse response ) {
-				
-		HashMap < String, String > state = sPendingPurchases.get ( response.getRequestId ());
-		if ( state != null ) {
-			
-			String productId = state.get ( MoaiAmazonBillingConstants.PENDING_PURCHASE_STATE_PRODUCT_ID );
-			String developerPayload = state.get ( MoaiAmazonBillingConstants.PENDING_PURCHASE_STATE_DEVELOPER_PAYLOAD );
-			
-			AKUNotifyAmazonPurchaseResponseReceived ( response.getPurchaseRequestStatus ().ordinal (), productId );
-			
-			if ( response.getPurchaseRequestStatus () == PurchaseResponse.PurchaseRequestStatus.SUCCESSFUL ) {
 
-				AKUNotifyAmazonPurchaseStateChanged ( MoaiAmazonBillingConstants.PurchaseState.PURCHASE_COMPLETED.ordinal (), productId, response.getRequestId (), response.getUserId (), developerPayload );
+	@Override
+	public void onPurchaseResponse ( final PurchaseResponse purchaseResponse ) {
+
+		final String requestId 	= purchaseResponse.getRequestId ().toString ();
+        final String userId 	= purchaseResponse.getUserData ().getUserId ();
+		final String sku 		= purchaseResponse.getReceipt ().getSku ();
+
+        final PurchaseResponse.RequestStatus requestStatus = purchaseResponse.getRequestStatus ();
+
+        switch ( requestStatus ) {
+
+		case SUCCESSFUL:
+
+            final Receipt receipt = purchaseResponse.getReceipt ();
+
+            MoaiLog.i ( "onPurchaseResponse: receipt json: " + receipt.toJSON () );
+
+		case ALREADY_PURCHASED:
+		case INVALID_SKU:
+		case FAILED:
+        case NOT_SUPPORTED:
+
+            AKUNotifyAmazonPurchaseResponseReceived ( requestStatus.ordinal () , sku );
+		}
+	}
+
+	@Override
+	public void onPurchaseUpdatesResponse ( final PurchaseUpdatesResponse purchaseUpdatesResponse ) {
+
+		final PurchaseUpdatesResponse.RequestStatus requestStatus = purchaseUpdatesResponse.getRequestStatus ();
+
+        switch ( requestStatus ) {
+
+        case SUCCESSFUL:
+
+			final List < Receipt > receiptList = purchaseUpdatesResponse.getReceipts ();
+        	final boolean hasMore = purchaseUpdatesResponse.hasMore ();
+
+			Iterator < Receipt > receiptListIterator = receiptList.iterator ();
+			while ( receiptListIterator.hasNext () ) {
+
+				Receipt receipt = receiptListIterator.next ();
+
+				if ( receiptListIterator.hasNext () ) {
+
+					AKUNotifyAmazonRestoreResponseReceived ( requestStatus.ordinal () , true, receipt.getSku () );
+				} else {
+
+					AKUNotifyAmazonRestoreResponseReceived ( requestStatus.ordinal () , hasMore, receipt.getSku () );
+				}
 			}
-			
-			sPendingPurchases.remove ( response.getRequestId ());
-		}
-	}
-	
-	//----------------------------------------------------------------//
-	@Override
-	public void onPurchaseUpdatesResponse ( PurchaseUpdatesResponse response ) {
-		
-		AKUNotifyAmazonRestoreResponseReceived ( response.getPurchaseUpdatesRequestStatus ().ordinal (), response.isMore (), ( response.isMore ()) ? response.getOffset ().toString () : null );
 
-		for ( Receipt receipt : response.getReceipts ())
-		{
-			AKUNotifyAmazonPurchaseStateChanged ( MoaiAmazonBillingConstants.PurchaseState.PURCHASE_COMPLETED.ordinal (), receipt.getSku (), response.getRequestId (), response.getUserId (), null );
-		}
+			if ( hasMore ) PurchasingService.getPurchaseUpdates ( false );
+            break;
 
-		for ( String productId : response.getRevokedSkus ())
-		{
-			AKUNotifyAmazonPurchaseStateChanged ( MoaiAmazonBillingConstants.PurchaseState.PURCHASE_REFUNDED.ordinal (), productId, response.getRequestId (), response.getUserId (), null );
-		}
+        case FAILED:
+        case NOT_SUPPORTED:
+
+			AKUNotifyAmazonRestoreResponseReceived ( requestStatus.ordinal () , false, null );
+        }
 	}
-	
-	//----------------------------------------------------------------//
+
 	@Override
-	public void onSdkAvailable ( boolean isSandboxMode ) {
-		
-		MoaiLog.i ( "MoaiAmazonBilling onSdkAvailable: " + (( isSandboxMode ) ? "SANDBOX" : "PRODUCTION" ));
-		
-		sBillingAvailable = true;		
+	public void onUserDataResponse ( final UserDataResponse userDataResponse ) {
+
+		final UserDataResponse.RequestStatus requestStatus = userDataResponse.getRequestStatus ();
+
+		switch ( requestStatus ) {
+
+		case SUCCESSFUL:
+
+			final String userId = userDataResponse.getUserData ().getUserId ();
+
+			if ( ! MoaiAmazonBilling.sBillingAvailable ) {
+
+				MoaiAmazonBilling.sBillingAvailable = true;
+				AKUNotifyAmazonBillingSupported ( true );
+			}
+
+			if ( ! userId.equals ( MoaiAmazonBilling.sUserId ) ) {
+
+				MoaiAmazonBilling.sUserId = userId;
+				AKUNotifyAmazonUserIdDetermined ( requestStatus.ordinal () , userId );
+			}
+
+			break;
+
+		case FAILED:
+        case NOT_SUPPORTED:
+
+			MoaiAmazonBilling.sUserId = null;
+			MoaiAmazonBilling.sBillingAvailable = false;
+			AKUNotifyAmazonBillingSupported ( false );
+			AKUNotifyAmazonUserIdDetermined ( requestStatus.ordinal (), null );
+		}
 	}
 }

@@ -6,7 +6,6 @@ MODULES = {
     'crittercism',
     'facebook',
     'fmod',
-    'google_play_services',
     'moai',
     'twitter',
 }

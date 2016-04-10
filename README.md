@@ -17,6 +17,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 
 ### Android
 * adcolony-2.3.4 (rewarded video)
+* amazon billing v2
 * admob-8.4.0 (interstitial)
 * chartboost-6.4.1 (interstitial)
 * crittercism-5.5.5
@@ -37,6 +38,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 ### Samples
 * android-adcolony
 * android-admob
+* android-billing-amazon
 * android-chartboost
 * android-facebook
 * android-heyzap
