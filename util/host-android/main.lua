@@ -18,7 +18,7 @@ MODULE_PROJECT_INCLUDES			= ''
 COPY							= {}
 
 ----------------------------------------------------------------
-local config = {}
+local config 						= { INVOKE_DIR = INVOKE_DIR }
 
 config.PROJECT_NAME					= 'MoaiSample'
 config.PACKAGE_NAME					= 'com.ziplinegames.moaisample'
@@ -28,10 +28,10 @@ config.LUA_WORKING_DIR				= 'bundle/assets/lua'
 config.LUA_MAIN						= 'main.lua'
 
 config.MANIFEST_DEBUGGABLE			= 'false'
-
 config.ANDROID_PLATFORM_TARGET		= 'android-17'
+config.VALID_ARCHITECTURES			= { 'armeabi-v7a', 'x86' }
 
-config.VALID_ARCHITECTURES 			= { 'armeabi-v7a', 'x86' }
+config.COPY							= {}
 
 --==============================================================
 -- util
@@ -42,6 +42,8 @@ local importLib
 local importSrc
 local processConfigFile
 local processModulesFiles
+
+local projectCounter = 0
 
 ----------------------------------------------------------------
 local importBin = function ( path )
@@ -77,8 +79,11 @@ local importLib = function ( path )
 	local projectPath = path .. 'project/'
 	if MOAIFileSystem.checkPathExists ( projectPath ) then
 		for i, pathname in ipairs ( util.listDirectories ( projectPath )) do
+			projectCounter = projectCounter + 1
+
 			MOAIFileSystem.copy (  projectPath .. pathname, ANT_DIR .. pathname )
-			MODULE_PROJECT_INCLUDES = MODULE_PROJECT_INCLUDES .. string.format ( 'android.library.reference.1=../%s/\n', pathname )
+			MODULE_PROJECT_INCLUDES = MODULE_PROJECT_INCLUDES ..
+					string.format ( 'android.library.reference.%d=../%s/\n', projectCounter, pathname )
 		end
 	end
 
@@ -188,12 +193,11 @@ for k, v in pairs (config['HOST_SETTINGS']['ANDROID'][STORE]) do
 end
 config['HOST_SETTINGS'] = nil
 
+-- Project game files
+table.insert ( config.COPY, { src = config.LUA_MAIN_DIR, dst = 'assets/lua' } )
+
 -- convert module list to module LUT
 processModulesFile('modules.lua')
-
-config.COPY = {
-	{ dst = 'assets/lua',		src = config.LUA_MAIN_DIR },
-}
 
 for name, mod in pairs (config['MODULES']) do
 	local src = resolvePath ( mod.src )
@@ -205,6 +209,10 @@ for name, mod in pairs (config['MODULES']) do
 		src = src and MOAIFileSystem.getAbsoluteDirectoryPath ( src ),
 		lib = lib and MOAIFileSystem.getAbsoluteDirectoryPath ( lib ),
 		bin = bin and MOAIFileSystem.getAbsoluteFilePath ( bin ),
+
+		-- true or nil (for facebook and gamecircle projects)
+		project = mod.project,
+		project_name = name,
 	}
 end
 
@@ -229,7 +237,7 @@ MOAIFileSystem.copy(
 )
 
 if config.KEYSTORE_NAME then
-	local keystore_path = MOAIFileSystem.getAbsoluteFilePath(INVOKE_DIR .. config.KEYSTORE_NAME)
+	local keystore_path = MOAIFileSystem.getAbsoluteFilePath(config.KEYSTORE_PATH .. config.KEYSTORE_NAME)
 	MOAIFileSystem.copy(keystore_path, MOAI_PROJECT_PATH .. config.KEYSTORE_NAME)
 end
 
@@ -331,8 +339,12 @@ os.execute ( string.format ( 'android update project --target %s --path %s',
 	MOAI_PROJECT_PATH
 ))
 
--- TODO: these should come from a table of projects since we might have any number based on the config
-os.execute ( string.format ( 'android update project --target %s --path %s',
-	tostring ( config.ANDROID_PLATFORM_TARGET ),
-	ANT_DIR .. 'facebook'
-))
+-- update library projects
+for name, mod in pairs(MODULES) do
+	if mod.project then
+		os.execute ( string.format ( 'android update project --target %s --path %s',
+			tostring ( config.ANDROID_PLATFORM_TARGET ),
+			ANT_DIR .. mod.project_name
+		))
+	end
+end

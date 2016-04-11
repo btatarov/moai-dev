@@ -107,6 +107,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	GAMECIRCLE = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_GAMECIRCLE',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-gamecircle.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-gamecircle',
+	},
+
+	----------------------------------------------------------------
 	GOOGLE_PLAY_SERVICES = {
 
 		MODULE_DEFINE = 'AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES',
@@ -396,6 +408,7 @@ STATIC_LIBRARIES = {
 	'libmoai-crittercism',
 	'libmoai-facebook',
 	'libmoai-flurry-analytics',
+	'libmoai-gamecircle',
 	'libmoai-googleplayservices',
 	'libmoai-heyzap',
 	'libmoai-revmob',

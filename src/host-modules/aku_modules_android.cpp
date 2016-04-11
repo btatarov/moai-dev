@@ -35,6 +35,10 @@ void AKUModulesAndroidAppFinalize () {
 	  AKUAndroidFlurryAppFinalize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_GAMECIRCLE
+	  AKUAndroidGameCircleAppFinalize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES
 		AKUAndroidGooglePlayServicesAppFinalize ();
 	#endif
@@ -92,6 +96,10 @@ void AKUModulesAndroidAppInitialize () {
 		AKUAndroidFlurryAppInitialize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_GAMECIRCLE
+		AKUAndroidGameCircleAppInitialize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES
 		AKUAndroidGooglePlayServicesAppInitialize ();
 	#endif
@@ -147,6 +155,10 @@ void AKUModulesAndroidContextInitialize () {
 
 	#if AKU_WITH_ANDROID_FLURRY
 		AKUAndroidFlurryContextInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_GAMECIRCLE
+		AKUAndroidGameCircleContextInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES

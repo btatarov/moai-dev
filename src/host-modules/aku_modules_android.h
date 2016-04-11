@@ -31,6 +31,10 @@
 	#include <moai-android-flurry/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_GAMECIRCLE
+	#include <moai-android-gamecircle/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES
 	#include <moai-android-google-play-services/host.h>
 #endif

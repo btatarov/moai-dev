@@ -15,6 +15,12 @@ MODULES = {
         src		= MOAI_SDK_HOME .. 'src/moai-android-amazon-billing',
     },
 
+    amazon_gamecircle = {
+		lib		= MOAI_SDK_HOME .. '3rdparty-android/amazon-gamecircle',
+		src		= MOAI_SDK_HOME .. 'src/moai-android-gamecircle',
+        project = true,
+	},
+
     chartboost = {
         lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost-6.4.1',
         src		= MOAI_SDK_HOME .. 'src/moai-android-chartboost',
@@ -43,6 +49,7 @@ MODULES = {
     facebook = {
 		lib		= MOAI_SDK_HOME .. '3rdparty-android/facebook-4.5.1',
 		src		= MOAI_SDK_HOME .. 'src/moai-android-facebook',
+        project = true,
 	},
 
     fmod = {
