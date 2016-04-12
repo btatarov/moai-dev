@@ -16,11 +16,12 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
 
 ### Android
+* [CHANGE] LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
 * adcolony-2.3.4 (rewarded video)
 * amazon ads (interstitial and banner)
 * amazon billing v2
 * amazon gamecircle
-* admob-8.4.0 (interstitial)
+* admob-8.4.0 (interstitial and banner)
 * chartboost-6.4.1 (interstitial)
 * crittercism-5.5.5
 * facebook-4.5.1 (4.6 and above require minSdkVersion=15)
@@ -32,7 +33,6 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * vungle-3.3.4 (rewarded video)
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
 * no multi-dex build
-* TODO: banner ads
 
 ### iOS
 * TODO

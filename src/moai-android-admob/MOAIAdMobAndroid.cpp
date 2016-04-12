@@ -15,7 +15,18 @@
 //================================================================//
 
 //----------------------------------------------------------------//
+int MOAIAdMobAndroid::_cacheBanner ( lua_State* L ) {
+
+	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
+
+	self->CallStaticVoidMethod ( self->mJava_CacheBanner );
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
 int MOAIAdMobAndroid::_cacheInterstitial ( lua_State* L ) {
+
 	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
 
 	self->CallStaticVoidMethod ( self->mJava_CacheInterstitial );
@@ -24,7 +35,18 @@ int MOAIAdMobAndroid::_cacheInterstitial ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIAdMobAndroid::_hasCachedBanner ( lua_State* L ) {
+
+	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
+
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_HasCachedBanner ) );
+
+	return 1;
+}
+
+//----------------------------------------------------------------//
 int MOAIAdMobAndroid::_hasCachedInterstitial ( lua_State* L ) {
+
 	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
 
 	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_HasCachedInterstitial ) );
@@ -33,7 +55,18 @@ int MOAIAdMobAndroid::_hasCachedInterstitial ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIAdMobAndroid::_hideBanner ( lua_State* L ) {
+
+	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
+
+	self->CallStaticVoidMethod ( self->mJava_HideBanner );
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
 int MOAIAdMobAndroid::_init ( lua_State* L ) {
+
 	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
 
 	jstring junitID = self->GetJString ( lua_tostring ( state, 1 ) );
@@ -44,7 +77,34 @@ int MOAIAdMobAndroid::_init ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIAdMobAndroid::_initBannerWithParams ( lua_State* L ) {
+
+	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
+
+	jstring 	junitID 	= self->GetJString ( lua_tostring ( state, 1 ) );
+	u32			width 		= lua_tonumber ( state, 2 );
+	u32			height 		= lua_tonumber ( state, 3 );
+	u32			margin 		= lua_tonumber ( state, 4 );
+	bool		bottom 		= lua_toboolean ( state, 5 );
+
+	self->CallStaticVoidMethod ( self->mJava_InitBannerWithParams, junitID, width, height, margin, bottom );
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
+int MOAIAdMobAndroid::_showBanner ( lua_State* L ) {
+
+	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
+
+	self->CallStaticVoidMethod ( self->mJava_ShowBanner );
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
 int MOAIAdMobAndroid::_showInterstitial ( lua_State* L ) {
+
 	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
 
 	self->CallStaticVoidMethod ( self->mJava_ShowInterstitial );
@@ -63,9 +123,14 @@ MOAIAdMobAndroid::MOAIAdMobAndroid () {
 
 	this->SetClass ( "com/ziplinegames/moai/MoaiAdMob" );
 
+	this->mJava_CacheBanner				= this->GetStaticMethod ( "cacheBanner", "()V" );
 	this->mJava_CacheInterstitial		= this->GetStaticMethod ( "cacheInterstitial", "()V" );
-	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
+	this->mJava_HasCachedBanner			= this->GetStaticMethod ( "hasCachedBanner", "()Z" );
 	this->mJava_HasCachedInterstitial	= this->GetStaticMethod ( "hasCachedInterstitial", "()Z" );
+	this->mJava_HideBanner				= this->GetStaticMethod ( "hideBanner", "()V" );
+	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
+	this->mJava_InitBannerWithParams	= this->GetStaticMethod ( "initBannerWithParams", "(Ljava/lang/String;IIIZ)V" );
+	this->mJava_ShowBanner				= this->GetStaticMethod ( "showBanner", "()V" );
 	this->mJava_ShowInterstitial		= this->GetStaticMethod ( "showInterstitial", "()V" );
 }
 
@@ -76,15 +141,17 @@ MOAIAdMobAndroid::~MOAIAdMobAndroid () {
 //----------------------------------------------------------------//
 void MOAIAdMobAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "INTERSTITIAL_LOAD_FAILED",	( u32 )INTERSTITIAL_LOAD_FAILED );
-	state.SetField ( -1, "INTERSTITIAL_DISMISSED", 		( u32 )INTERSTITIAL_DISMISSED );
-
 	luaL_Reg regTable [] = {
+		{ "cacheBanner",				_cacheBanner },
 		{ "cacheInterstitial",			_cacheInterstitial },
 		{ "hasCachedInterstitial",		_hasCachedInterstitial },
+		{ "hasCachedBanner",			_hasCachedBanner },
+		{ "hideBanner",					_hideBanner },
 		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIAdMobAndroid > },
 		{ "init",						_init },
+		{ "initBannerWithParams",		_initBannerWithParams },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIAdMobAndroid > },
+		{ "showBanner",					_showBanner },
 		{ "showInterstitial",			_showInterstitial },
 		{ NULL, NULL }
 	};
@@ -99,6 +166,5 @@ void MOAIAdMobAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 //----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiAdMob_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
 
-	ZLLog::LogF ( ZLLog::CONSOLE, "Java_com_ziplinegames_moai_MoaiAdMob_AKUInvokeListener\n" );
 	MOAIAdMobAndroid::Get ().InvokeListener (( u32 )eventID );
 }

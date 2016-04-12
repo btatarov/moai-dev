@@ -83,7 +83,7 @@ public class MoaiAmazonAds {
 
 		if ( sAdView != null ) {
 
-			sAdView.setVisibility ( View.INVISIBLE );
+			sAdView.setVisibility ( View.GONE );
 			sAdView.requestLayout ();
 		}
 	}
@@ -163,7 +163,7 @@ public class MoaiAmazonAds {
 		} );
 
 		sAdView.setTranslationY ( margin );
-		sAdView.setVisibility ( View.INVISIBLE );
+		sAdView.setVisibility ( View.GONE );
 	}
 
 	//----------------------------------------------------------------//
