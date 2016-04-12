@@ -1,6 +1,25 @@
 #!/bin/bash
+set -e
 
-xcodebuild -configuration Release -project libmoai.xcodeproj -target libmoai-osx-all || exit 1
+# check for command line switches
+usage="usage: $0 [--clean]"
+
+while [ $# -gt 0 ];	do
+    case "$1" in
+		--clean)  clean=true; break;;
+		*)
+	    	echo >&2 \
+	    		$usage
+	    	exit 1;;
+    esac
+    shift
+done
+
+if [ "$clean" == "true" ]; then
+	xcodebuild -configuration Release -project libmoai.xcodeproj -target libmoai-ios-all -sdk iphonesimulator clean || exit 1
+	xcodebuild -configuration Release -project libmoai.xcodeproj -target libmoai-ios-all -sdk iphoneos clean || exit 1
+fi
+
 xcodebuild -configuration Release -project libmoai.xcodeproj -target libmoai-ios-all -sdk iphonesimulator || exit 1
 xcodebuild -configuration Release -project libmoai.xcodeproj -target libmoai-ios-all -sdk iphoneos || exit 1
 
@@ -18,12 +37,6 @@ do
 	fi
 done
 popd > /dev/null
-
-OSX_LIB=../../lib/osx
-
-rm -rf $OSX_LIB
-mkdir -p $OSX_LIB
-cp -a ./build/Release/*.a $OSX_LIB
 
 IOS_LIB=../../lib/ios
 

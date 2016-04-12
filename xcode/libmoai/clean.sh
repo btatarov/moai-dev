@@ -11,7 +11,29 @@ set -e
 osx_schemes=( "libmoai-osx" "libmoai-osx-3rdparty" "libmoai-osx-fmod-ex" "libmoai-osx-luaext" "libmoai-osx-untz" "libmoai-osx-zlcore" )
 osx_sdks=( "macosx" )
 
-ios_schemes=( "libmoai-ios" "libmoai-ios-3rdparty" "libmoai-ios-facebook" "libmoai-ios-fmod-ex" "libmoai-ios-luaext" "libmoai-ios-tapjoy" "libmoai-ios-untz" "libmoai-ios-zlcore" )
+ios_schemes=(
+    "libmoai-ios"
+    "libmoai-ios-3rdparty-core"
+    "libmoai-ios-3rdparty-crypto"
+    "libmoai-ios-adcolony"
+    "libmoai-ios-audio-sampler"
+    "libmoai-ios-billing"
+    "libmoai-ios-box2d"
+    "libmoai-ios-chartboost"
+    "libmoai-ios-crittercism"
+    "libmoai-ios-crypto"
+    "libmoai-ios-facebook"
+    "libmoai-ios-gamecenter"
+    "libmoai-ios-http-client"
+    "libmoai-ios-http-server"
+    "libmoai-ios-luaext"
+    "libmoai-ios-sim"
+    "libmoai-ios-untz"
+    "libmoai-ios-vungle"
+    "libmoai-ios-zl-core"
+    "libmoai-ios-zl-crypto"
+    "libmoai-ios-zl-vfs"
+)
 ios_sdks=( "iphoneos" "iphonesimulator" )
 
 usage="usage: $0 [-j <jobName>] [-c Debug|Release|all] [-p osx|ios|all]"
@@ -67,14 +89,14 @@ for platform in $platforms; do
 	fi
 
 	for config in $configurations; do
-		for sdk in $sdks; do		
+		for sdk in $sdks; do
 			for scheme in $schemes; do
 				echo "Cleaning libmoai/$scheme/$sdk for $config"
 				xcodebuild -configuration $config -workspace libmoai.xcodeproj/project.xcworkspace -scheme $scheme -sdk $sdk clean CONFIGURATION_BUILD_DIR=/tmp/$job/$platform/$scheme/$sdk/$config
 				echo "Done"
 			done
 		done
-		
+
 		rm -rf "/tmp/$job/$platform/$config"
 	done
 done
