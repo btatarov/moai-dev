@@ -62,6 +62,19 @@ public class MoaiActivity extends Activity {
 	//----------------------------------------------------------------//
 	static {
 
+		MoaiLog.i ( "Loading libgnustl_shared.so" );
+		System.loadLibrary ( "gnustl_shared" );
+
+		// load fmod only if exists
+		try {
+
+			MoaiLog.i ( "Loading libfmod.so" );
+			System.loadLibrary ( "fmod" );
+		} catch ( UnsatisfiedLinkError e ) {
+
+			MoaiLog.i ( "FMod is disabled." );
+		}
+
 		MoaiLog.i ( "Loading libmoai.so" );
 		System.loadLibrary ( "moai" );
 	}
@@ -92,7 +105,7 @@ public class MoaiActivity extends Activity {
 		Moai.init ();
 
 		getWindow ().addFlags ( WindowManager.LayoutParams.FLAG_FULLSCREEN );
-		getWindow ().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		getWindow ().setSoftInputMode ( WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN );
 
 		try {
 

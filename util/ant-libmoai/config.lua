@@ -155,24 +155,6 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
-	FMOD_EX = {
-
-		MODULE_DEFINE = 'AKU_WITH_FMOD_EX',
-
-		HEADER_SEARCH_PATHS = {
-			'$(MOAI_SDK_HOME)/src/moai-fmod-ex',
-			'$(FMOD_ANDROID_SDK_ROOT)/api/inc',
-		},
-
-		INCLUDES = {
-			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-fmod-ex.mk',
-		},
-
-		STATIC_LIBRARIES = 'libmoai-fmod-ex',
-		SHARED_LIBRARIES = 'fmodex',
-	},
-
-	----------------------------------------------------------------
 	FMOD_STUDIO = {
 
 		MODULE_DEFINE = 'AKU_WITH_FMOD_STUDIO',
@@ -433,7 +415,6 @@ STATIC_LIBRARIES = {
 	'libmoai-box2d',
 	'libmoai-http-client',
 	'libmoai-fmod-studio',
-	'libmoai-fmod-ex',
 	'libmoai-luaext',
 	'libmoai-untz',
 	'libmoai-sim',

@@ -17,6 +17,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 
 ### Android
 * [CHANGE] LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
+* MOAIAppAndroid::isKindleFireDevice ()
 * adcolony-2.3.4 (rewarded video)
 * amazon ads (interstitial and banner)
 * amazon billing v2

@@ -101,30 +101,61 @@ int MOAIAppAndroid::_getStatusBarHeight ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+int MOAIAppAndroid::_isKindleFireDevice ( lua_State* L ) {
+
+	MOAILuaState state ( L );
+
+	JNI_GET_ENV ( jvm, env );
+
+	bool outVal = false;
+
+	jclass moai = env->FindClass ( "com/ziplinegames/moai/Moai" );
+    if ( moai == NULL ) {
+
+		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+    } else {
+
+    	jmethodID isKindleFireDevice = env->GetStaticMethodID ( moai, "isKindleFireDevice", "()Z" );
+    	if ( isKindleFireDevice == NULL ) {
+
+			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "isKindleFireDevice" );
+    	} else {
+
+			outVal = env->CallStaticBooleanMethod ( moai, isKindleFireDevice );
+		}
+	}
+
+	lua_pushboolean ( L, outVal );
+
+	return 1;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
 int MOAIAppAndroid::_openURL ( lua_State* L ) {
 
 	MOAILuaState state ( L );
-	
+
 	cc8* url = lua_tostring ( state, 1 );
-	
+
 	ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: _openURL %s", url );
-	
+
 	JNI_GET_ENV ( jvm, env );
-	
+
 	JNI_GET_JSTRING ( url, jurl );
-	
+
 	jclass moai = env->FindClass ( "com/ziplinegames/moai/Moai" );
 	    if ( moai == NULL ) {
-	
+
 		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
 	    } else {
-	
+
 	    	jmethodID openURL = env->GetStaticMethodID ( moai, "openURL", "(Ljava/lang/String;)V" );
 	    	if ( openURL == NULL ) {
-	
+
 			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "openURL" );
 	    	} else {
-	
+
 			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: calling java openURL" );
 			env->CallStaticVoidMethod ( moai, openURL, jurl );
 		}
@@ -245,9 +276,9 @@ int MOAIAppAndroid::_takePicture( lua_State* L ) {
 void MOAIAppAndroid::AppOpenedFromURL ( jstring url ) {
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
+
 	if ( this->PushListener ( APP_OPENED_FROM_URL, state )) {
-			
+
 		JNI_GET_ENV ( jvm, env );
 		JNI_GET_CSTRING ( url, returnurl );
 
@@ -290,8 +321,9 @@ void MOAIAppAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIAppAndroid > },
 		{ "getUTCTime",				_getUTCTime },
 		{ "getStatusBarHeight",		_getStatusBarHeight },
-		{ "sendMail",				_sendMail },		
+		{ "isKindleFireDevice",		_isKindleFireDevice },
 		{ "openURL",				_openURL },
+		{ "sendMail",				_sendMail },
 		{ "setListener",			&MOAIGlobalEventSource::_setListener < MOAIAppAndroid > },
 		{ "share",					_share },
         { "takePicture",            _takePicture },
@@ -307,7 +339,7 @@ void MOAIAppAndroid::NotifyPictureTaken() {
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	if ( MOAIAppAndroid::Get ().PushListener ( EVENT_PICTURE_TAKEN, state )) {
-		
+
 		jclass t_class = env->FindClass( "com/ziplinegames/moai/MoaiCamera" );
 		jmethodID t_getResultPath_mid = env->GetStaticMethodID( t_class, "getResultPath", "()Ljava/lang/String;" );
 		jmethodID t_getResultCode_mid = env->GetStaticMethodID( t_class, "getResultCode", "()I" );
