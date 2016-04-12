@@ -42,7 +42,7 @@ int MOAIAdColonyIOS::_init ( lua_State* L ) {
 		}
 	}
 	
-	[ AdColony configureWithAppID:[ NSString stringWithUTF8String:appID ] zoneIDs:zones delegate:MOAIAdColonyIOS::Get ().mAdColonyDelegate logging:YES ];
+	[ AdColony configureWithAppID:[ NSString stringWithUTF8String:appID ] zoneIDs:zones delegate:MOAIAdColonyIOS::Get ().mAdColonyDelegate logging:verbose ];
     
 	return 0;
 }
@@ -83,7 +83,7 @@ int MOAIAdColonyIOS::_videoReadyForZone ( lua_State *L ) {
 	
 	cc8* zone = lua_tostring ( state, 1 );
 	
-	int result = [ AdColony zoneStatusForZone:[ NSString stringWithUTF8String:zone ]];
+	u64 result = [ AdColony zoneStatusForZone:[ NSString stringWithUTF8String:zone ]];
 	bool ready = result == ADCOLONY_ZONE_STATUS_ACTIVE ? true : false;
 	
 	lua_pushboolean ( L, ready );
