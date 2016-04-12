@@ -19,7 +19,19 @@
 int MOAIChartBoostIOS::_cacheInterstitial ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
-	[[ Chartboost sharedChartboost ] cacheInterstitial ];
+	
+	[ Chartboost cacheInterstitial:CBLocationDefault ];
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
+int MOAIChartBoostIOS::_cacheRewardedVideo ( lua_State* L ) {
+	
+	MOAILuaState state ( L );
+	
+	[ Chartboost cacheRewardedVideo:CBLocationDefault ];
+	
 	return 0;
 }
 
@@ -30,11 +42,24 @@ int MOAIChartBoostIOS::_cacheInterstitial ( lua_State* L ) {
  @out 	bool	True, if an ad is cached.
  */
 int MOAIChartBoostIOS::_hasCachedInterstitial ( lua_State* L ) {
+	
 	MOAILuaState state ( L );
 	
-	bool isAdAvailable = [[ Chartboost sharedChartboost ] hasCachedInterstitial ];
+	bool isAdAvailable = [ Chartboost hasInterstitial:CBLocationDefault ];
 	
 	lua_pushboolean ( state, isAdAvailable );
+	
+	return 1;
+}
+
+//----------------------------------------------------------------//
+int MOAIChartBoostIOS::_hasCachedRewardedVideo ( lua_State* L ) {
+	
+	MOAILuaState state ( L );
+	
+	bool isVideoAvailable = [ Chartboost hasRewardedVideo:CBLocationDefault ];
+	
+	lua_pushboolean ( state, isVideoAvailable );
 	
 	return 1;
 }
@@ -54,10 +79,9 @@ int MOAIChartBoostIOS::_init ( lua_State* L ) {
 	cc8* identifier = lua_tostring ( state, 1 );
 	cc8* signature = lua_tostring ( state, 2 );
 	
-	[[ Chartboost sharedChartboost ] setAppId:[ NSString stringWithUTF8String:identifier ]];
-	[[ Chartboost sharedChartboost ] setAppSignature:[ NSString stringWithUTF8String:signature ]];
-	[[ Chartboost sharedChartboost ] setDelegate:MOAIChartBoostIOS::Get ().mDelegate ];
-	[[ Chartboost sharedChartboost ] startSession ];
+	[ Chartboost startWithAppId:[ NSString stringWithUTF8String:identifier ]
+				  appSignature:[ NSString stringWithUTF8String:signature ]
+					  delegate:MOAIChartBoostIOS::Get ().mDelegate ];
 	
 	return 0;
 }
@@ -72,11 +96,31 @@ int MOAIChartBoostIOS::_showInterstitial ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
 	
-	if ( [[ Chartboost sharedChartboost ] hasCachedInterstitial ]) {
-		[[ Chartboost sharedChartboost ] showInterstitial ];
+	if ( [ Chartboost hasInterstitial:CBLocationDefault ] ) {
+		
+		[ Chartboost showInterstitial:CBLocationDefault ];
+		
 		lua_pushboolean ( state, true );
 		return 1;
 	}
+	
+	lua_pushboolean ( state, false );
+	return 1;
+}
+
+//----------------------------------------------------------------//
+int MOAIChartBoostIOS::_showRewardedVideo ( lua_State* L ) {
+	
+	MOAILuaState state ( L );
+	
+	if ( [ Chartboost hasRewardedVideo:CBLocationDefault ] ) {
+		
+		[ Chartboost showRewardedVideo:CBLocationDefault ];
+		
+		lua_pushboolean ( state, true );
+		return 1;
+	}
+	
 	lua_pushboolean ( state, false );
 	return 1;
 }
@@ -104,14 +148,18 @@ void MOAIChartBoostIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
 	state.SetField ( -1, "INTERSTITIAL_LOAD_FAILED",	( u32 )INTERSTITIAL_LOAD_FAILED );
 	state.SetField ( -1, "INTERSTITIAL_DISMISSED", 		( u32 )INTERSTITIAL_DISMISSED );
+	state.SetField ( -1, "REWARDED_VIDEO_COMPLETED", 	( u32 )REWARDED_VIDEO_COMPLETED );
 
 	luaL_Reg regTable [] = {
 		{ "cacheInterstitial",		_cacheInterstitial },
+		{ "cacheRewardedVideo",		_cacheRewardedVideo },
 		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIChartBoostIOS > },
 		{ "hasCachedInterstitial",	_hasCachedInterstitial },
+		{ "hasCachedRewardedVideo",	_hasCachedRewardedVideo },
 		{ "init",					_init },
 		{ "setListener",			&MOAIGlobalEventSource::_setListener < MOAIChartBoostIOS > },
 		{ "showInterstitial",		_showInterstitial },
+		{ "showRewardedVideo",		_showRewardedVideo },
 		{ NULL, NULL }
 	};
 
@@ -129,36 +177,29 @@ void MOAIChartBoostIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	//================================================================//
 
 	//----------------------------------------------------------------//
-	- ( BOOL ) shouldRequestInterstitial {
-		return YES;
-	}
-
-	//----------------------------------------------------------------//
-	- ( void ) didFailToLoadInterstitial {
+	- ( void ) didFailToLoadInterstitial:( CBLocation )location withError:( CBLoadError )error {
+		
+		UNUSED ( location );
+		UNUSED ( error );
+		
 		MOAIChartBoostIOS::Get ().InvokeListener ( MOAIChartBoostIOS::INTERSTITIAL_LOAD_FAILED );
 	}
 
 	//----------------------------------------------------------------//
-	- ( BOOL ) shouldDisplayInterstitial:( CBLocation )location {
-		UNUSED ( location );
-		return YES;
-	}
-
-	//----------------------------------------------------------------//
 	- ( void ) didDismissInterstitial:( CBLocation )location {
+		
 		UNUSED ( location );
+		
 		MOAIChartBoostIOS::Get ().InvokeListener ( MOAIChartBoostIOS::INTERSTITIAL_DISMISSED );
 	}
 
 	//----------------------------------------------------------------//
-	- ( BOOL ) shouldDisplayMoreApps:( UIView * )moreAppsView {
-		UNUSED ( moreAppsView );
-		return NO;
-	}
-
-	//----------------------------------------------------------------//
-	-( BOOL ) shouldRequestInterstitialsInFirstSession {
-		return NO;
+	- (void)didCompleteRewardedVideo:(CBLocation)location withReward:(int)reward {
+		
+		UNUSED ( location );
+		UNUSED ( reward );
+		
+		MOAIChartBoostIOS::Get ().InvokeListener ( MOAIChartBoostIOS::REWARDED_VIDEO_COMPLETED );
 	}
 
 @end

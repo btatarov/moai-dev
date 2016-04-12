@@ -47,7 +47,6 @@
 				3E72B9BA19F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9BE19F703FA00A9DE30 /* PBXTargetDependency */,
 				CDB14A2F1A01CCFB008CEA54 /* PBXTargetDependency */,
-				3E72B9C419F703FA00A9DE30 /* PBXTargetDependency */,
 				43B309761CBD294900DF3017 /* PBXTargetDependency */,
 				3E72B9CA19F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9CE19F703FA00A9DE30 /* PBXTargetDependency */,
@@ -55,7 +54,6 @@
 				CDB14A391A01CCFB008CEA54 /* PBXTargetDependency */,
 				3E72B9DA19F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9DE19F703FA00A9DE30 /* PBXTargetDependency */,
-				3E72B9E019F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9E419F703FA00A9DE30 /* PBXTargetDependency */,
 				CDB14A411A01CCFB008CEA54 /* PBXTargetDependency */,
 				3E72B9E819F703FA00A9DE30 /* PBXTargetDependency */,
@@ -4349,13 +4347,6 @@
 			remoteGlobalIDString = CD5232471808ADF400B81720;
 			remoteInfo = "libmoai-ios-crittercism";
 		};
-		3E72B9C319F703FA00A9DE30 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CD70C10F18441DD0005CEBC0;
-			remoteInfo = "libmoai-ios-flurry";
-		};
 		3E72B9C919F703FA00A9DE30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -4390,13 +4381,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = CD07C3A313A182AA00C9386C;
 			remoteInfo = "libmoai-ios-untz";
-		};
-		3E72B9DF19F703FA00A9DE30 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CD4C4167180A9AEA00C02381;
-			remoteInfo = "libmoai-ios-urban-airship";
 		};
 		3E72B9E319F703FA00A9DE30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -4562,61 +4546,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03240A3F13564CAF000ADC60 /* cpConstraint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpConstraint.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpConstraint.c"; sourceTree = SOURCE_ROOT; };
-		03240A4013564CAF000ADC60 /* cpConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpConstraint.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpConstraint.h"; sourceTree = SOURCE_ROOT; };
-		03240A4113564CAF000ADC60 /* cpDampedRotarySpring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpDampedRotarySpring.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpDampedRotarySpring.c"; sourceTree = SOURCE_ROOT; };
-		03240A4213564CAF000ADC60 /* cpDampedRotarySpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpDampedRotarySpring.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpDampedRotarySpring.h"; sourceTree = SOURCE_ROOT; };
-		03240A4313564CAF000ADC60 /* cpDampedSpring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpDampedSpring.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpDampedSpring.c"; sourceTree = SOURCE_ROOT; };
-		03240A4413564CAF000ADC60 /* cpDampedSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpDampedSpring.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpDampedSpring.h"; sourceTree = SOURCE_ROOT; };
-		03240A4513564CAF000ADC60 /* cpGearJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpGearJoint.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpGearJoint.c"; sourceTree = SOURCE_ROOT; };
-		03240A4613564CAF000ADC60 /* cpGearJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpGearJoint.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpGearJoint.h"; sourceTree = SOURCE_ROOT; };
-		03240A4713564CAF000ADC60 /* cpGrooveJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpGrooveJoint.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpGrooveJoint.c"; sourceTree = SOURCE_ROOT; };
-		03240A4813564CAF000ADC60 /* cpGrooveJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpGrooveJoint.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpGrooveJoint.h"; sourceTree = SOURCE_ROOT; };
-		03240A4913564CAF000ADC60 /* cpPinJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpPinJoint.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpPinJoint.c"; sourceTree = SOURCE_ROOT; };
-		03240A4A13564CAF000ADC60 /* cpPinJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpPinJoint.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpPinJoint.h"; sourceTree = SOURCE_ROOT; };
-		03240A4B13564CAF000ADC60 /* cpPivotJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpPivotJoint.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpPivotJoint.c"; sourceTree = SOURCE_ROOT; };
-		03240A4C13564CAF000ADC60 /* cpPivotJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpPivotJoint.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpPivotJoint.h"; sourceTree = SOURCE_ROOT; };
-		03240A4D13564CAF000ADC60 /* cpRatchetJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpRatchetJoint.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpRatchetJoint.c"; sourceTree = SOURCE_ROOT; };
-		03240A4E13564CAF000ADC60 /* cpRatchetJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpRatchetJoint.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpRatchetJoint.h"; sourceTree = SOURCE_ROOT; };
-		03240A4F13564CAF000ADC60 /* cpRotaryLimitJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpRotaryLimitJoint.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpRotaryLimitJoint.c"; sourceTree = SOURCE_ROOT; };
-		03240A5013564CAF000ADC60 /* cpRotaryLimitJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpRotaryLimitJoint.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpRotaryLimitJoint.h"; sourceTree = SOURCE_ROOT; };
-		03240A5113564CAF000ADC60 /* cpSimpleMotor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSimpleMotor.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpSimpleMotor.c"; sourceTree = SOURCE_ROOT; };
-		03240A5213564CAF000ADC60 /* cpSimpleMotor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpSimpleMotor.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpSimpleMotor.h"; sourceTree = SOURCE_ROOT; };
-		03240A5313564CAF000ADC60 /* cpSlideJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSlideJoint.c; path = "../../3rdparty/chipmunk-5.3.4/src/constraints/cpSlideJoint.c"; sourceTree = SOURCE_ROOT; };
-		03240A5413564CAF000ADC60 /* cpSlideJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpSlideJoint.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/cpSlideJoint.h"; sourceTree = SOURCE_ROOT; };
-		03240A5513564CAF000ADC60 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/constraints/util.h"; sourceTree = SOURCE_ROOT; };
-		03240A5613564CAF000ADC60 /* chipmunk_ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chipmunk_ffi.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/chipmunk_ffi.h"; sourceTree = SOURCE_ROOT; };
-		03240A5713564CAF000ADC60 /* chipmunk_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chipmunk_private.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/chipmunk_private.h"; sourceTree = SOURCE_ROOT; };
-		03240A5813564CAF000ADC60 /* chipmunk_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chipmunk_types.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/chipmunk_types.h"; sourceTree = SOURCE_ROOT; };
-		03240A5913564CAF000ADC60 /* chipmunk_unsafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chipmunk_unsafe.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/chipmunk_unsafe.h"; sourceTree = SOURCE_ROOT; };
-		03240A5A13564CAF000ADC60 /* chipmunk.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = chipmunk.c; path = "../../3rdparty/chipmunk-5.3.4/src/chipmunk.c"; sourceTree = SOURCE_ROOT; };
-		03240A5B13564CAF000ADC60 /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chipmunk.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/chipmunk.h"; sourceTree = SOURCE_ROOT; };
-		03240A5C13564CAF000ADC60 /* cpArbiter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpArbiter.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpArbiter.c"; sourceTree = SOURCE_ROOT; };
-		03240A5D13564CAF000ADC60 /* cpArbiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpArbiter.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpArbiter.h"; sourceTree = SOURCE_ROOT; };
-		03240A5E13564CAF000ADC60 /* cpArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpArray.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpArray.c"; sourceTree = SOURCE_ROOT; };
-		03240A5F13564CAF000ADC60 /* cpArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpArray.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpArray.h"; sourceTree = SOURCE_ROOT; };
-		03240A6013564CAF000ADC60 /* cpBB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpBB.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpBB.c"; sourceTree = SOURCE_ROOT; };
-		03240A6113564CAF000ADC60 /* cpBB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpBB.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpBB.h"; sourceTree = SOURCE_ROOT; };
-		03240A6213564CAF000ADC60 /* cpBody.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpBody.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpBody.c"; sourceTree = SOURCE_ROOT; };
-		03240A6313564CAF000ADC60 /* cpBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpBody.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpBody.h"; sourceTree = SOURCE_ROOT; };
-		03240A6413564CAF000ADC60 /* cpCollision.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpCollision.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpCollision.c"; sourceTree = SOURCE_ROOT; };
-		03240A6513564CAF000ADC60 /* cpCollision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpCollision.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpCollision.h"; sourceTree = SOURCE_ROOT; };
-		03240A6613564CAF000ADC60 /* cpHashSet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpHashSet.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpHashSet.c"; sourceTree = SOURCE_ROOT; };
-		03240A6713564CAF000ADC60 /* cpHashSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpHashSet.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpHashSet.h"; sourceTree = SOURCE_ROOT; };
-		03240A6813564CAF000ADC60 /* cpPolyShape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpPolyShape.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpPolyShape.c"; sourceTree = SOURCE_ROOT; };
-		03240A6913564CAF000ADC60 /* cpPolyShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpPolyShape.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpPolyShape.h"; sourceTree = SOURCE_ROOT; };
-		03240A6A13564CAF000ADC60 /* cpShape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpShape.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpShape.c"; sourceTree = SOURCE_ROOT; };
-		03240A6B13564CAF000ADC60 /* cpShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpShape.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpShape.h"; sourceTree = SOURCE_ROOT; };
-		03240A6C13564CAF000ADC60 /* cpSpace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpace.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpSpace.c"; sourceTree = SOURCE_ROOT; };
-		03240A6D13564CAF000ADC60 /* cpSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpSpace.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpSpace.h"; sourceTree = SOURCE_ROOT; };
-		03240A6E13564CAF000ADC60 /* cpSpaceComponent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpaceComponent.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpSpaceComponent.c"; sourceTree = SOURCE_ROOT; };
-		03240A6F13564CAF000ADC60 /* cpSpaceHash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpaceHash.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpSpaceHash.c"; sourceTree = SOURCE_ROOT; };
-		03240A7013564CAF000ADC60 /* cpSpaceHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpSpaceHash.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpSpaceHash.h"; sourceTree = SOURCE_ROOT; };
-		03240A7113564CAF000ADC60 /* cpSpaceQuery.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpaceQuery.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpSpaceQuery.c"; sourceTree = SOURCE_ROOT; };
-		03240A7213564CAF000ADC60 /* cpSpaceStep.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpaceStep.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpSpaceStep.c"; sourceTree = SOURCE_ROOT; };
-		03240A7313564CAF000ADC60 /* cpVect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpVect.c; path = "../../3rdparty/chipmunk-5.3.4/src/cpVect.c"; sourceTree = SOURCE_ROOT; };
-		03240A7413564CAF000ADC60 /* cpVect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpVect.h; path = "../../3rdparty/chipmunk-5.3.4/include/chipmunk/cpVect.h"; sourceTree = SOURCE_ROOT; };
-		03240A7513564CAF000ADC60 /* prime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prime.h; path = "../../3rdparty/chipmunk-5.3.4/src/prime.h"; sourceTree = SOURCE_ROOT; };
 		03240A7713564CAF000ADC60 /* moai_utf8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = moai_utf8.c; path = ../../3rdparty/contrib/moai_utf8.c; sourceTree = SOURCE_ROOT; };
 		03240A7813564CAF000ADC60 /* moai_utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = moai_utf8.h; path = ../../3rdparty/contrib/moai_utf8.h; sourceTree = SOURCE_ROOT; };
 		03240A7B13564CAF000ADC60 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = curl.h; path = "../../3rdparty/curl-7.19.7/include-iphone/curl/curl.h"; sourceTree = SOURCE_ROOT; };
@@ -7922,7 +7851,6 @@
 			children = (
 				B0FC2A0616F4004900796249 /* sfmt */,
 				032409EF13564CAF000ADC60 /* box2d */,
-				03240A3D13564CAF000ADC60 /* chipmunk */,
 				03240A7613564CAF000ADC60 /* contrib */,
 				03240A7913564CAF000ADC60 /* curl */,
 				03240B1313564CB0000ADC60 /* expat */,
@@ -7967,76 +7895,6 @@
 				CD1BF7E4194050530066877A /* Rope */,
 			);
 			name = box2d;
-			sourceTree = "<group>";
-		};
-		03240A3D13564CAF000ADC60 /* chipmunk */ = {
-			isa = PBXGroup;
-			children = (
-				03240A5613564CAF000ADC60 /* chipmunk_ffi.h */,
-				03240A5713564CAF000ADC60 /* chipmunk_private.h */,
-				03240A5813564CAF000ADC60 /* chipmunk_types.h */,
-				03240A5913564CAF000ADC60 /* chipmunk_unsafe.h */,
-				03240A5A13564CAF000ADC60 /* chipmunk.c */,
-				03240A5B13564CAF000ADC60 /* chipmunk.h */,
-				03240A5C13564CAF000ADC60 /* cpArbiter.c */,
-				03240A5D13564CAF000ADC60 /* cpArbiter.h */,
-				03240A5E13564CAF000ADC60 /* cpArray.c */,
-				03240A5F13564CAF000ADC60 /* cpArray.h */,
-				03240A6013564CAF000ADC60 /* cpBB.c */,
-				03240A6113564CAF000ADC60 /* cpBB.h */,
-				03240A6213564CAF000ADC60 /* cpBody.c */,
-				03240A6313564CAF000ADC60 /* cpBody.h */,
-				03240A6413564CAF000ADC60 /* cpCollision.c */,
-				03240A6513564CAF000ADC60 /* cpCollision.h */,
-				03240A6613564CAF000ADC60 /* cpHashSet.c */,
-				03240A6713564CAF000ADC60 /* cpHashSet.h */,
-				03240A6813564CAF000ADC60 /* cpPolyShape.c */,
-				03240A6913564CAF000ADC60 /* cpPolyShape.h */,
-				03240A6A13564CAF000ADC60 /* cpShape.c */,
-				03240A6B13564CAF000ADC60 /* cpShape.h */,
-				03240A6C13564CAF000ADC60 /* cpSpace.c */,
-				03240A6D13564CAF000ADC60 /* cpSpace.h */,
-				03240A6E13564CAF000ADC60 /* cpSpaceComponent.c */,
-				03240A6F13564CAF000ADC60 /* cpSpaceHash.c */,
-				03240A7013564CAF000ADC60 /* cpSpaceHash.h */,
-				03240A7113564CAF000ADC60 /* cpSpaceQuery.c */,
-				03240A7213564CAF000ADC60 /* cpSpaceStep.c */,
-				03240A7313564CAF000ADC60 /* cpVect.c */,
-				03240A7413564CAF000ADC60 /* cpVect.h */,
-				03240A7513564CAF000ADC60 /* prime.h */,
-				03240A3E13564CAF000ADC60 /* constraints */,
-			);
-			name = chipmunk;
-			sourceTree = "<group>";
-		};
-		03240A3E13564CAF000ADC60 /* constraints */ = {
-			isa = PBXGroup;
-			children = (
-				03240A3F13564CAF000ADC60 /* cpConstraint.c */,
-				03240A4013564CAF000ADC60 /* cpConstraint.h */,
-				03240A4113564CAF000ADC60 /* cpDampedRotarySpring.c */,
-				03240A4213564CAF000ADC60 /* cpDampedRotarySpring.h */,
-				03240A4313564CAF000ADC60 /* cpDampedSpring.c */,
-				03240A4413564CAF000ADC60 /* cpDampedSpring.h */,
-				03240A4513564CAF000ADC60 /* cpGearJoint.c */,
-				03240A4613564CAF000ADC60 /* cpGearJoint.h */,
-				03240A4713564CAF000ADC60 /* cpGrooveJoint.c */,
-				03240A4813564CAF000ADC60 /* cpGrooveJoint.h */,
-				03240A4913564CAF000ADC60 /* cpPinJoint.c */,
-				03240A4A13564CAF000ADC60 /* cpPinJoint.h */,
-				03240A4B13564CAF000ADC60 /* cpPivotJoint.c */,
-				03240A4C13564CAF000ADC60 /* cpPivotJoint.h */,
-				03240A4D13564CAF000ADC60 /* cpRatchetJoint.c */,
-				03240A4E13564CAF000ADC60 /* cpRatchetJoint.h */,
-				03240A4F13564CAF000ADC60 /* cpRotaryLimitJoint.c */,
-				03240A5013564CAF000ADC60 /* cpRotaryLimitJoint.h */,
-				03240A5113564CAF000ADC60 /* cpSimpleMotor.c */,
-				03240A5213564CAF000ADC60 /* cpSimpleMotor.h */,
-				03240A5313564CAF000ADC60 /* cpSlideJoint.c */,
-				03240A5413564CAF000ADC60 /* cpSlideJoint.h */,
-				03240A5513564CAF000ADC60 /* util.h */,
-			);
-			name = constraints;
 			sourceTree = "<group>";
 		};
 		03240A7613564CAF000ADC60 /* contrib */ = {
@@ -18660,11 +18518,6 @@
 			target = CD5232471808ADF400B81720 /* libmoai-ios-crittercism */;
 			targetProxy = 3E72B9BD19F703FA00A9DE30 /* PBXContainerItemProxy */;
 		};
-		3E72B9C419F703FA00A9DE30 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CD70C10F18441DD0005CEBC0 /* libmoai-ios-flurry */;
-			targetProxy = 3E72B9C319F703FA00A9DE30 /* PBXContainerItemProxy */;
-		};
 		3E72B9CA19F703FA00A9DE30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CDA4B89B1808AC8F000129F9 /* libmoai-ios-gamecenter */;
@@ -18689,11 +18542,6 @@
 			isa = PBXTargetDependency;
 			target = CD07C3A313A182AA00C9386C /* libmoai-ios-untz */;
 			targetProxy = 3E72B9DD19F703FA00A9DE30 /* PBXContainerItemProxy */;
-		};
-		3E72B9E019F703FA00A9DE30 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CD4C4167180A9AEA00C02381 /* libmoai-ios-urban-airship */;
-			targetProxy = 3E72B9DF19F703FA00A9DE30 /* PBXContainerItemProxy */;
 		};
 		3E72B9E419F703FA00A9DE30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -19020,6 +18868,7 @@
 					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
 					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
 					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
+					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -19100,8 +18949,6 @@
 					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
@@ -19117,7 +18964,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/chartboost-4.2\"",
 					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
@@ -20488,6 +20334,7 @@
 					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
 					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
 					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
+					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -20567,8 +20414,6 @@
 					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
@@ -20584,7 +20429,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/chartboost-4.2\"",
 					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
@@ -23626,6 +23470,16 @@
 		CDA4B9821808AC9D000129F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MOAI_SDK_SRC)3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework",
+					"$(MOAI_SDK_SRC)3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
+					"$(MOAI_SDK_SRC)3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
+					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
+					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
+					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
+					"\"../../3rdparty-ios/chartboost-6.4.2\"",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
 					USE_OPENSSL,
@@ -23662,6 +23516,16 @@
 		CDA4B9831808AC9D000129F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MOAI_SDK_SRC)3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework",
+					"$(MOAI_SDK_SRC)3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
+					"$(MOAI_SDK_SRC)3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
+					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
+					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
+					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
+					"\"../../3rdparty-ios/chartboost-6.4.2\"",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -23693,6 +23557,16 @@
 		CDA4B9841808AC9D000129F9 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MOAI_SDK_SRC)3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework",
+					"$(MOAI_SDK_SRC)3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
+					"$(MOAI_SDK_SRC)3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
+					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
+					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
+					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
+					"\"../../3rdparty-ios/chartboost-6.4.2\"",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -23724,6 +23598,16 @@
 		CDA4B9851808AC9D000129F9 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MOAI_SDK_SRC)3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework",
+					"$(MOAI_SDK_SRC)3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
+					"$(MOAI_SDK_SRC)3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
+					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
+					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
+					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
+					"\"../../3rdparty-ios/chartboost-6.4.2\"",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -24819,6 +24703,7 @@
 					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
 					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
 					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
+					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -24899,8 +24784,6 @@
 					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
@@ -24916,7 +24799,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/chartboost-4.2\"",
 					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
@@ -25248,6 +25130,7 @@
 					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
 					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
 					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
+					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -25328,8 +25211,6 @@
 					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
@@ -25345,7 +25226,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/chartboost-4.2\"",
 					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",

@@ -36,7 +36,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * no multi-dex build
 
 ### iOS
-* TODO
+* chartboost-6.4.2 (interstitial and rewarded video)
 
 ### Samples
 * android-adcolony

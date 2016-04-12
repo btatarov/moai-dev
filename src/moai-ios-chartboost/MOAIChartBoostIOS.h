@@ -8,7 +8,7 @@
 #define	MOAICHARTBOOSTIOS_H
 
 #include <moai-core/headers.h>
-#import <Chartboost.h>
+#import <Chartboost/Chartboost.h>
 
 @class MoaiChartBoostDelegate;
 
@@ -23,9 +23,12 @@ private:
 
 	//----------------------------------------------------------------//
 	static int		_cacheInterstitial				( lua_State* L );
+	static int		_cacheRewardedVideo				( lua_State* L );
 	static int		_hasCachedInterstitial			( lua_State* L );
+	static int		_hasCachedRewardedVideo			( lua_State* L );
 	static int		_init							( lua_State* L );
 	static int		_showInterstitial				( lua_State* L );
+	static int		_showRewardedVideo				( lua_State* L );
 	
 public:
 
@@ -34,6 +37,7 @@ public:
 	enum {
 		INTERSTITIAL_LOAD_FAILED,
 		INTERSTITIAL_DISMISSED,
+		REWARDED_VIDEO_COMPLETED,
 		TOTAL
 	};
 	
