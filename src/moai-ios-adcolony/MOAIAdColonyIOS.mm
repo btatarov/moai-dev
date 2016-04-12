@@ -41,8 +41,8 @@ int MOAIAdColonyIOS::_init ( lua_State* L ) {
 			}	
 		}
 	}
-    
-	[ AdColony configureWithAppID:[ NSString stringWithUTF8String:appID ] zoneIDs:zones delegate:MOAIAdColonyIOS::Get ().mAdColonyDelegate logging:verbose ];
+	
+	[ AdColony configureWithAppID:[ NSString stringWithUTF8String:appID ] zoneIDs:zones delegate:MOAIAdColonyIOS::Get ().mAdColonyDelegate logging:YES ];
     
 	return 0;
 }

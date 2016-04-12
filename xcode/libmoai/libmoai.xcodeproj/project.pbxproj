@@ -42,6 +42,7 @@
 				3E72B9AA19F703FA00A9DE30 /* PBXTargetDependency */,
 				CDB14A291A01CCFB008CEA54 /* PBXTargetDependency */,
 				3E72B9AC19F703FA00A9DE30 /* PBXTargetDependency */,
+				43B309781CBD400A00DF3017 /* PBXTargetDependency */,
 				3E72B9B819F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9B619F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9BA19F703FA00A9DE30 /* PBXTargetDependency */,
@@ -4479,6 +4480,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 43B309411CBD23D000DF3017;
 			remoteInfo = "libmoai-ios-fmod-studio";
+		};
+		43B309771CBD400A00DF3017 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD27BE00191D9F44000A7770;
+			remoteInfo = "libmoai-ios-adcolony";
 		};
 		CDB14A281A01CCFB008CEA54 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -18613,6 +18621,11 @@
 			target = 43B309411CBD23D000DF3017 /* libmoai-ios-fmod-studio */;
 			targetProxy = 43B309751CBD294900DF3017 /* PBXContainerItemProxy */;
 		};
+		43B309781CBD400A00DF3017 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD27BE00191D9F44000A7770 /* libmoai-ios-adcolony */;
+			targetProxy = 43B309771CBD400A00DF3017 /* PBXContainerItemProxy */;
+		};
 		CDB14A291A01CCFB008CEA54 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CDD47B9417FA78AE00525B77 /* libmoai-ios-3rdparty-crypto */;
@@ -18867,8 +18880,8 @@
 					"$(MOAI_SDK_SRC)3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
 					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
-					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
+					"\"../../3rdparty-ios/adcolony-2.6.1\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -18964,7 +18977,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
 					"\"../../3rdparty/libtess2/include\"",
@@ -20333,8 +20345,8 @@
 					"$(MOAI_SDK_SRC)3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
 					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
-					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
+					"\"../../3rdparty-ios/adcolony-2.6.1\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -20429,7 +20441,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
 					"\"../../3rdparty/libtess2/include\"",
@@ -24702,8 +24713,8 @@
 					"$(MOAI_SDK_SRC)3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
 					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
-					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
+					"\"../../3rdparty-ios/adcolony-2.6.1\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -24799,7 +24810,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
 					"\"../../3rdparty/libtess2/include\"",
@@ -25129,8 +25139,8 @@
 					"$(MOAI_SDK_SRC)3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					"$(MOAI_SDK_SRC)3rdparty/kontagent_ios_v1.5.6",
 					"$(MOAI_SDK_SRC)3rdparty/facebook-ios-sdk-3.14.1",
-					"$(MOAI_SDK_SRC)3rdparty/adcolony-2.2.4",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
+					"\"../../3rdparty-ios/adcolony-2.6.1\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -25226,7 +25236,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
 					"\"../../3rdparty/libtess2/include\"",
