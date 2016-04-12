@@ -10,6 +10,11 @@ MODULES = {
         src		= MOAI_SDK_HOME .. 'src/moai-android-admob',
     },
 
+    amazon_ads = {
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/amazon-ads',
+        src		= MOAI_SDK_HOME .. 'src/moai-android-amazonads',
+    },
+
     amazon_billing = {
         lib     = MOAI_SDK_HOME .. "3rdparty-android/amazon-billing-v2",
         src		= MOAI_SDK_HOME .. 'src/moai-android-amazon-billing',

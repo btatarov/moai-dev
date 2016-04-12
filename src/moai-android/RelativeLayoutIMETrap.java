@@ -5,10 +5,10 @@
  *
  * This file implements the MOAIKeyboardAndroid functionality
  * for user-input from the soft keyboard on Android
- * 
+ *
  * http://getmoai.com
  *
- * This is an extension to the LinearLayout used by the Android MOAI host.
+ * This is an extension to the RelativeLayout used by the Android MOAI host.
  * The purpose of this class is to allow the Input Manager events to be
  * intercepted so that the Android soft keyboard can properly be used
  * with the moaigui framework.  This class intercepts IME key events
@@ -30,7 +30,7 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import android.widget.EditText;
 import android.text.TextWatcher;
@@ -38,13 +38,13 @@ import android.text.Editable;
 import android.util.AttributeSet;
 
 
-public class LinearLayoutIMETrap extends LinearLayout {
+public class RelativeLayoutIMETrap extends RelativeLayout {
 	Activity activityReference;
 
-	public LinearLayoutIMETrap ( Context context ) {
+	public RelativeLayoutIMETrap ( Context context ) {
 		super ( context );
 	}
-	public LinearLayoutIMETrap ( Context context, AttributeSet attrs ) {
+	public RelativeLayoutIMETrap ( Context context, AttributeSet attrs ) {
 		super ( context, attrs );
 	}
 	public void setMainActivity ( Activity activityReference ) {
@@ -56,7 +56,7 @@ public class LinearLayoutIMETrap extends LinearLayout {
 		if ( activityReference != null ) {
 			InputMethodManager imm = ( InputMethodManager ) activityReference.getSystemService ( Context.INPUT_METHOD_SERVICE );
 			if ( imm.isActive () && event.getKeyCode () == KeyEvent.KEYCODE_BACK ) {
-				MoaiLog.i ( "LinearLayoutIMETrap dispatchKeyEventPreIme, event: " + event );
+				MoaiLog.i ( "RelativeLayoutIMETrap dispatchKeyEventPreIme, event: " + event );
 				MoaiKeyboard.hideKeyboard (); // hide the keyboard if its visible ..
 				// if ( Moai.backButtonPressed ()) {
 				// 	return true;

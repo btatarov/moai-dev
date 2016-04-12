@@ -38,6 +38,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	AMAZON_ADS = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_AMAZON_ADS',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-amazonads.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-amazonads',
+	},
+
+	----------------------------------------------------------------
 	BOX2D = {
 
 		MODULE_DEFINE = 'AKU_WITH_BOX2D',
@@ -404,6 +416,7 @@ STATIC_LIBRARIES = {
 	-- platform specific
 	'libmoai-adcolony',
 	'libmoai-admob',
+	'libmoai-amazonads',
 	'libmoai-chartboost',
 	'libmoai-crittercism',
 	'libmoai-facebook',

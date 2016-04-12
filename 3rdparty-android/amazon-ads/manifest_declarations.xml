@@ -1,0 +1,5 @@
+<!-- Amazon Ads -->
+<activity
+	android:name="com.amazon.device.ads.AdActivity"
+	android:configChanges="keyboardHidden|orientation|screenSize"
+/>

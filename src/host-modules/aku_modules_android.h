@@ -15,6 +15,10 @@
 	#include <moai-android-admob/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_AMAZON_ADS
+	#include <moai-android-amazonads/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_CHARTBOOST
 	#include <moai-android-chartboost/host.h>
 #endif

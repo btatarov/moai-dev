@@ -29,7 +29,6 @@ import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 // Moai
 import com.ziplinegames.moai.*;
@@ -62,14 +61,14 @@ public class MoaiActivity extends Activity {
 
 	//----------------------------------------------------------------//
 	static {
-		
+
 		MoaiLog.i ( "Loading libmoai.so" );
 		System.loadLibrary ( "moai" );
 	}
 
 	//----------------------------------------------------------------//
     public void onActivityResult ( int requestCode, int resultCode, Intent data ) {
-	
+
 		super.onActivityResult ( requestCode, resultCode, data );
 		Moai.onActivityResult ( requestCode, resultCode, data );
     }
@@ -82,7 +81,7 @@ public class MoaiActivity extends Activity {
 		sActivity = this;
 
 		mAccelerometerData = new float[3];
-		
+
 		requestWindowFeature ( Window.FEATURE_NO_TITLE );
 		super.onCreate ( savedInstanceState );
 
@@ -91,14 +90,14 @@ public class MoaiActivity extends Activity {
 		Moai.createContext ();
 
 		Moai.init ();
-		
+
 		getWindow ().addFlags ( WindowManager.LayoutParams.FLAG_FULLSCREEN );
 		getWindow ().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 		try {
-			
+
 			ApplicationInfo myApp = getPackageManager ().getApplicationInfo ( getPackageName (), 0 );
-			
+
 			int apiVersion = android.os.Build.VERSION.SDK_INT;
 			if ( apiVersion >= 16 ) {
 			    // Jelly Bean or later
@@ -107,7 +106,7 @@ public class MoaiActivity extends Activity {
 			    // pre-Jelly Bean
 			    Moai.mount ( "bundle", myApp.publicSourceDir );
 			}
-			
+
 			Moai.setWorkingDirectory ( "@WORKING_DIR@" );
 		} catch ( NameNotFoundException e ) {
 			MoaiLog.e ( "MoaiActivity onCreate: Unable to locate the application bundle" );
@@ -118,13 +117,13 @@ public class MoaiActivity extends Activity {
 		} else {
 			MoaiLog.e ( "MoaiActivity onCreate: Unable to set the document directory" );
 		}
-		
+
 		if (  getCacheDir () != null ) {
 		 	Moai.setCacheDirectory ( getCacheDir ().getAbsolutePath ());
 		} else {
 			MoaiLog.e ( "MoaiActivity onCreate: Unable to set the cache directory" );
 		}
-		
+
 		Display display = (( WindowManager ) getSystemService ( Context.WINDOW_SERVICE )).getDefaultDisplay ();
 		ConfigurationInfo info = (( ActivityManager ) getSystemService ( Context.ACTIVITY_SERVICE )).getDeviceConfigurationInfo ();
 
@@ -135,17 +134,17 @@ public class MoaiActivity extends Activity {
 		startConnectivityReceiver ();
 		enableAccelerometerEvents ( false );
 		enableLocationEvents ( false );
-		
-		LinearLayoutIMETrap con = MoaiKeyboard.getContainer ();
+
+		RelativeLayoutIMETrap con = MoaiKeyboard.getContainer ();
 		setContentView ( con );
 		con.addView ( mMoaiView );
 		con.addView ( MoaiKeyboard.getEditText ());
-		
+
 		MoaiLog.i ( "MoaiActivity onCreate: Running game scripts" );
-		
+
 		// Moai.runScript ( "../init.lua" );
 		Moai.runScript ( "bootstrap.lua" );
-			
+
 		Moai.invokeListener ( Moai.ListenerEvent.ACTIVITY_ON_CREATE );
     }
 
@@ -167,7 +166,7 @@ public class MoaiActivity extends Activity {
 	protected void onNewIntent ( Intent intent ) {
 
 		MoaiLog.i ( "MoaiActivity onNewIntent: application started from NEW INTENT" );
-		
+
 		Uri data = intent.getData ();
 		if ( data != null ) {
 			Moai.appOpenedFromURL ( data.toString ());
@@ -365,7 +364,7 @@ public class MoaiActivity extends Activity {
 			if ( Moai.onBackPressed ()) return true;
 			if ( Moai.invokeListener ( Moai.ListenerEvent.BACK_BUTTON_PRESSED )) return true;
 	    }
-		
+
 		MoaiLog.i ( "MoaiActivity: onKeyDown not handled; falling back on super" );
 	    return super.onKeyDown ( keyCode, event );
 	}

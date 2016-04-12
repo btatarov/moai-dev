@@ -16,7 +16,6 @@ import android.view.inputmethod.EditorInfo;
 // To support Android Keyboard input
 import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.TextView;
@@ -47,7 +46,7 @@ public class MoaiKeyboard {
 	private static Context mContext;
 	private static InputMethodManager mInputMethodManager;
 
-	private static LinearLayoutIMETrap mContainer;
+	private static RelativeLayoutIMETrap mContainer;
 
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
@@ -58,9 +57,8 @@ public class MoaiKeyboard {
 		mInputMethodManager = ( InputMethodManager ) mContext.getSystemService ( Context.INPUT_METHOD_SERVICE );
 
 		// Our main container holds the EGL view as well as our fake TextEdit view for keyboard entry ..
-		mContainer = ( LinearLayoutIMETrap ) new LinearLayoutIMETrap ( mContext );
-		mContainer.setLayoutParams ( new LinearLayout.LayoutParams ( LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT ));
-		mContainer.setOrientation ( LinearLayout.VERTICAL );
+		mContainer = ( RelativeLayoutIMETrap ) new RelativeLayoutIMETrap ( mContext );
+		mContainer.setLayoutParams ( new RelativeLayout.LayoutParams ( RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT ));
 		mContainer.setMainActivity ( activity );
 
 		mKeyInTextView = new EditText ( activity );
@@ -95,14 +93,14 @@ public class MoaiKeyboard {
 		});
 
 		// Create the fake EditText, and push it outside the margins so that its not visible.
-		LinearLayout.LayoutParams paramsKeyInTextView = new LinearLayout.LayoutParams ( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+		RelativeLayout.LayoutParams paramsKeyInTextView = new RelativeLayout.LayoutParams ( 1, 1 );
 
 		// re-set the Margins so that the field is hidden.
-		paramsKeyInTextView.setMargins ( 0, 64, 0, 0 );
+		paramsKeyInTextView.setMargins ( -64, 0, 0, 0 );
 		mKeyInTextView.setLayoutParams ( paramsKeyInTextView );
 	}
 
-	public static LinearLayoutIMETrap getContainer () {
+	public static RelativeLayoutIMETrap getContainer () {
 		return mContainer;
 	}
 
