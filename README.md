@@ -14,9 +14,11 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * openssl 1.0.2g
 * luajit 2.0.4
 * MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
+* TODO: move loadDual in a separate module (loader)
+* TODO: facebook graph requests and user tokens (ios and android)
 
 ### Android
-* [CHANGE] LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
+* CHANGE: LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
 * MOAIAppAndroid::isKindleFireDevice ()
 * adcolony-2.3.4 (rewarded video)
 * amazon ads (interstitial and banner)
@@ -33,12 +35,13 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * twitter4j-4.0.4
 * vungle-3.3.4 (rewarded video)
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
-* no multi-dex build
+* no multi-dex build (via stripped google play services, see strip.sh)
 
 ### iOS
+* WIP: framework directory separation (moved from 3rdparty to 3rdparty-ios)
 * chartboost-6.4.2 (interstitial and rewarded video)
 * adcolony-2.6.1 (rewarded video)
-* crittercism-5.1.1
+* crittercism-5.5.1
 * facebook-4.10.1 (not fully tested, needs some more work)
 * util/host-ios
 * TODO: samples

@@ -40,11 +40,11 @@
 			);
 			dependencies = (
 				3E72B9AA19F703FA00A9DE30 /* PBXTargetDependency */,
-				CDB14A291A01CCFB008CEA54 /* PBXTargetDependency */,
 				3E72B9AC19F703FA00A9DE30 /* PBXTargetDependency */,
+				CDB14A291A01CCFB008CEA54 /* PBXTargetDependency */,
 				43B309781CBD400A00DF3017 /* PBXTargetDependency */,
-				3E72B9B819F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9B619F703FA00A9DE30 /* PBXTargetDependency */,
+				3E72B9B819F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9BA19F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9BE19F703FA00A9DE30 /* PBXTargetDependency */,
 				CDB14A2F1A01CCFB008CEA54 /* PBXTargetDependency */,
@@ -55,6 +55,7 @@
 				3E72B9D019F703FA00A9DE30 /* PBXTargetDependency */,
 				CDB14A391A01CCFB008CEA54 /* PBXTargetDependency */,
 				3E72B9DA19F703FA00A9DE30 /* PBXTargetDependency */,
+				43DB54591CBDE7D900BC83B0 /* PBXTargetDependency */,
 				3E72B9DE19F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9E419F703FA00A9DE30 /* PBXTargetDependency */,
 				CDB14A411A01CCFB008CEA54 /* PBXTargetDependency */,
@@ -350,6 +351,100 @@
 		43B309721CBD28D000DF3017 /* fmod_output.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B309691CBD28D000DF3017 /* fmod_output.h */; };
 		43B309731CBD28D000DF3017 /* fmod.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B3096A1CBD28D000DF3017 /* fmod.h */; };
 		43B309741CBD28D000DF3017 /* fmod.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 43B3096B1CBD28D000DF3017 /* fmod.hpp */; };
+		43DB54941CBDE83C00BC83B0 /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB545D1CBDE83C00BC83B0 /* Animation.h */; };
+		43DB54951CBDE83C00BC83B0 /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB545E1CBDE83C00BC83B0 /* AnimationState.h */; };
+		43DB54961CBDE83C00BC83B0 /* AnimationStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB545F1CBDE83C00BC83B0 /* AnimationStateData.h */; };
+		43DB54971CBDE83C00BC83B0 /* Atlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54601CBDE83C00BC83B0 /* Atlas.h */; };
+		43DB54981CBDE83C00BC83B0 /* AtlasAttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54611CBDE83C00BC83B0 /* AtlasAttachmentLoader.h */; };
+		43DB54991CBDE83C00BC83B0 /* Attachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54621CBDE83C00BC83B0 /* Attachment.h */; };
+		43DB549A1CBDE83C00BC83B0 /* AttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54631CBDE83C00BC83B0 /* AttachmentLoader.h */; };
+		43DB549B1CBDE83C00BC83B0 /* Bone.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54641CBDE83C00BC83B0 /* Bone.h */; };
+		43DB549C1CBDE83C00BC83B0 /* BoneData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54651CBDE83C00BC83B0 /* BoneData.h */; };
+		43DB549D1CBDE83C00BC83B0 /* BoundingBoxAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54661CBDE83C00BC83B0 /* BoundingBoxAttachment.h */; };
+		43DB549E1CBDE83C00BC83B0 /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54671CBDE83C00BC83B0 /* Event.h */; };
+		43DB549F1CBDE83C00BC83B0 /* EventData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54681CBDE83C00BC83B0 /* EventData.h */; };
+		43DB54A01CBDE83C00BC83B0 /* extension.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54691CBDE83C00BC83B0 /* extension.h */; };
+		43DB54A11CBDE83C00BC83B0 /* IkConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546A1CBDE83C00BC83B0 /* IkConstraint.h */; };
+		43DB54A21CBDE83C00BC83B0 /* IkConstraintData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546B1CBDE83C00BC83B0 /* IkConstraintData.h */; };
+		43DB54A31CBDE83C00BC83B0 /* MeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546C1CBDE83C00BC83B0 /* MeshAttachment.h */; };
+		43DB54A41CBDE83C00BC83B0 /* RegionAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546D1CBDE83C00BC83B0 /* RegionAttachment.h */; };
+		43DB54A51CBDE83C00BC83B0 /* Skeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546E1CBDE83C00BC83B0 /* Skeleton.h */; };
+		43DB54A61CBDE83C00BC83B0 /* SkeletonBounds.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546F1CBDE83C00BC83B0 /* SkeletonBounds.h */; };
+		43DB54A71CBDE83C00BC83B0 /* SkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54701CBDE83C00BC83B0 /* SkeletonData.h */; };
+		43DB54A81CBDE83C00BC83B0 /* SkeletonJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54711CBDE83C00BC83B0 /* SkeletonJson.h */; };
+		43DB54A91CBDE83C00BC83B0 /* Skin.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54721CBDE83C00BC83B0 /* Skin.h */; };
+		43DB54AA1CBDE83C00BC83B0 /* SkinnedMeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54731CBDE83C00BC83B0 /* SkinnedMeshAttachment.h */; };
+		43DB54AB1CBDE83C00BC83B0 /* Slot.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54741CBDE83C00BC83B0 /* Slot.h */; };
+		43DB54AC1CBDE83C00BC83B0 /* SlotData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54751CBDE83C00BC83B0 /* SlotData.h */; };
+		43DB54AD1CBDE83C00BC83B0 /* spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54761CBDE83C00BC83B0 /* spine.h */; };
+		43DB54C91CBDE88200BC83B0 /* Animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54791CBDE83C00BC83B0 /* Animation.c */; };
+		43DB54CA1CBDE88200BC83B0 /* AnimationState.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB547A1CBDE83C00BC83B0 /* AnimationState.c */; };
+		43DB54CB1CBDE88200BC83B0 /* AnimationStateData.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB547B1CBDE83C00BC83B0 /* AnimationStateData.c */; };
+		43DB54CC1CBDE88200BC83B0 /* Atlas.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB547C1CBDE83C00BC83B0 /* Atlas.c */; };
+		43DB54CD1CBDE88200BC83B0 /* AtlasAttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB547D1CBDE83C00BC83B0 /* AtlasAttachmentLoader.c */; };
+		43DB54CE1CBDE88200BC83B0 /* Attachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB547E1CBDE83C00BC83B0 /* Attachment.c */; };
+		43DB54CF1CBDE88200BC83B0 /* AttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB547F1CBDE83C00BC83B0 /* AttachmentLoader.c */; };
+		43DB54D01CBDE88200BC83B0 /* Bone.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54801CBDE83C00BC83B0 /* Bone.c */; };
+		43DB54D11CBDE88200BC83B0 /* BoneData.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54811CBDE83C00BC83B0 /* BoneData.c */; };
+		43DB54D21CBDE88200BC83B0 /* BoundingBoxAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54821CBDE83C00BC83B0 /* BoundingBoxAttachment.c */; };
+		43DB54D31CBDE88200BC83B0 /* Event.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54831CBDE83C00BC83B0 /* Event.c */; };
+		43DB54D41CBDE88200BC83B0 /* EventData.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54841CBDE83C00BC83B0 /* EventData.c */; };
+		43DB54D51CBDE88200BC83B0 /* extension.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54851CBDE83C00BC83B0 /* extension.c */; };
+		43DB54D61CBDE88200BC83B0 /* IkConstraint.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54861CBDE83C00BC83B0 /* IkConstraint.c */; };
+		43DB54D71CBDE88200BC83B0 /* IkConstraintData.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54871CBDE83C00BC83B0 /* IkConstraintData.c */; };
+		43DB54D81CBDE88200BC83B0 /* Json.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54881CBDE83C00BC83B0 /* Json.c */; };
+		43DB54D91CBDE88200BC83B0 /* Json.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54891CBDE83C00BC83B0 /* Json.h */; };
+		43DB54DA1CBDE88200BC83B0 /* MeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB548A1CBDE83C00BC83B0 /* MeshAttachment.c */; };
+		43DB54DB1CBDE88200BC83B0 /* RegionAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB548B1CBDE83C00BC83B0 /* RegionAttachment.c */; };
+		43DB54DC1CBDE88200BC83B0 /* Skeleton.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB548C1CBDE83C00BC83B0 /* Skeleton.c */; };
+		43DB54DD1CBDE88200BC83B0 /* SkeletonBounds.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB548D1CBDE83C00BC83B0 /* SkeletonBounds.c */; };
+		43DB54DE1CBDE88200BC83B0 /* SkeletonData.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB548E1CBDE83C00BC83B0 /* SkeletonData.c */; };
+		43DB54DF1CBDE88200BC83B0 /* SkeletonJson.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB548F1CBDE83C00BC83B0 /* SkeletonJson.c */; };
+		43DB54E01CBDE88200BC83B0 /* Skin.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54901CBDE83C00BC83B0 /* Skin.c */; };
+		43DB54E11CBDE88200BC83B0 /* SkinnedMeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54911CBDE83C00BC83B0 /* SkinnedMeshAttachment.c */; };
+		43DB54E21CBDE88200BC83B0 /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54921CBDE83C00BC83B0 /* Slot.c */; };
+		43DB54E31CBDE88200BC83B0 /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 43DB54931CBDE83C00BC83B0 /* SlotData.c */; };
+		43DB54E41CBDE89300BC83B0 /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB545D1CBDE83C00BC83B0 /* Animation.h */; };
+		43DB54E51CBDE89300BC83B0 /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB545E1CBDE83C00BC83B0 /* AnimationState.h */; };
+		43DB54E61CBDE89300BC83B0 /* AnimationStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB545F1CBDE83C00BC83B0 /* AnimationStateData.h */; };
+		43DB54E71CBDE89300BC83B0 /* Atlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54601CBDE83C00BC83B0 /* Atlas.h */; };
+		43DB54E81CBDE89300BC83B0 /* AtlasAttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54611CBDE83C00BC83B0 /* AtlasAttachmentLoader.h */; };
+		43DB54E91CBDE89300BC83B0 /* Attachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54621CBDE83C00BC83B0 /* Attachment.h */; };
+		43DB54EA1CBDE89300BC83B0 /* AttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54631CBDE83C00BC83B0 /* AttachmentLoader.h */; };
+		43DB54EB1CBDE89300BC83B0 /* Bone.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54641CBDE83C00BC83B0 /* Bone.h */; };
+		43DB54EC1CBDE89300BC83B0 /* BoneData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54651CBDE83C00BC83B0 /* BoneData.h */; };
+		43DB54ED1CBDE89300BC83B0 /* BoundingBoxAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54661CBDE83C00BC83B0 /* BoundingBoxAttachment.h */; };
+		43DB54EE1CBDE89300BC83B0 /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54671CBDE83C00BC83B0 /* Event.h */; };
+		43DB54EF1CBDE89300BC83B0 /* EventData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54681CBDE83C00BC83B0 /* EventData.h */; };
+		43DB54F01CBDE89300BC83B0 /* extension.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54691CBDE83C00BC83B0 /* extension.h */; };
+		43DB54F11CBDE89300BC83B0 /* IkConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546A1CBDE83C00BC83B0 /* IkConstraint.h */; };
+		43DB54F21CBDE89300BC83B0 /* IkConstraintData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546B1CBDE83C00BC83B0 /* IkConstraintData.h */; };
+		43DB54F31CBDE89300BC83B0 /* MeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546C1CBDE83C00BC83B0 /* MeshAttachment.h */; };
+		43DB54F41CBDE89300BC83B0 /* RegionAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546D1CBDE83C00BC83B0 /* RegionAttachment.h */; };
+		43DB54F51CBDE89300BC83B0 /* Skeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546E1CBDE83C00BC83B0 /* Skeleton.h */; };
+		43DB54F61CBDE89300BC83B0 /* SkeletonBounds.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB546F1CBDE83C00BC83B0 /* SkeletonBounds.h */; };
+		43DB54F71CBDE89300BC83B0 /* SkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54701CBDE83C00BC83B0 /* SkeletonData.h */; };
+		43DB54F81CBDE89300BC83B0 /* SkeletonJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54711CBDE83C00BC83B0 /* SkeletonJson.h */; };
+		43DB54F91CBDE89300BC83B0 /* Skin.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54721CBDE83C00BC83B0 /* Skin.h */; };
+		43DB54FA1CBDE89300BC83B0 /* SkinnedMeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54731CBDE83C00BC83B0 /* SkinnedMeshAttachment.h */; };
+		43DB54FB1CBDE89300BC83B0 /* Slot.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54741CBDE83C00BC83B0 /* Slot.h */; };
+		43DB54FC1CBDE89300BC83B0 /* SlotData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54751CBDE83C00BC83B0 /* SlotData.h */; };
+		43DB54FD1CBDE89300BC83B0 /* spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54761CBDE83C00BC83B0 /* spine.h */; };
+		43DB551D1CBDEA0300BC83B0 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB54FF1CBDE9F900BC83B0 /* headers.h */; };
+		43DB551E1CBDEA0300BC83B0 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DB55001CBDE9F900BC83B0 /* host.cpp */; };
+		43DB551F1CBDEA0300BC83B0 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB55011CBDE9F900BC83B0 /* host.h */; };
+		43DB55201CBDEA0300BC83B0 /* MOAISpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DB55021CBDE9F900BC83B0 /* MOAISpine.cpp */; };
+		43DB55211CBDEA0300BC83B0 /* MOAISpine.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB55031CBDE9F900BC83B0 /* MOAISpine.h */; };
+		43DB55221CBDEA0300BC83B0 /* MOAISpineBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DB55041CBDE9F900BC83B0 /* MOAISpineBone.cpp */; };
+		43DB55231CBDEA0300BC83B0 /* MOAISpineBone.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB55051CBDE9F900BC83B0 /* MOAISpineBone.h */; };
+		43DB55241CBDEA0300BC83B0 /* MOAISpineSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DB55061CBDE9F900BC83B0 /* MOAISpineSkeleton.cpp */; };
+		43DB55251CBDEA0300BC83B0 /* MOAISpineSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB55071CBDE9F900BC83B0 /* MOAISpineSkeleton.h */; };
+		43DB55261CBDEA0300BC83B0 /* MOAISpineSkeletonData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DB55081CBDE9F900BC83B0 /* MOAISpineSkeletonData.cpp */; };
+		43DB55271CBDEA0300BC83B0 /* MOAISpineSkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB55091CBDE9F900BC83B0 /* MOAISpineSkeletonData.h */; };
+		43DB55281CBDEA0300BC83B0 /* MOAISpineSlot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DB550A1CBDE9F900BC83B0 /* MOAISpineSlot.cpp */; };
+		43DB55291CBDEA0300BC83B0 /* MOAISpineSlot.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB550B1CBDE9F900BC83B0 /* MOAISpineSlot.h */; };
+		43DB552A1CBDEA0300BC83B0 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DB550C1CBDE9F900BC83B0 /* pch.cpp */; };
+		43DB552B1CBDEA0300BC83B0 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB550D1CBDE9F900BC83B0 /* pch.h */; };
 		43F4D1F11CBCF4C0000328AF /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = 43F4CDA41CBCF4BC000328AF /* aes.h */; };
 		43F4D1F21CBCF4C0000328AF /* aes_cbc.c in Sources */ = {isa = PBXBuildFile; fileRef = 43F4CDA51CBCF4BC000328AF /* aes_cbc.c */; };
 		43F4D1F31CBCF4C0000328AF /* aes_cfb.c in Sources */ = {isa = PBXBuildFile; fileRef = 43F4CDA61CBCF4BC000328AF /* aes_cfb.c */; };
@@ -4496,6 +4591,13 @@
 			remoteGlobalIDString = CD27BE00191D9F44000A7770;
 			remoteInfo = "libmoai-ios-adcolony";
 		};
+		43DB54581CBDE7D900BC83B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43DB54481CBDE79F00BC83B0;
+			remoteInfo = "libmoai-ios-spine";
+		};
 		CDB14A281A01CCFB008CEA54 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -4927,6 +5029,75 @@
 		43BA2E9C177332B2007DCDF0 /* PlayHavenSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayHavenSDK.h; path = "../../3rdparty/playhaven-ios-1.13.1/src/PlayHavenSDK.h"; sourceTree = "<group>"; };
 		43BA2E9D177332B2007DCDF0 /* UIDevice+HardwareString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+HardwareString.h"; path = "../../3rdparty/playhaven-ios-1.13.1/src/UIDevice+HardwareString.h"; sourceTree = "<group>"; };
 		43BA2E9E177332B2007DCDF0 /* UIDevice+HardwareString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+HardwareString.m"; path = "../../3rdparty/playhaven-ios-1.13.1/src/UIDevice+HardwareString.m"; sourceTree = "<group>"; };
+		43DB54571CBDE79F00BC83B0 /* libmoai-ios-spine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-spine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43DB545D1CBDE83C00BC83B0 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animation.h; path = "../../3rdparty/spine-c/include/spine/Animation.h"; sourceTree = SOURCE_ROOT; };
+		43DB545E1CBDE83C00BC83B0 /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationState.h; path = "../../3rdparty/spine-c/include/spine/AnimationState.h"; sourceTree = SOURCE_ROOT; };
+		43DB545F1CBDE83C00BC83B0 /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationStateData.h; path = "../../3rdparty/spine-c/include/spine/AnimationStateData.h"; sourceTree = SOURCE_ROOT; };
+		43DB54601CBDE83C00BC83B0 /* Atlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Atlas.h; path = "../../3rdparty/spine-c/include/spine/Atlas.h"; sourceTree = SOURCE_ROOT; };
+		43DB54611CBDE83C00BC83B0 /* AtlasAttachmentLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AtlasAttachmentLoader.h; path = "../../3rdparty/spine-c/include/spine/AtlasAttachmentLoader.h"; sourceTree = SOURCE_ROOT; };
+		43DB54621CBDE83C00BC83B0 /* Attachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Attachment.h; path = "../../3rdparty/spine-c/include/spine/Attachment.h"; sourceTree = SOURCE_ROOT; };
+		43DB54631CBDE83C00BC83B0 /* AttachmentLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttachmentLoader.h; path = "../../3rdparty/spine-c/include/spine/AttachmentLoader.h"; sourceTree = SOURCE_ROOT; };
+		43DB54641CBDE83C00BC83B0 /* Bone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bone.h; path = "../../3rdparty/spine-c/include/spine/Bone.h"; sourceTree = SOURCE_ROOT; };
+		43DB54651CBDE83C00BC83B0 /* BoneData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoneData.h; path = "../../3rdparty/spine-c/include/spine/BoneData.h"; sourceTree = SOURCE_ROOT; };
+		43DB54661CBDE83C00BC83B0 /* BoundingBoxAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoundingBoxAttachment.h; path = "../../3rdparty/spine-c/include/spine/BoundingBoxAttachment.h"; sourceTree = SOURCE_ROOT; };
+		43DB54671CBDE83C00BC83B0 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = "../../3rdparty/spine-c/include/spine/Event.h"; sourceTree = SOURCE_ROOT; };
+		43DB54681CBDE83C00BC83B0 /* EventData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventData.h; path = "../../3rdparty/spine-c/include/spine/EventData.h"; sourceTree = SOURCE_ROOT; };
+		43DB54691CBDE83C00BC83B0 /* extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = extension.h; path = "../../3rdparty/spine-c/include/spine/extension.h"; sourceTree = SOURCE_ROOT; };
+		43DB546A1CBDE83C00BC83B0 /* IkConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IkConstraint.h; path = "../../3rdparty/spine-c/include/spine/IkConstraint.h"; sourceTree = SOURCE_ROOT; };
+		43DB546B1CBDE83C00BC83B0 /* IkConstraintData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IkConstraintData.h; path = "../../3rdparty/spine-c/include/spine/IkConstraintData.h"; sourceTree = SOURCE_ROOT; };
+		43DB546C1CBDE83C00BC83B0 /* MeshAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeshAttachment.h; path = "../../3rdparty/spine-c/include/spine/MeshAttachment.h"; sourceTree = SOURCE_ROOT; };
+		43DB546D1CBDE83C00BC83B0 /* RegionAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegionAttachment.h; path = "../../3rdparty/spine-c/include/spine/RegionAttachment.h"; sourceTree = SOURCE_ROOT; };
+		43DB546E1CBDE83C00BC83B0 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Skeleton.h; path = "../../3rdparty/spine-c/include/spine/Skeleton.h"; sourceTree = SOURCE_ROOT; };
+		43DB546F1CBDE83C00BC83B0 /* SkeletonBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkeletonBounds.h; path = "../../3rdparty/spine-c/include/spine/SkeletonBounds.h"; sourceTree = SOURCE_ROOT; };
+		43DB54701CBDE83C00BC83B0 /* SkeletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkeletonData.h; path = "../../3rdparty/spine-c/include/spine/SkeletonData.h"; sourceTree = SOURCE_ROOT; };
+		43DB54711CBDE83C00BC83B0 /* SkeletonJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkeletonJson.h; path = "../../3rdparty/spine-c/include/spine/SkeletonJson.h"; sourceTree = SOURCE_ROOT; };
+		43DB54721CBDE83C00BC83B0 /* Skin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Skin.h; path = "../../3rdparty/spine-c/include/spine/Skin.h"; sourceTree = SOURCE_ROOT; };
+		43DB54731CBDE83C00BC83B0 /* SkinnedMeshAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinnedMeshAttachment.h; path = "../../3rdparty/spine-c/include/spine/SkinnedMeshAttachment.h"; sourceTree = SOURCE_ROOT; };
+		43DB54741CBDE83C00BC83B0 /* Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Slot.h; path = "../../3rdparty/spine-c/include/spine/Slot.h"; sourceTree = SOURCE_ROOT; };
+		43DB54751CBDE83C00BC83B0 /* SlotData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlotData.h; path = "../../3rdparty/spine-c/include/spine/SlotData.h"; sourceTree = SOURCE_ROOT; };
+		43DB54761CBDE83C00BC83B0 /* spine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spine.h; path = "../../3rdparty/spine-c/include/spine/spine.h"; sourceTree = SOURCE_ROOT; };
+		43DB54791CBDE83C00BC83B0 /* Animation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Animation.c; path = spine/Animation.c; sourceTree = "<group>"; };
+		43DB547A1CBDE83C00BC83B0 /* AnimationState.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AnimationState.c; path = spine/AnimationState.c; sourceTree = "<group>"; };
+		43DB547B1CBDE83C00BC83B0 /* AnimationStateData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AnimationStateData.c; path = spine/AnimationStateData.c; sourceTree = "<group>"; };
+		43DB547C1CBDE83C00BC83B0 /* Atlas.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Atlas.c; path = spine/Atlas.c; sourceTree = "<group>"; };
+		43DB547D1CBDE83C00BC83B0 /* AtlasAttachmentLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AtlasAttachmentLoader.c; path = spine/AtlasAttachmentLoader.c; sourceTree = "<group>"; };
+		43DB547E1CBDE83C00BC83B0 /* Attachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Attachment.c; path = spine/Attachment.c; sourceTree = "<group>"; };
+		43DB547F1CBDE83C00BC83B0 /* AttachmentLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AttachmentLoader.c; path = spine/AttachmentLoader.c; sourceTree = "<group>"; };
+		43DB54801CBDE83C00BC83B0 /* Bone.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Bone.c; path = spine/Bone.c; sourceTree = "<group>"; };
+		43DB54811CBDE83C00BC83B0 /* BoneData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BoneData.c; path = spine/BoneData.c; sourceTree = "<group>"; };
+		43DB54821CBDE83C00BC83B0 /* BoundingBoxAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BoundingBoxAttachment.c; path = spine/BoundingBoxAttachment.c; sourceTree = "<group>"; };
+		43DB54831CBDE83C00BC83B0 /* Event.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Event.c; path = spine/Event.c; sourceTree = "<group>"; };
+		43DB54841CBDE83C00BC83B0 /* EventData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = EventData.c; path = spine/EventData.c; sourceTree = "<group>"; };
+		43DB54851CBDE83C00BC83B0 /* extension.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = extension.c; path = spine/extension.c; sourceTree = "<group>"; };
+		43DB54861CBDE83C00BC83B0 /* IkConstraint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = IkConstraint.c; path = spine/IkConstraint.c; sourceTree = "<group>"; };
+		43DB54871CBDE83C00BC83B0 /* IkConstraintData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = IkConstraintData.c; path = spine/IkConstraintData.c; sourceTree = "<group>"; };
+		43DB54881CBDE83C00BC83B0 /* Json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Json.c; path = spine/Json.c; sourceTree = "<group>"; };
+		43DB54891CBDE83C00BC83B0 /* Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Json.h; path = spine/Json.h; sourceTree = "<group>"; };
+		43DB548A1CBDE83C00BC83B0 /* MeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MeshAttachment.c; path = spine/MeshAttachment.c; sourceTree = "<group>"; };
+		43DB548B1CBDE83C00BC83B0 /* RegionAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RegionAttachment.c; path = spine/RegionAttachment.c; sourceTree = "<group>"; };
+		43DB548C1CBDE83C00BC83B0 /* Skeleton.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Skeleton.c; path = spine/Skeleton.c; sourceTree = "<group>"; };
+		43DB548D1CBDE83C00BC83B0 /* SkeletonBounds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SkeletonBounds.c; path = spine/SkeletonBounds.c; sourceTree = "<group>"; };
+		43DB548E1CBDE83C00BC83B0 /* SkeletonData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SkeletonData.c; path = spine/SkeletonData.c; sourceTree = "<group>"; };
+		43DB548F1CBDE83C00BC83B0 /* SkeletonJson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SkeletonJson.c; path = spine/SkeletonJson.c; sourceTree = "<group>"; };
+		43DB54901CBDE83C00BC83B0 /* Skin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Skin.c; path = spine/Skin.c; sourceTree = "<group>"; };
+		43DB54911CBDE83C00BC83B0 /* SkinnedMeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SkinnedMeshAttachment.c; path = spine/SkinnedMeshAttachment.c; sourceTree = "<group>"; };
+		43DB54921CBDE83C00BC83B0 /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Slot.c; path = spine/Slot.c; sourceTree = "<group>"; };
+		43DB54931CBDE83C00BC83B0 /* SlotData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SlotData.c; path = spine/SlotData.c; sourceTree = "<group>"; };
+		43DB54FF1CBDE9F900BC83B0 /* headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = headers.h; path = "moai-spine/headers.h"; sourceTree = "<group>"; };
+		43DB55001CBDE9F900BC83B0 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = host.cpp; path = "moai-spine/host.cpp"; sourceTree = "<group>"; };
+		43DB55011CBDE9F900BC83B0 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = host.h; path = "moai-spine/host.h"; sourceTree = "<group>"; };
+		43DB55021CBDE9F900BC83B0 /* MOAISpine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MOAISpine.cpp; path = "moai-spine/MOAISpine.cpp"; sourceTree = "<group>"; };
+		43DB55031CBDE9F900BC83B0 /* MOAISpine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAISpine.h; path = "moai-spine/MOAISpine.h"; sourceTree = "<group>"; };
+		43DB55041CBDE9F900BC83B0 /* MOAISpineBone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MOAISpineBone.cpp; path = "moai-spine/MOAISpineBone.cpp"; sourceTree = "<group>"; };
+		43DB55051CBDE9F900BC83B0 /* MOAISpineBone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAISpineBone.h; path = "moai-spine/MOAISpineBone.h"; sourceTree = "<group>"; };
+		43DB55061CBDE9F900BC83B0 /* MOAISpineSkeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MOAISpineSkeleton.cpp; path = "moai-spine/MOAISpineSkeleton.cpp"; sourceTree = "<group>"; };
+		43DB55071CBDE9F900BC83B0 /* MOAISpineSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAISpineSkeleton.h; path = "moai-spine/MOAISpineSkeleton.h"; sourceTree = "<group>"; };
+		43DB55081CBDE9F900BC83B0 /* MOAISpineSkeletonData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MOAISpineSkeletonData.cpp; path = "moai-spine/MOAISpineSkeletonData.cpp"; sourceTree = "<group>"; };
+		43DB55091CBDE9F900BC83B0 /* MOAISpineSkeletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAISpineSkeletonData.h; path = "moai-spine/MOAISpineSkeletonData.h"; sourceTree = "<group>"; };
+		43DB550A1CBDE9F900BC83B0 /* MOAISpineSlot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MOAISpineSlot.cpp; path = "moai-spine/MOAISpineSlot.cpp"; sourceTree = "<group>"; };
+		43DB550B1CBDE9F900BC83B0 /* MOAISpineSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAISpineSlot.h; path = "moai-spine/MOAISpineSlot.h"; sourceTree = "<group>"; };
+		43DB550C1CBDE9F900BC83B0 /* pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pch.cpp; path = "moai-spine/pch.cpp"; sourceTree = "<group>"; };
+		43DB550D1CBDE9F900BC83B0 /* pch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pch.h; path = "moai-spine/pch.h"; sourceTree = "<group>"; };
 		43F4CDA41CBCF4BC000328AF /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aes.h; path = "../../3rdparty/openssl-1.0.2g/crypto/aes/aes.h"; sourceTree = SOURCE_ROOT; };
 		43F4CDA51CBCF4BC000328AF /* aes_cbc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = aes_cbc.c; path = "../../3rdparty/openssl-1.0.2g/crypto/aes/aes_cbc.c"; sourceTree = SOURCE_ROOT; };
 		43F4CDA61CBCF4BC000328AF /* aes_cfb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = aes_cfb.c; path = "../../3rdparty/openssl-1.0.2g/crypto/aes/aes_cfb.c"; sourceTree = SOURCE_ROOT; };
@@ -7544,6 +7715,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		43DB54511CBDE79F00BC83B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89BE6F00173AD06700DFE837 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -7892,6 +8070,7 @@
 				CD795EFD17F08FED006AEB47 /* mongoose */,
 				43BA2E5717733124007DCDF0 /* playhaven */,
 				CD795CBA17F0834F006AEB47 /* sdl */,
+				43DB545A1CBDE7E900BC83B0 /* spine */,
 				03240BA213564CB0000ADC60 /* sqlite */,
 				03240BA613564CB0000ADC60 /* tinyxml */,
 				07658749145CD04800723A7D /* tlsf */,
@@ -8285,6 +8464,7 @@
 				89BE6AC31739759100DFE837 /* moai-luaext */,
 				CD42F2D51A60A795001B6D72 /* moai-sdl */,
 				89BE6F19173AD0CA00DFE837 /* moai-sim */,
+				43DB54FE1CBDE9C000BC83B0 /* moai-spine */,
 				89E9D880174BD51100033CDD /* moai-test */,
 				89BE6B5F17399FEB00DFE837 /* moai-untz */,
 				89BE6CC21739A42500DFE837 /* moai-util */,
@@ -8351,6 +8531,7 @@
 				CD257BA21A6255380057A53A /* libmoai-ios-apple.a */,
 				CD18459C1A626BD500FCCCE0 /* libmoai-osx-apple.a */,
 				43B3094A1CBD23D000DF3017 /* libmoai-ios-fmod-studio.a */,
+				43DB54571CBDE79F00BC83B0 /* libmoai-ios-spine.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -8549,6 +8730,106 @@
 				43BA2E6017733267007DCDF0 /* SBJsonWriter.m */,
 			);
 			name = JSON;
+			sourceTree = "<group>";
+		};
+		43DB545A1CBDE7E900BC83B0 /* spine */ = {
+			isa = PBXGroup;
+			children = (
+				43DB545B1CBDE83C00BC83B0 /* include */,
+				43DB54771CBDE83C00BC83B0 /* src */,
+			);
+			name = spine;
+			sourceTree = "<group>";
+		};
+		43DB545B1CBDE83C00BC83B0 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				43DB545D1CBDE83C00BC83B0 /* Animation.h */,
+				43DB545E1CBDE83C00BC83B0 /* AnimationState.h */,
+				43DB545F1CBDE83C00BC83B0 /* AnimationStateData.h */,
+				43DB54601CBDE83C00BC83B0 /* Atlas.h */,
+				43DB54611CBDE83C00BC83B0 /* AtlasAttachmentLoader.h */,
+				43DB54621CBDE83C00BC83B0 /* Attachment.h */,
+				43DB54631CBDE83C00BC83B0 /* AttachmentLoader.h */,
+				43DB54641CBDE83C00BC83B0 /* Bone.h */,
+				43DB54651CBDE83C00BC83B0 /* BoneData.h */,
+				43DB54661CBDE83C00BC83B0 /* BoundingBoxAttachment.h */,
+				43DB54671CBDE83C00BC83B0 /* Event.h */,
+				43DB54681CBDE83C00BC83B0 /* EventData.h */,
+				43DB54691CBDE83C00BC83B0 /* extension.h */,
+				43DB546A1CBDE83C00BC83B0 /* IkConstraint.h */,
+				43DB546B1CBDE83C00BC83B0 /* IkConstraintData.h */,
+				43DB546C1CBDE83C00BC83B0 /* MeshAttachment.h */,
+				43DB546D1CBDE83C00BC83B0 /* RegionAttachment.h */,
+				43DB546E1CBDE83C00BC83B0 /* Skeleton.h */,
+				43DB546F1CBDE83C00BC83B0 /* SkeletonBounds.h */,
+				43DB54701CBDE83C00BC83B0 /* SkeletonData.h */,
+				43DB54711CBDE83C00BC83B0 /* SkeletonJson.h */,
+				43DB54721CBDE83C00BC83B0 /* Skin.h */,
+				43DB54731CBDE83C00BC83B0 /* SkinnedMeshAttachment.h */,
+				43DB54741CBDE83C00BC83B0 /* Slot.h */,
+				43DB54751CBDE83C00BC83B0 /* SlotData.h */,
+				43DB54761CBDE83C00BC83B0 /* spine.h */,
+			);
+			name = include;
+			path = "../../3rdparty/spine-c/include";
+			sourceTree = "<group>";
+		};
+		43DB54771CBDE83C00BC83B0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				43DB54791CBDE83C00BC83B0 /* Animation.c */,
+				43DB547A1CBDE83C00BC83B0 /* AnimationState.c */,
+				43DB547B1CBDE83C00BC83B0 /* AnimationStateData.c */,
+				43DB547C1CBDE83C00BC83B0 /* Atlas.c */,
+				43DB547D1CBDE83C00BC83B0 /* AtlasAttachmentLoader.c */,
+				43DB547E1CBDE83C00BC83B0 /* Attachment.c */,
+				43DB547F1CBDE83C00BC83B0 /* AttachmentLoader.c */,
+				43DB54801CBDE83C00BC83B0 /* Bone.c */,
+				43DB54811CBDE83C00BC83B0 /* BoneData.c */,
+				43DB54821CBDE83C00BC83B0 /* BoundingBoxAttachment.c */,
+				43DB54831CBDE83C00BC83B0 /* Event.c */,
+				43DB54841CBDE83C00BC83B0 /* EventData.c */,
+				43DB54851CBDE83C00BC83B0 /* extension.c */,
+				43DB54861CBDE83C00BC83B0 /* IkConstraint.c */,
+				43DB54871CBDE83C00BC83B0 /* IkConstraintData.c */,
+				43DB54881CBDE83C00BC83B0 /* Json.c */,
+				43DB54891CBDE83C00BC83B0 /* Json.h */,
+				43DB548A1CBDE83C00BC83B0 /* MeshAttachment.c */,
+				43DB548B1CBDE83C00BC83B0 /* RegionAttachment.c */,
+				43DB548C1CBDE83C00BC83B0 /* Skeleton.c */,
+				43DB548D1CBDE83C00BC83B0 /* SkeletonBounds.c */,
+				43DB548E1CBDE83C00BC83B0 /* SkeletonData.c */,
+				43DB548F1CBDE83C00BC83B0 /* SkeletonJson.c */,
+				43DB54901CBDE83C00BC83B0 /* Skin.c */,
+				43DB54911CBDE83C00BC83B0 /* SkinnedMeshAttachment.c */,
+				43DB54921CBDE83C00BC83B0 /* Slot.c */,
+				43DB54931CBDE83C00BC83B0 /* SlotData.c */,
+			);
+			name = src;
+			path = "../../3rdparty/spine-c/src";
+			sourceTree = "<group>";
+		};
+		43DB54FE1CBDE9C000BC83B0 /* moai-spine */ = {
+			isa = PBXGroup;
+			children = (
+				43DB54FF1CBDE9F900BC83B0 /* headers.h */,
+				43DB55001CBDE9F900BC83B0 /* host.cpp */,
+				43DB55011CBDE9F900BC83B0 /* host.h */,
+				43DB55021CBDE9F900BC83B0 /* MOAISpine.cpp */,
+				43DB55031CBDE9F900BC83B0 /* MOAISpine.h */,
+				43DB55041CBDE9F900BC83B0 /* MOAISpineBone.cpp */,
+				43DB55051CBDE9F900BC83B0 /* MOAISpineBone.h */,
+				43DB55061CBDE9F900BC83B0 /* MOAISpineSkeleton.cpp */,
+				43DB55071CBDE9F900BC83B0 /* MOAISpineSkeleton.h */,
+				43DB55081CBDE9F900BC83B0 /* MOAISpineSkeletonData.cpp */,
+				43DB55091CBDE9F900BC83B0 /* MOAISpineSkeletonData.h */,
+				43DB550A1CBDE9F900BC83B0 /* MOAISpineSlot.cpp */,
+				43DB550B1CBDE9F900BC83B0 /* MOAISpineSlot.h */,
+				43DB550C1CBDE9F900BC83B0 /* pch.cpp */,
+				43DB550D1CBDE9F900BC83B0 /* pch.h */,
+			);
+			name = "moai-spine";
 			sourceTree = "<group>";
 		};
 		43F4CDA31CBCF4BC000328AF /* aes */ = {
@@ -13006,22 +13287,34 @@
 				89BE6B0C173975E500DFE837 /* MOAIFoo.h in Headers */,
 				CD8215FC195A322D00603EA1 /* MOAITakeCameraListener.h in Headers */,
 				89BE6B10173975E500DFE837 /* MOAIFooMgr.h in Headers */,
+				43DB54AA1CBDE83C00BC83B0 /* SkinnedMeshAttachment.h in Headers */,
+				43DB54951CBDE83C00BC83B0 /* AnimationState.h in Headers */,
+				43DB54941CBDE83C00BC83B0 /* Animation.h in Headers */,
 				89BE6B14173975E500DFE837 /* MOAIGlobals.h in Headers */,
+				43DB549A1CBDE83C00BC83B0 /* AttachmentLoader.h in Headers */,
 				89BE6B18173975E500DFE837 /* MOAILogMessages.h in Headers */,
 				89BE6B1C173975E500DFE837 /* MOAILogMgr.h in Headers */,
 				89BE6B1E173975E500DFE837 /* MOAILua.h in Headers */,
 				89BE6B24173975E500DFE837 /* MOAILuaObject.h in Headers */,
 				CD1975F81A8037D9006E3917 /* MOAIKeyCode.h in Headers */,
 				89BE6B28173975E500DFE837 /* MOAILuaRef.h in Headers */,
+				43DB54981CBDE83C00BC83B0 /* AtlasAttachmentLoader.h in Headers */,
+				43DB54A91CBDE83C00BC83B0 /* Skin.h in Headers */,
 				89BE6B2C173975E500DFE837 /* MOAILuaRuntime.h in Headers */,
 				CD323B0A1A80445400E2FEBB /* MOAIKeyCodeEnum.h in Headers */,
 				078EA4071983314C00880938 /* MOAIFontEffectsShader-vsh.h in Headers */,
+				43DB54AD1CBDE83C00BC83B0 /* spine.h in Headers */,
 				CD1844DF1A6269AB00FCCCE0 /* MOAINotificationsIOS.h in Headers */,
 				89BE6B2E173975E500DFE837 /* MOAILuaSharedPtr.h in Headers */,
 				89BE6B30173975E500DFE837 /* MOAILuaState-impl.h in Headers */,
+				43DB54AC1CBDE83C00BC83B0 /* SlotData.h in Headers */,
+				43DB54A71CBDE83C00BC83B0 /* SkeletonData.h in Headers */,
 				078EA4061983314C00880938 /* MOAIFontEffectsShader-fsh.h in Headers */,
 				89BE6B34173975E500DFE837 /* MOAILuaState.h in Headers */,
 				89BE6B3C173975E500DFE837 /* MOAIObject.h in Headers */,
+				43DB54991CBDE83C00BC83B0 /* Attachment.h in Headers */,
+				43DB549C1CBDE83C00BC83B0 /* BoneData.h in Headers */,
+				43DB549B1CBDE83C00BC83B0 /* Bone.h in Headers */,
 				89BE6B40173975E500DFE837 /* MOAIRtti.h in Headers */,
 				CD1844E31A6269AB00FCCCE0 /* MOAIWebViewIOS.h in Headers */,
 				89BE6B44173975E500DFE837 /* MOAISerializer.h in Headers */,
@@ -13030,15 +13323,20 @@
 				89BE6B4C173975E500DFE837 /* MOAIWeakPtr.h in Headers */,
 				89BE6B50173975E500DFE837 /* pch.h in Headers */,
 				89BE6CFA1739A42500DFE837 /* headers.h in Headers */,
+				43DB54971CBDE83C00BC83B0 /* Atlas.h in Headers */,
+				43DB54AB1CBDE83C00BC83B0 /* Slot.h in Headers */,
 				CDADCCFA1A3576A10029FEDA /* MOAITrace.h in Headers */,
 				89BE6CFE1739A42500DFE837 /* host.h in Headers */,
+				43DB549E1CBDE83C00BC83B0 /* Event.h in Headers */,
 				89BE6D021739A42500DFE837 /* MOAIDataBuffer.h in Headers */,
 				89BE6D061739A42500DFE837 /* MOAIDataBufferStream.h in Headers */,
+				43DB54A01CBDE83C00BC83B0 /* extension.h in Headers */,
 				89BE6D0A1739A42500DFE837 /* MOAIDataIOTask.h in Headers */,
 				CD1844DB1A6269AB00FCCCE0 /* MOAIDialogIOS.h in Headers */,
 				89BE6D0E1739A42500DFE837 /* MOAIFileStream.h in Headers */,
 				89BE6D121739A42500DFE837 /* MOAIFileSystem.h in Headers */,
 				89BE6D161739A42500DFE837 /* MOAIHashWriter.h in Headers */,
+				43DB54A31CBDE83C00BC83B0 /* MeshAttachment.h in Headers */,
 				89BE6D1A1739A42500DFE837 /* MOAIJsonParser.h in Headers */,
 				89BE6D1E1739A42500DFE837 /* MOAIMath.h in Headers */,
 				89BE6D221739A42500DFE837 /* MOAIMemStream.h in Headers */,
@@ -13049,25 +13347,34 @@
 				89BE6D321739A42500DFE837 /* MOAIParser.h in Headers */,
 				CD3024C21A68AB4B00CCEE32 /* MOAITestMgr.h in Headers */,
 				89BE6D361739A42500DFE837 /* MOAIStream.h in Headers */,
+				43DB54A51CBDE83C00BC83B0 /* Skeleton.h in Headers */,
 				CD1845C21A62751300FCCCE0 /* MOAIEnvironment.h in Headers */,
 				89BE6D3A1739A42500DFE837 /* MOAIStreamReader.h in Headers */,
+				43DB54A81CBDE83C00BC83B0 /* SkeletonJson.h in Headers */,
 				89BE6D3E1739A42500DFE837 /* MOAIStreamWriter.h in Headers */,
 				89BE6D421739A42500DFE837 /* MOAITask.h in Headers */,
 				89BE6D461739A42500DFE837 /* MOAITaskQueue.h in Headers */,
 				CD1844DD1A6269AB00FCCCE0 /* MOAIKeyboardIOS.h in Headers */,
 				89BE6D4A1739A42500DFE837 /* MOAITaskSubscriber.h in Headers */,
+				43DB54A11CBDE83C00BC83B0 /* IkConstraint.h in Headers */,
 				89BE6D4E1739A42500DFE837 /* MOAITaskThread.h in Headers */,
 				89BE6D521739A42500DFE837 /* MOAIThread.h in Headers */,
+				43DB549D1CBDE83C00BC83B0 /* BoundingBoxAttachment.h in Headers */,
 				89BE6D561739A42500DFE837 /* MOAIThread_posix.h in Headers */,
 				89BE6D5A1739A42500DFE837 /* MOAIThread_win32.h in Headers */,
 				89BE6D5E1739A42500DFE837 /* MOAIXmlParser.h in Headers */,
 				89BE6D621739A42500DFE837 /* MOAIXmlWriter.h in Headers */,
 				CD4283631A0476D20069392E /* MOAIByteStream.h in Headers */,
 				89BE6D661739A42500DFE837 /* pch.h in Headers */,
+				43DB54961CBDE83C00BC83B0 /* AnimationStateData.h in Headers */,
+				43DB54A61CBDE83C00BC83B0 /* SkeletonBounds.h in Headers */,
 				89E9D7881743F7EE00033CDD /* MOAIVersion.h in Headers */,
+				43DB549F1CBDE83C00BC83B0 /* EventData.h in Headers */,
 				89E9D7A81745223E00033CDD /* MOAIScopedLuaState.h in Headers */,
 				CD1844D41A6269AB00FCCCE0 /* headers.h in Headers */,
+				43DB54A41CBDE83C00BC83B0 /* RegionAttachment.h in Headers */,
 				CD93078417EC473A00AED686 /* MOAILuaClass.h in Headers */,
+				43DB54A21CBDE83C00BC83B0 /* IkConstraintData.h in Headers */,
 				CD1844D71A6269AB00FCCCE0 /* MOAIAppIOS.h in Headers */,
 				CD2CB51F19FDBECA00C42260 /* MOAIStreamAdapter.h in Headers */,
 				CD93078817EC473A00AED686 /* MOAILuaRefTable.h in Headers */,
@@ -13092,6 +13399,48 @@
 				43B309721CBD28D000DF3017 /* fmod_output.h in Headers */,
 				43B309741CBD28D000DF3017 /* fmod.hpp in Headers */,
 				43B3096D1CBD28D000DF3017 /* fmod_common.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43DB54491CBDE79F00BC83B0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43DB54EA1CBDE89300BC83B0 /* AttachmentLoader.h in Headers */,
+				43DB55271CBDEA0300BC83B0 /* MOAISpineSkeletonData.h in Headers */,
+				43DB55291CBDEA0300BC83B0 /* MOAISpineSlot.h in Headers */,
+				43DB54E91CBDE89300BC83B0 /* Attachment.h in Headers */,
+				43DB54E81CBDE89300BC83B0 /* AtlasAttachmentLoader.h in Headers */,
+				43DB54EE1CBDE89300BC83B0 /* Event.h in Headers */,
+				43DB54FC1CBDE89300BC83B0 /* SlotData.h in Headers */,
+				43DB54D91CBDE88200BC83B0 /* Json.h in Headers */,
+				43DB54FB1CBDE89300BC83B0 /* Slot.h in Headers */,
+				43DB54EF1CBDE89300BC83B0 /* EventData.h in Headers */,
+				43DB54F61CBDE89300BC83B0 /* SkeletonBounds.h in Headers */,
+				43DB54FA1CBDE89300BC83B0 /* SkinnedMeshAttachment.h in Headers */,
+				43DB54E61CBDE89300BC83B0 /* AnimationStateData.h in Headers */,
+				43DB55231CBDEA0300BC83B0 /* MOAISpineBone.h in Headers */,
+				43DB54F91CBDE89300BC83B0 /* Skin.h in Headers */,
+				43DB54FD1CBDE89300BC83B0 /* spine.h in Headers */,
+				43DB54E51CBDE89300BC83B0 /* AnimationState.h in Headers */,
+				43DB54ED1CBDE89300BC83B0 /* BoundingBoxAttachment.h in Headers */,
+				43DB54F31CBDE89300BC83B0 /* MeshAttachment.h in Headers */,
+				43DB54F81CBDE89300BC83B0 /* SkeletonJson.h in Headers */,
+				43DB54E71CBDE89300BC83B0 /* Atlas.h in Headers */,
+				43DB55251CBDEA0300BC83B0 /* MOAISpineSkeleton.h in Headers */,
+				43DB551F1CBDEA0300BC83B0 /* host.h in Headers */,
+				43DB552B1CBDEA0300BC83B0 /* pch.h in Headers */,
+				43DB54F01CBDE89300BC83B0 /* extension.h in Headers */,
+				43DB55211CBDEA0300BC83B0 /* MOAISpine.h in Headers */,
+				43DB54F51CBDE89300BC83B0 /* Skeleton.h in Headers */,
+				43DB54F21CBDE89300BC83B0 /* IkConstraintData.h in Headers */,
+				43DB54E41CBDE89300BC83B0 /* Animation.h in Headers */,
+				43DB54F71CBDE89300BC83B0 /* SkeletonData.h in Headers */,
+				43DB54EC1CBDE89300BC83B0 /* BoneData.h in Headers */,
+				43DB54EB1CBDE89300BC83B0 /* Bone.h in Headers */,
+				43DB54F11CBDE89300BC83B0 /* IkConstraint.h in Headers */,
+				43DB54F41CBDE89300BC83B0 /* RegionAttachment.h in Headers */,
+				43DB551D1CBDEA0300BC83B0 /* headers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14944,6 +15293,23 @@
 			productReference = 43B3094A1CBD23D000DF3017 /* libmoai-ios-fmod-studio.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		43DB54481CBDE79F00BC83B0 /* libmoai-ios-spine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43DB54521CBDE79F00BC83B0 /* Build configuration list for PBXNativeTarget "libmoai-ios-spine" */;
+			buildPhases = (
+				43DB54491CBDE79F00BC83B0 /* Headers */,
+				43DB544D1CBDE79F00BC83B0 /* Sources */,
+				43DB54511CBDE79F00BC83B0 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-spine";
+			productName = OpenUSLS;
+			productReference = 43DB54571CBDE79F00BC83B0 /* libmoai-ios-spine.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		89BE6EF5173AD06700DFE837 /* libmoai-ios-sim */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89BE6F01173AD06700DFE837 /* Build configuration list for PBXNativeTarget "libmoai-ios-sim" */;
@@ -15766,6 +16132,7 @@
 				CD4C4132180A667300C02381 /* libmoai-ios-mobile-app-tracker */,
 				CDD7814D1A11631E00AD133E /* libmoai-ios-motion */,
 				89BE6EF5173AD06700DFE837 /* libmoai-ios-sim */,
+				43DB54481CBDE79F00BC83B0 /* libmoai-ios-spine */,
 				CDA4B9111808AC9D000129F9 /* libmoai-ios-tapjoy */,
 				CD07C3A313A182AA00C9386C /* libmoai-ios-untz */,
 				CD4C4167180A9AEA00C02381 /* libmoai-ios-urban-airship */,
@@ -16440,6 +16807,46 @@
 				43B3095A1CBD249B00DF3017 /* MOAIFmodStudioSound.cpp in Sources */,
 				43B309581CBD249B00DF3017 /* MOAIFmodStudioChannel.cpp in Sources */,
 				43B309561CBD249B00DF3017 /* MOAIFmodStudio.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43DB544D1CBDE79F00BC83B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43DB54D71CBDE88200BC83B0 /* IkConstraintData.c in Sources */,
+				43DB54E31CBDE88200BC83B0 /* SlotData.c in Sources */,
+				43DB551E1CBDEA0300BC83B0 /* host.cpp in Sources */,
+				43DB552A1CBDEA0300BC83B0 /* pch.cpp in Sources */,
+				43DB55201CBDEA0300BC83B0 /* MOAISpine.cpp in Sources */,
+				43DB54DD1CBDE88200BC83B0 /* SkeletonBounds.c in Sources */,
+				43DB54D81CBDE88200BC83B0 /* Json.c in Sources */,
+				43DB54CE1CBDE88200BC83B0 /* Attachment.c in Sources */,
+				43DB54CF1CBDE88200BC83B0 /* AttachmentLoader.c in Sources */,
+				43DB54E21CBDE88200BC83B0 /* Slot.c in Sources */,
+				43DB55281CBDEA0300BC83B0 /* MOAISpineSlot.cpp in Sources */,
+				43DB54E01CBDE88200BC83B0 /* Skin.c in Sources */,
+				43DB54CA1CBDE88200BC83B0 /* AnimationState.c in Sources */,
+				43DB55221CBDEA0300BC83B0 /* MOAISpineBone.cpp in Sources */,
+				43DB55241CBDEA0300BC83B0 /* MOAISpineSkeleton.cpp in Sources */,
+				43DB54D01CBDE88200BC83B0 /* Bone.c in Sources */,
+				43DB54D41CBDE88200BC83B0 /* EventData.c in Sources */,
+				43DB54D21CBDE88200BC83B0 /* BoundingBoxAttachment.c in Sources */,
+				43DB54E11CBDE88200BC83B0 /* SkinnedMeshAttachment.c in Sources */,
+				43DB54CC1CBDE88200BC83B0 /* Atlas.c in Sources */,
+				43DB54D51CBDE88200BC83B0 /* extension.c in Sources */,
+				43DB54D11CBDE88200BC83B0 /* BoneData.c in Sources */,
+				43DB54DE1CBDE88200BC83B0 /* SkeletonData.c in Sources */,
+				43DB54C91CBDE88200BC83B0 /* Animation.c in Sources */,
+				43DB54DF1CBDE88200BC83B0 /* SkeletonJson.c in Sources */,
+				43DB54D31CBDE88200BC83B0 /* Event.c in Sources */,
+				43DB54CD1CBDE88200BC83B0 /* AtlasAttachmentLoader.c in Sources */,
+				43DB54D61CBDE88200BC83B0 /* IkConstraint.c in Sources */,
+				43DB54CB1CBDE88200BC83B0 /* AnimationStateData.c in Sources */,
+				43DB54DB1CBDE88200BC83B0 /* RegionAttachment.c in Sources */,
+				43DB55261CBDEA0300BC83B0 /* MOAISpineSkeletonData.cpp in Sources */,
+				43DB54DC1CBDE88200BC83B0 /* Skeleton.c in Sources */,
+				43DB54DA1CBDE88200BC83B0 /* MeshAttachment.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -18639,6 +19046,11 @@
 			target = CD27BE00191D9F44000A7770 /* libmoai-ios-adcolony */;
 			targetProxy = 43B309771CBD400A00DF3017 /* PBXContainerItemProxy */;
 		};
+		43DB54591CBDE7D900BC83B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43DB54481CBDE79F00BC83B0 /* libmoai-ios-spine */;
+			targetProxy = 43DB54581CBDE7D900BC83B0 /* PBXContainerItemProxy */;
+		};
 		CDB14A291A01CCFB008CEA54 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CDD47B9417FA78AE00525B77 /* libmoai-ios-3rdparty-crypto */;
@@ -18961,42 +19373,42 @@
 					"\"../../src/config-default\"",
 					"\"../../src\"",
 					"\"../../3rdparty\"",
-					"\"../../3rdparty/lua-5.1.3/src\"",
+					"\"../../3rdparty/box2d-2.3.0\"",
 					"\"../../3rdparty/contrib\"",
-					"\"../../3rdparty/tinyxml\"",
-					"\"../../3rdparty/lpng140\"",
-					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.2g/include-ios\"",
-					"\"../../3rdparty/openssl-1.0.2g/include\"",
-					"\"../../3rdparty/openssl-1.0.2g/crypto\"",
-					"\"../../3rdparty/openssl-1.0.2g\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.1.0/lib\"",
 					"\"../../3rdparty/fmod/headers\"",
 					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
-					"\"../../3rdparty/box2d-2.3.0\"",
+					"\"../../3rdparty/jansson-2.1/src\"",
+					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/libogg-1.2.2/include\"",
+					"\"../../3rdparty/libpvr-3.4\"",
+					"\"../../3rdparty/libtess2/include\"",
+					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/lua-5.1.3/src\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
 					"\"../../3rdparty/luasql-2.2.0/src\"",
-					"\"../../3rdparty/libogg-1.2.2/include\"",
-					"\"../../3rdparty/jansson-2.1/src\"",
-					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/mongoose\"",
+					"\"../../3rdparty/ooid-0.99\"",
+					"\"../../3rdparty/openssl-1.0.2g/include-ios\"",
+					"\"../../3rdparty/openssl-1.0.2g/include\"",
+					"\"../../3rdparty/openssl-1.0.2g/crypto\"",
+					"\"../../3rdparty/openssl-1.0.2g\"",
+					"\"../../3rdparty/sfmt-1.4\"",
+					"\"../../3rdparty/spine-c/include\"",
+					"\"../../3rdparty/tinyxml\"",
+					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/untz/include\"",
 					"\"../../3rdparty/untz/src\"",
 					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
 					"\"../../3rdparty/libvorbis-1.3.2/include\"",
-					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
-					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
-					"\"../../3rdparty/libtess2/include\"",
-					"\"../../3rdparty/sfmt-1.4\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
 					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
@@ -19290,6 +19702,143 @@
 				PRODUCT_NAME = "moai-ios-fmod-studio";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
+		43DB54531CBDE79F00BC83B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					_DEBUG,
+					DEBUG,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					SQLITE_ENABLE_FTS3,
+					SQLITE_ENABLE_FTS3_PARENTHESIS,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT_DEBUG_LEVEL_ERROR,
+					FT_DEBUG_LEVEL_TRACE,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-spine";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		43DB54541CBDE79F00BC83B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-spine";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		43DB54551CBDE79F00BC83B0 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-spine";
+				SDKROOT = iphoneos;
+			};
+			name = AdHoc;
+		};
+		43DB54561CBDE79F00BC83B0 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-spine";
+				SDKROOT = iphoneos;
 			};
 			name = Distribution;
 		};
@@ -20456,42 +21005,42 @@
 					"\"../../src/config-default\"",
 					"\"../../src\"",
 					"\"../../3rdparty\"",
-					"\"../../3rdparty/lua-5.1.3/src\"",
+					"\"../../3rdparty/box2d-2.3.0\"",
 					"\"../../3rdparty/contrib\"",
-					"\"../../3rdparty/tinyxml\"",
-					"\"../../3rdparty/lpng140\"",
-					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.2g/include-ios\"",
-					"\"../../3rdparty/openssl-1.0.2g/include\"",
-					"\"../../3rdparty/openssl-1.0.2g/crypto\"",
-					"\"../../3rdparty/openssl-1.0.2g\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.1.0/lib\"",
 					"\"../../3rdparty/fmod/headers\"",
 					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
-					"\"../../3rdparty/box2d-2.3.0\"",
+					"\"../../3rdparty/jansson-2.1/src\"",
+					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/libogg-1.2.2/include\"",
+					"\"../../3rdparty/libpvr-3.4\"",
+					"\"../../3rdparty/libtess2/include\"",
+					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/lua-5.1.3/src\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
 					"\"../../3rdparty/luasql-2.2.0/src\"",
-					"\"../../3rdparty/libogg-1.2.2/include\"",
-					"\"../../3rdparty/jansson-2.1/src\"",
-					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/mongoose\"",
+					"\"../../3rdparty/ooid-0.99\"",
+					"\"../../3rdparty/openssl-1.0.2g/include-ios\"",
+					"\"../../3rdparty/openssl-1.0.2g/include\"",
+					"\"../../3rdparty/openssl-1.0.2g/crypto\"",
+					"\"../../3rdparty/openssl-1.0.2g\"",
+					"\"../../3rdparty/sfmt-1.4\"",
+					"\"../../3rdparty/spine-c/include\"",
+					"\"../../3rdparty/tinyxml\"",
+					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/untz/include\"",
 					"\"../../3rdparty/untz/src\"",
 					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
 					"\"../../3rdparty/libvorbis-1.3.2/include\"",
-					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
-					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
-					"\"../../3rdparty/libtess2/include\"",
-					"\"../../3rdparty/sfmt-1.4\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
 					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
@@ -24888,42 +25437,42 @@
 					"\"../../src/config-default\"",
 					"\"../../src\"",
 					"\"../../3rdparty\"",
-					"\"../../3rdparty/lua-5.1.3/src\"",
+					"\"../../3rdparty/box2d-2.3.0\"",
 					"\"../../3rdparty/contrib\"",
-					"\"../../3rdparty/tinyxml\"",
-					"\"../../3rdparty/lpng140\"",
-					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.2g/include-ios\"",
-					"\"../../3rdparty/openssl-1.0.2g/include\"",
-					"\"../../3rdparty/openssl-1.0.2g/crypto\"",
-					"\"../../3rdparty/openssl-1.0.2g\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.1.0/lib\"",
 					"\"../../3rdparty/fmod/headers\"",
 					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
-					"\"../../3rdparty/box2d-2.3.0\"",
+					"\"../../3rdparty/jansson-2.1/src\"",
+					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/libogg-1.2.2/include\"",
+					"\"../../3rdparty/libpvr-3.4\"",
+					"\"../../3rdparty/libtess2/include\"",
+					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/lua-5.1.3/src\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
 					"\"../../3rdparty/luasql-2.2.0/src\"",
-					"\"../../3rdparty/libogg-1.2.2/include\"",
-					"\"../../3rdparty/jansson-2.1/src\"",
-					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/mongoose\"",
+					"\"../../3rdparty/ooid-0.99\"",
+					"\"../../3rdparty/openssl-1.0.2g/include-ios\"",
+					"\"../../3rdparty/openssl-1.0.2g/include\"",
+					"\"../../3rdparty/openssl-1.0.2g/crypto\"",
+					"\"../../3rdparty/openssl-1.0.2g\"",
+					"\"../../3rdparty/sfmt-1.4\"",
+					"\"../../3rdparty/spine-c/include\"",
+					"\"../../3rdparty/tinyxml\"",
+					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/untz/include\"",
 					"\"../../3rdparty/untz/src\"",
 					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
 					"\"../../3rdparty/libvorbis-1.3.2/include\"",
-					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
-					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
-					"\"../../3rdparty/libtess2/include\"",
-					"\"../../3rdparty/sfmt-1.4\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
 					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
@@ -25320,42 +25869,42 @@
 					"\"../../src/config-default\"",
 					"\"../../src\"",
 					"\"../../3rdparty\"",
-					"\"../../3rdparty/lua-5.1.3/src\"",
+					"\"../../3rdparty/box2d-2.3.0\"",
 					"\"../../3rdparty/contrib\"",
-					"\"../../3rdparty/tinyxml\"",
-					"\"../../3rdparty/lpng140\"",
-					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.2g/include-ios\"",
-					"\"../../3rdparty/openssl-1.0.2g/include\"",
-					"\"../../3rdparty/openssl-1.0.2g/crypto\"",
-					"\"../../3rdparty/openssl-1.0.2g\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.1.0/lib\"",
 					"\"../../3rdparty/fmod/headers\"",
 					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
-					"\"../../3rdparty/box2d-2.3.0\"",
+					"\"../../3rdparty/jansson-2.1/src\"",
+					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/libogg-1.2.2/include\"",
+					"\"../../3rdparty/libpvr-3.4\"",
+					"\"../../3rdparty/libtess2/include\"",
+					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/lua-5.1.3/src\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
 					"\"../../3rdparty/luasql-2.2.0/src\"",
-					"\"../../3rdparty/libogg-1.2.2/include\"",
-					"\"../../3rdparty/jansson-2.1/src\"",
-					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/mongoose\"",
+					"\"../../3rdparty/ooid-0.99\"",
+					"\"../../3rdparty/openssl-1.0.2g/include-ios\"",
+					"\"../../3rdparty/openssl-1.0.2g/include\"",
+					"\"../../3rdparty/openssl-1.0.2g/crypto\"",
+					"\"../../3rdparty/openssl-1.0.2g\"",
+					"\"../../3rdparty/sfmt-1.4\"",
+					"\"../../3rdparty/spine-c/include\"",
+					"\"../../3rdparty/tinyxml\"",
+					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/untz/include\"",
 					"\"../../3rdparty/untz/src\"",
 					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
 					"\"../../3rdparty/libvorbis-1.3.2/include\"",
-					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
-					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
-					"\"../../3rdparty/libtess2/include\"",
-					"\"../../3rdparty/sfmt-1.4\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
 					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
@@ -25748,6 +26297,17 @@
 				43B309471CBD23D000DF3017 /* Release */,
 				43B309481CBD23D000DF3017 /* AdHoc */,
 				43B309491CBD23D000DF3017 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43DB54521CBDE79F00BC83B0 /* Build configuration list for PBXNativeTarget "libmoai-ios-spine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43DB54531CBDE79F00BC83B0 /* Debug */,
+				43DB54541CBDE79F00BC83B0 /* Release */,
+				43DB54551CBDE79F00BC83B0 /* AdHoc */,
+				43DB54561CBDE79F00BC83B0 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

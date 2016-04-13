@@ -1,17 +1,7 @@
 #!/bin/bash
-
-#----------------------------------------------------------------#
-# Copyright (c) 2010-2011 Zipline Games, Inc.
-# All Rights Reserved.
-# http://getmoai.com
-#----------------------------------------------------------------#
-
 set -e
 
-osx_schemes=( "libmoai-osx" "libmoai-osx-3rdparty" "libmoai-osx-fmod-ex" "libmoai-osx-luaext" "libmoai-osx-untz" "libmoai-osx-zlcore" )
-osx_sdks=( "macosx" )
-
-ios_schemes=(
+ios_targets=(
     "libmoai-ios"
     "libmoai-ios-3rdparty-core"
     "libmoai-ios-3rdparty-crypto"
@@ -23,11 +13,13 @@ ios_schemes=(
     "libmoai-ios-crittercism"
     "libmoai-ios-crypto"
     "libmoai-ios-facebook"
+    "libmoai-ios-fmod-studio"
     "libmoai-ios-gamecenter"
     "libmoai-ios-http-client"
     "libmoai-ios-http-server"
     "libmoai-ios-luaext"
     "libmoai-ios-sim"
+    "libmoai-ios-spine"
     "libmoai-ios-untz"
     "libmoai-ios-vungle"
     "libmoai-ios-zl-core"
@@ -36,16 +28,11 @@ ios_schemes=(
 )
 ios_sdks=( "iphoneos" "iphonesimulator" )
 
-usage="usage: $0 [-j <jobName>] [-c Debug|Release|all] [-p osx|ios|all]"
-job="moai"
+usage="usage: $0 [-c Debug|Release|all]"
 configurations="all"
-platforms="all"
-
 while [ $# -gt 0 ];	do
     case "$1" in
-		-j)  job="$2"; shift;;
 		-c)  configurations="$2"; shift;;
-		-p)  platforms="$2"; shift;;
 		-*)
 	    	echo >&2 \
 	    		$usage
@@ -55,13 +42,6 @@ while [ $# -gt 0 ];	do
     shift
 done
 
-if ! [[ $job =~ ^[a-zA-Z0-9_\-]+$ ]]; then
-	echo -e "*** Illegal job name specified: $job..."
-	echo -e "    > Job names may only contain letters, numbers, dashes and underscores"
-	echo
-	exit 1
-fi
-
 if [ x"$configurations" != xDebug ] && [ x"$configurations" != xRelease ] && [ x"$configurations" != xall ]; then
 	echo $usage
 	exit 1
@@ -69,34 +49,15 @@ elif [ x"$configurations" = xall ]; then
 	configurations="Debug Release"
 fi
 
-if [ x"$platforms" != xosx ] && [ x"$platforms" != xios ] && [ x"$platforms" != xall ]; then
-	echo $usage
-	exit 1
-elif [ x"$platforms" = xall ]; then
-	platforms="osx ios"
-fi
+targets="${ios_targets[@]}"
+sdks="${ios_sdks[@]}"
 
-for platform in $platforms; do
-
-	schemes=
-	sdks=
-	if [ x"$platform" = xosx ]; then
-		schemes="${osx_schemes[@]}"
-		sdks="${osx_sdks[@]}"
-	elif [ x"$platform" = xios ]; then
-		schemes="${ios_schemes[@]}"
-		sdks="${ios_sdks[@]}"
-	fi
-
-	for config in $configurations; do
-		for sdk in $sdks; do
-			for scheme in $schemes; do
-				echo "Cleaning libmoai/$scheme/$sdk for $config"
-				xcodebuild -configuration $config -workspace libmoai.xcodeproj/project.xcworkspace -scheme $scheme -sdk $sdk clean CONFIGURATION_BUILD_DIR=/tmp/$job/$platform/$scheme/$sdk/$config
-				echo "Done"
-			done
+for config in $configurations; do
+	for sdk in $sdks; do
+		for target in $targets; do
+			echo "Cleaning libmoai/$target/$sdk for $config"
+			xcodebuild -configuration $config -project libmoai.xcodeproj -target $target -sdk $sdk clean
+			echo "Done"
 		done
-
-		rm -rf "/tmp/$job/$platform/$config"
 	done
 done
