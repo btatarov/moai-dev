@@ -5,7 +5,7 @@
 
 #import <moai-ios-crittercism/MOAICrittercismIOS.h>
 
-#import <Crittercism.h>
+#import <Crittercism/Crittercism.h>
 
 //================================================================//
 // lua
@@ -16,8 +16,6 @@
 	@text	Initialize Crittercism.
 	
 	@in		string appId			Available in Crittercism dashboard settings.
-	@in		string appKey			Available in Crittercism dashboard settings.
-	@in		string appSecret		Available in Crittercism dashboard settings.
 	@out	nil
 */
 int MOAICrittercismIOS::_init ( lua_State* L ) {
@@ -25,21 +23,11 @@ int MOAICrittercismIOS::_init ( lua_State* L ) {
 	MOAILuaState state ( L );
 
 	cc8* appId = lua_tostring ( state, 1 );
-	//cc8* appKey = lua_tostring ( state, 2 );
-	//cc8* appSecret = lua_tostring ( state, 3 );
-
 	NSString* appID = [[ NSString alloc ] initWithUTF8String:appId ];
-	//NSString* key = [[ NSString alloc ] initWithUTF8String:appKey ];
-	//NSString* secret = [[ NSString alloc ] initWithUTF8String:appSecret ];
-		
-	//UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-	//UIViewController* rootVC = [ window rootViewController ];
-	//[ Crittercism initWithAppID: ID andKey: key andSecret: secret andMainViewController: rootVC ];
+	
 	[ Crittercism enableWithAppID: appID ];
 
 	[ appID release ];
-	//[ key release ];
-	//[ secret release ];
 	
 	return 0;
 }
@@ -51,9 +39,11 @@ int MOAICrittercismIOS::_init ( lua_State* L ) {
 	@out	nil 
  */
 int	MOAICrittercismIOS::_forceException ( lua_State* L ) {
+	
 	MOAILuaState state ( L );
 	
 	[ NSException raise:NSInvalidArgumentException format:@"Moai Force Exception" ];
+	
 	return 0;
 }
 
@@ -87,6 +77,7 @@ int MOAICrittercismIOS::_leaveBreadcrumb ( lua_State* L ) {
  @out	nil
 */
 int MOAICrittercismIOS::_setUser ( lua_State* L ) {
+	
 	MOAILuaState state ( L );
 	
 	cc8* username = lua_tostring ( state, 1 );

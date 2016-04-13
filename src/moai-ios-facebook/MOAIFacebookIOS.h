@@ -9,11 +9,12 @@
 
 #import <Foundation/Foundation.h> 
 #import <moai-core/headers.h>
-#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
-@class MOAIFacebookIOSDialogDelegate;
-@class MOAIFacebookIOSRequestDelegate;
-@class MOAIFacebookIOSSessionDelegate;
+@class MoaiFacebookShareDelegate;
+@class MoaiFacebookAppInviteDelegate;
 
 //================================================================//
 // MOAIFacebookIOS
@@ -23,59 +24,61 @@
 			Facebook provides social integration for sharing on
 			www.facebook.com. Exposed to Lua via MOAIFacebook on 
 			all mobile platforms.
-
-	@const	DIALOG_DID_COMPLETE			Event code for a successfully completed Facebook dialog.
-	@const	DIALOG_DID_NOT_COMPLETE		Event code for a failed (or canceled) Facebook dialog.
-	@const	SESSION_DID_LOGIN			Event code for a successfully completed Facebook login.
-	@const	SESSION_DID_NOT_LOGIN		Event code for a failed (or canceled) Facebook login.
-	@const	REQUEST_RESPONSE			Event code for graph request responses.
-	@const	REQUEST_RESPONSE_FAILED		Event code for failed graph request responses.
+ TODO:doxygen
 */
 class MOAIFacebookIOS :
 	public MOAIGlobalClass < MOAIFacebookIOS, MOAILuaObject >,
 	public MOAIGlobalEventSource {
 private:
 		
+	MoaiFacebookShareDelegate* mShareDelegate;
+	MoaiFacebookAppInviteDelegate* mAppInviteDelegate;
+		
 	//----------------------------------------------------------------//
-	static int		_extendToken				( lua_State* L );
-	static int		_getExpirationDate			( lua_State* L );
-	static int		_getToken					( lua_State* L );
-	static int		_graphRequest				( lua_State* L );
-	static int		_handleDidBecomeActive		( lua_State* L );
-	static int		_handleOpenUrl				( lua_State* L );
 	static int		_init						( lua_State* L );
+	static int		_inviteFriends				( lua_State* L );
 	static int		_login						( lua_State* L );
 	static int		_logout						( lua_State* L );
 	static int		_postToFeed					( lua_State* L );
-	static int		_restoreSession				( lua_State* L );
-	static int		_sendRequest				( lua_State* L );
-	static int		_sessionValid				( lua_State* L );
 	
 public:
     
 	DECL_LUA_SINGLETON ( MOAIFacebookIOS );
+		
+	enum {
+		LOGIN_SUCCESSFUL,
+		LOGIN_ERROR,
+		LOGIN_DISMISSED
+	};
 	
 	enum {
-		DIALOG_DID_COMPLETE,
-		DIALOG_DID_NOT_COMPLETE,
-		REQUEST_RESPONSE,
-		REQUEST_RESPONSE_FAILED,
-		SESSION_DID_LOGIN,
-		SESSION_DID_NOT_LOGIN,
-		SESSION_EXTENDED
+		SHARE_SUCCESSFUL,
+		SHARE_ERROR,
+		SHARE_DISMISSED
+	};
+		
+	enum {
+		INVITE_SUCCESSFUL,
+		INVITE_ERROR
 	};
 	
 	//----------------------------------------------------------------//
-	void		DialogDidNotComplete	        ();
-	void		DialogDidComplete		        ();
 				MOAIFacebookIOS			        ();
 				~MOAIFacebookIOS		        ();
 	void		RegisterLuaClass		        ( MOAILuaState& state );
-	void		ReceivedRequestResponse	        ( id result );
-	void		ReceivedRequestResponseFailure	();
-	void		SessionDidLogin			        ();
-	void		SessionDidNotLogin		        ();
-	void		SessionExtended			        ( cc8* token, cc8* expDate );
 };
+
+//================================================================//
+// Moai Facebook Delegates
+//================================================================//
+@interface MoaiFacebookShareDelegate : NSObject < FBSDKSharingDelegate > {
+@private
+}
+@end
+
+@interface MoaiFacebookAppInviteDelegate : NSObject < FBSDKAppInviteDialogDelegate > {
+@private
+}
+@end
 
 #endif // MOAIFACEBOOK_H

@@ -7,6 +7,11 @@
 #import "MOAIAppDelegate.h"
 #import "MOAIView.h"
 
+// TODO: handle with a listener and onDidFinishLaunchingWithOptions ()
+#ifdef AKU_WITH_IOS_FACEBOOK
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#endif
+
 //================================================================//
 // AppDelegate
 //================================================================//
@@ -32,6 +37,12 @@
 
 	//----------------------------------------------------------------//
 	-( BOOL ) application:( UIApplication* )application didFinishLaunchingWithOptions:( NSDictionary* )launchOptions {
+        
+        #ifdef AKU_WITH_IOS_FACEBOOK
+        [ [ FBSDKApplicationDelegate sharedInstance ] application:application
+                                 didFinishLaunchingWithOptions:launchOptions ];
+        #endif
+        
 		( void )application;
         
 		[ application setStatusBarHidden:true ];
@@ -121,6 +132,13 @@
 	
     //----------------------------------------------------------------//
     -( BOOL )application:( UIApplication* )application openURL:( NSURL* )url sourceApplication:( NSString* )sourceApplication annotation:( id )annotation {
+        
+        #ifdef AKU_WITH_IOS_FACEBOOK
+        BOOL handled = [ [ FBSDKApplicationDelegate sharedInstance ] application:application
+                       openURL:url sourceApplication:sourceApplication annotation:annotation
+        ];
+        #endif
+        
         [ mMoaiView application:application openURL:url sourceApplication:sourceApplication annotation:annotation ];
         return YES;
     }

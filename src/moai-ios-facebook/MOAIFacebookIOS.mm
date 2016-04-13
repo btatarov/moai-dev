@@ -12,136 +12,46 @@
 //================================================================//
 
 //----------------------------------------------------------------//
-/**	@lua	extendToken
- @text	Extends the life of an active token. Should be called on app resume/start.
- 
- @in		nil
- @out	nil
- */
-int MOAIFacebookIOS::_extendToken ( lua_State* L ) {
-	UNUSED ( L );
-	printf ( "extending token....\n" );
-	//[ MOAIFacebookIOS::Get ().mFacebook extendAccessTokenIfNeeded ];
-	return 0;
-}
-
-//----------------------------------------------------------------//
-/**	@lua	getExpirationDate
- @text	Retrieve the Facebook login token expiration date.
- 
- @in		nil
- @out	string	token expiration date
- */
-int MOAIFacebookIOS::_getExpirationDate ( lua_State* L ) {
-	
-	MOAILuaState state ( L );
-	
-	NSDateFormatter *formatter = [[[ NSDateFormatter alloc ] init ] autorelease ];
-	[ formatter setDateFormat:@"dd-MM-yyyy HH:mm:ss" ];
-	
-	NSString* dateString = [ formatter stringFromDate:FBSession.activeSession.accessTokenData.expirationDate ];
-	lua_pushstring ( L, [ dateString UTF8String ]);
-	
-	return 1;
-}
-
-//----------------------------------------------------------------//
-/**	@lua	getToken
- @text	Retrieve the Facebook login token.
- 
- @in		nil
- @out	string	token
- */
-int MOAIFacebookIOS::_getToken ( lua_State* L ) {
-	
-	MOAILuaState state ( L );
-	
-	NSString* token = FBSession.activeSession.accessTokenData.accessToken;
-	
-	if ( token ) {
-		lua_pushstring ( L, [ token UTF8String ]);
-	} else {
-		lua_pushnil ( L );
-	}
-	
-	return 1;
-}
-
-//----------------------------------------------------------------//
-/**	@lua	graphRequest
-	@text	Make a request on Facebook's Graph API
- 
-	@in		string	path
-	@opt	table	parameters
-	@out	nil
- */
-int MOAIFacebookIOS::_graphRequest ( lua_State* L ) {
-	
-	MOAILuaState state ( L );
-	
-	NSString* httpMethod = @"GET";
-	
-    cc8* path = state.GetValue < cc8* >( 1, "" );
-	NSString* nsPath = [[[ NSString alloc ] initWithUTF8String:path ] autorelease ];
-	
-    NSMutableDictionary* paramsDict = [[[ NSMutableDictionary alloc ] init ] autorelease ];
-	if ( state.IsTableOrUserdata ( 2 )) {
-		[ paramsDict initWithLua:state stackIndex:2 ];
-		httpMethod = @"POST";
-	}
-	
-	[ FBRequestConnection startWithGraphPath:nsPath
-		parameters:paramsDict
-		HTTPMethod:httpMethod
-		completionHandler:^( FBRequestConnection* connection, id result, NSError* error ) {
-		
-			UNUSED ( connection );
-			
-			if ( error ) {
-				 MOAIFacebookIOS::Get ().ReceivedRequestResponseFailure ();
-			}
-			else {
-				MOAIFacebookIOS::Get ().ReceivedRequestResponse ( result );
-			}
-		}
-	];
-	return 0;
-}
-
-//----------------------------------------------------------------//
-// TODO: doxygen
-int MOAIFacebookIOS::_handleDidBecomeActive ( lua_State* L ) {
-	UNUSED ( L );
-	[ FBAppCall handleDidBecomeActiveWithSession:FBSession.activeSession ];
-	return 0;
-}
-
-//----------------------------------------------------------------//
-// TODO: doxygen
-int MOAIFacebookIOS::_handleOpenUrl ( lua_State* L ) {
-
-	MOAILuaState state ( L );
-	
-	NSURL* url						= [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* >( 1, "" )]];
-	NSString* sourceApplication		= [ NSString stringWithUTF8String:state.GetValue < cc8* >( 2, "" )];
-
-	[ FBAppCall handleOpenURL:url sourceApplication:sourceApplication ];
-	
-	return 0;
-}
-
-//----------------------------------------------------------------//
 /**	@lua	init
  @text	Initialize Facebook.
  
- @in		string	appId			Available in Facebook developer settings.
+ @in		nil
  @out 	nil
  */
 int MOAIFacebookIOS::_init ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
 	
-	[ FBSettings setDefaultAppID:[ NSString stringWithUTF8String:state.GetValue < cc8* >( 1, "" )]];
+	[ FBSDKAppEvents activateApp ];
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	inviteFriends
+	@text	Send an app request to the logged in users' friends.
+	@in		string	url				The URL that the post links to. See Facebook documentation.
+ 
+	@opt	string	image			The URL of an image to include in the post. See Facebook documentation.
+	@out 	nil
+ */
+int MOAIFacebookIOS::_inviteFriends ( lua_State* L ) {
+	
+	MOAILuaState state ( L );
+	
+	// root view controller
+	UIWindow* window = [ [ UIApplication sharedApplication ] keyWindow ];
+	UIViewController* rootVC = [ window rootViewController ];
+	
+	FBSDKAppInviteContent *content =[ [FBSDKAppInviteContent alloc ] init ];
+	content.appLinkURL = [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* > ( 1, "" ) ] ];
+	content.appInvitePreviewImageURL = [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* > ( 2, "" ) ] ];
+	
+	[ FBSDKAppInviteDialog showFromViewController:rootVC
+									  withContent:content
+										 delegate:MOAIFacebookIOS::Get ().mAppInviteDelegate ];
+	
+	[ content release ];
 	
 	return 0;
 }
@@ -157,41 +67,39 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
 	
-	MOAIFacebookIOS& facebook = MOAIFacebookIOS::Get ();
+	UIWindow* window = [ [ UIApplication sharedApplication ] keyWindow ];
+	UIViewController* rootVC = [ window rootViewController ];
 	
-	NSMutableDictionary* paramsDict = [[ NSMutableDictionary alloc ] init ];
+	FBSDKLoginManager* loginMgr = [ [ FBSDKLoginManager alloc ] init ];
+	
+	NSMutableDictionary* paramsDict = [ [ NSMutableDictionary alloc ] init ];
 	
 	if ( state.IsType ( 1, LUA_TTABLE )) {
 		[ paramsDict initWithLua:state stackIndex:1 ];
 	}
-	NSArray* paramsArray = [ paramsDict allValues ];
 	
-	[ FBSession openActiveSessionWithReadPermissions:paramsArray
-		allowLoginUI:YES
-		completionHandler:^( FBSession *session, FBSessionState sessionState, NSError *error ) {
-			UNUSED ( session );
+	NSMutableArray* perms = [ [ NSMutableArray alloc ] initWithObjects:[ paramsDict allValues ], nil ];
+	[ perms addObject:@"public_profile" ];
+	[ perms addObject:@"email" ];
+	
+	[ loginMgr logInWithReadPermissions:perms fromViewController:rootVC
+	 handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
+		 
+		if ( error ) {
 			
-			switch ( sessionState ) {
-				case FBSessionStateOpen:
-					facebook.SessionDidLogin ();
-					break;
-					
-				case FBSessionStateClosed:
-				case FBSessionStateClosedLoginFailed:
-					
-					[ FBSession.activeSession closeAndClearTokenInformation ];
-					facebook.DialogDidNotComplete ();
-					break;
-					
-				default:
-					break;
-			}
-
-			if ( error) {
-				facebook.DialogDidNotComplete ();
-			}
+			MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_ERROR );
+		} else if (result.isCancelled) {
+			
+			MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_DISMISSED );
+		 } else {
+			 
+			MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_SUCCESSFUL );
 		}
-	];
+  }];
+	
+	[ perms release ];
+	[ paramsDict release ];
+	[ loginMgr release ];
 	
 	return 0;
 }
@@ -205,9 +113,9 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
  */
 int MOAIFacebookIOS::_logout ( lua_State* L ) {
 	
-	MOAILuaState state ( L );
-	
-	[ FBSession.activeSession closeAndClearTokenInformation ];
+	FBSDKLoginManager* loginMgr = [ [ FBSDKLoginManager alloc ] init ];
+	[ loginMgr logOut ];
+	[ loginMgr release ];
 	
 	return 0;
 }
@@ -216,10 +124,10 @@ int MOAIFacebookIOS::_logout ( lua_State* L ) {
 /**	@lua	postToFeed
  @text	Post a message to the logged in users' news feed.
  
- @in		string	link			The URL that the post links to. See Facebook documentation.
- @in		string	picture			The URL of an image to include in the post. See Facebook documentation.
- @in		string	name			The name of the link. See Facebook documentation.
- @in		string	caption			The caption of the link. See Facebook documentation.
+ @in		string	url				The URL that the post links to. See Facebook documentation.
+ @in		string	image			The URL of an image to include in the post. See Facebook documentation.
+ @in		string	title			The name of the link. See Facebook documentation.
+
  @in		string	description		The description of the link. See Facebook documentation.
  @out 	nil
  */
@@ -227,141 +135,32 @@ int MOAIFacebookIOS::_postToFeed ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
 	
-	FBShareDialogParams *shareParams = [[[FBShareDialogParams alloc ] init ] autorelease ];
+	// root view controller
+	UIWindow* window = [ [ UIApplication sharedApplication ] keyWindow ];
+	UIViewController* rootVC = [ window rootViewController ];
 	
-	shareParams.link			= [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* >( 1, "" )]];
-	shareParams.picture			= [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* >( 2, "" )]];
-	shareParams.name			= [ NSString stringWithUTF8String:state.GetValue < cc8* >( 3, "" )];
-	shareParams.caption			= [ NSString stringWithUTF8String:state.GetValue < cc8* >( 4, "" )];
-	shareParams.description		= [ NSString stringWithUTF8String:state.GetValue < cc8* >( 5, "" )];
-
-	if ([ FBDialogs canPresentShareDialogWithParams:shareParams ]){
-
-		[ FBDialogs presentShareDialogWithParams:shareParams
-			clientState:nil
-			handler:^( FBAppCall* call, NSDictionary *results, NSError *error ) {
-				UNUSED ( call );
-				
-				if ( error ) {
-					MOAIFacebookIOS::Get ().DialogDidNotComplete ();
-				}
-				else if ( results [ @"completionGesture" ] && [ results [ @"completionGesture" ] isEqualToString:@"cancel" ]) {
-					MOAIFacebookIOS::Get ().DialogDidNotComplete ();
-				}
-				else {
-					MOAIFacebookIOS::Get ().DialogDidNotComplete ();
-				}
-		}];
-	}
-	else {
-
-		NSDictionary *params = @{
-			@"name":shareParams.name,
-			@"caption":shareParams.caption,
-			@"description":shareParams.description,
-			@"picture":shareParams.picture,
-			@"link":shareParams.link,
-		};
-
-		// Invoke the dialog
-		[ FBWebDialogs presentFeedDialogModallyWithSession:nil
-			parameters:params
-			handler:^( FBWebDialogResult result, NSURL* resultURL, NSError* error ) {
-				UNUSED ( resultURL );
-				
-				if (error) {
-					MOAIFacebookIOS::Get ().DialogDidNotComplete ();
-				}
-				else {
-					if ( result == FBWebDialogResultDialogNotCompleted ) {
-						MOAIFacebookIOS::Get ().DialogDidNotComplete ();
-					}
-					else {
-						MOAIFacebookIOS::Get ().DialogDidNotComplete ();
-					}
-				}
-			}
-		];
-    }
+	// content to share
+	FBSDKShareLinkContent *content = [ [ FBSDKShareLinkContent alloc ] init ];
 	
-	return 0;
-}
-
-//----------------------------------------------------------------//
-// TODO: doxygen
-int MOAIFacebookIOS::_restoreSession ( lua_State* L ) {
+	content.contentURL			= [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* > ( 1, "" ) ] ];
+	content.imageURL			= [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* > ( 2, "" ) ] ];
+	content.contentTitle		= [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 3, "" ) ];
+	content.contentDescription	= [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 4, "" ) ];
 	
-	MOAILuaState state ( L );
+	// share dialog
+	[ FBSDKShareDialog showFromViewController:rootVC withContent:content delegate:nil ];
 	
-	BOOL result = [ FBSession openActiveSessionWithAllowLoginUI:NO ];
-	lua_pushboolean ( L, result );
-	return 1;
-}
-
-//----------------------------------------------------------------//
-/**	@lua	sendRequest
-	@text	Send an app request to the logged in users' friends.
- 
-	@opt	string	message			The message for the request. See Facebook documentation. Default is nil.
-	@out 	nil
- */
-int MOAIFacebookIOS::_sendRequest ( lua_State* L ) {
+	FBSDKShareDialog *dialog = [ [FBSDKShareDialog alloc ] init ];
+	dialog.fromViewController = rootVC;
+	dialog.shareContent = content;
+	dialog.mode = FBSDKShareDialogModeShareSheet;
+	dialog.delegate = MOAIFacebookIOS::Get ().mShareDelegate;
+	[ dialog show ];
 	
-	MOAILuaState state ( L );
-	
-	NSString* message = [ NSString stringWithUTF8String:state.GetValue < cc8* >( 1, "" )];
-	
-	NSMutableDictionary* params = nil;
-	
-	if ( state.IsType ( 2, LUA_TTABLE )) {
-		
-		NSMutableDictionary* friendDict = [[[ NSMutableDictionary alloc ] init ] autorelease ];
-		[ friendDict initWithLua:state stackIndex:2 ];
-		NSArray* targeted = [ friendDict allValues ];
-		
-		if ( targeted != nil && [ targeted count ] > 0 ) {
-			params = [[[ NSMutableDictionary alloc ] init ] autorelease ];
-			NSString* selectIDsStr = [ targeted componentsJoinedByString:@"," ];
-			[ params setObject:selectIDsStr forKey:@"suggestions" ];
-		}
-	}
-	
-    [ FBWebDialogs presentRequestsDialogModallyWithSession:nil
-		message:message
-		title:nil
-		parameters:params
-		handler:^( FBWebDialogResult result, NSURL* resultURL, NSError* error ) {
-			UNUSED ( resultURL );
-		
-			if ( error ) {
-				MOAIFacebookIOS::Get ().DialogDidNotComplete ();
-			}
-			else {
-				if (result == FBWebDialogResultDialogCompleted) {
-					MOAIFacebookIOS::Get ().DialogDidComplete ();
-				} else {
-					MOAIFacebookIOS::Get ().DialogDidNotComplete ();
-				}
-			}
-		}
-	];
+	[ dialog release ];
+	[ content release ];
 
 	return 0;
-}
-
-//----------------------------------------------------------------//
-/**	@lua	sessionValid
- @text	Determine whether or not the current Facebook session is valid.
- 
- @in		nil
- @out 	boolean	valid
- */
-int MOAIFacebookIOS::_sessionValid ( lua_State* L ) {
-	
-	MOAILuaState state ( L );
-	
-	lua_pushboolean ( state, [ FBSession.activeSession isOpen ]);
-	return 1;
 }
 	
 //================================================================//
@@ -372,41 +171,38 @@ int MOAIFacebookIOS::_sessionValid ( lua_State* L ) {
 MOAIFacebookIOS::MOAIFacebookIOS () {
     
 	RTTI_SINGLE ( MOAILuaObject )
-	RTTI_SINGLE ( MOAIGlobalEventSource )
+	
+	mShareDelegate = [ [ MoaiFacebookShareDelegate alloc ] init ];
+	mAppInviteDelegate = [ [ MoaiFacebookAppInviteDelegate alloc ] init ];
 }
 
 //----------------------------------------------------------------//
 MOAIFacebookIOS::~MOAIFacebookIOS () {
-    
-	[ FBSession.activeSession close ];
+	
+	[ mShareDelegate release ];
 }
 
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
     
-	state.SetField ( -1, "DIALOG_DID_COMPLETE", 	( u32 )DIALOG_DID_COMPLETE );
-	state.SetField ( -1, "DIALOG_DID_NOT_COMPLETE",	( u32 )DIALOG_DID_NOT_COMPLETE );
-	state.SetField ( -1, "REQUEST_RESPONSE", 		( u32 )REQUEST_RESPONSE );
-	state.SetField ( -1, "REQUEST_RESPONSE_FAILED", ( u32 )REQUEST_RESPONSE_FAILED );
-	state.SetField ( -1, "SESSION_DID_LOGIN", 		( u32 )SESSION_DID_LOGIN );
-	state.SetField ( -1, "SESSION_DID_NOT_LOGIN", 	( u32 )SESSION_DID_NOT_LOGIN );
-	state.SetField ( -1, "SESSION_EXTENDED",		( u32 )SESSION_EXTENDED );
+	state.SetField ( -1, "LOGIN_SUCCESSFUL", 	( u32 )LOGIN_SUCCESSFUL );
+	state.SetField ( -1, "LOGIN_ERROR",			( u32 )LOGIN_ERROR );
+	state.SetField ( -1, "LOGIN_DISMISSED",		( u32 )LOGIN_DISMISSED );
+	
+	state.SetField ( -1, "SHARE_SUCCESSFUL", 	( u32 )SHARE_SUCCESSFUL );
+	state.SetField ( -1, "SHARE_ERROR",			( u32 )SHARE_ERROR );
+	state.SetField ( -1, "SHARE_DISMISSED",		( u32 )SHARE_DISMISSED );
+	
+	state.SetField ( -1, "INVITE_SUCCESSFUL", 	( u32 )INVITE_SUCCESSFUL );
+	state.SetField ( -1, "INVITE_ERROR",		( u32 )INVITE_ERROR );
 	
 	luaL_Reg regTable[] = {
-		{ "extendToken",				_extendToken },
-		{ "getExpirationDate",			_getExpirationDate },
 		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIFacebookIOS > },
-		{ "getToken",					_getToken },
-		{ "graphRequest",				_graphRequest },
-		{ "handleDidBecomeActive",		_handleDidBecomeActive },
-		{ "handleOpenUrl",				_handleOpenUrl },
 		{ "init",						_init },
 		{ "login",						_login },
 		{ "logout",						_logout },
 		{ "postToFeed",					_postToFeed },
-		{ "restoreSession",				_restoreSession },
-		{ "sendRequest",				_sendRequest },
-		{ "sessionValid",				_sessionValid },
+		{ "inviteFriends",				_inviteFriends },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIFacebookIOS > },
 		{ NULL, NULL }	
 	};
@@ -414,80 +210,66 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	luaL_register ( state, 0, regTable );
 }
 
-//----------------------------------------------------------------//
-void MOAIFacebookIOS::DialogDidNotComplete ( ) {
-	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( DIALOG_DID_NOT_COMPLETE, state )) {
-		state.DebugCall ( 0, 0 );
-	}
-}
+//================================================================//
+// MoaiFacebookShareDelegate
+//================================================================//
+@implementation MoaiFacebookShareDelegate
 
-//----------------------------------------------------------------//
-void MOAIFacebookIOS::DialogDidComplete () {
+	//================================================================//
+	#pragma mark -
+	#pragma mark Protocol MoaiFacebookShareDelegate
+	//================================================================//
+
+	//----------------------------------------------------------------//
+	- ( void ) sharer:( id < FBSDKSharing > )sharer didCompleteWithResults:( NSDictionary* )results {
 		
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( DIALOG_DID_COMPLETE, state )) {
-		state.DebugCall ( 0, 0 );
+		UNUSED ( sharer );
+		UNUSED ( results );
+		
+		MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::SHARE_SUCCESSFUL );
 	}
-}
 
-//----------------------------------------------------------------//
-void MOAIFacebookIOS::ReceivedRequestResponse ( id result ) {
-	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ([ result isKindOfClass:[ NSString class ]]) {
-		[(( NSString* )result ) toLua:state ];
+	- ( void ) sharer:( id < FBSDKSharing > )sharer didFailWithError:( NSError* )error {
+		
+		UNUSED ( sharer );
+		UNUSED (error );
+		
+		MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::SHARE_ERROR );
 	}
-	else if ([ result isKindOfClass:[ NSData class ]]) {
-		[(( NSData* )result ) toLua:state ];
-	}
-	
-	if ( this->PushListener ( REQUEST_RESPONSE, state )) {
-		state.DebugCall ( 1, 0 );
-	}
-}
 
-//----------------------------------------------------------------//
-void MOAIFacebookIOS::ReceivedRequestResponseFailure () {
-    MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( REQUEST_RESPONSE_FAILED, state )) {
-		state.DebugCall ( 0, 0 );
+	- ( void ) sharerDidCancel:( id < FBSDKSharing > )sharer {
+		
+		UNUSED ( sharer );
+		
+		MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::SHARE_DISMISSED );
 	}
-}
 
-//----------------------------------------------------------------//
-void MOAIFacebookIOS::SessionDidLogin () {
-	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( SESSION_DID_LOGIN, state )) {
-		state.DebugCall ( 0, 0 );
-	}
-}
+@end
 
-//----------------------------------------------------------------//
-void MOAIFacebookIOS::SessionDidNotLogin () {
-	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( SESSION_DID_NOT_LOGIN, state )) {
-		state.DebugCall ( 0, 0 );
-	}
-}
+@implementation MoaiFacebookAppInviteDelegate
 
-//----------------------------------------------------------------//
-void MOAIFacebookIOS::SessionExtended ( cc8* token, cc8* expDate ) {
+	//================================================================//
+	#pragma mark -
+	#pragma mark Protocol MoaiFacebookAppInviteDelegate
+	//================================================================//
+
+	//----------------------------------------------------------------//
+- ( void ) appInviteDialog:	(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:	(NSDictionary *)results {
 	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( SESSION_EXTENDED, state )) {
-		state.Push ( token );		
-		state.Push ( expDate );
-		state.DebugCall ( 2, 0 );
+		UNUSED ( appInviteDialog );
+		UNUSED ( results );
+		
+		MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::INVITE_SUCCESSFUL );
 	}
-}
+
+	//----------------------------------------------------------------//
+	- ( void ) appInviteDialog:	( FBSDKAppInviteDialog* )appInviteDialog
+			  didFailWithError:	(NSError *)error {
+	
+		UNUSED (error );
+		
+		MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::INVITE_ERROR );
+	}
+@end
+
+

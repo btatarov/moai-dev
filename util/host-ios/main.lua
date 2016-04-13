@@ -17,8 +17,10 @@ end
 
 local config = {}
 local hostconfig = {
-  AppName = "Moai Template",
-  CompanyName = "Zipline Games"
+  APP_NAME      = "Moai Template",
+
+  MOAI_SDK_HOME = MOAI_SDK_HOME,
+  INVOKE_DIR    = INVOKE_DIR,
 }
 
 local configFile = false
@@ -39,7 +41,7 @@ for i, escape, param, iter in util.iterateCommandLine ( arg or {}) do
 			config.OUTPUT_DIR = MOAIFileSystem.getAbsoluteDirectoryPath(param)
 		end
 
-	  if escape == 'l' or escape == 'lib-source' then
+	    if escape == 'l' or escape == 'lib-source' then
 			config.LIB_SOURCE = MOAIFileSystem.getAbsoluteDirectoryPath(param)
 		end
 
@@ -67,9 +69,9 @@ copyhostfiles = function()
 
 
 
-	for  entry in util.iterateFiles(MOAI_SDK_HOME..'host-templates/ios/Moai Template', false, true) do
-			local fullpath = string.format ( '%s/%s',MOAI_SDK_HOME..'host-templates/ios/Moai Template' , entry )
-			print( string.format( '%s -> %s', fullpath, output..entry ))
+	for  entry in util.iterateFiles ( SCRIPT_DIR .. '/project', false, true ) do
+
+			local fullpath = string.format ( '%s/project/%s', SCRIPT_DIR, entry )
 			MOAIFileSystem.copy(fullpath, output..entry)
 	end
     --we want the copy from src
@@ -91,7 +93,24 @@ copyhostfiles = function()
 end
 
 copylib = function()
-	MOAIFileSystem.copy(config.LIB_SOURCE, config.OUTPUT_DIR..'libmoai' )
+	MOAIFileSystem.copy ( config.LIB_SOURCE, config.OUTPUT_DIR .. 'libmoai' )
+
+    -- fmod
+    -- TODO: move to modules.lua
+    MOAIFileSystem.copy ( MOAI_SDK_HOME .. "3rdparty/fmod/lib/ios/libfmod_iphoneos.a",
+                          config.OUTPUT_DIR .. 'libmoai/libfmod_iphoneos.a' )
+    MOAIFileSystem.copy ( MOAI_SDK_HOME .. "3rdparty/fmod/lib/ios/libfmod_iphonesimulator.a",
+                          config.OUTPUT_DIR .. 'libmoai/libfmod_iphonesimulator.a' )
+
+    -- from config
+    if hostconfig[ "EXTRA_FRAMEWORKS" ] then
+
+        for _, framework in ipairs ( hostconfig[ "EXTRA_FRAMEWORKS" ] ) do
+
+            MOAIFileSystem.copy ( MOAIFileSystem.getAbsoluteDirectoryPath ( framework ),
+                                  config.OUTPUT_DIR .. "libmoai/" .. util.getFilenameFromPath ( framework ) )
+        end
+    end
 end
 
 linklib = function()
@@ -109,76 +128,92 @@ applyConfigFile = function(configFile)
 
 
   --copy host specific settings to main config
-  if (hostconfig["HostSettings"] and hostconfig["HostSettings"]["ios"]) then
-    for k,v in pairs(hostconfig["HostSettings"]["ios"]) do
+  if ( hostconfig[ "HOST_SETTINGS" ] and hostconfig[ "HOST_SETTINGS" ][ "IOS" ] ) then
+
+    for k,v in pairs( hostconfig[ "HOST_SETTINGS" ][ "IOS" ] ) do
+
       hostconfig[k] = v
     end
   end
 
-  hostconfig["HostSettings"] = nil
-
+  hostconfig["HOST_SETTINGS"] = nil
 end
 
 configureHost = function()
-  local output = config.OUTPUT_DIR
+    local output = config.OUTPUT_DIR
 
-  print("\n\nApplying config from "..configFile..":")
-  for k,v in pairs(hostconfig) do
-    print (k..": ", v)
-  end
+    --get lua folder path (relative to xcode project)
+    local fullLua = MOAIFileSystem.getAbsoluteDirectoryPath ( hostconfig[ "LUA_MAIN_DIR" ] )
 
-  --get lua folder path (relative to xcode project)
-  local fullLua = MOAIFileSystem.getAbsoluteDirectoryPath(hostconfig['LuaSrc'])
-  local relativeLua = MOAIFileSystem.getRelativePath( fullLua, output )
-  local relativeLua = string.match(relativeLua, "(.*)/$") --strip trailing slash
+    local relativeLua = MOAIFileSystem.getRelativePath ( fullLua, output )
+    relativeLua = string.match ( relativeLua, "(.*)/$" ) --strip trailing slash
 
-  local luafolder = string.match(fullLua, ".*/([^/]-)/$") --ensure to ignore trailing slash
+    local luafolder = string.match(fullLua, ".*/([^/]-)/$") --ensure to ignore trailing slash
 
-  local projectfiles = {
-    [ output..'Moai Template.xcodeproj/project.xcworkspace/contents.xcworkspacedata' ] = true,
-    [ output..'Moai Template.xcodeproj/xcshareddata/xcschemes/Moai Template.xcscheme' ] = true
-  }
+    local projectfiles = {
+        [ output..'Moai Template.xcodeproj/project.xcworkspace/contents.xcworkspacedata' ] = true,
+        [ output..'Moai Template.xcodeproj/xcshareddata/xcschemes/Moai Template.xcscheme' ] = true
+    }
 
-  util.replaceInFiles ({
-    [ output..'Moai Template.xcodeproj/project.pbxproj' ] = {
-        --our lua path
-        ['(63D01EC01A38659C0097C3E8%C-name = )([^;]-)(;.-path = )([^;]-)(;.*)'] = "%1"..'"'..luafolder..'"'.."%3"..'"'..relativeLua..'"'.."%5",
-        --our app name
-        ['Moai Template'] = hostconfig['AppName'],
-      },
-      [ util.wrap(pairs, projectfiles) ] = {
-        ['Moai Template'] = hostconfig['AppName'],
-      },
-      [ output..'main.lua'] = {
-        ['setWorkingDirectory%(.-%)'] = 'setWorkingDirectory("'..luafolder..'")'
-      }
+    local orientationString
+    if hostconfig [ 'DEFAULT_ORIENTATION' ] == 'portrait' then
+        orientationString = '<string>UIInterfaceOrientationPortrait</string>\n<string>UIInterfaceOrientationPortraitUpsideDown</string>'
+    else
+        orientationString = '<string>UIInterfaceOrientationLandscapeLeft</string>\n<string>UIInterfaceOrientationLandscapeRight</string>'
+    end
+
+    util.replaceInFiles ({
+        [ output..'Moai Template.xcodeproj/project.pbxproj' ] = {
+            --our lua path
+            ['(63D01EC01A38659C0097C3E8%C-name = )([^;]-)(;.-path = )([^;]-)(;.*)'] = "%1"..'"'..luafolder..'"'.."%3"..'"'..relativeLua..'"'.."%5",
+            --our app name
+            [ 'Moai Template' ] = hostconfig['APP_NAME'],
+            [ "%$%(MOAI_SDK_HOME%)" ] = string.match ( MOAI_SDK_HOME, "(.*)/$" ),
+        },
+
+        [ util.wrap(pairs, projectfiles) ] = {
+            ['Moai Template'] = hostconfig [ 'APP_NAME' ],
+        },
+
+        [ output..'main.lua' ] = {
+            [ 'setWorkingDirectory%(.-%)' ] = 'setWorkingDirectory("' .. luafolder .. '")'
+        },
+
+        [ output .. 'res/Info.plist' ] = {
+            [ '@BUNDLE_ID@' ] = hostconfig[ 'BUNDLE_ID' ],
+            [ '@VERSION@' ] = hostconfig[ 'VERSION' ],
+            [ '@BUILD_NUMBER@' ] = hostconfig[ 'BUILD_NUMBER' ],
+            [ '@FB_APP_ID@' ] = hostconfig[ 'FB_APP_ID' ],
+            [ '@FB_APP_NAME@' ] = hostconfig[ 'FB_APP_NAME' ],
+            [ '<string>UIInterfaceOrientationPortrait</string>' ] = orientationString,
+        }
     })
 
-    if (hostconfig['AppName'] ~= 'Moai Template' ) then
+    if ( hostconfig[ 'APP_NAME' ] ~= 'Moai Template' ) then
 
+        --rename the scheme
+        MOAIFileSystem.copy(output..'Moai Template.xcodeproj/xcshareddata/xcschemes/Moai Template.xcscheme',
+        output..'Moai Template.xcodeproj/xcshareddata/xcschemes/'..hostconfig['APP_NAME']..'.xcscheme')
+        MOAIFileSystem.deleteFile(output..'Moai Template.xcodeproj/xcshareddata/xcschemes/Moai Template.xcscheme')
 
-      --rename the scheme
-      MOAIFileSystem.copy(output..'Moai Template.xcodeproj/xcshareddata/xcschemes/Moai Template.xcscheme',
-      output..'Moai Template.xcodeproj/xcshareddata/xcschemes/'..hostconfig['AppName']..'.xcscheme')
-      MOAIFileSystem.deleteFile(output..'Moai Template.xcodeproj/xcshareddata/xcschemes/Moai Template.xcscheme')
-
-      --rename the project file too````
-      MOAIFileSystem.copy(output..'Moai Template.xcodeproj', output..hostconfig['AppName']..'.xcodeproj')
-      MOAIFileSystem.deleteDirectory(output..'Moai Template.xcodeproj', true)
+        --rename the project file too````
+        MOAIFileSystem.copy ( output .. 'Moai Template.xcodeproj', output .. hostconfig[ 'APP_NAME' ] .. '.xcodeproj' )
+        MOAIFileSystem.deleteDirectory ( output .. 'Moai Template.xcodeproj', true )
     end
 
     --icon
     if (hostconfig['Images.xcassets']) then
-      local icons = MOAIFileSystem.getAbsoluteDirectoryPath(hostconfig['Images.xcassets'])
-      if (MOAIFileSystem.checkPathExists(icons)) then
-        MOAIFileSystem.deleteDirectory(config.OUTPUT_DIR.."res/Images.xcassets")
-        MOAIFileSystem.copy(icons, config.OUTPUT_DIR.."res/Images.xcassets")
-      else
-        error("Could not find specified icon assets:"..icons.." - skipping")
-      end
-    end
 
-  end
+        local icons = MOAIFileSystem.getAbsoluteDirectoryPath(hostconfig['Images.xcassets'])
+
+        if (MOAIFileSystem.checkPathExists(icons)) then
+            MOAIFileSystem.deleteDirectory(config.OUTPUT_DIR.."res/Images.xcassets")
+            MOAIFileSystem.copy(icons, config.OUTPUT_DIR.."res/Images.xcassets")
+        else
+            error("Could not find specified icon assets:"..icons.." - skipping")
+        end
+    end
+end
 
 if (configFile) then
   applyConfigFile(configFile)

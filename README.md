@@ -38,6 +38,10 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 ### iOS
 * chartboost-6.4.2 (interstitial and rewarded video)
 * adcolony-2.6.1 (rewarded video)
+* crittercism-5.1.1
+* facebook-4.10.1 (not fully tested, needs some more work)
+* util/host-ios
+* TODO: samples
 
 ### Samples
 * android-adcolony

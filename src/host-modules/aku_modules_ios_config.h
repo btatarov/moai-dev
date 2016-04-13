@@ -6,7 +6,7 @@
 	#endif
 
 	#ifndef AKU_WITH_IOS_ADCOLONY
-		#define AKU_WITH_IOS_ADCOLONY 0
+		#define AKU_WITH_IOS_ADCOLONY 1
 	#endif
 
 	#ifndef AKU_WITH_IOS_BILLING
@@ -14,15 +14,15 @@
 	#endif
 
 	#ifndef AKU_WITH_IOS_CHARTBOOST
-		#define AKU_WITH_IOS_CHARTBOOST 0
+		#define AKU_WITH_IOS_CHARTBOOST 1
 	#endif
 
 	#ifndef AKU_WITH_IOS_CRITTERCISM
-		#define AKU_WITH_IOS_CRITTERCISM 0
+		#define AKU_WITH_IOS_CRITTERCISM 1
 	#endif
 
 	#ifndef AKU_WITH_IOS_FACEBOOK
-		#define AKU_WITH_IOS_FACEBOOK 0
+		#define AKU_WITH_IOS_FACEBOOK 1
 	#endif
 
 	#ifndef AKU_WITH_IOS_FLURRY
@@ -40,7 +40,7 @@
 	#ifndef AKU_WITH_IOS_MOBILE_APP_TRACKER
 		#define AKU_WITH_IOS_MOBILE_APP_TRACKER 0
 	#endif
-	
+
 	#ifndef AKU_WITH_IOS_MOTION
 		#define AKU_WITH_IOS_MOTION 0
 	#endif
@@ -48,7 +48,7 @@
   #ifndef AKU_WITH_IOS_MOVIE
 	  #define AKU_WITH_IOS_MOVIE 1
 	#endif
-	
+
 	#ifndef AKU_WITH_IOS_TAPJOY
 		#define AKU_WITH_IOS_TAPJOY 0
 	#endif
