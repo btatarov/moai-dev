@@ -1,137 +1,75 @@
 //----------------------------------------------------------------//
-// Copyright (c) 2010-2011 Zipline Games, Inc. 
-// All Rights Reserved. 
+// Copyright (c) 2010-2011 Zipline Games, Inc.
+// All Rights Reserved.
 // http://getmoai.com
 //----------------------------------------------------------------//
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import <vunglepub/vunglepub.h>
 #import <moai-ios-vungle/MOAIVungleIOS.h>
-
-//================================================================//
-// MOAIVungleDelegate
-//================================================================//
-@interface MOAIVungleDelegate : NSObject < VGVunglePubDelegate > {
-@private
-}
-@end
 
 //================================================================//
 // lua
 //================================================================//
 
 //----------------------------------------------------------------//
-/**	@lua	allowAutoRotate
-	@text	Set to true to keep your users from rotating the device from landscape to portrait to properly view the video ad
- 
-	@in		bool autorotate 
-	@out 	nil
-*/
-int	MOAIVungleIOS::_allowAutoRotate	( lua_State* L ) {
+int MOAIVungleIOS::_hasCachedRewardedVideo ( lua_State* L ) {
+
 	MOAILuaState state ( L );
 
-	bool autorotate = lua_toboolean( state, 1 );
-	[ VGVunglePub allowAutoRotate:autorotate ];
-	return 0;
-}
+	VungleSDK* sdk = [ VungleSDK sharedSDK ];
+	bool hasCachedVideo = [ sdk isAdPlayable ];
 
-//----------------------------------------------------------------//
-/**	@lua	cacheSizeGet
-	@text	Detects if an add has been downloaded
- 
-	@out 	number current video cache size
-*/
-int	MOAIVungleIOS::_cacheSizeGet ( lua_State* L ) {
-	MOAILuaState state ( L );
+	lua_pushboolean ( state, hasCachedVideo );
 
-	int cacheSize = ( int )[ VGVunglePub cacheSizeGet ];
-	lua_pushnumber ( state, cacheSize );
 	return 1;
-	
 }
 
 //----------------------------------------------------------------//
-/**	@lua	cacheSizeSet
-	@text	Detects if an add has been downloaded
- 
-	@in		number size size in megabytes to set the video cache to
-	@out 	nil
-*/
-int	MOAIVungleIOS::_cacheSizeSet ( lua_State* L ) {
+int MOAIVungleIOS::_init ( lua_State* L ) {
+
 	MOAILuaState state ( L );
-	
-	int cacheSize = lua_tonumber( state, 1 );
-	[ VGVunglePub cacheSizeSet:cacheSize ];
+
+	cc8* appID = lua_tostring ( state, 1 );
+
+	VungleSDK* sdk = [ VungleSDK sharedSDK ];
+	[ sdk startWithAppId:[ NSString stringWithUTF8String:appID ] ];
+
 	return 0;
 }
 
 //----------------------------------------------------------------//
-// TODO: doxygen
-int	MOAIVungleIOS::_displayAdvert ( lua_State* L ) {
+int MOAIVungleIOS::_showRewardedVideo ( lua_State* L ) {
+
 	MOAILuaState state ( L );
 	
-	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+	bool showCloseButton = lua_toboolean ( state, 1 );
+	
+	// root view controller
+	UIWindow* window = [ [ UIApplication sharedApplication ] keyWindow ];
 	UIViewController* rootVC = [ window rootViewController ];
 	
-	bool incentivised	= state.GetValue < bool >( 1, true );
+	VungleSDK* sdk = [ VungleSDK sharedSDK ];
 	
-	if ( incentivised ) {
-		bool showClose = state.GetValue < bool >( 2, false );
-		[ VGVunglePub playIncentivizedAd:rootVC animated:TRUE showClose:showClose userTag:nil ];
-	}
-	else {
-		[ VGVunglePub playModalAd:rootVC animated:TRUE ];
-	}
-	return 0;
-}
-	
-//----------------------------------------------------------------//
-/**	@lua	init
-	@text	Initialize Vungle.
-	
-	@in		string	appId			Available in Vungle dashboard settings.
-	@opt	bool	landscape		True to dispaly video ads in landscape mode
-	@out 	nil
-*/
-int MOAIVungleIOS::_init ( lua_State* L ) {
-	MOAILuaState state ( L );
-
-	cc8* identifier = lua_tostring ( state, 1 );
-	
-	if ( identifier ) {
+	if ( [ sdk isAdPlayable ] ) {
 		
-		bool landscape = state.GetValue < bool >( 2, true );
-		VGUserData*  data  = [ VGUserData defaultUserData ];
+		NSError *error; // TODO: Print to console or listener callback?
+		if ( showCloseButton ) {
+			
+			[ sdk playAd:rootVC error:( &error ) ];
+		} else {
+			
+			NSDictionary* options = @{
+				VunglePlayAdOptionKeyIncentivized : @YES,
+				VunglePlayAdOptionKeyIncentivizedAlertBodyText : @"If the video isn't completed you won't get your reward! Are you sure you want to close early?",
+				VunglePlayAdOptionKeyIncentivizedAlertCloseButtonText : @"Close",
+				VunglePlayAdOptionKeyIncentivizedAlertContinueButtonText : @"Keep Watching",
+				VunglePlayAdOptionKeyIncentivizedAlertTitleText : @"Careful!"
+			};
 		
-		if ( landscape ) {
-			data.adOrientation = VGAdOrientationLandscape;
+			[ sdk playAd:rootVC withOptions:options error:( &error ) ];
 		}
-		else {
-			data.adOrientation = VGAdOrientationPortrait;
-		}
-		
-		data.locationEnabled = TRUE;
-		
-		// start vungle publisher library
-		[ VGVunglePub setDelegate: ( VGVungleDelegate ) MOAIVungleIOS::Get ().mDelegate ];
-		[ VGVunglePub startWithPubAppID:[ NSString stringWithUTF8String:identifier ] userData:data ];
 	}
-	return 0;
-}
-
-//----------------------------------------------------------------//
-/**	@lua	isVideoAvailable
-	@text	Detects if an add has been downloaded
- 
-	@out 	bool	True, if an ad is cached and will be displayed.
- */
-int MOAIVungleIOS::_isVideoAvailable ( lua_State* L ) {
-	MOAILuaState state ( L );
 	
-	bool isAdAvailable = [ VGVunglePub adIsAvailable ];
-	lua_pushboolean ( state, isAdAvailable );
-	return 1;
+	return 0;
 }
 
 //================================================================//
@@ -139,70 +77,57 @@ int MOAIVungleIOS::_isVideoAvailable ( lua_State* L ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-MOAIVungleIOS::MOAIVungleIOS () :
-	mWatchedAd ( false ) {
+MOAIVungleIOS::MOAIVungleIOS () {
 
 	RTTI_SINGLE ( MOAILuaObject )
-	
-	mDelegate = [[ MOAIVungleDelegate alloc ] init ];
+
+	mDelegate = [ [ MoaiVungleDelegate alloc ] init ];
 }
 
 //----------------------------------------------------------------//
 MOAIVungleIOS::~MOAIVungleIOS () {
-	[ mDelegate release ];
-}
 
-//----------------------------------------------------------------//
-void MOAIVungleIOS::NotifyMoviePlayed () {
-	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	if ( this->PushListener ( AD_VIEWED, state )) {
-		state.Push ( this->mWatchedAd );
-		state.DebugCall ( 1, 0 );
-	}
-	this->mWatchedAd = false;
+	[ mDelegate release ];
 }
 
 //----------------------------------------------------------------//
 void MOAIVungleIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "AD_VIEWED", ( u32 )AD_VIEWED );
+	state.SetField ( -1, "REWARDED_VIDEO_COMPLETED", 	( u32 )REWARDED_VIDEO_COMPLETED );
 
 	luaL_Reg regTable [] = {
-		{ "allowAutoRotate",	_allowAutoRotate },
-		{ "cacheSizeGet",		_cacheSizeGet },
-		{ "cacheSizeSet",		_cacheSizeSet },
-		{ "displayAdvert",		_displayAdvert },
-		{ "getListener",		&MOAIGlobalEventSource::_getListener < MOAIVungleIOS > },
-		{ "init",				_init },
-		{ "isVideoAvailable",	_isVideoAvailable },
-		{ "setListener",		&MOAIGlobalEventSource::_setListener < MOAIVungleIOS > },
+		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIVungleIOS > },
+		{ "hasCachedRewardedVideo",	_hasCachedRewardedVideo },
+		{ "init",					_init },
+		{ "setListener",			&MOAIGlobalEventSource::_setListener < MOAIVungleIOS > },
+		{ "showRewardedVideo",		_showRewardedVideo },
 		{ NULL, NULL }
 	};
 
 	luaL_register ( state, 0, regTable );
 }
 
-//----------------------------------------------------------------//
-void MOAIVungleIOS::WatchedAd ( bool playedFull ) {
-	this->mWatchedAd = playedFull;
-}
+//================================================================//
+// MoaiVungleDelegate
+//================================================================//
+@implementation MoaiVungleDelegate
 
-//================================================================//
-// MOAIVungleDelegate
-//================================================================//
-@implementation MOAIVungleDelegate
+	//================================================================//
+	#pragma mark -
+	#pragma mark Protocol MoaiVungleDelegate
+	//================================================================//
 
 	//----------------------------------------------------------------//
-	- ( void ) vungleMoviePlayed:( VGPlayData * ) playData {
-		bool playedFull = [ playData playedFull ];
-		MOAIVungleIOS::Get ().WatchedAd ( playedFull );
-	}
+	- ( void )vungleSDKwillCloseAdWithViewInfo:( NSDictionary* )viewInfo willPresentProductSheet:( BOOL )willPresentProductSheet {
 
-	//----------------------------------------------------------------//
-	- ( void ) vungleViewDidDisappear:( UIViewController * ) viewController {
-		UNUSED ( viewController );
-		MOAIVungleIOS::Get ().NotifyMoviePlayed ();
+		UNUSED ( willPresentProductSheet );
+		
+		bool completedView = [ viewInfo valueForKey:@"completedView" ];
+		
+		if ( completedView ) {
+
+			MOAIVungleIOS::Get ().InvokeListener ( MOAIVungleIOS::REWARDED_VIDEO_COMPLETED );
+		}
 	}
 
 @end

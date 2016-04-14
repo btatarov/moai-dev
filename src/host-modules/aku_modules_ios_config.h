@@ -62,7 +62,7 @@
 	#endif
 
 	#ifndef AKU_WITH_IOS_VUNGLE
-		#define AKU_WITH_IOS_VUNGLE 0
+		#define AKU_WITH_IOS_VUNGLE 1
 	#endif
 
 #endif

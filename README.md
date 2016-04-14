@@ -44,8 +44,9 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * chartboost-6.4.2 (interstitial and rewarded video)
 * crittercism-5.5.1
 * facebook-4.10.1 (not fully tested, needs some more work)
+* vungle-3.2.0 (rewarded video)
 * util/host-ios ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-ios/hosts.lua.sample))
-* TODO: samples
+* TODO: missing samples
 
 ### Samples
 * android-adcolony
@@ -63,6 +64,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * android-vungle
 * fmod
 * ios-admob
+* ios-vungle
 * spine-attachment-vertices
 * spine-boy
 * spine-events
