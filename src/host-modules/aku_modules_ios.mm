@@ -21,6 +21,10 @@ void AKUModulesIosAppFinalize () {
 		AKUIosAdColonyAppFinalize ();
 	#endif
 
+	#if AKU_WITH_IOS_ADMOB
+		AKUIosAdMobAppFinalize ();
+	#endif
+
 	#if AKU_WITH_IOS_BILLING
 		AKUIosBillingAppFinalize ();
 	#endif
@@ -36,7 +40,7 @@ void AKUModulesIosAppFinalize () {
 	#if AKU_WITH_IOS_FACEBOOK
 		AKUIosFacebookAppFinalize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_FLURRY
 		AKUIosFlurryAppFinalize ();
 	#endif
@@ -44,19 +48,19 @@ void AKUModulesIosAppFinalize () {
 	#if AKU_WITH_IOS_GAMECENTER
 		AKUIosGameCenterAppFinalize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_KONTAGENT
 		AKUIosKontagentAppFinalize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_MIXPANEL
 		AKUIosMixpanelAppFinalize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_MOBILE_APP_TRACKER
 		AKUIosMobileAppTrackerAppFinalize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_MOTION
 	  AKUIosMotionAppFinalize ();
 	#endif
@@ -64,7 +68,7 @@ void AKUModulesIosAppFinalize () {
 	#if AKU_WITH_IOS_MOVIE
 		AKUIosMovieAppFinalize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_TAPJOY
 		AKUIosTapjoyAppFinalize ();
 	#endif
@@ -89,6 +93,10 @@ void AKUModulesIosAppInitialize () {
 		AKUIosAdColonyAppInitialize ();
 	#endif
 
+	#if AKU_WITH_IOS_ADMOB
+		AKUIosAdMobAppInitialize ();
+	#endif
+
 	#if AKU_WITH_IOS_BILLING
 		AKUIosBillingAppInitialize ();
 	#endif
@@ -104,7 +112,7 @@ void AKUModulesIosAppInitialize () {
 	#if AKU_WITH_IOS_FACEBOOK
 		AKUIosFacebookAppInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_FLURRY
 		AKUIosFlurryAppInitialize ();
 	#endif
@@ -124,11 +132,11 @@ void AKUModulesIosAppInitialize () {
 	#if AKU_WITH_IOS_MOBILE_APP_TRACKER
 		AKUIosMobileAppTrackerAppInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_MOTION
 	  AKUIosMotionAppInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_MOVIE
 		AKUIosMovieAppInitialize ();
 	#endif
@@ -136,7 +144,7 @@ void AKUModulesIosAppInitialize () {
 	#if AKU_WITH_IOS_TAPJOY
 		AKUIosTapjoyAppInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_URBAN_AIRSHIP
 		AKUIosUrbanAirshipAppInitialize ();
 	#endif
@@ -157,6 +165,10 @@ void AKUModulesIosContextInitialize () {
 		AKUIosAdColonyContextInitialize ();
 	#endif
 
+	#if AKU_WITH_IOS_ADMOB
+		AKUIosAdMobContextInitialize ();
+	#endif
+
 	#if AKU_WITH_IOS_BILLING
 		AKUIosBillingContextInitialize ();
 	#endif
@@ -172,7 +184,7 @@ void AKUModulesIosContextInitialize () {
 	#if AKU_WITH_IOS_FACEBOOK
 		AKUIosFacebookContextInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_FLURRY
 		AKUIosFlurryContextInitialize ();
 	#endif
@@ -180,23 +192,23 @@ void AKUModulesIosContextInitialize () {
 	#if AKU_WITH_IOS_GAMECENTER
 		AKUIosGameCenterContextInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_KONTAGENT
 		AKUIosKontagentContextInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_MIXPANEL
 		AKUIosMixpanelContextInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_MOBILE_APP_TRACKER
 		AKUIosMobileAppTrackerContextInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_MOTION
 	   AKUIosMotionContextInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_MOVIE
 		AKUIosMovieContextInitialize ();
 	#endif
@@ -204,7 +216,7 @@ void AKUModulesIosContextInitialize () {
 	#if AKU_WITH_IOS_TAPJOY
 		AKUIosTapjoyContextInitialize ();
 	#endif
-	
+
 	#if AKU_WITH_IOS_URBAN_AIRSHIP
 		AKUIosUrbanAirshipContextInitialize ();
 	#endif

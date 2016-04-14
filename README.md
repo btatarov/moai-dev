@@ -39,11 +39,12 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 
 ### iOS
 * WIP: framework directory separation (moved from 3rdparty to 3rdparty-ios)
-* chartboost-6.4.2 (interstitial and rewarded video)
 * adcolony-2.6.1 (rewarded video)
+* admob-7.7.1 (intersitial and banner)
+* chartboost-6.4.2 (interstitial and rewarded video)
 * crittercism-5.5.1
 * facebook-4.10.1 (not fully tested, needs some more work)
-* util/host-ios
+* util/host-ios ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-ios/hosts.lua.sample))
 * TODO: samples
 
 ### Samples
@@ -61,6 +62,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * android-twitter
 * android-vungle
 * fmod
+* ios-admob
 * spine-attachment-vertices
 * spine-boy
 * spine-events

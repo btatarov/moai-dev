@@ -45,12 +45,27 @@ HOST_SETTINGS = {
 
         AMAZON = {
 
+            VERSION_CODE = '1',
+            VERSION_NAME = '1.0',
+
+            GOOGLE_PLAY_APP_ID  = '', -- unused
+            REVMOB_APP_ID       = '< YOUR REVMOB MEDIA ID >',
+
             MODULES = {
                 'adcolony',
-                'amazon_billing',
+                'admob',
+                'google_billing',
+                'google_play_services',
                 'chartboost',
+                'heyzap',
                 'revmob',
-            }
+                'startapp',
+                'vungle',
+            },
         },
+    },
+
+    IOS = {
+
     },
 }

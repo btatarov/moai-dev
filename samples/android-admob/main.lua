@@ -32,7 +32,6 @@ thread:run( function ()
 
     MOAIAdMobAndroid.init ( '< YOUR UNIT ID >' )
 	MOAIAdMobAndroid.initBannerWithParams ( '< YOUR UNIT ID >', 640, 0, 10, true )
-	MOAIAdMobAndroid.cacheBanner ()
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()

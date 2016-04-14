@@ -1,0 +1,39 @@
+HOST_SETTINGS = {
+
+    IOS = {
+        APP_NAME            = 'Moai Sample',
+        BUNDLE_ID           = 'com.ziplinegames.moaisample',
+        VERSION             = '1.0',
+        BUILD_NUMBER        = '1',
+
+        DEFAULT_ORIENTATION = '< landscape|portrait >',
+        LUA_MAIN_DIR        = '< path to lua sources >',
+
+        FB_APP_ID           = '0',
+        FB_APP_NAME         = 'Moai Sample: Facebook Long Name',
+
+        IOS_TARGET          = '8.1', -- min supported ios version
+
+        ICONS                = '< PATH TO AppIcon.appiconset/ >',
+        LAUNCH_IMAGES        = '< PATH TO LaunchImage.launchimage/ >',
+
+        FRAMEWORKS = {
+            'AdColony',
+            'AdMob',
+            'ChartBoost',
+            'Crittercism',
+            'Facebook',
+        },
+    },
+
+    ANDROID = {
+
+        GOOGLEPLAY = {
+
+        },
+
+        AMAZON = {
+
+        },
+    },
+}

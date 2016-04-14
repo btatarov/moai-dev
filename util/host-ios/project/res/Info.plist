@@ -25,16 +25,14 @@
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
-        <!-- the bellow single orientation is used as a placeholder -->
-        <!-- don't change! -->
 		<string>UIInterfaceOrientationPortrait</string>
-        <!-- should always be: -->
-        <!-- UIInterfaceOrientationPortrait -->
 	</array>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

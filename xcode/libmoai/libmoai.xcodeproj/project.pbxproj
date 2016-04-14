@@ -43,6 +43,7 @@
 				3E72B9AC19F703FA00A9DE30 /* PBXTargetDependency */,
 				CDB14A291A01CCFB008CEA54 /* PBXTargetDependency */,
 				43B309781CBD400A00DF3017 /* PBXTargetDependency */,
+				43FEA3161CBF039200260EB1 /* PBXTargetDependency */,
 				3E72B9B619F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9B819F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9BA19F703FA00A9DE30 /* PBXTargetDependency */,
@@ -1184,6 +1185,10 @@
 		43F4D5CC1CBD01A3000328AF /* cmll_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 43F4CEBE1CBCF4BD000328AF /* cmll_misc.c */; };
 		43F4D5CD1CBD01A3000328AF /* cmll_ofb.c in Sources */ = {isa = PBXBuildFile; fileRef = 43F4CEBF1CBCF4BD000328AF /* cmll_ofb.c */; };
 		43F4D5CE1CBD01A3000328AF /* cmll_utl.c in Sources */ = {isa = PBXBuildFile; fileRef = 43F4CEC01CBCF4BD000328AF /* cmll_utl.c */; };
+		43FEA31C1CBF047E00260EB1 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 43FEA3181CBF047E00260EB1 /* host.h */; };
+		43FEA31D1CBF047E00260EB1 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43FEA3191CBF047E00260EB1 /* host.mm */; };
+		43FEA31E1CBF047E00260EB1 /* MOAIAdMobIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 43FEA31A1CBF047E00260EB1 /* MOAIAdMobIOS.h */; };
+		43FEA31F1CBF047E00260EB1 /* MOAIAdMobIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43FEA31B1CBF047E00260EB1 /* MOAIAdMobIOS.mm */; };
 		663704171612813D002D0D27 /* moai_whirlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 663704111612812C002D0D27 /* moai_whirlpool.h */; };
 		663704191612813E002D0D27 /* moai_whirlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 663704111612812C002D0D27 /* moai_whirlpool.h */; };
 		66E345461614CA710021FC4B /* moai_whirlpool.c in Sources */ = {isa = PBXBuildFile; fileRef = 66E345451614CA710021FC4B /* moai_whirlpool.c */; };
@@ -4598,6 +4603,13 @@
 			remoteGlobalIDString = 43DB54481CBDE79F00BC83B0;
 			remoteInfo = "libmoai-ios-spine";
 		};
+		43FEA3151CBF039200260EB1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43FEA3071CBF02D700260EB1;
+			remoteInfo = "libmoai-ios-admob";
+		};
 		CDB14A281A01CCFB008CEA54 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -5968,6 +5980,11 @@
 		43F4D5C21CBD0109000328AF /* t1_trce.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = t1_trce.c; path = "../../3rdparty/openssl-1.0.2g/ssl/t1_trce.c"; sourceTree = SOURCE_ROOT; };
 		43F4D5C31CBD0109000328AF /* tls_srp.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = tls_srp.c; path = "../../3rdparty/openssl-1.0.2g/ssl/tls_srp.c"; sourceTree = SOURCE_ROOT; };
 		43F4D5C41CBD0109000328AF /* tls1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = tls1.h; path = "../../3rdparty/openssl-1.0.2g/ssl/tls1.h"; sourceTree = SOURCE_ROOT; };
+		43FEA3141CBF02D700260EB1 /* libmoai-ios-admob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-admob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43FEA3181CBF047E00260EB1 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = host.h; path = "../../src/moai-ios-admob/host.h"; sourceTree = SOURCE_ROOT; };
+		43FEA3191CBF047E00260EB1 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = host.mm; path = "../../src/moai-ios-admob/host.mm"; sourceTree = SOURCE_ROOT; };
+		43FEA31A1CBF047E00260EB1 /* MOAIAdMobIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIAdMobIOS.h; path = "../../src/moai-ios-admob/MOAIAdMobIOS.h"; sourceTree = SOURCE_ROOT; };
+		43FEA31B1CBF047E00260EB1 /* MOAIAdMobIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIAdMobIOS.mm; path = "../../src/moai-ios-admob/MOAIAdMobIOS.mm"; sourceTree = SOURCE_ROOT; };
 		663704111612812C002D0D27 /* moai_whirlpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = moai_whirlpool.h; path = ../../3rdparty/contrib/moai_whirlpool.h; sourceTree = "<group>"; };
 		6671AE9C15915C1500B36122 /* RiffFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RiffFile.cpp; path = ../../3rdparty/untz/src/native/android/RiffFile.cpp; sourceTree = "<group>"; };
 		6671AE9D15915C1500B36122 /* WaveFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WaveFile.cpp; path = ../../3rdparty/untz/src/native/android/WaveFile.cpp; sourceTree = "<group>"; };
@@ -7722,6 +7739,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		43FEA30E1CBF02D700260EB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89BE6F00173AD06700DFE837 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -8449,6 +8473,7 @@
 				CD257B241A6253F70057A53A /* moai-apple */,
 				CD2B7C2E17FA564B00EBA2DB /* moai-ios */,
 				CD27BDFF191D9E04000A7770 /* moai-ios-adcolony */,
+				43FEA3171CBF047E00260EB1 /* moai-ios-admob */,
 				CDA4B7331808AB19000129F9 /* moai-ios-billing */,
 				CDA4B7351808AB2F000129F9 /* moai-ios-chartboost */,
 				CD9F75A31808AE270001EF0C /* moai-ios-crittercism */,
@@ -8532,6 +8557,7 @@
 				CD18459C1A626BD500FCCCE0 /* libmoai-osx-apple.a */,
 				43B3094A1CBD23D000DF3017 /* libmoai-ios-fmod-studio.a */,
 				43DB54571CBDE79F00BC83B0 /* libmoai-ios-spine.a */,
+				43FEA3141CBF02D700260EB1 /* libmoai-ios-admob.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -9948,6 +9974,17 @@
 			);
 			name = x509v3;
 			path = "../../3rdparty/openssl-1.0.2g/crypto/x509v3";
+			sourceTree = "<group>";
+		};
+		43FEA3171CBF047E00260EB1 /* moai-ios-admob */ = {
+			isa = PBXGroup;
+			children = (
+				43FEA3181CBF047E00260EB1 /* host.h */,
+				43FEA3191CBF047E00260EB1 /* host.mm */,
+				43FEA31A1CBF047E00260EB1 /* MOAIAdMobIOS.h */,
+				43FEA31B1CBF047E00260EB1 /* MOAIAdMobIOS.mm */,
+			);
+			path = "moai-ios-admob";
 			sourceTree = "<group>";
 		};
 		669C0566155DB5D500A5CE7F /* luasocket-embed */ = {
@@ -13444,6 +13481,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		43FEA3081CBF02D700260EB1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43FEA31E1CBF047E00260EB1 /* MOAIAdMobIOS.h in Headers */,
+				43FEA31C1CBF047E00260EB1 /* host.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89BE6EF6173AD06700DFE837 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -15310,6 +15356,23 @@
 			productReference = 43DB54571CBDE79F00BC83B0 /* libmoai-ios-spine.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		43FEA3071CBF02D700260EB1 /* libmoai-ios-admob */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43FEA30F1CBF02D700260EB1 /* Build configuration list for PBXNativeTarget "libmoai-ios-admob" */;
+			buildPhases = (
+				43FEA3081CBF02D700260EB1 /* Headers */,
+				43FEA30B1CBF02D700260EB1 /* Sources */,
+				43FEA30E1CBF02D700260EB1 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-admob";
+			productName = OpenUSLS;
+			productReference = 43FEA3141CBF02D700260EB1 /* libmoai-ios-admob.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		89BE6EF5173AD06700DFE837 /* libmoai-ios-sim */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89BE6F01173AD06700DFE837 /* Build configuration list for PBXNativeTarget "libmoai-ios-sim" */;
@@ -16113,6 +16176,7 @@
 				0379C3D51333ECD800E89DDC /* libmoai-ios-3rdparty-core */,
 				CDD47B9417FA78AE00525B77 /* libmoai-ios-3rdparty-crypto */,
 				CD27BE00191D9F44000A7770 /* libmoai-ios-adcolony */,
+				43FEA3071CBF02D700260EB1 /* libmoai-ios-admob */,
 				CDA0D9F71A01B111002B71B6 /* libmoai-ios-audio-sampler */,
 				CDA4B7391808AC61000129F9 /* libmoai-ios-billing */,
 				89BE737C173AD2B600DFE837 /* libmoai-ios-box2d */,
@@ -16847,6 +16911,15 @@
 				43DB55261CBDEA0300BC83B0 /* MOAISpineSkeletonData.cpp in Sources */,
 				43DB54DC1CBDE88200BC83B0 /* Skeleton.c in Sources */,
 				43DB54DA1CBDE88200BC83B0 /* MeshAttachment.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43FEA30B1CBF02D700260EB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43FEA31D1CBF047E00260EB1 /* host.mm in Sources */,
+				43FEA31F1CBF047E00260EB1 /* MOAIAdMobIOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19051,6 +19124,11 @@
 			target = 43DB54481CBDE79F00BC83B0 /* libmoai-ios-spine */;
 			targetProxy = 43DB54581CBDE7D900BC83B0 /* PBXContainerItemProxy */;
 		};
+		43FEA3161CBF039200260EB1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43FEA3071CBF02D700260EB1 /* libmoai-ios-admob */;
+			targetProxy = 43FEA3151CBF039200260EB1 /* PBXContainerItemProxy */;
+		};
 		CDB14A291A01CCFB008CEA54 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CDD47B9417FA78AE00525B77 /* libmoai-ios-3rdparty-crypto */;
@@ -19310,6 +19388,7 @@
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.10.1\"",
+					"\"../../3rdparty-ios/admob-7.7.1\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -19838,6 +19917,139 @@
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				PRODUCT_NAME = "moai-ios-spine";
+				SDKROOT = iphoneos;
+			};
+			name = Distribution;
+		};
+		43FEA3101CBF02D700260EB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					_DEBUG,
+					DEBUG,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					SQLITE_ENABLE_FTS3,
+					SQLITE_ENABLE_FTS3_PARENTHESIS,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT_DEBUG_LEVEL_ERROR,
+					FT_DEBUG_LEVEL_TRACE,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-admob";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		43FEA3111CBF02D700260EB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-admob";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		43FEA3121CBF02D700260EB1 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-admob";
+				SDKROOT = iphoneos;
+			};
+			name = AdHoc;
+		};
+		43FEA3131CBF02D700260EB1 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-admob";
 				SDKROOT = iphoneos;
 			};
 			name = Distribution;
@@ -20943,6 +21155,7 @@
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.10.1\"",
+					"\"../../3rdparty-ios/admob-7.7.1\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -25374,6 +25587,7 @@
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.10.1\"",
+					"\"../../3rdparty-ios/admob-7.7.1\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -25806,6 +26020,7 @@
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.10.1\"",
+					"\"../../3rdparty-ios/admob-7.7.1\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -26308,6 +26523,17 @@
 				43DB54541CBDE79F00BC83B0 /* Release */,
 				43DB54551CBDE79F00BC83B0 /* AdHoc */,
 				43DB54561CBDE79F00BC83B0 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43FEA30F1CBF02D700260EB1 /* Build configuration list for PBXNativeTarget "libmoai-ios-admob" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43FEA3101CBF02D700260EB1 /* Debug */,
+				43FEA3111CBF02D700260EB1 /* Release */,
+				43FEA3121CBF02D700260EB1 /* AdHoc */,
+				43FEA3131CBF02D700260EB1 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
