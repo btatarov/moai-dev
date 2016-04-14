@@ -19,5 +19,6 @@ void AKUIosVungleAppInitialize () {
 //----------------------------------------------------------------//
 void AKUIosVungleContextInitialize () {
 
+	NSLog(@"\n\ntestist\n\n");
 	REGISTER_LUA_CLASS ( MOAIVungleIOS );
 }

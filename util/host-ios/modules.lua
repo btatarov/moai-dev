@@ -21,6 +21,10 @@ FRAMEWORKS = {
         MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.10.1/FBSDKLoginKit.framework',
         MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.10.1/FBSDKShareKit.framework',
     },
+
+    Vungle = {
+        MOAI_SDK_HOME .. '3rdparty-ios/vungle-3.2.0/VungleSDK.framework',    
+    },
 }
 
 -- WARNING: these will always be copied to your host

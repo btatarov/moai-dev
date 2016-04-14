@@ -30,10 +30,10 @@ thread:run( function ()
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 
-    if MOAIVungleIOS.hasRewardedVideo () then
-    	print ( "Showing Vungle video ad." )
+    if MOAIVungleIOS.hasCachedRewardedVideo () then
+    	print ( 'Showing Vungle video ad.' )
         MOAIVungleIOS.showRewardedVideo ()
     else
-    	print ( "There is no cached video ad." )
+    	print ( 'There is no cached video ad.' )
     end
 end )

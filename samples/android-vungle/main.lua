@@ -30,7 +30,7 @@ thread:run( function ()
     MOAIVungleAndroid.setListener (
         MOAIVungleAndroid.AD_VIEWED,
         function ()
-            print ( "Rewarded video successfully completed." )
+            print ( 'Rewarded video successfully completed.' )
         end
     )
 
@@ -40,9 +40,9 @@ thread:run( function ()
     coroutine:yield ()
 
     if MOAIVungleAndroid.isVideoAvailable () then
-    	print ( "Showing Vungle rewarded video." )
+    	print ( 'Showing Vungle rewarded video.' )
         MOAIVungleAndroid.displayAdvert ()
     else
-    	print ( "There is no cached rewarded video." )
+    	print ( 'There is no cached rewarded video.' )
     end
 end )

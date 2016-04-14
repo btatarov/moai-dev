@@ -35,6 +35,8 @@
 		43B309A31CBD878800DF3017 /* libmoai-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B3098E1CBD878800DF3017 /* libmoai-ios.a */; };
 		43B309D01CBD8D7C00DF3017 /* libfmod_iphoneos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B309CE1CBD8D7C00DF3017 /* libfmod_iphoneos.a */; };
 		43B309D11CBD8D7C00DF3017 /* libfmod_iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B309CF1CBD8D7C00DF3017 /* libfmod_iphonesimulator.a */; };
+		43DA2D481CC0258C0025AF75 /* libmoai-ios-vungle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DA2D471CC0258C0025AF75 /* libmoai-ios-vungle.a */; };
+		43DA2D4A1CC026820025AF75 /* VungleSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DA2D491CC026820025AF75 /* VungleSDK.framework */; };
 		43DB552F1CBDEFB600BC83B0 /* libmoai-ios-spine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DB552E1CBDEFB600BC83B0 /* libmoai-ios-spine.a */; };
 		43DB55311CBDF42E00BC83B0 /* libmoai-ios-facebook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DB55301CBDF42E00BC83B0 /* libmoai-ios-facebook.a */; };
 		43FEA3211CBF077200260EB1 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FEA3201CBF077200260EB1 /* EventKitUI.framework */; };
@@ -104,6 +106,8 @@
 		43B3098E1CBD878800DF3017 /* libmoai-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios.a"; path = "libmoai/libmoai-ios.a"; sourceTree = "<group>"; };
 		43B309CE1CBD8D7C00DF3017 /* libfmod_iphoneos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmod_iphoneos.a; path = libmoai/libfmod_iphoneos.a; sourceTree = "<group>"; };
 		43B309CF1CBD8D7C00DF3017 /* libfmod_iphonesimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmod_iphonesimulator.a; path = libmoai/libfmod_iphonesimulator.a; sourceTree = "<group>"; };
+		43DA2D471CC0258C0025AF75 /* libmoai-ios-vungle.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios-vungle.a"; path = "libmoai/libmoai-ios-vungle.a"; sourceTree = "<group>"; };
+		43DA2D491CC026820025AF75 /* VungleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VungleSDK.framework; path = libmoai/VungleSDK.framework; sourceTree = "<group>"; };
 		43DB552E1CBDEFB600BC83B0 /* libmoai-ios-spine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios-spine.a"; path = "libmoai/libmoai-ios-spine.a"; sourceTree = SOURCE_ROOT; };
 		43DB55301CBDF42E00BC83B0 /* libmoai-ios-facebook.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios-facebook.a"; path = "libmoai/libmoai-ios-facebook.a"; sourceTree = "<group>"; };
 		43FEA3201CBF077200260EB1 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
@@ -147,7 +151,7 @@
 		63CF1AF51A06675B00F731F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		63CF1AF81A066B7C00F731F1 /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.lua; sourceTree = SOURCE_ROOT; };
 		63D01EB41A3864620097C3E8 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = "host-ios/main.mm"; sourceTree = "<group>"; };
-		63D01EB51A3864620097C3E8 /* MOAIAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIAppDelegate.h; path = "host-ios/MOAIAppDelegate.h"; sourceTree = "<group>"; };
+		63D01EB51A3864620097C3E8 /* MOAIAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIAppDelegate.h; path = "host-\n\t\tMOAIAppDelegate.h"; sourceTree = "<group>"; };
 		63D01EB61A3864620097C3E8 /* MOAIAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIAppDelegate.mm; path = "host-ios/MOAIAppDelegate.mm"; sourceTree = "<group>"; };
 		63D01EB71A3864620097C3E8 /* MOAIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIView.h; path = "host-ios/MOAIView.h"; sourceTree = "<group>"; };
 		63D01EB81A3864620097C3E8 /* MOAIView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIView.mm; path = "host-ios/MOAIView.mm"; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 				43B3099C1CBD878800DF3017 /* libmoai-ios-luaext.a in Frameworks */,
 				43B3099D1CBD878800DF3017 /* libmoai-ios-sim.a in Frameworks */,
 				43B3099E1CBD878800DF3017 /* libmoai-ios-untz.a in Frameworks */,
+				43DA2D481CC0258C0025AF75 /* libmoai-ios-vungle.a in Frameworks */,
 				43B309A01CBD878800DF3017 /* libmoai-ios-zl-core.a in Frameworks */,
 				43B309A11CBD878800DF3017 /* libmoai-ios-zl-crypto.a in Frameworks */,
 				43B309A21CBD878800DF3017 /* libmoai-ios-zl-vfs.a in Frameworks */,
@@ -190,6 +195,7 @@
 				432F17C21CBDCB9B0014E7E0 /* FBSDKLoginKit.framework in Frameworks */,
 				432F17C31CBDCB9B0014E7E0 /* FBSDKShareKit.framework in Frameworks */,
 				43FEA3231CBF355000260EB1 /* GoogleMobileAds.framework in Frameworks */,
+				43DA2D4A1CC026820025AF75 /* VungleSDK.framework in Frameworks */,
 				63CF1AE01A06664500F731F1 /* AdSupport.framework in Frameworks */,
 				63CF1AC81A06655F00F731F1 /* AudioToolbox.framework in Frameworks */,
 				63CF1AC61A06654E00F731F1 /* AVFoundation.framework in Frameworks */,
@@ -255,6 +261,7 @@
 				432F17BF1CBDCB9B0014E7E0 /* FBSDKLoginKit.framework */,
 				432F17C01CBDCB9B0014E7E0 /* FBSDKShareKit.framework */,
 				43FEA3221CBF355000260EB1 /* GoogleMobileAds.framework */,
+				43DA2D491CC026820025AF75 /* VungleSDK.framework */,
 				43B309CE1CBD8D7C00DF3017 /* libfmod_iphoneos.a */,
 				43B309CF1CBD8D7C00DF3017 /* libfmod_iphonesimulator.a */,
 				43B3097A1CBD878800DF3017 /* libmoai-ios-3rdparty-core.a */,
@@ -275,6 +282,7 @@
 				43B309881CBD878800DF3017 /* libmoai-ios-sim.a */,
 				43DB552E1CBDEFB600BC83B0 /* libmoai-ios-spine.a */,
 				43B309891CBD878800DF3017 /* libmoai-ios-untz.a */,
+				43DA2D471CC0258C0025AF75 /* libmoai-ios-vungle.a */,
 				43B3098B1CBD878800DF3017 /* libmoai-ios-zl-core.a */,
 				43B3098C1CBD878800DF3017 /* libmoai-ios-zl-crypto.a */,
 				43B3098D1CBD878800DF3017 /* libmoai-ios-zl-vfs.a */,
@@ -529,6 +537,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libmoai",
@@ -562,6 +571,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libmoai",
