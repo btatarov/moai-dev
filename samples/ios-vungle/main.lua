@@ -24,8 +24,7 @@ thread:run( function ()
     local delay_timer = MOAITimer:new ()
     delay_timer:setSpan ( 10 )
 
-    -- MOAIVungleIOS.init ( '< YOUR UNIT ID >' )
-	MOAIVungleIOS.init ( '619471667' )
+    MOAIVungleIOS.init ( '< YOUR UNIT ID >' )
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()

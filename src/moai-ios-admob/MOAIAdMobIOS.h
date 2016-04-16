@@ -8,6 +8,7 @@
 #define	MOAIADMOBIOS_H
 
 #include <moai-core/headers.h>
+#include <moai-ios/MOAILucidViewIOS.h>
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import <UIKit/UIKit.h>
 
@@ -20,10 +21,6 @@
 class MOAIAdMobIOS :
 	public MOAIGlobalClass < MOAIAdMobIOS, MOAIGlobalEventSource > {
 private:
-
-	GADBannerView*				mBannerView;
-	MoaiAdMobBannerDelegate*	mBannerDelegate;
-	GADInterstitial*			mInterstitial;
 
 	//----------------------------------------------------------------//
 	static int		_cacheBanner				( lua_State* L );
@@ -39,8 +36,11 @@ private:
 public:
 
 	DECL_LUA_SINGLETON ( MOAIAdMobIOS );
-	
+
+	GADBannerView*				mBannerView;
+	MoaiAdMobBannerDelegate*	mBannerDelegate;
 	MoaiAdMobContainerView*		mContainerView;
+	GADInterstitial*			mInterstitial;
 	BOOL						mHasCachedBanner = NO;
 
 	//----------------------------------------------------------------//
@@ -52,7 +52,7 @@ public:
 //================================================================//
 // MoaiAdMobContainerView
 //================================================================//
-@interface MoaiAdMobContainerView : UIView
+@interface MoaiAdMobContainerView : MOAILucidViewIOS
 
 	@property BOOL		atBottom;
 	@property BOOL		alreadyPositioned;

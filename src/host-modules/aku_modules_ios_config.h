@@ -49,8 +49,12 @@
 		#define AKU_WITH_IOS_MOTION 0
 	#endif
 
-  #ifndef AKU_WITH_IOS_MOVIE
-	  #define AKU_WITH_IOS_MOVIE 1
+	#ifndef AKU_WITH_IOS_MOVIE
+		#define AKU_WITH_IOS_MOVIE 1
+	#endif
+
+	#ifndef AKU_WITH_IOS_STARTAPP
+		#define AKU_WITH_IOS_STARTAPP 1
 	#endif
 
 	#ifndef AKU_WITH_IOS_TAPJOY

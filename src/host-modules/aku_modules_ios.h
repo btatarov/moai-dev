@@ -63,6 +63,10 @@
 	#include <moai-ios-movie/host.h>
 #endif
 
+#if AKU_WITH_IOS_STARTAPP
+	#include <moai-ios-startapp/host.h>
+#endif
+
 #if AKU_WITH_IOS_TAPJOY
 	#include <moai-ios-tapjoy/host.h>
 #endif

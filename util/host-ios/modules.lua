@@ -22,8 +22,13 @@ FRAMEWORKS = {
         MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.10.1/FBSDKShareKit.framework',
     },
 
+    StartApp = {
+        MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.3.2/StartApp.bundle',
+        MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.3.2/StartApp.framework',
+    },
+
     Vungle = {
-        MOAI_SDK_HOME .. '3rdparty-ios/vungle-3.2.0/VungleSDK.framework',    
+        MOAI_SDK_HOME .. '3rdparty-ios/vungle-3.2.0/VungleSDK.framework',
     },
 }
 
