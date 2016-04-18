@@ -49,7 +49,7 @@ int MOAIFacebookIOS::_inviteFriends ( lua_State* L ) {
 
 	[ FBSDKAppInviteDialog showFromViewController:rootVC
 	                                  withContent:content
-                        delegate:MOAIFacebookIOS::Get ().mAppInviteDelegate
+										 delegate:MOAIFacebookIOS::Get ().mAppInviteDelegate
     ];
 
 	[ content release ];
@@ -75,27 +75,30 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
 
 	NSMutableDictionary* paramsDict = [ [ NSMutableDictionary alloc ] init ];
 
-	if ( state.IsType ( 1, LUA_TTABLE )) {
+	if ( state.IsType ( 1, LUA_TTABLE ) ) {
+		
 		[ paramsDict initWithLua:state stackIndex:1 ];
 	}
-
-	NSMutableArray* perms = [ [ NSMutableArray alloc ] initWithObjects:[ paramsDict allValues ], nil ];
+	
+	NSMutableArray* perms;
+	
+	if ( [ [ paramsDict allKeys ] count ] > 0 )
+		perms = [ [ NSMutableArray alloc ] initWithObjects:[ paramsDict allValues ], nil ];
+	else
+		perms = [ [ NSMutableArray alloc ] init ];
+	
 	[ perms addObject:@"public_profile" ];
 	[ perms addObject:@"email" ];
-
+	
 	[ loginMgr logInWithReadPermissions:perms fromViewController:rootVC
 	 handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
 
-		if ( error ) {
-
+		if ( error )
 			MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_ERROR );
-		} else if (result.isCancelled) {
-
+		else if ( result.isCancelled )
 			MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_DISMISSED );
-		 } else {
-
+		else
 			MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_SUCCESSFUL );
-		}
   }];
 
 	[ perms release ];
@@ -113,6 +116,8 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
  @out 	nil
  */
 int MOAIFacebookIOS::_logout ( lua_State* L ) {
+	
+	MOAILuaState state ( L );
 
 	FBSDKLoginManager* loginMgr = [ [ FBSDKLoginManager alloc ] init ];
 	[ loginMgr logOut ];
@@ -148,14 +153,13 @@ int MOAIFacebookIOS::_postToFeed ( lua_State* L ) {
 	content.contentTitle        = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 3, "" ) ];
 	content.contentDescription  = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 4, "" ) ];
 
-	// share dialog
-	[ FBSDKShareDialog showFromViewController:rootVC withContent:content delegate:nil ];
-
-	FBSDKShareDialog *dialog = [ [FBSDKShareDialog alloc ] init ];
-	dialog.fromViewController = rootVC;
+	FBSDKShareDialog *dialog = [ [ FBSDKShareDialog alloc ] init ];
+	dialog.mode = FBSDKShareDialogModeNative;
 	dialog.shareContent = content;
-	dialog.mode = FBSDKShareDialogModeShareSheet;
+	dialog.fromViewController = rootVC;
 	dialog.delegate = MOAIFacebookIOS::Get ().mShareDelegate;
+	
+	if ( ! [ dialog canShow ] ) dialog.mode = FBSDKShareDialogModeFeedBrowser;
 	[ dialog show ];
 
 	[ dialog release ];
@@ -234,7 +238,7 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	- ( void ) sharer:( id < FBSDKSharing > )sharer didFailWithError:( NSError* )error {
 
 		UNUSED ( sharer );
-		UNUSED (error );
+		UNUSED ( error );
 
 		MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::SHARE_ERROR );
 	}
@@ -268,7 +272,8 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	- ( void ) appInviteDialog:	( FBSDKAppInviteDialog* )appInviteDialog
 			  didFailWithError:	(NSError *)error {
 
-		UNUSED (error );
+		UNUSED ( appInviteDialog );
+		UNUSED ( error );
 
 		MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::INVITE_ERROR );
 	}
