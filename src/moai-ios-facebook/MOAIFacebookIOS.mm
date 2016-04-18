@@ -12,19 +12,27 @@
 //================================================================//
 
 //----------------------------------------------------------------//
-/**	@lua	init
- @text	Initialize Facebook.
-
- @in		nil
- @out 	nil
- */
-int MOAIFacebookIOS::_init ( lua_State* L ) {
-
+int MOAIFacebookIOS::_getToken ( lua_State* L ) {
+	
 	MOAILuaState state ( L );
+	
+	NSString* token = [ [ FBSDKAccessToken currentAccessToken ] tokenString ];
+	
+	lua_pushstring ( state, [ token UTF8String ] );
+	
+	return 1;
+}
 
-	[ FBSDKAppEvents activateApp ];
-
-	return 0;
+//----------------------------------------------------------------//
+int MOAIFacebookIOS::_getUserID ( lua_State* L ) {
+	
+	MOAILuaState state ( L );
+	
+	NSString* userID = [ [ FBSDKAccessToken currentAccessToken ] userID ];
+	
+	lua_pushstring ( state, [ userID UTF8String ] );
+	
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -58,6 +66,19 @@ int MOAIFacebookIOS::_inviteFriends ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIFacebookIOS::_isUserLoggedIn ( lua_State* L ) {
+	
+	MOAILuaState state ( L );
+	
+	bool result = false;
+	if ( [ FBSDKAccessToken currentAccessToken ] ) result = true;
+	
+	lua_pushboolean ( state, result );
+	
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	login
  @text	Prompt the user to login to Facebook.
 
@@ -68,42 +89,48 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
-	UIWindow* window = [ [ UIApplication sharedApplication ] keyWindow ];
-	UIViewController* rootVC = [ window rootViewController ];
-
-	FBSDKLoginManager* loginMgr = [ [ FBSDKLoginManager alloc ] init ];
-
-	NSMutableDictionary* paramsDict = [ [ NSMutableDictionary alloc ] init ];
-
-	if ( state.IsType ( 1, LUA_TTABLE ) ) {
+	if ( ! [FBSDKAccessToken currentAccessToken] ) {
 		
-		[ paramsDict initWithLua:state stackIndex:1 ];
-	}
-	
-	NSMutableArray* perms;
-	
-	if ( [ [ paramsDict allKeys ] count ] > 0 )
-		perms = [ [ NSMutableArray alloc ] initWithObjects:[ paramsDict allValues ], nil ];
-	else
-		perms = [ [ NSMutableArray alloc ] init ];
-	
-	[ perms addObject:@"public_profile" ];
-	[ perms addObject:@"email" ];
-	
-	[ loginMgr logInWithReadPermissions:perms fromViewController:rootVC
-	 handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
+		UIWindow* window = [ [ UIApplication sharedApplication ] keyWindow ];
+		UIViewController* rootVC = [ window rootViewController ];
 
-		if ( error )
-			MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_ERROR );
-		else if ( result.isCancelled )
-			MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_DISMISSED );
+		FBSDKLoginManager* loginMgr = [ [ FBSDKLoginManager alloc ] init ];
+
+		NSMutableDictionary* paramsDict = [ [ NSMutableDictionary alloc ] init ];
+
+		if ( state.IsType ( 1, LUA_TTABLE ) ) {
+			
+			[ paramsDict initWithLua:state stackIndex:1 ];
+		}
+		
+		NSMutableArray* perms;
+		
+		if ( [ [ paramsDict allKeys ] count ] > 0 )
+			perms = [ [ NSMutableArray alloc ] initWithObjects:[ paramsDict allValues ], nil ];
 		else
-			MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_SUCCESSFUL );
-  }];
+			perms = [ [ NSMutableArray alloc ] init ];
+		
+		[ perms addObject:@"public_profile" ];
+		[ perms addObject:@"email" ];
+		
+		[ loginMgr logInWithReadPermissions:perms fromViewController:rootVC
+		 handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
 
-	[ perms release ];
-	[ paramsDict release ];
-	[ loginMgr release ];
+			if ( error )
+				MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_ERROR );
+			else if ( result.isCancelled )
+				MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_DISMISSED );
+			else
+				MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_SUCCESSFUL );
+		}];
+
+		[ perms release ];
+		[ paramsDict release ];
+		[ loginMgr release ];
+	} else {
+		
+		MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_SUCCESSFUL );
+	}
 
 	return 0;
 }
@@ -204,11 +231,13 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
 	luaL_Reg regTable[] = {
 		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIFacebookIOS > },
-		{ "init",						_init },
+		{ "getToken",					_getToken },
+		{ "getUserID",					_getUserID },
+		{ "inviteFriends",				_inviteFriends },
+		{ "isUserLoggedIn",				_isUserLoggedIn },
 		{ "login",						_login },
 		{ "logout",						_logout },
 		{ "postToFeed",					_postToFeed },
-		{ "inviteFriends",				_inviteFriends },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIFacebookIOS > },
 		{ NULL, NULL }
 	};

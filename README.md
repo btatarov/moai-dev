@@ -15,7 +15,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * luajit 2.0.4
 * MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
 * TODO: move loadDual in a separate module (loader)
-* TODO: facebook graph requests and user tokens (ios and android)
+* TODO: facebook setToken and graphRequest (android and ios)
 
 ### Android
 * CHANGE: LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)

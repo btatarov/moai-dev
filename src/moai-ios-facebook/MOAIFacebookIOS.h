@@ -35,8 +35,10 @@ private:
 	MoaiFacebookAppInviteDelegate* mAppInviteDelegate;
 		
 	//----------------------------------------------------------------//
-	static int		_init						( lua_State* L );
+	static int		_getToken					( lua_State* L );
+	static int		_getUserID					( lua_State* L );
 	static int		_inviteFriends				( lua_State* L );
+	static int		_isUserLoggedIn				( lua_State* L );
 	static int		_login						( lua_State* L );
 	static int		_logout						( lua_State* L );
 	static int		_postToFeed					( lua_State* L );
