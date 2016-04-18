@@ -55,6 +55,7 @@
 				3E72B9CE19F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9D019F703FA00A9DE30 /* PBXTargetDependency */,
 				CDB14A391A01CCFB008CEA54 /* PBXTargetDependency */,
+				43D328FB1CC35FF700612A15 /* PBXTargetDependency */,
 				3E72B9DA19F703FA00A9DE30 /* PBXTargetDependency */,
 				43DB54591CBDE7D900BC83B0 /* PBXTargetDependency */,
 				43EDBF2B1CC05A88000DF5D4 /* PBXTargetDependency */,
@@ -360,6 +361,10 @@
 		43B309721CBD28D000DF3017 /* fmod_output.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B309691CBD28D000DF3017 /* fmod_output.h */; };
 		43B309731CBD28D000DF3017 /* fmod.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B3096A1CBD28D000DF3017 /* fmod.h */; };
 		43B309741CBD28D000DF3017 /* fmod.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 43B3096B1CBD28D000DF3017 /* fmod.hpp */; };
+		43D328F61CC3508F00612A15 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 43D328EE1CC34F7800612A15 /* host.h */; };
+		43D328F71CC3508F00612A15 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43D328EF1CC34F7800612A15 /* host.mm */; };
+		43D328F81CC3508F00612A15 /* MOAIRevMobIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 43D328F01CC34F7800612A15 /* MOAIRevMobIOS.h */; };
+		43D328F91CC3508F00612A15 /* MOAIRevMobIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43D328F11CC34F7800612A15 /* MOAIRevMobIOS.mm */; };
 		43DB54941CBDE83C00BC83B0 /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB545D1CBDE83C00BC83B0 /* Animation.h */; };
 		43DB54951CBDE83C00BC83B0 /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB545E1CBDE83C00BC83B0 /* AnimationState.h */; };
 		43DB54961CBDE83C00BC83B0 /* AnimationStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DB545F1CBDE83C00BC83B0 /* AnimationStateData.h */; };
@@ -4604,6 +4609,13 @@
 			remoteGlobalIDString = CD27BE00191D9F44000A7770;
 			remoteInfo = "libmoai-ios-adcolony";
 		};
+		43D328FA1CC35FF700612A15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43D328DF1CC34B3A00612A15;
+			remoteInfo = "libmoai-ios-revmob";
+		};
 		43DA2D451CC024BE0025AF75 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -5065,6 +5077,11 @@
 		43BA2E9C177332B2007DCDF0 /* PlayHavenSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayHavenSDK.h; path = "../../3rdparty/playhaven-ios-1.13.1/src/PlayHavenSDK.h"; sourceTree = "<group>"; };
 		43BA2E9D177332B2007DCDF0 /* UIDevice+HardwareString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+HardwareString.h"; path = "../../3rdparty/playhaven-ios-1.13.1/src/UIDevice+HardwareString.h"; sourceTree = "<group>"; };
 		43BA2E9E177332B2007DCDF0 /* UIDevice+HardwareString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+HardwareString.m"; path = "../../3rdparty/playhaven-ios-1.13.1/src/UIDevice+HardwareString.m"; sourceTree = "<group>"; };
+		43D328EC1CC34B3A00612A15 /* libmoai-ios-revmob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-revmob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43D328EE1CC34F7800612A15 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = host.h; path = "moai-ios-revmob/host.h"; sourceTree = "<group>"; };
+		43D328EF1CC34F7800612A15 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = host.mm; path = "moai-ios-revmob/host.mm"; sourceTree = "<group>"; };
+		43D328F01CC34F7800612A15 /* MOAIRevMobIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIRevMobIOS.h; path = "moai-ios-revmob/MOAIRevMobIOS.h"; sourceTree = "<group>"; };
+		43D328F11CC34F7800612A15 /* MOAIRevMobIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIRevMobIOS.mm; path = "moai-ios-revmob/MOAIRevMobIOS.mm"; sourceTree = "<group>"; };
 		43DB54571CBDE79F00BC83B0 /* libmoai-ios-spine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-spine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43DB545D1CBDE83C00BC83B0 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animation.h; path = "../../3rdparty/spine-c/include/spine/Animation.h"; sourceTree = SOURCE_ROOT; };
 		43DB545E1CBDE83C00BC83B0 /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationState.h; path = "../../3rdparty/spine-c/include/spine/AnimationState.h"; sourceTree = SOURCE_ROOT; };
@@ -7761,6 +7778,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		43D328E61CC34B3A00612A15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43DB54511CBDE79F00BC83B0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -8519,6 +8543,7 @@
 				CD70C16D184488BC005CEBC0 /* moai-ios-kontagent */,
 				CD4C4131180A663300C02381 /* moai-ios-mobile-app-tracker */,
 				CDD7814C1A1162F400AD133E /* moai-ios-motion */,
+				43D328ED1CC34F4E00612A15 /* moai-ios-revmob */,
 				43EDBF2C1CC05A99000DF5D4 /* moai-ios-startapp */,
 				CDA4B7371808AB6F000129F9 /* moai-ios-tapjoy */,
 				CD4C4166180A9AC500C02381 /* moai-ios-urban-airship */,
@@ -8596,6 +8621,7 @@
 				43DB54571CBDE79F00BC83B0 /* libmoai-ios-spine.a */,
 				43FEA3141CBF02D700260EB1 /* libmoai-ios-admob.a */,
 				43EDBF291CC05A53000DF5D4 /* libmoai-ios-startapp.a */,
+				43D328EC1CC34B3A00612A15 /* libmoai-ios-revmob.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -8794,6 +8820,17 @@
 				43BA2E6017733267007DCDF0 /* SBJsonWriter.m */,
 			);
 			name = JSON;
+			sourceTree = "<group>";
+		};
+		43D328ED1CC34F4E00612A15 /* moai-ios-revmob */ = {
+			isa = PBXGroup;
+			children = (
+				43D328EE1CC34F7800612A15 /* host.h */,
+				43D328EF1CC34F7800612A15 /* host.mm */,
+				43D328F01CC34F7800612A15 /* MOAIRevMobIOS.h */,
+				43D328F11CC34F7800612A15 /* MOAIRevMobIOS.mm */,
+			);
+			name = "moai-ios-revmob";
 			sourceTree = "<group>";
 		};
 		43DB545A1CBDE7E900BC83B0 /* spine */ = {
@@ -13491,6 +13528,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		43D328E01CC34B3A00612A15 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D328F61CC3508F00612A15 /* host.h in Headers */,
+				43D328F81CC3508F00612A15 /* MOAIRevMobIOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43DB54491CBDE79F00BC83B0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -15400,6 +15446,23 @@
 			productReference = 43B3094A1CBD23D000DF3017 /* libmoai-ios-fmod-studio.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		43D328DF1CC34B3A00612A15 /* libmoai-ios-revmob */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43D328E71CC34B3A00612A15 /* Build configuration list for PBXNativeTarget "libmoai-ios-revmob" */;
+			buildPhases = (
+				43D328E01CC34B3A00612A15 /* Headers */,
+				43D328E31CC34B3A00612A15 /* Sources */,
+				43D328E61CC34B3A00612A15 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-revmob";
+			productName = OpenUSLS;
+			productReference = 43D328EC1CC34B3A00612A15 /* libmoai-ios-revmob.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		43DB54481CBDE79F00BC83B0 /* libmoai-ios-spine */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43DB54521CBDE79F00BC83B0 /* Build configuration list for PBXNativeTarget "libmoai-ios-spine" */;
@@ -16273,6 +16336,7 @@
 				CDD06A061398822500AB0420 /* libmoai-ios-luaext */,
 				CD4C4132180A667300C02381 /* libmoai-ios-mobile-app-tracker */,
 				CDD7814D1A11631E00AD133E /* libmoai-ios-motion */,
+				43D328DF1CC34B3A00612A15 /* libmoai-ios-revmob */,
 				89BE6EF5173AD06700DFE837 /* libmoai-ios-sim */,
 				43DB54481CBDE79F00BC83B0 /* libmoai-ios-spine */,
 				43EDBF1C1CC05A53000DF5D4 /* libmoai-ios-startapp */,
@@ -16951,6 +17015,15 @@
 				43B3095A1CBD249B00DF3017 /* MOAIFmodStudioSound.cpp in Sources */,
 				43B309581CBD249B00DF3017 /* MOAIFmodStudioChannel.cpp in Sources */,
 				43B309561CBD249B00DF3017 /* MOAIFmodStudio.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43D328E31CC34B3A00612A15 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D328F91CC3508F00612A15 /* MOAIRevMobIOS.mm in Sources */,
+				43D328F71CC3508F00612A15 /* host.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19208,6 +19281,11 @@
 			target = CD27BE00191D9F44000A7770 /* libmoai-ios-adcolony */;
 			targetProxy = 43B309771CBD400A00DF3017 /* PBXContainerItemProxy */;
 		};
+		43D328FB1CC35FF700612A15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43D328DF1CC34B3A00612A15 /* libmoai-ios-revmob */;
+			targetProxy = 43D328FA1CC35FF700612A15 /* PBXContainerItemProxy */;
+		};
 		43DA2D461CC024BE0025AF75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CDA4B9871808ACA6000129F9 /* libmoai-ios-vungle */;
@@ -19483,6 +19561,7 @@
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.10.1\"",
+					"\"../../3rdparty-ios/revmob-9.0.8\"",
 					"\"../../3rdparty-ios/startapp-3.3.2\"",
 					"\"../../3rdparty-ios/vungle-3.2.0\"",
 				);
@@ -19877,6 +19956,139 @@
 				PRODUCT_NAME = "moai-ios-fmod-studio";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
+		43D328E81CC34B3A00612A15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					_DEBUG,
+					DEBUG,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					SQLITE_ENABLE_FTS3,
+					SQLITE_ENABLE_FTS3_PARENTHESIS,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT_DEBUG_LEVEL_ERROR,
+					FT_DEBUG_LEVEL_TRACE,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-revmob";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		43D328E91CC34B3A00612A15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-revmob";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		43D328EA1CC34B3A00612A15 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-revmob";
+				SDKROOT = iphoneos;
+			};
+			name = AdHoc;
+		};
+		43D328EB1CC34B3A00612A15 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_ARES,
+					USE_OPENSSL,
+					USE_SSLEAY,
+					USE_SSL,
+					BUILDING_LIBCURL,
+					POSIX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					L_ENDIAN,
+					OPENSSL_NO_GMP,
+					OPENSSL_NO_JPAKE,
+					OPENSSL_NO_MD2,
+					OPENSSL_NO_RC5,
+					OPENSSL_NO_RFC3779,
+					OPENSSL_NO_STORE,
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				PRODUCT_NAME = "moai-ios-revmob";
+				SDKROOT = iphoneos;
 			};
 			name = Distribution;
 		};
@@ -21380,6 +21592,7 @@
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.10.1\"",
+					"\"../../3rdparty-ios/revmob-9.0.8\"",
 					"\"../../3rdparty-ios/startapp-3.3.2\"",
 					"\"../../3rdparty-ios/vungle-3.2.0\"",
 				);
@@ -25809,6 +26022,7 @@
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.10.1\"",
+					"\"../../3rdparty-ios/revmob-9.0.8\"",
 					"\"../../3rdparty-ios/startapp-3.3.2\"",
 					"\"../../3rdparty-ios/vungle-3.2.0\"",
 				);
@@ -26239,6 +26453,7 @@
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.10.1\"",
+					"\"../../3rdparty-ios/revmob-9.0.8\"",
 					"\"../../3rdparty-ios/startapp-3.3.2\"",
 					"\"../../3rdparty-ios/vungle-3.2.0\"",
 				);
@@ -26732,6 +26947,17 @@
 				43B309471CBD23D000DF3017 /* Release */,
 				43B309481CBD23D000DF3017 /* AdHoc */,
 				43B309491CBD23D000DF3017 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43D328E71CC34B3A00612A15 /* Build configuration list for PBXNativeTarget "libmoai-ios-revmob" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43D328E81CC34B3A00612A15 /* Debug */,
+				43D328E91CC34B3A00612A15 /* Release */,
+				43D328EA1CC34B3A00612A15 /* AdHoc */,
+				43D328EB1CC34B3A00612A15 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

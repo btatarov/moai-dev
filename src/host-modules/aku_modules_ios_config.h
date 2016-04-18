@@ -53,6 +53,10 @@
 		#define AKU_WITH_IOS_MOVIE 1
 	#endif
 
+	#ifndef AKU_WITH_IOS_REVMOB
+		#define AKU_WITH_IOS_REVMOB 1
+	#endif
+
 	#ifndef AKU_WITH_IOS_STARTAPP
 		#define AKU_WITH_IOS_STARTAPP 1
 	#endif

@@ -69,6 +69,10 @@ void AKUModulesIosAppFinalize () {
 		AKUIosMovieAppFinalize ();
 	#endif
 
+	#if AKU_WITH_IOS_REVMOB
+		AKUIosRevMobAppFinalize ();
+	#endif
+
 	#if AKU_WITH_IOS_STARTAPP
 		AKUIosStartAppAppFinalize ();
 	#endif
@@ -145,6 +149,10 @@ void AKUModulesIosAppInitialize () {
 		AKUIosMovieAppInitialize ();
 	#endif
 
+	#if AKU_WITH_IOS_REVMOB
+		AKUIosRevMobAppInitialize ();
+	#endif
+
 	#if AKU_WITH_IOS_STARTAPP
 		AKUIosStartAppAppInitialize ();
 	#endif
@@ -219,6 +227,10 @@ void AKUModulesIosContextInitialize () {
 
 	#if AKU_WITH_IOS_MOVIE
 		AKUIosMovieContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_REVMOB
+		AKUIosRevMobContextInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_STARTAPP

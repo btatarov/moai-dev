@@ -25,7 +25,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * amazon billing v2
 * amazon gamecircle
 * admob-8.4.0 (interstitial and banner)
-* chartboost-6.4.1 (interstitial)
+* chartboost-6.4.1 (interstitial and rewarded video)
 * crittercism-5.5.5
 * facebook-4.5.1 (4.6 and above require minSdkVersion=15)
 * heyzap-9.4.5 (interstitial and rewarded video)
@@ -44,7 +44,8 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * admob-7.7.1 (intersitial and banner)
 * chartboost-6.4.2 (interstitial and rewarded video)
 * crittercism-5.5.1
-* facebook-4.10.1 (not fully tested, needs some more work)
+* facebook-4.10.1 (TODO: not fully tested, needs some more work)
+* revmob-9.0.8 (interstitial, banner and rewarded video)
 * startapp-3.3.2 (interstitial, banner and return ad)
 * vungle-3.2.0 (rewarded video)
 * util/host-ios ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-ios/hosts.lua.sample))

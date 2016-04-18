@@ -93,7 +93,7 @@ configureHost = function ()
             MOAIFileSystem.copy ( icons, config.OUTPUT_DIR .. 'res/Images.xcassets/AppIcon.appiconset/' )
         else
 
-            error ( "Could not find specified icon assets:" .. icons .. " - skipping" )
+            error ( 'Could not find specified icon assets:' .. icons .. ' - skipping' )
         end
     end
 
@@ -118,7 +118,7 @@ copyHostFiles = function ()
 
 	local output = config.OUTPUT_DIR
     MOAIFileSystem.affirmPath ( output )
-    print ( "Creating: " .. output )
+    print ( 'Creating: ' .. output )
 
 	for  entry in util.iterateFiles ( SCRIPT_DIR .. '/project', false, true ) do
 
@@ -172,12 +172,12 @@ processConfigFile = function ( configFile )
     assert ( hostconfig[ 'HOST_SETTINGS' ][ 'IOS' ], 'Config file error.' ) -- always crash here on mistakes
 
     --copy host specific settings to main config
-    for k, v in pairs ( hostconfig[ "HOST_SETTINGS" ][ "IOS" ] ) do
+    for k, v in pairs ( hostconfig[ 'HOST_SETTINGS' ][ 'IOS' ] ) do
 
         hostconfig[k] = v
     end
 
-    hostconfig["HOST_SETTINGS"] = nil
+    hostconfig[ 'HOST_SETTINGS' ] = nil
 end
 
 ----------------------------------------------------------------
@@ -213,3 +213,5 @@ copyHostFiles ()
 copyLibraryFiles ()
 
 configureHost ()
+
+print ( 'Done.' )

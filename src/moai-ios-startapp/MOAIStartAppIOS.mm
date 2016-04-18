@@ -101,10 +101,12 @@ int MOAIStartAppIOS::_initBannerWithParams ( lua_State* L ) {
 	// wrapper bounds
 	CGRect screenRect	= [ [ UIScreen mainScreen ] bounds ];
 	CGFloat scale		= [ [ UIScreen mainScreen ] scale ];
+	
+	if ( bannerWidth < 1 ) bannerWidth = screenRect.size.width * scale;
 
 	CGFloat left_margin = ( screenRect.size.width - bannerWidth / scale );
 
-	CGRect containerRect = CGRectMake ( left_margin, margin / scale, screenRect.size.width - left_margin, screenRect.size.height - margin / scale * 2 );
+	CGRect containerRect = CGRectMake ( left_margin, margin / scale, screenRect.size.width - left_margin * 2, screenRect.size.height - margin / scale * 2 );
 
 	MoaiStartAppContainerView* container = [ MOAIStartAppIOS::Get ().mContainerView initWithFrame:containerRect ];
 	[ rootVC.view addSubview:container ];

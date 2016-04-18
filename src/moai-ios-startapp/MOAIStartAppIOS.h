@@ -8,11 +8,10 @@
 #define	MOAISTARTAPPIOS_H
 
 #include <moai-core/headers.h>
-#include <moai-ios/headers.h>
+#include <moai-ios/MOAILucidViewIOS.h>
+
 #import <StartApp/StartApp.h>
 #import <UIKit/UIKit.h>
-
-#import <moai-ios/MOAILucidViewIOS.h>
 
 @class MoaiStartAppContainerView;
 

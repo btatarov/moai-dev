@@ -22,6 +22,10 @@ FRAMEWORKS = {
         MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.10.1/FBSDKShareKit.framework',
     },
 
+    RevMob = {
+        MOAI_SDK_HOME .. '3rdparty-ios/revmob-9.0.8/RevMobAds.framework',
+    },
+
     StartApp = {
         MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.3.2/StartApp.bundle',
         MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.3.2/StartApp.framework',

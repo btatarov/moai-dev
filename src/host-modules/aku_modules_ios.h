@@ -63,6 +63,10 @@
 	#include <moai-ios-movie/host.h>
 #endif
 
+#if AKU_WITH_IOS_REVMOB
+	#include <moai-ios-revmob/host.h>
+#endif
+
 #if AKU_WITH_IOS_STARTAPP
 	#include <moai-ios-startapp/host.h>
 #endif
