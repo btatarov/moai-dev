@@ -9,7 +9,7 @@
 //================================================================//
 // MOAIActionStackMgr
 //================================================================//
-	
+
 //----------------------------------------------------------------//
 MOAIAction* MOAIActionStackMgr::GetCurrent () {
 
@@ -67,10 +67,10 @@ void MOAIActionStackMgr::Push ( MOAIAction& action ) {
 */
 int MOAIAction::_addChild ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIAction, "U" )
-	
+
 	MOAIAction* action		= state.GetLuaObject < MOAIAction >( 2, true );
 	bool defer				= state.GetValue < bool >( 3, false );
-	
+
 	if ( action ) {
 		action->Attach ( self, defer );
 	}
@@ -91,13 +91,13 @@ int MOAIAction::_addChild ( lua_State* L ) {
 */
 int MOAIAction::_attach ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIAction, "U" )
-	
+
 	MOAIAction* parent		= state.GetLuaObject < MOAIAction >( 2, true );
 	bool defer				= state.GetValue < bool >( 3, false );
-	
+
 	self->Attach ( parent, defer );
 	state.CopyToTop ( 1 );
-	
+
 	return 1;
 }
 
@@ -113,7 +113,7 @@ int MOAIAction::_clear ( lua_State* L ) {
 
 	self->ClearChildren ();
 	state.CopyToTop ( 1 );
-	
+
 	return 1;
 }
 
@@ -121,7 +121,7 @@ int MOAIAction::_clear ( lua_State* L ) {
 // TODO: doxygen
 int MOAIAction::_defer ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIAction, "U" )
-	
+
 	bool defer = state.GetValue < bool >( 2, false );
 	self->Defer ( defer );
 	return 0;
@@ -137,10 +137,10 @@ int MOAIAction::_defer ( lua_State* L ) {
 */
 int MOAIAction::_detach ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIAction, "U" )
-	
+
 	self->Detach ();
 	state.CopyToTop ( 1 );
-	
+
 	return 1;
 }
 
@@ -191,13 +191,13 @@ int MOAIAction::_isDone ( lua_State* L ) {
 //----------------------------------------------------------------//
 /**	@lua	isPaused
 	@text	Checks to see if an action is 'paused.'
- 
+
 	@in		MOAIAction self
 	@out	bool isPaused
 */
 int MOAIAction::_isPaused ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIAction, "U" );
-	
+
 	lua_pushboolean ( state, self->IsPaused ());
 	return 1;
 }
@@ -240,7 +240,7 @@ int MOAIAction::_start ( lua_State* L ) {
 
 	MOAIAction* action		= state.GetLuaObject < MOAIAction >( 2, true );
 	bool defer				= state.GetValue < bool >( 3, false );
-	
+
 	if ( !action ) {
 		action = MOAISim::Get ().GetActionMgr ().GetDefaultParent ();
 	}
@@ -274,7 +274,7 @@ int MOAIAction::_stop ( lua_State* L ) {
 /**	@lua	throttle
 	@text	Sets the actions throttle. Throttle is a scalar on time.
 			Is is passed to the action's children.
-	
+
 	@in		MOAIAction self
 	@opt	number throttle	Default value is 1.
 	@out	MOAIAction self
@@ -284,7 +284,7 @@ int MOAIAction::_throttle ( lua_State* L ) {
 
 	self->mThrottle = state.GetValue < float >( 2, 1.0f );
 	state.CopyToTop ( 1 );
-	
+
 	return 1;
 }
 
@@ -303,9 +303,9 @@ void MOAIAction::Attach ( MOAIAction* parent, bool defer ) {
 	if ( parent ) {
 		parent->LuaRetain ( this );
 	}
-	
+
 	if ( oldParent ) {
-	
+
 		// if we're detaching the action while the parent action is updating
 		// then we need to handle the edge case where the action is referenced
 		// by mChildIt
@@ -316,33 +316,34 @@ void MOAIAction::Attach ( MOAIAction* parent, bool defer ) {
 			}
 			this->Release ();
 		}
-		
+
 		oldParent->mChildren.Remove ( this->mLink );
 		oldParent->OnLostChild ( this );
-		
+
 		// TODO: hmmm...
 		this->UnblockSelf ();
 		this->UnblockAll ();
 		this->mParent = 0;
-		
+
 		oldParent->LuaRelease ( this );
 	}
-	
+
 	if ( oldParent && ( !parent )) {
 		this->OnStop ();
 	}
-	
+
 	if ( parent ) {
-	
+
 		this->mParent = parent;
 		parent->mChildren.PushBack ( this->mLink );
 		this->ResetPass ( defer ? parent->mPass + 1 : parent->mPass );
-		
-		if ( !parent->mChildIt ) {
+
+		if ( ( parent->mActionFlags & FLAGS_IS_UPDATING ) && ( !parent->mChildIt ) ) {
+			this->Retain ();
 			parent->mChildIt = &this->mLink;
 		}
 	}
-	
+
 	if (( !oldParent ) && parent ) {
 		if ( !( this->mActionFlags & FLAGS_IS_PAUSED )) {
 			this->OnStart ();
@@ -494,7 +495,7 @@ void MOAIAction::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "throttle",				_throttle },
 		{ NULL, NULL }
 	};
-	
+
 	luaL_register ( state, 0, regTable );
 }
 
@@ -524,18 +525,18 @@ void MOAIAction::Update ( MOAIActionTree& tree, double step ) {
 	if ( profilingEnabled ) {
 		t0 = ZLDeviceTime::GetTimeInSeconds ();
 	}
-	
+
 	this->mPass = this->mParent ? this->mParent->mPass : this->mPass + 1;
-	
+
 	// handles the case when Moai has been running continuously for approx. 136 years at 60 fps
 	if ( this->mPass == 0xffffffff ) {
 		this->ResetPass ();
 	}
-	
+
 	step *= this->mThrottle;
-	
+
 	this->mActionFlags |= FLAGS_IS_UPDATING;
-	
+
 	this->InvokeListenerWithSelf ( EVENT_ACTION_PRE_UPDATE );
 	this->OnUpdate ( step );
 	this->InvokeListenerWithSelf ( EVENT_ACTION_POST_UPDATE );
@@ -547,12 +548,12 @@ void MOAIAction::Update ( MOAIActionTree& tree, double step ) {
 			MOAILog ( 0, MOAILogMessages::MOAIAction_Profile_PSFF, this, this->TypeName (), debugInfo.c_str(), step * 1000, elapsed * 1000 );
 		}
 	}
-	
+
 	// the trick below is to alway retain the current child plus the
-	// *next* child in the list. each child is processed once and 
-	// released after processing, so all the children should be 
+	// *next* child in the list. each child is processed once and
+	// released after processing, so all the children should be
 	// retain/release'd exactly once.
-	
+
 	// we retain the head child in the list (if any)
 	// here because the first child retained inside the loop (below)
 	// is the *second* child in the list
@@ -560,33 +561,33 @@ void MOAIAction::Update ( MOAIActionTree& tree, double step ) {
 	if ( this->mChildIt ) {
 		this->mChildIt->Data ()->Retain ();
 	}
-	
+
 	MOAIAction* child = 0;
 	while ( this->mChildIt ) {
-		
+
 		child = this->mChildIt->Data ();
-		
+
 		// retain the *next* child in the list (if any)
 		this->mChildIt = this->mChildIt->Next ();
 		if ( this->mChildIt ) {
 			this->mChildIt->Data ()->Retain ();
 		}
-		
+
 		if ( child->mParent && ( child->mPass <= this->mPass )) {
 			child->Update ( tree, step );
 		}
-		
+
 		// release the *current* child
 		child->Release ();
 	}
-	
+
 	this->mActionFlags &= ~FLAGS_IS_UPDATING;
 	this->mChildIt = 0;
-	
+
 	if ( this->IsDone ()) {
 		this->Detach ();
 	}
-	
+
 	MOAIActionStackMgr::Get ().Pop ();
 }
 
