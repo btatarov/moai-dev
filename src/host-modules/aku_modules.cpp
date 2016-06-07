@@ -330,6 +330,10 @@ void AKUModulesUpdate () {
 		AKUFmodExUpdate ();
 	#endif
 
+	#if AKU_WITH_FMOD_STUDIO
+		AKUFmodStudioUpdate ();
+	#endif
+
 	#if AKU_WITH_HARNESS
 		AKUHarnessUpdate ()
 	#endif
