@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.5)
+ cmake_minimum_required(VERSION 2.8.5)
 
 project ( host-sdl )
 set ( CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../cmake-modules" )
@@ -72,7 +72,7 @@ set_target_properties ( moai PROPERTIES
     if( ${FRAMEWORK_${fwname}} STREQUAL FRAMEWORK_${fwname}-NOTFOUND)
         MESSAGE(ERROR ": Framework ${fwname} not found")
     else()
-        TARGET_LINK_LIBRARIES(${appname} "${FRAMEWORK_${fwname}}/${fwname}.tbd")
+        TARGET_LINK_LIBRARIES(${appname} "${FRAMEWORK_${fwname}}/${fwname}")
         MESSAGE(STATUS "Framework ${fwname} found at ${FRAMEWORK_${fwname}}")
     endif()
   endmacro(ADD_FRAMEWORK)
