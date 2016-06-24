@@ -211,7 +211,9 @@ public class MoaiFacebook {
 	//----------------------------------------------------------------//
 	public static boolean isUserLoggedIn () {
 
-		return getToken() != null;
+		MoaiLog.i ( "user_id: buffer" );
+		MoaiLog.i ( "user_id: " + getUserID() );
+		return getUserID() != null;
 	}
 
 	//----------------------------------------------------------------//

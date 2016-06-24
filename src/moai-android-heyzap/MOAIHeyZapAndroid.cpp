@@ -53,7 +53,9 @@ int MOAIHeyZapAndroid::_init ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIHeyZapAndroid, "" )
 
 	jstring jpublisherID = self->GetJString ( lua_tostring ( state, 1 ) );
-	self->CallStaticVoidMethod ( self->mJava_Init, jpublisherID );
+	bool amazon_store = lua_toboolean ( state, 2 );
+
+	self->CallStaticVoidMethod ( self->mJava_Init, jpublisherID, amazon_store );
 
 	return 0;
 }
@@ -91,7 +93,7 @@ MOAIHeyZapAndroid::MOAIHeyZapAndroid () {
 	this->mJava_CacheRewardedVideo		= this->GetStaticMethod ( "cacheRewardedVideo", "()V" );
 	this->mJava_HasCachedInterstitial	= this->GetStaticMethod ( "hasCachedInterstitial", "()Z" );
 	this->mJava_HasCachedRewardedVideo	= this->GetStaticMethod ( "hasCachedRewardedVideo", "()Z" );
-	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
+	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;Z)V" );
 	this->mJava_ShowInterstitial		= this->GetStaticMethod ( "showInterstitial", "()V" );
 	this->mJava_ShowRewardedVideo		= this->GetStaticMethod ( "showRewardedVideo", "()V" );
 }

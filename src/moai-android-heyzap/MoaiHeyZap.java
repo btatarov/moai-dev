@@ -59,9 +59,15 @@ class MoaiHeyZap {
 	}
 
 	//----------------------------------------------------------------//
-	public static void init ( String publisherID ) {
+	public static void init ( String publisherID, boolean amazon_store ) {
 
-		HeyzapAds.start ( publisherID, sActivity );
+		if ( amazon_store ) {
+
+			HeyzapAds.start ( publisherID, sActivity, HeyzapAds.AMAZON );
+		} else {
+
+			HeyzapAds.start ( publisherID, sActivity );
+		}
 
 		IncentivizedAd.setOnIncentiveResultListener(new OnIncentiveResultListener() {
 		    @Override
