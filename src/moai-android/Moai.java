@@ -120,6 +120,7 @@ public class Moai {
 		ACTIVITY_ON_PAUSE,
 		ACTIVITY_ON_RESUME,
 		ACTIVITY_ON_RESTART,
+		APP_OPENED_FROM_URL,
 		BACK_BUTTON_PRESSED,
 		UNKNOWN;
 
@@ -227,6 +228,15 @@ public class Moai {
 	}
 
 	//----------------------------------------------------------------//
+	public static void closeApp () {
+		for ( Class < ? > theClass : sAvailableClasses ) {
+			executeMethod ( theClass, null, "onBackPressed", new Class < ? > [] { }, new Object [] { });
+		}
+
+		sActivity.finish();
+	}
+
+	//----------------------------------------------------------------//
 	public static int createContext () {
 
 		int contextId;
@@ -251,9 +261,9 @@ public class Moai {
 	//----------------------------------------------------------------//
 	public static void dialogDismissed ( int dialogResult ) {
 
-		//synchronized ( sAkuLock ) {
-		//	AKUAppDialogDismissed ( dialogResult );
-		//}
+		synchronized ( sAkuLock ) {
+			AKUAppDialogDismissed ( dialogResult );
+		}
 	}
 
 	//----------------------------------------------------------------//

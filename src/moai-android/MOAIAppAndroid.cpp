@@ -32,6 +32,33 @@ int MOAIAppAndroid::_getPicturePath( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIAppAndroid::_closeApp ( lua_State* L ) {
+
+	MOAILuaState state ( L );
+
+	JNI_GET_ENV ( jvm, env );
+
+	jclass moai = env->FindClass ( "com/ziplinegames/moai/Moai" );
+    if ( moai == NULL ) {
+
+		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+    } else {
+
+    	jmethodID closeApp = env->GetStaticMethodID ( moai, "closeApp", "()V" );
+    	if ( closeApp == NULL ) {
+
+			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "closeApp" );
+    	} else {
+
+			env->CallStaticVoidMethod ( moai, closeApp );
+		}
+	}
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	getUTCTime
 	@text	Gets the UTC time.
 
@@ -316,6 +343,7 @@ void MOAIAppAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "EVENT_PICTURE_TAKEN",		( u32 )EVENT_PICTURE_TAKEN );
 
 	luaL_Reg regTable [] = {
+		{ "closeApp",				_closeApp },
         { "getPictureCode",			_getPictureCode },
         { "getPicturePath",			_getPicturePath },
 		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIAppAndroid > },
