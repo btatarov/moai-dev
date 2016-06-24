@@ -39,6 +39,5 @@ MOAITwitterAndroid.setListener (
         end
 )
 
--- MOAITwitterAndroid.init ( '< CONSUMER KEY >', '< CONSUMER SECRET >', '< CALLBACK URL >' )
-MOAITwitterAndroid.init ( 'ySzVb8xcINBm5he1obavw', 'xHwY0522QCKF2QlibvFwCn882WWlEGiNcVU1VYZud8c', 'http://www.mahjongskies.com/' )
+MOAITwitterAndroid.init ( '< CONSUMER KEY >', '< CONSUMER SECRET >', '< CALLBACK URL >' )
 MOAITwitterAndroid.login ()
