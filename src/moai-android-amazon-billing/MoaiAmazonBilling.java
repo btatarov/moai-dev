@@ -11,6 +11,7 @@ import android.app.Activity;
 import java.util.Iterator;
 import java.util.List;
 
+import com.amazon.device.iap.model.FulfillmentResult;
 import com.amazon.device.iap.model.ProductDataResponse;
 import com.amazon.device.iap.model.PurchaseResponse;
 import com.amazon.device.iap.model.PurchaseUpdatesResponse;
@@ -31,7 +32,7 @@ public class MoaiAmazonBilling implements PurchasingListener {
 
 	protected static native void AKUNotifyAmazonBillingSupported			( boolean supported );
 	protected static native void AKUNotifyAmazonPurchaseResponseReceived	( int responseCode, String productId );
-	protected static native void AKUNotifyAmazonRestoreResponseReceived		( int responseCode, boolean more, String offset );
+	protected static native void AKUNotifyAmazonRestoreResponseReceived		( int responseCode, boolean more, String sku, String receiptId );
 	protected static native void AKUNotifyAmazonUserIdDetermined			( int responseCode, String userId );
 
 	//----------------------------------------------------------------//
@@ -74,6 +75,12 @@ public class MoaiAmazonBilling implements PurchasingListener {
 
 		// unused
 		return false;
+	}
+
+	//----------------------------------------------------------------//
+	public static void fulfillReceipt ( String receiptId ) {
+
+		PurchasingService.notifyFulfillment ( receiptId, FulfillmentResult.FULFILLED );
 	}
 
 	//----------------------------------------------------------------//
@@ -123,15 +130,19 @@ public class MoaiAmazonBilling implements PurchasingListener {
 		case SUCCESSFUL:
 
             final Receipt receipt = purchaseResponse.getReceipt ();
+			// HACK: remove later and modify lua code to use fulfillReceipt()
+			PurchasingService.notifyFulfillment ( receipt.getReceiptId (), FulfillmentResult.FULFILLED );
 
-            MoaiLog.i ( "onPurchaseResponse: receipt json: " + receipt.toJSON () );
-
-		case ALREADY_PURCHASED:
 		case INVALID_SKU:
 		case FAILED:
         case NOT_SUPPORTED:
 
-            AKUNotifyAmazonPurchaseResponseReceived ( requestStatus.ordinal () , sku );
+            AKUNotifyAmazonPurchaseResponseReceived ( requestStatus.ordinal (), sku );
+			break;
+
+		case ALREADY_PURCHASED:
+			// HACK: remove later
+			AKUNotifyAmazonPurchaseResponseReceived ( PurchaseResponse.RequestStatus.valueOf ( "SUCCESSFUL" ).ordinal (), sku );
 		}
 	}
 
@@ -154,10 +165,10 @@ public class MoaiAmazonBilling implements PurchasingListener {
 
 				if ( receiptListIterator.hasNext () ) {
 
-					AKUNotifyAmazonRestoreResponseReceived ( requestStatus.ordinal () , true, receipt.getSku () );
+					AKUNotifyAmazonRestoreResponseReceived ( requestStatus.ordinal () , true, receipt.getSku (), receipt.getReceiptId () );
 				} else {
 
-					AKUNotifyAmazonRestoreResponseReceived ( requestStatus.ordinal () , hasMore, receipt.getSku () );
+					AKUNotifyAmazonRestoreResponseReceived ( requestStatus.ordinal () , hasMore, receipt.getSku (), receipt.getReceiptId () );
 				}
 			}
 
@@ -167,7 +178,7 @@ public class MoaiAmazonBilling implements PurchasingListener {
         case FAILED:
         case NOT_SUPPORTED:
 
-			AKUNotifyAmazonRestoreResponseReceived ( requestStatus.ordinal () , false, null );
+			AKUNotifyAmazonRestoreResponseReceived ( requestStatus.ordinal () , false, null, null );
         }
 	}
 

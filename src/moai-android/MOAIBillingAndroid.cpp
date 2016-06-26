@@ -241,7 +241,7 @@ int MOAIBillingAndroid::_restoreTransactions ( lua_State* L ) {
 //----------------------------------------------------------------//
 /**	@lua	setBillingProvider
 	@text	Set the billing provider to use for in-app purchases.
-	
+
 	@in		number provider			The billing provider.
 	@out 	boolean success			True, if the provider was successfully set.
 */
@@ -448,8 +448,8 @@ int MOAIBillingAndroid::_consumePurchaseSync ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 /**	@lua	getPurchasedProducts
-	@text	Gets the user's purchased products 
-				
+	@text	Gets the user's purchased products
+
 	@in		number type
 	@opt	string continuation
 	@out 	string products			JSON string of products
@@ -580,7 +580,7 @@ int MOAIBillingAndroid::_purchaseProductFortumo( lua_State* L ) {
 //----------------------------------------------------------------//
 /**	@lua	requestProductsSync
 	@text	Gets the products from Google Play for the current app
-				
+
     @in		table skus
 	@in	    number type
 	@out 	string products			JSON string of products
@@ -661,6 +661,38 @@ int MOAIBillingAndroid::_requestProductsSync ( lua_State* L ) {
 	return 0;
 }
 
+// Amazon IAP v2: TODO - maybe mix with consumePurchaseSync
+
+//----------------------------------------------------------------//
+int MOAIBillingAndroid::_fulfillReceiptAmazon ( lua_State* L ) {
+
+	MOAILuaState state ( L );
+
+	cc8* receiptId = lua_tostring ( state, 1 );
+
+	JNI_GET_ENV ( jvm, env );
+
+	JNI_GET_JSTRING ( receiptId, jReceiptId );
+
+	jclass billing = env->FindClass ( MOAIBillingAndroid::Get ().mBillingProvider );
+    if ( billing == NULL ) {
+
+		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", MOAIBillingAndroid::Get ().mBillingProvider );
+    } else {
+
+    	jmethodID fulfillReceipt = env->GetStaticMethodID ( billing, "fulfillReceipt", "(Ljava/lang/String;)V" );
+    	if ( fulfillReceipt == NULL ) {
+
+			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find static java method %s", "fulfillReceipt" );
+    	} else {
+
+			env->CallStaticVoidMethod ( billing, fulfillReceipt, jReceiptId );
+		}
+	}
+
+	return 0;
+}
+
 
 //================================================================//
 // MOAIBillingAndroid
@@ -733,6 +765,9 @@ void MOAIBillingAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "purchaseProduct",	 			_purchaseProduct },
 		{ "purchaseProductFortumo", 		_purchaseProductFortumo },
 		{ "requestProductsSync", 			_requestProductsSync },
+
+		// Amazon IAP v2: TODO - maybe mix with consumePurchaseSync
+		{ "fulfillReceiptAmazon", 			_fulfillReceiptAmazon },
 
 		{ NULL, NULL }
 	};
@@ -919,6 +954,24 @@ void MOAIBillingAndroid::NotifyRestoreResponseReceived ( int code, bool more, cc
 }
 
 //----------------------------------------------------------------//
+void MOAIBillingAndroid::NotifyRestoreResponseReceivedAmazon ( int code, bool more, cc8* sku, cc8* receiptId ) {
+
+	MOAILuaRef& callback = this->mListeners [ RESTORE_RESPONSE_RECEIVED ];
+
+	if ( callback ) {
+
+		MOAIScopedLuaState state = callback.GetSelf ();
+
+		lua_pushinteger ( state, code );
+		lua_pushboolean ( state, more );
+		lua_pushstring ( state, sku );
+		lua_pushstring ( state, receiptId );
+
+		state.DebugCall ( 4, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
 void MOAIBillingAndroid::NotifyUserIdDetermined ( int code, cc8* user ) {
 
 	MOAILuaRef& callback = this->mListeners [ USER_ID_DETERMINED ];
@@ -971,13 +1024,15 @@ extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiAmazonBilling_A
 }
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiAmazonBilling_AKUNotifyAmazonRestoreResponseReceived ( JNIEnv* env, jclass obj, jint code, jboolean more, jstring joffset ) {
+extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiAmazonBilling_AKUNotifyAmazonRestoreResponseReceived ( JNIEnv* env, jclass obj, jint code, jboolean more, jstring jsku, jstring jreceiptId ) {
 
-	JNI_GET_CSTRING ( joffset, offset );
+	JNI_GET_CSTRING ( jsku, sku );
+	JNI_GET_CSTRING ( jreceiptId, receiptId );
 
-	MOAIBillingAndroid::Get ().NotifyRestoreResponseReceived ( MOAIBillingAndroid::MapAmazonRestoreRequestStatus ( code ), more, offset );
+	MOAIBillingAndroid::Get ().NotifyRestoreResponseReceivedAmazon ( MOAIBillingAndroid::MapAmazonRestoreRequestStatus ( code ), more, sku, receiptId );
 
-	JNI_RELEASE_CSTRING ( joffset, offset );
+	JNI_RELEASE_CSTRING ( jsku, sku );
+	JNI_RELEASE_CSTRING ( jreceiptId, receiptId );
 }
 
 //----------------------------------------------------------------//

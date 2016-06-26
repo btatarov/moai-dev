@@ -13,8 +13,8 @@
 //================================================================//
 /**	@lua	MOAIBillingAndroid
 	@text	Wrapper for in-app purchase integration on Android
-			devices using either Google Play or Amazon. Exposed 
-			to Lua via MOAIBilling on all mobile platforms, but 
+			devices using either Google Play or Amazon. Exposed
+			to Lua via MOAIBilling on all mobile platforms, but
 			API differs on iOS and Android.
 
 	@const	CHECK_BILLING_SUPPORTED						Event code for billing support request completion.
@@ -39,7 +39,7 @@
 class MOAIBillingAndroid :
 	public MOAIGlobalClass < MOAIBillingAndroid, MOAILuaObject > {
 private:
-		
+
 	static cc8*	_luaParseTable 	( lua_State* L, int idx );
 
 	//----------------------------------------------------------------//
@@ -61,11 +61,14 @@ private:
 	static int _purchaseProduct				( lua_State* L );
 	static int _purchaseProductFortumo		( lua_State* L );
 	static int _requestProductsSync			( lua_State* L );
-	
+
+	// Amazon IAP v2: TODO - maybe mix with consumePurchaseSync
+	static int _fulfillReceiptAmazon		( lua_State* L );
+
 public:
 
 	DECL_LUA_SINGLETON ( MOAIBillingAndroid );
-		
+
 	enum {
 		CHECK_BILLING_SUPPORTED,
 		PURCHASE_RESPONSE_RECEIVED,
@@ -95,7 +98,7 @@ public:
         BILLING_PURCHASE_STATE_PURCHASE_CANCELED,
         BILLING_PURCHASE_STATE_ITEM_REFUNDED,
 	};
-	
+
 	enum {
         GOOGLE_RESPONSE_CODE_OK,
         GOOGLE_RESPONSE_CODE_USER_CANCELED,
@@ -105,13 +108,13 @@ public:
         GOOGLE_RESPONSE_CODE_DEVELOPER_ERROR,
         GOOGLE_RESPONSE_CODE_ERROR,
 	};
-	
+
 	enum {
         GOOGLE_PURCHASE_STATE_ITEM_PURCHASED,
         GOOGLE_PURCHASE_STATE_PURCHASE_CANCELED,
         GOOGLE_PURCHASE_STATE_ITEM_REFUNDED,
 	};
-	
+
 	enum {
 		AMAZON_USER_ID_REQUEST_STATUS_SUCCESS,
 		AMAZON_USER_ID_REQUEST_STATUS_FAILED,
@@ -133,7 +136,7 @@ public:
 		AMAZON_USER_ID_RESTORE_STATUS_SUCCESS,
 		AMAZON_USER_ID_RESTORE_STATUS_FAILED,
 	};
-	
+
 	enum {
 		BILLINGV3_PRODUCT_INAPP,
 		BILLINGV3_PRODUCT_SUBSCRIPTION,
@@ -148,7 +151,7 @@ public:
         BILLINGV3_RESPONSE_RESULT_ERROR = 6,
         BILLINGV3_RESPONSE_RESULT_ITEM_ALREADY_OWNED = 7,
         BILLINGV3_RESPONSE_RESULT_ITEM_NOT_OWNED = 8,
-	}; 
+	};
 
 	cc8*			mBillingProvider;
 	MOAILuaStrongRef		mListeners [ TOTAL ];
@@ -163,6 +166,7 @@ public:
 	static int		MapGoogleResponseCode			( int code );
 	void			NotifyBillingSupported			( bool supported );
 	void			NotifyPurchaseResponseReceived	( int code, cc8* identifier );
+	void 			NotifyRestoreResponseReceivedAmazon ( int code, bool more, cc8* sku, cc8* receiptId );
 	void			NotifyPurchaseStateChanged		( int code, cc8* identifier, cc8* order, cc8* user, cc8* notification, cc8* payload );
 	void			NotifyRestoreResponseReceived	( int code, bool more, cc8* offset );
 	void			NotifyUserIdDetermined			( int code, cc8* user );
