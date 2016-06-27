@@ -72,6 +72,12 @@ MODULES = {
 		bin		= MOAI_SDK_HOME .. 'ant/libmoai/libs/<arch>/libmoai.so',
 	},
 
+    obb_downloader = {
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/obb-downloader',
+        src		= MOAI_SDK_HOME .. 'src/moai-android-obb-downloader',
+        project = true,
+    },
+
     revmob = {
         lib		= MOAI_SDK_HOME .. '3rdparty-android/revmob-9.0.8',
         src		= MOAI_SDK_HOME .. 'src/moai-android-revmob',

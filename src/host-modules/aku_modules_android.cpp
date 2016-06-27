@@ -51,6 +51,10 @@ void AKUModulesAndroidAppFinalize () {
 		AKUAndroidHeyZapAppFinalize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_OBB_DOWNLOADER
+		AKUAndroidObbDownloaderAppFinalize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_REVMOB
 		AKUAndroidRevMobAppFinalize ();
 	#endif
@@ -116,6 +120,10 @@ void AKUModulesAndroidAppInitialize () {
 		AKUAndroidHeyZapAppInitialize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_OBB_DOWNLOADER
+		AKUAndroidObbDownloaderAppInitialize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_REVMOB
 		AKUAndroidRevMobAppInitialize ();
 	#endif
@@ -179,6 +187,10 @@ void AKUModulesAndroidContextInitialize () {
 
 	#if AKU_WITH_ANDROID_HEYZAP
 		AKUAndroidHeyZapContextInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_OBB_DOWNLOADER
+		AKUAndroidObbDownloaderContextInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_REVMOB

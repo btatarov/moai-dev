@@ -54,10 +54,11 @@ HOST_SETTINGS = {
             MODULES = {
                 'adcolony',
                 'admob',
+                'chartboost',
                 'google_billing',
                 'google_play_services',
-                'chartboost',
                 'heyzap',
+                'obb-downloader',
                 'revmob',
                 'startapp',
                 'vungle',

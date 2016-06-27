@@ -230,6 +230,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	OBB_DOWNLOADER = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_OBB_DOWNLOADER',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-obb-downloader.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-obb-downloader',
+	},
+
+	----------------------------------------------------------------
 	STARTAPP = {
 
 		MODULE_DEFINE = 'AKU_WITH_ANDROID_STARTAPP',
@@ -406,6 +418,7 @@ STATIC_LIBRARIES = {
 	'libmoai-gamecircle',
 	'libmoai-googleplayservices',
 	'libmoai-heyzap',
+	'libmoai-obb-downloader',
 	'libmoai-revmob',
 	'libmoai-startapp',
 	'libmoai-twitter',

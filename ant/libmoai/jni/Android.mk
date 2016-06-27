@@ -107,16 +107,9 @@
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-adcolony.mk
 
 	#--------------------------------------------------------------#
-	# CRYPTO
+	# UNTZ
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_CRYPTO=1
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include-android
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/crypto
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-crypto.mk
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/zl-crypto.mk
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-crypto.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_UNTZ=0
 
 	#--------------------------------------------------------------#
 	# TWITTER
@@ -196,11 +189,6 @@
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-http-client.mk
 
 	#--------------------------------------------------------------#
-	# AMAZON_ADS
-
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_AMAZON_ADS=0
-
-	#--------------------------------------------------------------#
 	# FMOD_STUDIO
 
 	MY_LOCAL_CFLAGS += -DAKU_WITH_FMOD_STUDIO=1
@@ -210,9 +198,27 @@
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-fmod-studio.mk
 
 	#--------------------------------------------------------------#
-	# UNTZ
+	# AMAZON_ADS
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_UNTZ=0
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_AMAZON_ADS=0
+
+	#--------------------------------------------------------------#
+	# FACEBOOK
+
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_FACEBOOK=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-facebook.mk
+
+	#--------------------------------------------------------------#
+	# CRYPTO
+
+	MY_LOCAL_CFLAGS += -DAKU_WITH_CRYPTO=1
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include-android
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/crypto
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-crypto.mk
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/zl-crypto.mk
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-crypto.mk
 
 	#--------------------------------------------------------------#
 	# VUNGLE
@@ -221,10 +227,10 @@
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-vungle.mk
 
 	#--------------------------------------------------------------#
-	# FACEBOOK
+	# OBB_DOWNLOADER
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_FACEBOOK=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-facebook.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_OBB_DOWNLOADER=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-obb-downloader.mk
 
 	#--------------------------------------------------------------#
 	# UTIL
@@ -285,7 +291,7 @@
 	LOCAL_SRC_FILES 	+= src/aku_plugins.cpp
 
 	LOCAL_SHARED_LIBRARIES := fmod
-	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-admob libmoai-chartboost libmoai-crittercism libmoai-facebook libmoai-googleplayservices libmoai-heyzap libmoai-revmob libmoai-startapp libmoai-twitter libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
+	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-admob libmoai-chartboost libmoai-crittercism libmoai-facebook libmoai-googleplayservices libmoai-heyzap libmoai-obb-downloader libmoai-revmob libmoai-startapp libmoai-twitter libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
 	LOCAL_WHOLE_STATIC_LIBRARIES := libmoai-android libmoai-sim libmoai-core libcrypto
 
 #----------------------------------------------------------------#

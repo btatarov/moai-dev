@@ -331,6 +331,8 @@ util.replaceInFiles ({
 		[ '@PLATFORM_NAME@' ]					= string.upper ( config.PLATFORM_NAME ),
 		[ '@RUN_SCRIPTS@' ]						= config.LUA_MAIN,
 		[ '@WORKING_DIR@' ]						= config.LUA_WORKING_DIR,
+		[ '@KEY_ALIAS_PASSWORD@' ]				= config.KEYSTORE_ALIAS_PASSWORD,
+		[ '@BASE_64_PUBLIC_KEY@' ]				= config.BASE64_PUBLIC_KEY,
 	},
 })
 

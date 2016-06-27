@@ -1,0 +1,4 @@
+<!-- Google Downloader -->
+<activity android:name="com.ziplinegames.moai.MoaiGoogleDownloader" />
+<service android:name="com.ziplinegames.moai.MoaiGoogleDownloaderService" />
+<receiver android:name="com.ziplinegames.moai.MoaiGoogleDownloaderAlarmReceiver" />

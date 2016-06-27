@@ -47,6 +47,10 @@
 	#include <moai-android-heyzap/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_OBB_DOWNLOADER
+	#include <moai-android-obb-downloader/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_REVMOB
 	#include <moai-android-revmob/host.h>
 #endif
