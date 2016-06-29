@@ -45,10 +45,25 @@ MOAIObbDownloaderAndroid::~MOAIObbDownloaderAndroid () {
 //----------------------------------------------------------------//
 void MOAIObbDownloaderAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
+	state.SetField ( -1, "DOWNLOAD_COMPLETED",	( u32 )DOWNLOAD_COMPLETED );
+
 	luaL_Reg regTable [] = {
-		{ "init",	_init },
+		{ "getListener",	&MOAIGlobalEventSource::_getListener < MOAIObbDownloaderAndroid > },
+		{ "init",			_init },
+		{ "setListener",	&MOAIGlobalEventSource::_setListener < MOAIObbDownloaderAndroid > },
 		{ NULL, NULL }
 	};
 
 	luaL_register ( state, 0, regTable );
+}
+
+//================================================================//
+// ObbDownloader JNI methods
+//================================================================//
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiObbDownloader_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
+
+	ZLLog::LogF ( ZLLog::CONSOLE, "Java_com_ziplinegames_moai_MoaiObbDownloader_AKUInvokeListener\n" );
+	MOAIObbDownloaderAndroid::Get ().InvokeListener ( ( u32 )eventID );
 }

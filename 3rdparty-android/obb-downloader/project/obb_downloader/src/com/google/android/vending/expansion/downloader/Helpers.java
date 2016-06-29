@@ -261,56 +261,57 @@ public class Helpers {
      * @return string resource ID for the corresponding string.
      */
     static public int getDownloaderStringResourceIDFromState(Context ctx, int state) {
-         switch (state) {
-             case IDownloaderClient.STATE_IDLE:
-                 return getStringResource(ctx, "state_idle");
-             case IDownloaderClient.STATE_FETCHING_URL:
-                 return getStringResource(ctx, "state_fetching_url");
-             case IDownloaderClient.STATE_CONNECTING:
-                 return getStringResource(ctx, "state_connecting");
-             case IDownloaderClient.STATE_DOWNLOADING:
-                 return getStringResource(ctx, "state_downloading");
-             case IDownloaderClient.STATE_COMPLETED:
-                 return getStringResource(ctx, "state_completed");
-             case IDownloaderClient.STATE_PAUSED_NETWORK_UNAVAILABLE:
-                 return getStringResource(ctx, "state_paused_network_unavailable");
-             case IDownloaderClient.STATE_PAUSED_BY_REQUEST:
-                 return getStringResource(ctx, "state_paused_by_request");
-             case IDownloaderClient.STATE_PAUSED_WIFI_DISABLED_NEED_CELLULAR_PERMISSION:
-                 return getStringResource(ctx, "state_paused_wifi_disabled");
-             case IDownloaderClient.STATE_PAUSED_NEED_CELLULAR_PERMISSION:
-                 return getStringResource(ctx, "state_paused_wifi_unavailable");
-             case IDownloaderClient.STATE_PAUSED_WIFI_DISABLED:
-                 return getStringResource(ctx, "state_paused_wifi_disabled");
-             case IDownloaderClient.STATE_PAUSED_NEED_WIFI:
-                 return getStringResource(ctx, "state_paused_wifi_unavailable");
-             case IDownloaderClient.STATE_PAUSED_ROAMING:
-                 return getStringResource(ctx, "state_paused_roaming");
-             case IDownloaderClient.STATE_PAUSED_NETWORK_SETUP_FAILURE:
-                 return getStringResource(ctx, "state_paused_network_setup_failure");
-             case IDownloaderClient.STATE_PAUSED_SDCARD_UNAVAILABLE:
-                 return getStringResource(ctx, "state_paused_sdcard_unavailable");
-             case IDownloaderClient.STATE_FAILED_UNLICENSED:
-                 return getStringResource(ctx, "state_failed_unlicensed");
-             case IDownloaderClient.STATE_FAILED_FETCHING_URL:
-                 return getStringResource(ctx, "state_failed_fetching_url");
-             case IDownloaderClient.STATE_FAILED_SDCARD_FULL:
-                 return getStringResource(ctx, "state_failed_sdcard_full");
-             case IDownloaderClient.STATE_FAILED_CANCELED:
-                 return getStringResource(ctx, "state_failed_cancelled");
-             default:
-                 return getStringResource(ctx, "state_unknown");
-         }
+        switch (state) {
+            case IDownloaderClient.STATE_IDLE:
+                return getStringResource(ctx, "state_idle");
+            case IDownloaderClient.STATE_FETCHING_URL:
+                return getStringResource(ctx, "state_fetching_url");
+            case IDownloaderClient.STATE_CONNECTING:
+                return getStringResource(ctx, "state_connecting");
+            case IDownloaderClient.STATE_DOWNLOADING:
+                return getStringResource(ctx, "state_downloading");
+            case IDownloaderClient.STATE_COMPLETED:
+                return getStringResource(ctx, "state_completed");
+            case IDownloaderClient.STATE_PAUSED_NETWORK_UNAVAILABLE:
+                return getStringResource(ctx, "state_paused_network_unavailable");
+            case IDownloaderClient.STATE_PAUSED_BY_REQUEST:
+                return getStringResource(ctx, "state_paused_by_request");
+            case IDownloaderClient.STATE_PAUSED_WIFI_DISABLED_NEED_CELLULAR_PERMISSION:
+                return getStringResource(ctx, "state_paused_wifi_disabled");
+            case IDownloaderClient.STATE_PAUSED_NEED_CELLULAR_PERMISSION:
+                return getStringResource(ctx, "state_paused_wifi_unavailable");
+            case IDownloaderClient.STATE_PAUSED_WIFI_DISABLED:
+                return getStringResource(ctx, "state_paused_wifi_disabled");
+            case IDownloaderClient.STATE_PAUSED_NEED_WIFI:
+                return getStringResource(ctx, "state_paused_wifi_unavailable");
+            case IDownloaderClient.STATE_PAUSED_ROAMING:
+                return getStringResource(ctx, "state_paused_roaming");
+            case IDownloaderClient.STATE_PAUSED_NETWORK_SETUP_FAILURE:
+                return getStringResource(ctx, "state_paused_network_setup_failure");
+            case IDownloaderClient.STATE_PAUSED_SDCARD_UNAVAILABLE:
+                return getStringResource(ctx, "state_paused_sdcard_unavailable");
+            case IDownloaderClient.STATE_FAILED_UNLICENSED:
+                return getStringResource(ctx, "state_failed_unlicensed");
+            case IDownloaderClient.STATE_FAILED_FETCHING_URL:
+                return getStringResource(ctx, "state_failed_fetching_url");
+            case IDownloaderClient.STATE_FAILED_SDCARD_FULL:
+                return getStringResource(ctx, "state_failed_sdcard_full");
+            case IDownloaderClient.STATE_FAILED_CANCELED:
+                return getStringResource(ctx, "state_failed_cancelled");
+            default:
+                return getStringResource(ctx, "state_unknown");
+        }
     }
 
     static public int getStringResource(Context ctx, String name) {
 		return ctx.getResources().getIdentifier(name, "string", ctx.getPackageName());
 	}
+
 	static public int getLayoutResource(Context ctx, String name) {
 		return ctx.getResources().getIdentifier(name, "layout", ctx.getPackageName());
 	}
+    
 	static public int getIdResource(Context ctx, String name) {
 		return ctx.getResources().getIdentifier(name, "id", ctx.getPackageName());
 	}
-
 }

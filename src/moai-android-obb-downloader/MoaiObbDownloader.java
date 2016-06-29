@@ -22,6 +22,11 @@ import java.io.InputStream;
 import com.google.android.vending.expansion.downloader.*;
 
 public class MoaiObbDownloader extends Activity implements IDownloaderClient {
+
+    public enum ListenerEvent {
+		DOWNLOAD_COMPLETED,
+    }
+
     private ProgressBar mPB;
 
     private TextView mStatusText;
@@ -46,19 +51,19 @@ public class MoaiObbDownloader extends Activity implements IDownloaderClient {
 
     private static Activity sActivity = null;
 
+    protected static native void AKUInvokeListener ( int eventID );
+
     //----------------------------------------------------------------//
     public static void onCreate ( Activity activity ) {
 
 		MoaiLog.i ( "MoaiObbDownloader onCreate: Initializing Obb Downloader" );
 		sActivity = activity;
-
-        init ();
 	}
 
     //----------------------------------------------------------------//
     public static void init () {
 
-        sActivity.runOnUiThread (new Runnable () {
+        sActivity.runOnUiThread ( new Runnable () {
 
   			public void run () {
 
@@ -74,7 +79,7 @@ public class MoaiObbDownloader extends Activity implements IDownloaderClient {
 
         super.onCreate ( savedInstanceState );
 
-		requestWindowFeature ( Window.FEATURE_NO_TITLE );
+        requestWindowFeature ( Window.FEATURE_NO_TITLE );
 
 		try {
 
@@ -302,6 +307,8 @@ public class MoaiObbDownloader extends Activity implements IDownloaderClient {
 
             Moai.mount ( "bundleobb", filePath + "/" + fileName );
             Moai.setWorkingDirectory ( "bundleobb/assets/lua" );
+
+            AKUInvokeListener ( ListenerEvent.DOWNLOAD_COMPLETED.ordinal () );
         } catch (NameNotFoundException e) {
 
             MoaiLog.e ( "MoaiObbDownloader on mount: Unable to locate the application bundle" );

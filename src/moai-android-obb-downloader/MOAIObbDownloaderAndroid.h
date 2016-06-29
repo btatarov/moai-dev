@@ -24,6 +24,10 @@ public:
 
 	DECL_LUA_SINGLETON ( MOAIObbDownloaderAndroid );
 
+	enum {
+		DOWNLOAD_COMPLETED,
+	};
+
 	//----------------------------------------------------------------//
 			MOAIObbDownloaderAndroid	();
 			~MOAIObbDownloaderAndroid	();
