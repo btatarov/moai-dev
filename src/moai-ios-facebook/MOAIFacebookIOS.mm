@@ -13,25 +13,25 @@
 
 //----------------------------------------------------------------//
 int MOAIFacebookIOS::_getToken ( lua_State* L ) {
-	
+
 	MOAILuaState state ( L );
-	
+
 	NSString* token = [ [ FBSDKAccessToken currentAccessToken ] tokenString ];
-	
+
 	lua_pushstring ( state, [ token UTF8String ] );
-	
+
 	return 1;
 }
 
 //----------------------------------------------------------------//
 int MOAIFacebookIOS::_getUserID ( lua_State* L ) {
-	
+
 	MOAILuaState state ( L );
-	
+
 	NSString* userID = [ [ FBSDKAccessToken currentAccessToken ] userID ];
-	
+
 	lua_pushstring ( state, [ userID UTF8String ] );
-	
+
 	return 1;
 }
 
@@ -67,14 +67,14 @@ int MOAIFacebookIOS::_inviteFriends ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 int MOAIFacebookIOS::_isUserLoggedIn ( lua_State* L ) {
-	
+
 	MOAILuaState state ( L );
-	
+
 	bool result = false;
 	if ( [ FBSDKAccessToken currentAccessToken ] ) result = true;
-	
+
 	lua_pushboolean ( state, result );
-	
+
 	return 1;
 }
 
@@ -90,7 +90,7 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
 	MOAILuaState state ( L );
 
 	if ( ! [FBSDKAccessToken currentAccessToken] ) {
-		
+
 		UIWindow* window = [ [ UIApplication sharedApplication ] keyWindow ];
 		UIViewController* rootVC = [ window rootViewController ];
 
@@ -99,37 +99,37 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
 		NSMutableDictionary* paramsDict = [ [ NSMutableDictionary alloc ] init ];
 
 		if ( state.IsType ( 1, LUA_TTABLE ) ) {
-			
+
 			[ paramsDict initWithLua:state stackIndex:1 ];
 		}
-		
+
 		NSMutableArray* perms;
-		
+
 		if ( [ [ paramsDict allKeys ] count ] > 0 )
 			perms = [ [ NSMutableArray alloc ] initWithObjects:[ paramsDict allValues ], nil ];
 		else
 			perms = [ [ NSMutableArray alloc ] init ];
-		
+
 		[ perms addObject:@"public_profile" ];
 		[ perms addObject:@"email" ];
-		
+
 		[ loginMgr logInWithReadPermissions:perms fromViewController:rootVC
 		 handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
 
 			if ( error )
-				MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_ERROR );
+				MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::FACEBOOK_LOGIN_ERROR );
 			else if ( result.isCancelled )
-				MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_DISMISSED );
+				MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::FACEBOOK_LOGIN_CANCEL );
 			else
-				MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_SUCCESSFUL );
+				MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::FACEBOOK_LOGIN_SUCCESS );
 		}];
 
 		[ perms release ];
 		[ paramsDict release ];
 		[ loginMgr release ];
 	} else {
-		
-		MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::LOGIN_SUCCESSFUL );
+
+		MOAIFacebookIOS::Get ().InvokeListener ( MOAIFacebookIOS::FACEBOOK_LOGIN_SUCCESS );
 	}
 
 	return 0;
@@ -143,7 +143,7 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
  @out 	nil
  */
 int MOAIFacebookIOS::_logout ( lua_State* L ) {
-	
+
 	MOAILuaState state ( L );
 
 	FBSDKLoginManager* loginMgr = [ [ FBSDKLoginManager alloc ] init ];
@@ -185,7 +185,7 @@ int MOAIFacebookIOS::_postToFeed ( lua_State* L ) {
 	dialog.shareContent = content;
 	dialog.fromViewController = rootVC;
 	dialog.delegate = MOAIFacebookIOS::Get ().mShareDelegate;
-	
+
 	if ( ! [ dialog canShow ] ) dialog.mode = FBSDKShareDialogModeFeedBrowser;
 	[ dialog show ];
 
@@ -218,16 +218,16 @@ MOAIFacebookIOS::~MOAIFacebookIOS () {
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "LOGIN_SUCCESSFUL",    ( u32 )LOGIN_SUCCESSFUL );
-	state.SetField ( -1, "LOGIN_ERROR",         ( u32 )LOGIN_ERROR );
-	state.SetField ( -1, "LOGIN_DISMISSED",     ( u32 )LOGIN_DISMISSED );
+	state.SetField ( -1, "FACEBOOK_LOGIN_SUCCESS",	( u32 )FACEBOOK_LOGIN_SUCCESS );
+	state.SetField ( -1, "FACEBOOK_LOGIN_CANCEL", 	( u32 )FACEBOOK_LOGIN_CANCEL );
+	state.SetField ( -1, "FACEBOOK_LOGIN_ERROR",	( u32 )FACEBOOK_LOGIN_ERROR );
 
-	state.SetField ( -1, "SHARE_SUCCESSFUL", 	( u32 )SHARE_SUCCESSFUL );
-	state.SetField ( -1, "SHARE_ERROR",         ( u32 )SHARE_ERROR );
-	state.SetField ( -1, "SHARE_DISMISSED",     ( u32 )SHARE_DISMISSED );
+	state.SetField ( -1, "SHARE_SUCCESSFUL", 		( u32 )SHARE_SUCCESSFUL );
+	state.SetField ( -1, "SHARE_ERROR",         	( u32 )SHARE_ERROR );
+	state.SetField ( -1, "SHARE_DISMISSED",     	( u32 )SHARE_DISMISSED );
 
-	state.SetField ( -1, "INVITE_SUCCESSFUL",   ( u32 )INVITE_SUCCESSFUL );
-	state.SetField ( -1, "INVITE_ERROR",        ( u32 )INVITE_ERROR );
+	state.SetField ( -1, "INVITE_SUCCESSFUL",   	( u32 )INVITE_SUCCESSFUL );
+	state.SetField ( -1, "INVITE_ERROR",        	( u32 )INVITE_ERROR );
 
 	luaL_Reg regTable[] = {
 		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIFacebookIOS > },

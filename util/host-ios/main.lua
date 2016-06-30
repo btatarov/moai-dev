@@ -90,7 +90,7 @@ configureHost = function ()
         if ( MOAIFileSystem.checkPathExists ( icons ) ) then
 
             MOAIFileSystem.deleteDirectory ( config.OUTPUT_DIR .. 'res/Images.xcassets/AppIcon.appiconset' )
-            MOAIFileSystem.copy ( icons, config.OUTPUT_DIR .. 'res/Images.xcassets/AppIcon.appiconset/' )
+            MOAIFileSystem.copy ( icons, config.OUTPUT_DIR .. 'res/Images.xcassets/AppIcon.appiconset' )
         else
 
             error ( 'Could not find specified icon assets:' .. icons .. ' - skipping' )
@@ -105,7 +105,7 @@ configureHost = function ()
         if ( MOAIFileSystem.checkPathExists ( icons ) ) then
 
             MOAIFileSystem.deleteDirectory ( config.OUTPUT_DIR .. 'res/Images.xcassets/LaunchImage.launchimage' )
-            MOAIFileSystem.copy ( icons, config.OUTPUT_DIR .. 'res/Images.xcassets/LaunchImage.launchimage/' )
+            MOAIFileSystem.copy ( icons, config.OUTPUT_DIR .. 'res/Images.xcassets/LaunchImage.launchimage' )
         else
 
             error ( 'Could not find specified icon assets:' .. icons .. ' - skipping' )
