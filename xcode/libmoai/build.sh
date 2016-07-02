@@ -44,3 +44,4 @@ IOS_LIB=../../lib/ios
 rm -rf $IOS_LIB
 mkdir -p $IOS_LIB
 cp -a ./build/Release-universal/*.a $IOS_LIB
+cp -a ../../3rdparty/fmod/lib/ios/*.a $IOS_LIB

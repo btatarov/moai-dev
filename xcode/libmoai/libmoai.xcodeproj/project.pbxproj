@@ -40,6 +40,7 @@
 			);
 			dependencies = (
 				3E72B9AA19F703FA00A9DE30 /* PBXTargetDependency */,
+				4367C4821D277A6F00F51100 /* PBXTargetDependency */,
 				3E72B9AC19F703FA00A9DE30 /* PBXTargetDependency */,
 				CDB14A291A01CCFB008CEA54 /* PBXTargetDependency */,
 				43B309781CBD400A00DF3017 /* PBXTargetDependency */,
@@ -4594,6 +4595,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = CDA4B8251808AC82000129F9;
 			remoteInfo = "libmoai-ios-facebook";
+		};
+		4367C4811D277A6F00F51100 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD257B251A6255380057A53A;
+			remoteInfo = "libmoai-ios-apple";
 		};
 		43B309751CBD294900DF3017 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -19270,6 +19278,11 @@
 			isa = PBXTargetDependency;
 			target = CDA4B8251808AC82000129F9 /* libmoai-ios-facebook */;
 			targetProxy = 432F17B41CBDB5460014E7E0 /* PBXContainerItemProxy */;
+		};
+		4367C4821D277A6F00F51100 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD257B251A6255380057A53A /* libmoai-ios-apple */;
+			targetProxy = 4367C4811D277A6F00F51100 /* PBXContainerItemProxy */;
 		};
 		43B309761CBD294900DF3017 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
