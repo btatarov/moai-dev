@@ -12,6 +12,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * fmod as module (from [moai-fmod-studio](https://github.com/Vavius/moai-fmod-studio))
 * spine as module (from [plugin-moai-spine](https://github.com/Vavius/plugin-moai-spine))
 * openssl 1.0.2g
+* libpng-1.4.19 (TODO: currently only for android)
 * luajit 2.0.4
 * MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
 * TODO: move loadDual in a separate module (loader)
@@ -27,7 +28,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * amazon billing v2
 * amazon gamecircle
 * admob-8.4.0 (interstitial and banner)
-* chartboost-6.4.1 (interstitial and rewarded video)
+* chartboost-6.4.1 (interstitial)
 * crittercism-5.5.5
 * facebook-4.5.1 (4.6 and above require minSdkVersion=15)
 * heyzap-9.4.5 (interstitial and rewarded video)

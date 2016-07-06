@@ -16,22 +16,22 @@ class MOAIVungleAndroid :
 private:
 
 	jmethodID	mJava_Init;
-	jmethodID	mJava_IsVideoAvailable;
-	jmethodID	mJava_DisplayAdvert;
+	jmethodID	mJava_HasCachedRewardedVideo;
+	jmethodID	mJava_ShowRewardedVideo;
 
 	//----------------------------------------------------------------//
-	static int	_displayAdvert		( lua_State* L );
-	static int	_init				( lua_State* L );
-	static int	_isVideoAvailable	( lua_State* L );
+	static int	_showRewardedVideo			( lua_State* L );
+	static int	_init						( lua_State* L );
+	static int	_hasCachedRewardedVideo		( lua_State* L );
 
 public:
 
 	DECL_LUA_SINGLETON ( MOAIVungleAndroid );
 
 	enum {
-		AD_START,
-		AD_END,
-		AD_VIEWED,
+		REWARDED_VIDEO_STARTED,
+		REWARDED_VIDEO_FINISH,
+		REWARDED_VIDEO_COMPLETED,
 	};
 
 	//----------------------------------------------------------------//

@@ -15,10 +15,10 @@
 //================================================================//
 
 //----------------------------------------------------------------//
-int MOAIVungleAndroid::_displayAdvert ( lua_State* L ) {
+int MOAIVungleAndroid::_showRewardedVideo ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
 
-	self->CallStaticVoidMethod ( self->mJava_DisplayAdvert );
+	self->CallStaticVoidMethod ( self->mJava_ShowRewardedVideo );
 
 	return 0;
 }
@@ -35,10 +35,10 @@ int	MOAIVungleAndroid::_init ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-int	MOAIVungleAndroid::_isVideoAvailable ( lua_State* L ) {
+int	MOAIVungleAndroid::_hasCachedRewardedVideo ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
 
-	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_IsVideoAvailable ) );
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_HasCachedRewardedVideo ) );
 
 	return 1;
 }
@@ -54,9 +54,9 @@ MOAIVungleAndroid::MOAIVungleAndroid () {
 
 	this->SetClass ( "com/ziplinegames/moai/MoaiVungle" );
 
-	this->mJava_Init				= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
-	this->mJava_IsVideoAvailable	= this->GetStaticMethod ( "isVideoAvailable", "()Z" );
-	this->mJava_DisplayAdvert		= this->GetStaticMethod ( "displayAdvert", "()V" );
+	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
+	this->mJava_HasCachedRewardedVideo	= this->GetStaticMethod ( "hasCachedRewardedVideo", "()Z" );
+	this->mJava_ShowRewardedVideo		= this->GetStaticMethod ( "showRewardedVideo", "()V" );
 }
 
 //----------------------------------------------------------------//
@@ -66,15 +66,15 @@ MOAIVungleAndroid::~MOAIVungleAndroid () {
 //----------------------------------------------------------------//
 void MOAIVungleAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "AD_START",		( u32 )AD_START );
-	state.SetField ( -1, "AD_END", 			( u32 )AD_END );
-	state.SetField ( -1, "AD_VIEWED", 		( u32 )AD_VIEWED );
+	state.SetField ( -1, "REWARDED_VIDEO_STARTED",		( u32 )REWARDED_VIDEO_STARTED );
+	state.SetField ( -1, "REWARDED_VIDEO_FINISH", 		( u32 )REWARDED_VIDEO_FINISH );
+	state.SetField ( -1, "REWARDED_VIDEO_COMPLETED", 	( u32 )REWARDED_VIDEO_COMPLETED );
 
 	luaL_Reg regTable [] = {
-		{ "displayAdvert",				_displayAdvert },
+		{ "showRewardedVideo",			_showRewardedVideo },
 		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIVungleAndroid > },
 		{ "init",						_init },
-		{ "isVideoAvailable",			_isVideoAvailable },
+		{ "hasCachedRewardedVideo",		_hasCachedRewardedVideo },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIVungleAndroid > },
 		{ NULL, NULL }
 	};
@@ -98,7 +98,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiVungle_AKUOnVie
 
 	ZLLog::LogF ( ZLLog::CONSOLE, "Java_com_ziplinegames_moai_MoaiVungle_AKUOnView\n" );
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	if ( MOAIVungleAndroid::Get ().PushListener ( MOAIVungleAndroid::AD_VIEWED, state )) {
+	if ( MOAIVungleAndroid::Get ().PushListener ( MOAIVungleAndroid::REWARDED_VIDEO_COMPLETED, state )) {
 		state.Push ( watched == length );
 		state.DebugCall ( 1, 0 );
 	}

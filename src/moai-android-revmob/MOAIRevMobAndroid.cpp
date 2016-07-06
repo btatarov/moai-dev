@@ -71,7 +71,7 @@ int MOAIRevMobAndroid::_showRewardedVideo ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIRevMobAndroid, "" )
 
 	self->CallStaticVoidMethod ( self->mJava_ShowRewardedVideo );
-	
+
 	return 0;
 }
 
@@ -102,7 +102,7 @@ MOAIRevMobAndroid::~MOAIRevMobAndroid () {
 //----------------------------------------------------------------//
 void MOAIRevMobAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "REWARDEDVIDEOAD_COMPLETED",	( u32 )REWARDEDVIDEOAD_COMPLETED );
+	state.SetField ( -1, "REWARDED_VIDEO_COMPLETED",	( u32 )REWARDED_VIDEO_COMPLETED );
 
 	luaL_Reg regTable [] = {
 		{ "cacheInterstitial",			_cacheInterstitial },

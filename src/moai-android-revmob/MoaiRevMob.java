@@ -15,7 +15,7 @@ import com.revmob.ads.interstitial.RevMobFullscreen;
 class MoaiRevMob {
 
 	public enum ListenerEvent {
-		REWARDEDVIDEOAD_COMPLETED,
+		REWARDED_VIDEO_COMPLETED,
     }
 
 	private static Activity sActivity = null;
@@ -32,7 +32,7 @@ class MoaiRevMob {
 
 		@Override
 		public void onRevMobRewardedVideoCompleted () {
-			AKUInvokeListener ( ListenerEvent.REWARDEDVIDEOAD_COMPLETED.ordinal () );
+			AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_COMPLETED.ordinal () );
 		}
 
 		@Override

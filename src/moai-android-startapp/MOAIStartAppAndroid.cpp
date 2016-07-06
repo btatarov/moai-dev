@@ -103,7 +103,7 @@ MOAIStartAppAndroid::~MOAIStartAppAndroid () {
 //----------------------------------------------------------------//
 void MOAIStartAppAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "REWARDEDVIDEOAD_COMPLETED",	( u32 )REWARDEDVIDEOAD_COMPLETED );
+	state.SetField ( -1, "REWARDED_VIDEO_COMPLETED",	( u32 )REWARDED_VIDEO_COMPLETED );
 
 	luaL_Reg regTable [] = {
 		{ "cacheInterstitial",			_cacheInterstitial },

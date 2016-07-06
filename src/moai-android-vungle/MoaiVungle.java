@@ -18,9 +18,9 @@ import com.vungle.publisher.VunglePub;
 public class MoaiVungle {
 
 	public enum ListenerEvent {
-		AD_START,
-		AD_END,
-		AD_VIEWED,
+		REWARDED_VIDEO_STARTED,
+		REWARDED_VIDEO_FINISH,
+		REWARDED_VIDEO_COMPLETED,
     }
 
 	private static final VunglePub vunglePub = VunglePub.getInstance();
@@ -58,7 +58,7 @@ public class MoaiVungle {
 	//================================================================//
 
 	//----------------------------------------------------------------//
-	public static void displayAdvert () {
+	public static void showRewardedVideo () {
 
 		if ( vunglePub.isAdPlayable () ) {
 
@@ -77,20 +77,20 @@ public class MoaiVungle {
 		    public void onVideoView ( boolean isCompletedView, int watchedMillis, int videoDurationMillis ) {
 
 				if ( isCompletedView ) {
-					AKUInvokeListener ( ListenerEvent.AD_VIEWED.ordinal () );
+					AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_COMPLETED.ordinal () );
 				}
 		    }
 
 		    @Override
 		    public void onAdStart () {
 
-				AKUInvokeListener ( ListenerEvent.AD_START.ordinal () );
+				AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_STARTED.ordinal () );
 		    }
 
 		    @Override
 		    public void onAdEnd ( boolean wasCallToActionClicked ) {
 
-				AKUInvokeListener ( ListenerEvent.AD_END.ordinal () );
+				AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_FINISH.ordinal () );
 		    }
 
 		    @Override
@@ -102,7 +102,7 @@ public class MoaiVungle {
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean isVideoAvailable () {
+	public static boolean hasCachedRewardedVideo () {
 
 		return vunglePub.isAdPlayable ();
 	}

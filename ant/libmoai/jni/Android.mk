@@ -120,12 +120,14 @@
 	#--------------------------------------------------------------#
 	# GOOGLE_PLAY_SERVICES
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES=0
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-google-play-services.mk
 
 	#--------------------------------------------------------------#
 	# ADMOB
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_ADMOB=0
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_ADMOB=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-admob.mk
 
 	#--------------------------------------------------------------#
 	# HEYZAP
@@ -136,8 +138,7 @@
 	#--------------------------------------------------------------#
 	# GAMECIRCLE
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_GAMECIRCLE=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-gamecircle.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_GAMECIRCLE=0
 
 	#--------------------------------------------------------------#
 	# BOX2D
@@ -199,8 +200,7 @@
 	#--------------------------------------------------------------#
 	# AMAZON_ADS
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_AMAZON_ADS=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-amazonads.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_AMAZON_ADS=0
 
 	#--------------------------------------------------------------#
 	# FACEBOOK
@@ -223,12 +223,14 @@
 	#--------------------------------------------------------------#
 	# VUNGLE
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_VUNGLE=0
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_VUNGLE=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-vungle.mk
 
 	#--------------------------------------------------------------#
 	# OBB_DOWNLOADER
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_OBB_DOWNLOADER=0
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_OBB_DOWNLOADER=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-obb-downloader.mk
 
 	#--------------------------------------------------------------#
 	# UTIL
@@ -265,7 +267,8 @@
 	#--------------------------------------------------------------#
 	# STARTAPP
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_STARTAPP=0
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_STARTAPP=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-startapp.mk
 
 	#--------------------------------------------------------------#
 	# CRITTERCISM
@@ -288,7 +291,7 @@
 	LOCAL_SRC_FILES 	+= src/aku_plugins.cpp
 
 	LOCAL_SHARED_LIBRARIES := fmod
-	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-amazonads libmoai-chartboost libmoai-crittercism libmoai-facebook libmoai-gamecircle libmoai-heyzap libmoai-revmob libmoai-twitter libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
+	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-admob libmoai-chartboost libmoai-crittercism libmoai-facebook libmoai-googleplayservices libmoai-heyzap libmoai-obb-downloader libmoai-revmob libmoai-startapp libmoai-twitter libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
 	LOCAL_WHOLE_STATIC_LIBRARIES := libmoai-android libmoai-sim libmoai-core libcrypto
 
 #----------------------------------------------------------------#

@@ -37,7 +37,7 @@ public:
 	DECL_LUA_SINGLETON ( MOAIStartAppAndroid );
 
 	enum {
-		REWARDEDVIDEOAD_COMPLETED,
+		REWARDED_VIDEO_COMPLETED,
 	};
 
 	//----------------------------------------------------------------//

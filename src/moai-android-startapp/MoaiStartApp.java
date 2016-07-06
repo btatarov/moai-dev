@@ -18,7 +18,7 @@ import com.startapp.android.publish.video.VideoListener;
 class MoaiStartApp {
 
 	public enum ListenerEvent {
-		REWARDEDVIDEOAD_COMPLETED,
+		REWARDED_VIDEO_COMPLETED,
     }
 
 	private static StartAppAd rewardedVideoAd = null;
@@ -110,7 +110,7 @@ class MoaiStartApp {
 		     @Override
 		     public void onVideoCompleted () {
 
-				 AKUInvokeListener ( ListenerEvent.REWARDEDVIDEOAD_COMPLETED.ordinal () );
+				 AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_COMPLETED.ordinal () );
 		     }
 
 		} );

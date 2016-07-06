@@ -16,7 +16,7 @@ import com.heyzap.sdk.ads.InterstitialAd;
 class MoaiHeyZap {
 
 	public enum ListenerEvent {
-		REWARDEDVIDEOAD_COMPLETED,
+		REWARDED_VIDEO_COMPLETED,
     }
 
 	private static Activity sActivity = null;
@@ -72,7 +72,7 @@ class MoaiHeyZap {
 		IncentivizedAd.setOnIncentiveResultListener(new OnIncentiveResultListener() {
 		    @Override
 		    public void onComplete(String tag) {
-		        AKUInvokeListener ( ListenerEvent.REWARDEDVIDEOAD_COMPLETED.ordinal () );
+		        AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_COMPLETED.ordinal () );
 		    }
 
 		    @Override
