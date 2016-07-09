@@ -131,9 +131,10 @@
 	//----------------------------------------------------------------//
 	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUAppInitialize ( JNIEnv* env, jclass obj ) {
 
+		inputQueue = new LockingQueue < InputEvent > ();
+
 		AKUAppInitialize ();
 		AKUModulesAppInitialize ();
-        AKUModulesAndroidAppInitialize ();
 	}
 
 	//----------------------------------------------------------------//
@@ -236,39 +237,27 @@
 	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUInit ( JNIEnv* env, jclass obj ) {
 
 		MOAIAppAndroid::Affirm ();
-		REGISTER_LUA_CLASS ( MOAIAppAndroid );
-
 		MOAIBrowserAndroid::Affirm ();
-		REGISTER_LUA_CLASS ( MOAIBrowserAndroid );
-
 		MOAIDialogAndroid::Affirm ();
-		REGISTER_LUA_CLASS ( MOAIDialogAndroid );
-
 		MOAIMoviePlayerAndroid::Affirm ();
-		REGISTER_LUA_CLASS ( MOAIMoviePlayerAndroid );
-
 		MOAIKeyboardAndroid::Affirm ();
+
+		REGISTER_LUA_CLASS ( MOAIAppAndroid );
+		REGISTER_LUA_CLASS ( MOAIBrowserAndroid );
+		REGISTER_LUA_CLASS ( MOAIDialogAndroid );
+		REGISTER_LUA_CLASS ( MOAIMoviePlayerAndroid );
 		REGISTER_LUA_CLASS ( MOAIKeyboardAndroid );
 
 		#ifndef DISABLE_BILLING
 			MOAIBillingAndroid::Affirm ();
 			REGISTER_LUA_CLASS ( MOAIBillingAndroid );
 		#endif
-
-		inputQueue = new LockingQueue < InputEvent > ();
 	}
 
 	//----------------------------------------------------------------//
 	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUModulesContextInitialize ( JNIEnv* env, jclass obj ) {
 
         AKUModulesContextInitialize ();
-        AKUModulesAndroidContextInitialize ();
-    }
-
-    //----------------------------------------------------------------//
-	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUModulesRunLuaAPIWrapper ( JNIEnv* env, jclass obj ) {
-
-        AKUModulesRunLuaAPIWrapper ();
     }
 
 	//----------------------------------------------------------------//

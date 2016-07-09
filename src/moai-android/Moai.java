@@ -183,7 +183,6 @@ public class Moai {
 	protected static native void 		AKUFMODExInit		 			();
 	protected static native void 		AKUInit 						();
 	protected static native void    	AKUModulesContextInitialize     ();
-	protected static native void    	AKUModulesRunLuaAPIWrapper      ();
 	protected static native void		AKUModulesUpdate				();
 	protected static native void 		AKUMountVirtualDirectory 		( String virtualPath, String archive );
 	protected static native void 		AKUPause 						( boolean paused );
@@ -244,8 +243,6 @@ public class Moai {
 		synchronized ( sAkuLock ) {
 			contextId = AKUCreateContext ();
 			AKUSetContext ( contextId );
-			AKUModulesContextInitialize ();
-			AKUModulesRunLuaAPIWrapper ();
 		}
 
 		return contextId;
@@ -319,6 +316,7 @@ public class Moai {
 		synchronized ( sAkuLock ) {
 
 			AKUInit ();
+			AKUModulesContextInitialize ();
 
 			AKUSetInputConfigurationName 	( "Android" );
 

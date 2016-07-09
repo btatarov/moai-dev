@@ -101,10 +101,10 @@ void onPaint () {
 void onReshape( int w, int h ) {
 
 	if ( sExitFullscreen ) {
-	
+
 		w = sWinWidth;
 		h = sWinHeight;
-		
+
 		sExitFullscreen = false;
 	}
 
@@ -117,10 +117,10 @@ void onTimer ( ) {
 
 	double fSimStep = AKUGetSimStep ();
 	int timerInterval = ( int )( fSimStep * 1000.0 );
-	
+
 	AKUModulesUpdate ();
-	
-	
+
+
 }
 
 //================================================================//
@@ -158,10 +158,10 @@ void _AKUOpenWindowFunc ( const char* title, int width, int height ) {
 //----------------------------------------------------------------//
 void Cleanup () {
 
-	
+
 	AKUModulesAppFinalize();
 	AKUAppFinalize ();
-	
+
 }
 
 void Dummy() {
@@ -176,13 +176,12 @@ void RefreshContext () {
 	AKUCreateContext ();
 
     AKUModulesContextInitialize ();
-	AKUModulesRunLuaAPIWrapper ();
-	
+
 	AKUSetInputConfigurationName ( "AKUGlut" );
 
 	AKUReserveInputDevices			( HtmlInputDeviceID::TOTAL );
 	AKUSetInputDevice				( HtmlInputDeviceID::DEVICE, "device" );
-	
+
 	AKUReserveInputDeviceSensors	( HtmlInputDeviceID::DEVICE, HtmlInputDeviceSensorID::TOTAL );
 	AKUSetInputDeviceKeyboard		( HtmlInputDeviceID::DEVICE, HtmlInputDeviceSensorID::KEYBOARD,		"keyboard" );
 	AKUSetInputDevicePointer		( HtmlInputDeviceID::DEVICE, HtmlInputDeviceSensorID::POINTER,		"pointer" );

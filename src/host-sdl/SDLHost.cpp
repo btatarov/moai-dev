@@ -13,7 +13,7 @@
 #elif defined(MOAI_OS_LINUX)
     #include <X11/Xlib.h>      //XOpenDisplay,etc
     #include <xcb/xcb.h>
-    #include <xcb/xcb_aux.h> 
+    #include <xcb/xcb_aux.h>
     #include <xcb/randr.h>
 #endif
 
@@ -96,7 +96,7 @@ void _AKUExitFullscreenModeFunc () {
 
 //----------------------------------------------------------------//
 void _AKUOpenWindowFunc ( const char* title, int width, int height ) {
-	
+
 	if ( !sWindow ) {
 		sWindow = SDL_CreateWindow ( title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
 		SDL_GL_CreateContext ( sWindow );
@@ -119,7 +119,7 @@ void _AKUSetTextInputRectFunc ( int xMin, int yMin, int xMax, int yMax ) {
 	sdlRect.y = yMin;
 	sdlRect.w = xMax - xMin;
 	sdlRect.h = yMax - yMin;
-	
+
 	SDL_SetTextInputRect ( &sdlRect );
 }
 
@@ -139,7 +139,7 @@ void Finalize () {
 
 	AKUModulesAppFinalize ();
 	AKUAppFinalize ();
-	
+
 	SDL_Quit ();
 }
 
@@ -158,7 +158,6 @@ void Init ( int argc, char** argv ) {
 
 	AKUCreateContext ();
 	AKUModulesContextInitialize ();
-	AKUModulesRunLuaAPIWrapper ();
 
 	AKUSetInputConfigurationName ( "SDL" );
 
@@ -168,7 +167,7 @@ void Init ( int argc, char** argv ) {
 
 	AKUReserveInputDevices			( InputDeviceID::TOTAL );
 	AKUSetInputDevice				( InputDeviceID::DEVICE, "device" );
-	
+
 	AKUReserveInputDeviceSensors	( InputDeviceID::DEVICE, InputSensorID::TOTAL );
 	AKUSetInputDeviceKeyboard		( InputDeviceID::DEVICE, InputSensorID::KEYBOARD,		"keyboard" );
 	AKUSetInputDevicePointer		( InputDeviceID::DEVICE, InputSensorID::POINTER,		"pointer" );
@@ -185,20 +184,20 @@ void Init ( int argc, char** argv ) {
 	AKUSetFunc_HideCursor ( _AKUHideCursor );
 
 	AKUSetFunc_OpenWindow ( _AKUOpenWindowFunc );
-	
+
 	AKUSetFunc_SetTextInputRect( _AKUSetTextInputRectFunc );
-	
+
 	#ifdef __APPLE__
 			//are we a bundle?
 			CFBundleRef bref = CFBundleGetMainBundle();
 			if (bref == NULL || CFBundleGetIdentifier(bref) == NULL) {
 	AKUModulesParseArgs ( argc, argv );
-	
+
 			} else {
-			
+
 					CFURLRef bundleurl = CFBundleCopyResourcesDirectoryURL(bref);
 					assert(bundleurl != NULL);
-					
+
 					UInt8 buf[PATH_MAX];
 					CFURLGetFileSystemRepresentation(bundleurl, true, buf, PATH_MAX);
 
@@ -207,16 +206,16 @@ void Init ( int argc, char** argv ) {
 					AKUCallFunc();
 			}
 	#else
-			
-			
+
+
 		AKUModulesParseArgs ( argc, argv );
 	#endif
 
-	
+
 	atexit ( Finalize ); // do this *after* SDL_Init
 }
 
-// based on host-glut 
+// based on host-glut
 void _onMultiButton( int touch_id, float x, float y, int state );
 void _onMultiButton( int touch_id, float x, float y, int state ) {
 
@@ -271,7 +270,7 @@ void SetScreenDpi() {
 	AKUSetScreenDpi(( int )widthInPixels / widthInInches );
 
 	xcb_disconnect( conn );
-  
+
 #endif
 
 }
@@ -283,11 +282,11 @@ void MainLoop () {
 	Joystick * joystick0 = NULL;
 
 	if ( SDL_NumJoysticks() < 1 ) {
-		
+
 		std::cerr << "No Joysticks connected." << std::endl;
 
 	} else {
-		
+
 		joystick0 = new Joystick(0); // 0 == first joystick of system.
 
 		if ( joystick0->isOpen() || !joystick0->Open() )
@@ -298,21 +297,21 @@ void MainLoop () {
 	}
 
 	Uint32 lastFrame = SDL_GetTicks();
-	
+
 	bool running = true;
 	while ( running ) {
-		
+
 		SDL_Event sdlEvent;
-		
-		while ( SDL_PollEvent ( &sdlEvent )) {  
-			   
+
+		while ( SDL_PollEvent ( &sdlEvent )) {
+
 			switch ( sdlEvent.type )  {
-			
+
 				case SDL_QUIT:
-				
+
 					running = false;
 					break;
-				
+
 				case SDL_KEYDOWN:
 				case SDL_KEYUP:	{
 					if ( sdlEvent.key.repeat ) break;
@@ -320,7 +319,7 @@ void MainLoop () {
 					AKUEnqueueKeyboardKeyEvent ( InputDeviceID::DEVICE, InputSensorID::KEYBOARD, moaiKeyCode, sdlEvent.key.type == SDL_KEYDOWN );
 					break;
 				}
-				
+
 				case SDL_TEXTINPUT: {
 					AKUEnqueueKeyboardTextEvent ( InputDeviceID::DEVICE, InputSensorID::KEYBOARD, sdlEvent.text.text );
 					break;
@@ -329,24 +328,24 @@ void MainLoop () {
 					char *text = sdlEvent.edit.text;
 					int start = sdlEvent.edit.start;
 					int length = sdlEvent.edit.length;
-					
+
 					AKUEnqueueKeyboardEditEvent ( InputDeviceID::DEVICE, InputSensorID::KEYBOARD, text, start, length, SDL_TEXTEDITINGEVENT_TEXT_SIZE );
 					break;
 				}
-				
+
 				case SDL_MOUSEBUTTONDOWN:
 				case SDL_MOUSEBUTTONUP:
-	
+
 					switch ( sdlEvent.button.button ) {
-					
+
 						case SDL_BUTTON_LEFT:
 							AKUEnqueueButtonEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_LEFT, ( sdlEvent.type == SDL_MOUSEBUTTONDOWN ));
 							break;
-						
+
 						case SDL_BUTTON_MIDDLE:
 							AKUEnqueueButtonEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_MIDDLE, ( sdlEvent.type == SDL_MOUSEBUTTONDOWN ));
 							break;
-						
+
 						case SDL_BUTTON_RIGHT:
 							AKUEnqueueButtonEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_RIGHT, ( sdlEvent.type == SDL_MOUSEBUTTONDOWN ));
 							break;
@@ -354,11 +353,11 @@ void MainLoop () {
 
 					break;
 
-				case SDL_MOUSEWHEEL: 
+				case SDL_MOUSEWHEEL:
 
 						if ( sdlEvent.wheel.which != SDL_TOUCH_MOUSEID ) {
                             //const int32_t x = sdlEvent.wheel.x;
-							const int32_t y = sdlEvent.wheel.y; 
+							const int32_t y = sdlEvent.wheel.y;
 
 							//XXX: x or y ?
 							AKUEnqueueWheelEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL, y );
@@ -375,7 +374,7 @@ void MainLoop () {
 					 * SDL_JOYDEVICEREMOVED	joystick disconnected
 					 * */
 				case SDL_JOYAXISMOTION:
-						
+
 						//TODO: array's of Joysticks
 
 						if ( sdlEvent.jaxis.which == 0 /* what joystick? */  && joystick0 != NULL ) {
@@ -386,7 +385,7 @@ void MainLoop () {
 					break;
 
 				case SDL_MOUSEMOTION:
-				
+
 					AKUEnqueuePointerEvent ( InputDeviceID::DEVICE, InputSensorID::POINTER, sdlEvent.motion.x, sdlEvent.motion.y );
 					break;
 
@@ -395,12 +394,12 @@ void MainLoop () {
 					// Not for the event "resize", by default SDL main window is not resizable(at least Linux)
 					if ( sdlEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED ||
 							sdlEvent.window.event == SDL_WINDOWEVENT_RESIZED ) {
-						
+
 						AKUSetViewSize(sdlEvent.window.data1, sdlEvent.window.data2);
 					} else if ( sdlEvent.window.event == SDL_WINDOWEVENT_FOCUS_LOST ) {
 						// If the focus is lost, it must be stopped.
 						SDL_StopTextInput();
-						
+
 						// Clear Editing text.
 						AKUEnqueueKeyboardEditEvent ( InputDeviceID::DEVICE, InputSensorID::KEYBOARD, "", 0, 0, SDL_TEXTEDITINGEVENT_TEXT_SIZE );
 					} else if ( sdlEvent.window.event == SDL_WINDOWEVENT_FOCUS_GAINED ) {
@@ -423,16 +422,16 @@ void MainLoop () {
 					break;
 			} //end_switch
 		}//end_while
-		
+
 		AKUModulesUpdate ();
-		
+
 		AKURender ();
 		SDL_GL_SwapWindow ( sWindow );
-		
+
 		Uint32 frameDelta = ( Uint32 )( AKUGetSimStep () * 1000.0 );
 		Uint32 currentFrame = SDL_GetTicks ();
 		Uint32 delta = currentFrame - lastFrame;
-		
+
 		if ( delta < frameDelta ) {
 			SDL_Delay ( frameDelta - delta );
 		}

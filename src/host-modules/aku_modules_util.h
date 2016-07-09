@@ -6,6 +6,5 @@
 
 //----------------------------------------------------------------//
 void		AKUModulesParseArgs						( int argc, char** argv );
-void		AKUModulesRunLuaAPIWrapper				();
 
 #endif
