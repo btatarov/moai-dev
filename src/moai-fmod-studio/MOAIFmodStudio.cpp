@@ -290,6 +290,11 @@ void MOAIFmodStudio::OpenSoundSystem ( u32 channels ) {
 	result = FMOD_System_Create ( &this->mSoundSys ); // Create the main system object.
 	if ( !MOAIFmodCheckError ( result ) ) return;
 
+#if defined(__ANDROID__)
+    result = FMOD_System_SetOutput ( this->mSoundSys, FMOD_OUTPUTTYPE_AUDIOTRACK );
+    if ( !MOAIFmodCheckError ( result ) ) return;
+#endif
+
 	result = FMOD_System_Init ( this->mSoundSys, channels, FMOD_INIT_NORMAL, 0 );
 	if ( !MOAIFmodCheckError ( result ) ) return;
 

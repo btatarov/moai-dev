@@ -43,11 +43,9 @@ public class MoaiCrittercism {
 	//----------------------------------------------------------------//
 	public static void init ( String appId ) {
 
-		MoaiLog.i ( String.format ( "MoaiCrittercism: init %s", appId ));
-		
 		CrittercismConfig config = new CrittercismConfig();
 		config.setLogcatReportingEnabled( true );
-		
+
 		Crittercism.initialize ( sActivity.getApplicationContext (), appId, config );
 	}
 

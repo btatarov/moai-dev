@@ -1,12 +1,12 @@
 /*
  * Copyright (C) 2012 Neo Visionaries Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -60,10 +60,10 @@ import android.webkit.WebViewClient;
  * </p>
  *
  * <pre style="border: 1px solid black; margin: 1em; padding: 0.5em;">
- * 
+ *
  * package twitteroauthview.sample;
- * 
- * 
+ *
+ *
  * import twitter4j.auth.AccessToken;
  * import com.neovisionaries.android.twitter.{@link TwitterOAuthView};
  * import com.neovisionaries.android.twitter.{@link TwitterOAuthView.Result};
@@ -74,50 +74,50 @@ import android.webkit.WebViewClient;
  *
  * public class TwitterOAuthActivity extends Activity implements {@link TwitterOAuthView.Listener}
  * {
- *     <span style="color: darkgreen;">// Replace values of the parameters below with your own.</span> 
+ *     <span style="color: darkgreen;">// Replace values of the parameters below with your own.</span>
  *     private static final String CONSUMER_KEY = "YOUR CONSUMER KEY HERE";
  *     private static final String CONSUMER_SECRET = "YOUR CONSUMER SECRET HERE";
  *     private static final String CALLBACK_URL = "YOUR CALLBACK URL HERE";
  *     private static final boolean DUMMY_CALLBACK_URL = true;
- * 
- * 
+ *
+ *
  *     private {@link TwitterOAuthView} view;
  *     private boolean oauthStarted;
- * 
- * 
+ *
+ *
  *     &#x0040;Override
  *     public void onCreate(Bundle savedInstanceState)
  *     {
  *         super.onCreate(savedInstanceState);
- * 
+ *
  *         <span style="color: darkgreen;">// Create an instance of TwitterOAuthView.</span>
  *         view = new {@link TwitterOAuthView#TwitterOAuthView(Context) TwitterOAuthView}(this);
- * 
+ *
  *         setContentView(view);
- * 
+ *
  *         oauthStarted = false;
  *     }
- * 
- * 
+ *
+ *
  *     &#x0040;Override
  *     protected void onResume()
  *     {
  *         super.onResume();
- * 
+ *
  *         if (oauthStarted)
  *         {
  *             return;
  *         }
- * 
+ *
  *         oauthStarted = true;
- * 
+ *
  *         <span style="color: darkgreen;">// Start Twitter OAuth process. Its result will be notified via
  *         // TwitterOAuthView.Listener interface.</span>
  *         view.{@link #start(String, String, String, boolean, Listener)
  *         start}(CONSUMER_KEY, CONSUMER_SECRET, CALLBACK_URL, DUMMY_CALLBACK_URL, this);
  *     }
- * 
- * 
+ *
+ *
  *     public void {@link TwitterOAuthView.Listener#onSuccess(TwitterOAuthView, AccessToken)
  *     onSuccess}({@link TwitterOAuthView} view, {@link AccessToken} accessToken)
  *     {
@@ -126,16 +126,16 @@ import android.webkit.WebViewClient;
  *         // for later use.</span>
  *         showMessage("Authorized by " + accessToken.{@link AccessToken#getScreenName() getScreenName()});
  *     }
- * 
- * 
+ *
+ *
  *     public void {@link TwitterOAuthView.Listener#onFailure(TwitterOAuthView, TwitterOAuthView.Result)
  *     onFailure}({@link TwitterOAuthView} view, {@link TwitterOAuthView.Result Result} result)
  *     {
  *         <span style="color: darkgreen;">// Failed to get an access token.</span>
  *         showMessage("Failed due to " + result);
  *     }
- * 
- * 
+ *
+ *
  *     private void showMessage(String message)
  *     {
  *         <span style="color: darkgreen;">// Show a popup message.</span>
@@ -258,7 +258,7 @@ public class TwitterOAuthView extends WebView
     /**
      * A constructor that calls {@link WebView#WebView(Context, AttributeSet)
      * super}(context, attrs).
-     * 
+     *
      * @param context
      * @param attrs
      */
@@ -273,7 +273,7 @@ public class TwitterOAuthView extends WebView
 
     /**
      * A constructor that calls {@link WebView#WebView(Context) super}(context).
-     * 
+     *
      * @param context
      */
     public TwitterOAuthView(Context context)
@@ -575,7 +575,9 @@ public class TwitterOAuthView extends WebView
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error)
             {
-                handler.proceed();
+                // Changed to default behavior to fix Google Play security warning
+                // handler.proceed();
+                handler.cancel();
             }
 
 
@@ -631,7 +633,7 @@ public class TwitterOAuthView extends WebView
 
                 if (DEBUG)
                     Log.d(TAG, "oauth_verifier = " + verifier);
-                
+
                 // Notify that the the authorization step was done.
                 notifyAuthorization();
 
