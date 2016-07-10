@@ -47,7 +47,7 @@
 
 	</application>
 
-    <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="19" />
+    <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="11" />
 
 	<!-- Moai -->
  	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
