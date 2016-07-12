@@ -19,6 +19,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * TODO: facebook setToken and graphRequest (android and ios)
 
 ### Android
+* immersive mode
 * CHANGE: LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
 * MOAIAppAndroid::closeApp ()
 * MOAIAppAndroid::isKindleFireDevice ()

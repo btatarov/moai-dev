@@ -25,8 +25,10 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -106,6 +108,27 @@ public class MoaiActivity extends Activity {
 
 		getWindow ().addFlags ( WindowManager.LayoutParams.FLAG_FULLSCREEN );
 		getWindow ().setSoftInputMode ( WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN );
+
+		// Immersive mode
+		final Handler mHideSystemUiHandler = new Handler ();
+		final Runnable mHideSystemUiCallback = new Runnable () {
+			@Override
+			public void run () {
+				getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+    		}
+		};
+
+		getWindow ().getDecorView ().setOnSystemUiVisibilityChangeListener ( new View.OnSystemUiVisibilityChangeListener () {
+			@Override
+			public void onSystemUiVisibilityChange ( int visibility ) {
+				if ( ( visibility & ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION ) ) == 0 ) {
+            		mHideSystemUiHandler.removeCallbacks ( mHideSystemUiCallback );
+            		mHideSystemUiHandler.postDelayed ( mHideSystemUiCallback, 3000 );
+        		}
+    		}
+		} );
+
+		getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
 
 		try {
 
