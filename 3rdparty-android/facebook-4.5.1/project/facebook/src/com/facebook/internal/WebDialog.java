@@ -494,7 +494,7 @@ public class WebDialog extends Dialog {
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             if (DISABLE_SSL_CHECK_FOR_TESTING) {
-                handler.proceed();
+                // handler.proceed();
             } else {
                 super.onReceivedSslError(view, handler, error);
 

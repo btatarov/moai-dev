@@ -374,8 +374,8 @@ public class MoaiActivity extends Activity {
 		MoaiLog.i ("MoaiActivity onKeyDown, keycode " + keyCode + " event: " + event );
 
 	    if ( keyCode == KeyEvent.KEYCODE_BACK ) {
-			if ( Moai.onBackPressed ()) return true;
-			if ( Moai.invokeListener ( Moai.ListenerEvent.BACK_BUTTON_PRESSED )) return true;
+			if ( Moai.invokeListener ( Moai.ListenerEvent.BACK_BUTTON_PRESSED ) ) return true;
+			if ( Moai.onBackPressed () ) return true;
 	    }
 
 		MoaiLog.i ( "MoaiActivity: onKeyDown not handled; falling back on super" );

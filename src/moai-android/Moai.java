@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.provider.Settings.Secure;
 import android.util.DisplayMetrics;
 
@@ -229,11 +230,24 @@ public class Moai {
 
 	//----------------------------------------------------------------//
 	public static void closeApp () {
-		for ( Class < ? > theClass : sAvailableClasses ) {
-			executeMethod ( theClass, null, "onBackPressed", new Class < ? > [] { }, new Object [] { });
-		}
 
-		sActivity.finish();
+		Handler handler = new Handler ();
+		handler.post ( new Runnable () {
+
+			public void run () {
+
+				Intent intent = new Intent ( Intent.ACTION_MAIN );
+				intent.addCategory ( Intent.CATEGORY_HOME );
+				intent.setFlags ( Intent.FLAG_ACTIVITY_CLEAR_TASK );
+				intent.setFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+
+				sActivity.startActivity ( intent );
+				sActivity.finish ();
+
+				System.gc ();
+				System.exit ( 0 );
+			}
+		} );
 	}
 
 	//----------------------------------------------------------------//

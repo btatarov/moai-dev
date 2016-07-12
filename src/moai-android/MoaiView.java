@@ -1,11 +1,11 @@
 //----------------------------------------------------------------//
-// Copyright (c) 2010-2011 Zipline Games, Inc. 
-// All Rights Reserved. 
+// Copyright (c) 2010-2011 Zipline Games, Inc.
+// All Rights Reserved.
 // http://getmoai.com
 //----------------------------------------------------------------//
 
 package @PACKAGE@;
- 
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -33,26 +33,26 @@ public class MoaiView extends GLSurfaceView {
 	private int 		mHeight;
 	private Runnable	mUpdateRunnable;
 	private int 		mWidth;
-	
+
     //----------------------------------------------------------------//
 	public MoaiView ( Context context, int width, int height, int glesVersion ) {
 
 		super ( context );
-		
+
 		mAppContext = context.getApplicationContext();
 
 		setScreenDimensions ( width, height );
 		Moai.setScreenSize ( mWidth, mHeight );
-		
+
 		DisplayMetrics metrics = getResources().getDisplayMetrics ();
 		Moai.setScreenDpi ( metrics.densityDpi );
-		
+
 		if ( glesVersion >= 0x20000 ) {
-			
+
 			// NOTE: Must be set before the renderer is set.
 			setEGLContextClientVersion ( 2 );
 		}
-		
+
 		// Create a handler that we can use to post to the main thread and a pseudo-
 		// periodic runnable that will handle calling Moai.update on the main thread.
 		mHandler = new Handler ( Looper.getMainLooper ());
@@ -65,9 +65,9 @@ public class MoaiView extends GLSurfaceView {
 		};
 
         setRenderer ( new MoaiRenderer ());
-		onPause (); // Pause rendering until restarted by the activity lifecycle.		
+		onPause (); // Pause rendering until restarted by the activity lifecycle.
 	}
-	
+
 	//================================================================//
 	// Public methods
 	//================================================================//
@@ -75,16 +75,16 @@ public class MoaiView extends GLSurfaceView {
 	//----------------------------------------------------------------//
 	@Override
 	public void onSizeChanged ( int newWidth, int newHeight, int oldWidth, int oldHeight ) {
-		
+
 		setScreenDimensions ( newWidth, newHeight );
 		Moai.setViewSize ( mWidth, mHeight );
 	}
-	
+
 	//----------------------------------------------------------------//
 	public void pause ( boolean paused ) {
-	
+
 		if ( paused ) {
-			
+
 			mHandler.removeCallbacks ( mUpdateRunnable );
 			Moai.pause ( true );
 			setRenderMode ( GLSurfaceView.RENDERMODE_WHEN_DIRTY );
@@ -108,7 +108,7 @@ public class MoaiView extends GLSurfaceView {
 	public boolean onTouchEvent ( MotionEvent event ) {
 
 		boolean isDown = true;
-        
+
 		switch( event.getActionMasked() )
 		{
 			case MotionEvent.ACTION_CANCEL:
@@ -128,10 +128,10 @@ public class MoaiView extends GLSurfaceView {
 				Moai.enqueueTouchEvent (
 					Moai.InputDevice.INPUT_DEVICE.ordinal (),
 					Moai.InputSensor.SENSOR_TOUCH.ordinal (),
-					pointerId, 
-					isDown, 
-					Math.round ( event.getX ( pointerIndex )), 
-					Math.round ( event.getY ( pointerIndex )), 
+					pointerId,
+					isDown,
+					Math.round ( event.getX ( pointerIndex )),
+					Math.round ( event.getY ( pointerIndex )),
 					1
 				);
 				break;
@@ -141,32 +141,32 @@ public class MoaiView extends GLSurfaceView {
 			{
 				final int pointerCount = event.getPointerCount ();
 				for ( int pointerIndex = 0; pointerIndex < pointerCount; ++pointerIndex ) {
-				
+
 					int pointerId = event.getPointerId ( pointerIndex );
 					Moai.enqueueTouchEvent (
 						Moai.InputDevice.INPUT_DEVICE.ordinal (),
 						Moai.InputSensor.SENSOR_TOUCH.ordinal (),
-						pointerId, 
-						isDown, 
-						Math.round ( event.getX ( pointerIndex )), 
-						Math.round ( event.getY ( pointerIndex )), 
+						pointerId,
+						isDown,
+						Math.round ( event.getX ( pointerIndex )),
+						Math.round ( event.getY ( pointerIndex )),
 						1
 					);
 				}
 				break;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	//================================================================//
 	// Private methods
 	//================================================================//
-	
+
 	//----------------------------------------------------------------//
 	public void setScreenDimensions ( int width, int height ) {
-	
+
 		Resources resources = mAppContext.getResources();
 		Configuration config = resources.getConfiguration();
 
@@ -183,11 +183,11 @@ public class MoaiView extends GLSurfaceView {
 			mHeight = height;
 		}
 	}
-	
+
 	//================================================================//
 	// MoaiRenderer
 	//================================================================//
-	
+
 	private class MoaiRenderer implements GLSurfaceView.Renderer {
 
 	    //----------------------------------------------------------------//
@@ -206,7 +206,7 @@ public class MoaiView extends GLSurfaceView {
 			setScreenDimensions ( width, height );
 			Moai.setViewSize ( mWidth, mHeight );
 		}
-        
+
 	    //----------------------------------------------------------------//
 		@Override
 		public void onSurfaceCreated ( GL10 gl, EGLConfig config ) {
