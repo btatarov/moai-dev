@@ -45,11 +45,13 @@ int MOAIGameCircleAndroid::_showDefaultAchievements ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-int MOAIGameCircleAndroid::_showDefaultLeaderboard ( lua_State* L ) {
+int MOAIGameCircleAndroid::_showLeaderboard ( lua_State* L ) {
 
 	MOAI_JAVA_LUA_SETUP ( MOAIGameCircleAndroid, "" )
 
-	self->CallStaticVoidMethod ( self->mJava_ShowDefaultLeaderboard );
+	jstring jleaderboardID = self->GetJString ( lua_tostring ( state, 1 ) );
+
+	self->CallStaticVoidMethod ( self->mJava_ShowLeaderboard, jleaderboardID );
 
 	return 0;
 }
@@ -94,7 +96,7 @@ MOAIGameCircleAndroid::MOAIGameCircleAndroid () {
 	this->mJava_Connect						= this->GetStaticMethod ( "connect", "()V");
 	this->mJava_IsConnected					= this->GetStaticMethod ( "isConnected", "()Z" );
 	this->mJava_ShowDefaultAchievements		= this->GetStaticMethod ( "showDefaultAchievements", "()V");
-	this->mJava_ShowDefaultLeaderboard		= this->GetStaticMethod ( "showDefaultLeaderboard", "()V");
+	this->mJava_ShowLeaderboard				= this->GetStaticMethod ( "showLeaderboard", "(Ljava/lang/String;J)V");
 	this->mJava_ReportScore					= this->GetStaticMethod ( "reportScore", "(Ljava/lang/String;J)V");
 	this->mJava_ReportAchievementProgress	= this->GetStaticMethod ( "reportAchievementProgress", "(Ljava/lang/String;J)V");
 }
@@ -115,7 +117,7 @@ void MOAIGameCircleAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "isConnected",				_isConnected },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIGameCircleAndroid > },
 		{ "showDefaultAchievements",	_showDefaultAchievements },
-		{ "showDefaultLeaderboard",		_showDefaultLeaderboard },
+		{ "showLeaderboard",			_showLeaderboard },
 		{ "reportScore",				_reportScore },
 		{ "reportAchievementProgress",	_reportAchievementProgress },
 		{ NULL, NULL }

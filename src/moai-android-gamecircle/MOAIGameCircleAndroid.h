@@ -18,7 +18,7 @@ private:
 	jmethodID	mJava_Connect;
 	jmethodID	mJava_IsConnected;
 	jmethodID	mJava_ShowDefaultAchievements;
-	jmethodID	mJava_ShowDefaultLeaderboard;
+	jmethodID	mJava_ShowLeaderboard;
 	jmethodID	mJava_ReportScore;
 	jmethodID	mJava_ReportAchievementProgress;
 
@@ -26,7 +26,7 @@ private:
 	static int  _connect					( lua_State* L );
 	static int  _isConnected				( lua_State* L );
 	static int	_showDefaultAchievements	( lua_State* L );
-	static int	_showDefaultLeaderboard		( lua_State* L );
+	static int	_showLeaderboard			( lua_State* L );
 	static int  _reportScore				( lua_State* L );
 	static int  _reportAchievementProgress	( lua_State* L );
 

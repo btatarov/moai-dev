@@ -121,11 +121,11 @@ public class MoaiGameCircle {
     }
 
     //----------------------------------------------------------------//
-    public static void showDefaultLeaderboard () {
+    public static void showLeaderboard ( String leaderboardId ) {
 
         if ( sAGClient != null && sLBClient != null ) {
 
-            sLBClient.showLeaderboardsOverlay();
+            sLBClient.showLeaderboardsOverlay( leaderboardId );
         }
     }
 

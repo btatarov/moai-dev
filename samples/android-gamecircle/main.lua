@@ -18,6 +18,7 @@ layer:insertProp ( prop )
 
 prop:moveRot ( 720, 2.0 )
 
+leaderboard_id = '< LEADERBOARD ID >'
 MOAIGameCircleAndroid.setListener (
 		MOAIGameCircleAndroid.SERVICE_READY,
 		function ()
@@ -25,7 +26,7 @@ MOAIGameCircleAndroid.setListener (
 
 			-- HACK: unset the listener because onResume will call .connect () again
 			MOAIGameCircleAndroid.setListener ( MOAIGameCircleAndroid.SERVICE_READY, nil )
-			MOAIGameCircleAndroid.showDefaultLeaderboard ()
+			MOAIGameCircleAndroid.showLeaderboard ( leaderboard_id )
 		end
 )
 
@@ -36,5 +37,5 @@ if not MOAIGameCircleAndroid.isConnected () then
 	MOAIGameCircleAndroid.connect ()
 else
 	print ( 'GameCircle service is already connected.' )
-	MOAIGameCircleAndroid.showDefaultLeaderboard ()
+	MOAIGameCircleAndroid.showLeaderboard ( leaderboard_id )
 end

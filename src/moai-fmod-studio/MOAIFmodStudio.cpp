@@ -293,6 +293,9 @@ void MOAIFmodStudio::OpenSoundSystem ( u32 channels ) {
 #if defined(__ANDROID__)
     result = FMOD_System_SetOutput ( this->mSoundSys, FMOD_OUTPUTTYPE_AUDIOTRACK );
     if ( !MOAIFmodCheckError ( result ) ) return;
+
+    result = FMOD_System_SetDSPBufferSize ( this->mSoundSys, 512, 4 );
+    if ( !MOAIFmodCheckError ( result ) ) return;
 #endif
 
 	result = FMOD_System_Init ( this->mSoundSys, channels, FMOD_INIT_NORMAL, 0 );

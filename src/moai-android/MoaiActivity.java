@@ -196,6 +196,7 @@ public class MoaiActivity extends Activity {
 		stopConnectivityReceiver ();
 
 		Moai.finish ();
+		System.gc ();
 	}
 
 	//----------------------------------------------------------------//
