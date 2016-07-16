@@ -120,7 +120,7 @@ public class MoaiAmazonAds {
 	//----------------------------------------------------------------//
 	public static void initBannerWithParams ( int width, int height, int margin, boolean atBottom ) {
 
-		if ( width < 1 ) width = RelativeLayout.LayoutParams.FILL_PARENT;
+		if ( width < 1 ) width = RelativeLayout.LayoutParams.MATCH_PARENT;
 		if ( height < 1 ) height = RelativeLayout.LayoutParams.WRAP_CONTENT;
 
 		sAdViewParams = new RelativeLayout.LayoutParams ( width, height );

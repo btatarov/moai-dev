@@ -58,7 +58,7 @@ public class MoaiKeyboard {
 
 		// Our main container holds the EGL view as well as our fake TextEdit view for keyboard entry ..
 		mContainer = ( RelativeLayoutIMETrap ) new RelativeLayoutIMETrap ( mContext );
-		mContainer.setLayoutParams ( new RelativeLayout.LayoutParams ( RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT ));
+		mContainer.setLayoutParams ( new RelativeLayout.LayoutParams ( RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT ));
 		mContainer.setMainActivity ( activity );
 
 		mKeyInTextView = new EditText ( activity );

@@ -99,7 +99,7 @@ public class MoaiAdMob {
 
 		sContainer = MoaiKeyboard.getContainer ();
 
-		if ( width < 1 ) width = LayoutParams.FILL_PARENT;
+		if ( width < 1 ) width = LayoutParams.MATCH_PARENT;
 		if ( height < 1 ) height = LayoutParams.WRAP_CONTENT;
 
 		sAdViewParams = new LayoutParams ( width, height );

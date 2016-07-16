@@ -1,6 +1,6 @@
 //----------------------------------------------------------------//
-// Copyright (c) 2010-2011 Zipline Games, Inc. 
-// All Rights Reserved. 
+// Copyright (c) 2010-2011 Zipline Games, Inc.
+// All Rights Reserved.
 // http://getmoai.com
 //----------------------------------------------------------------//
 
@@ -43,24 +43,24 @@ public class MoaiMoviePlayer extends Activity implements OnCompletionListener, O
 
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
-		
+
 		MoaiLog.i ( "MoaiMoviePlayer onCreate: Initializing Movie Player" );
-		
+
 		sActivity = activity;
 	}
-	
+
 	//================================================================//
 	// MoviePlayer JNI callback methods
 	//================================================================//
-	
+
 	//----------------------------------------------------------------//
 	public static void init ( String url ) {
-		
+
 		if ( sMovie != null ) {
-			
+
 			sMovie.finish ();
 		}
-	
+
 		Intent movie = new Intent ( sActivity.getApplication (), MoaiMoviePlayer.class );
 		movie.putExtra ( "url", url );
 		sActivity.startActivity ( movie );
@@ -68,73 +68,73 @@ public class MoaiMoviePlayer extends Activity implements OnCompletionListener, O
 
 	//----------------------------------------------------------------//
 	public static void play () {
-		
+
 		if ( sMovie != null ) {
-			
+
 			sMovie.startPlayback ();
 		}
 	}
-	
+
 	//----------------------------------------------------------------//
 	public static void pause () {
-		
+
 		if ( sMovie != null ) {
-			
+
 			sMovie.pausePlayback ();
 		}
 	}
 
 	//----------------------------------------------------------------//
 	public static void stop () {
-		
+
 		if ( sMovie != null ) {
-			
+
 			sMovie.stopPlayback ();
 		}
 	}
-	
+
 	//================================================================//
 	// MoaiMoviePlayer instance methods
 	//================================================================//
-	
+
 	//----------------------------------------------------------------//
 	public void onCreate ( Bundle savedInstanceState ) {
 
 		MoaiLog.i ( "MoaiMoviePlayer onCreate: activity CREATED" );
-		
+
 		super.onCreate ( savedInstanceState );
 
 		sMovie = this;
-		
+
 		RelativeLayout layout = new RelativeLayout ( this );
 		layout.setGravity ( Gravity.CENTER );
-		
+
 		mVideoView = new VideoView ( this );
 		mVideoView.setOnPreparedListener ( this );
         mVideoView.setOnCompletionListener ( this );
 
-		layout.addView ( mVideoView, new RelativeLayout.LayoutParams ( LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT ));
-		setContentView ( layout );		
-		
+		layout.addView ( mVideoView, new RelativeLayout.LayoutParams ( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT ) );
+		setContentView ( layout );
+
 		String url = this.getIntent ().getStringExtra ( "url" );
-		
+
 		MoaiLog.i ( "MoaiMoviePlayer onCreate: Initializing video player with media URL " + url );
 
 		mVideoView.setVideoURI ( Uri.parse ( url ));
 		mVideoView.requestFocus ();
-	}	
+	}
 
 	//----------------------------------------------------------------//
 	protected void onDestroy () {
-		
+
 		super.onDestroy ();
-		
+
 		sMovie = null;
 	}
-	
+
 	//----------------------------------------------------------------//
 	public void startPlayback () {
-		
+
 		if ( mVideoView.isPlaying ()) {
 
 			mVideoView.resume ();
@@ -143,10 +143,10 @@ public class MoaiMoviePlayer extends Activity implements OnCompletionListener, O
 			mVideoView.start ();
 		}
 	}
-	
+
 	//----------------------------------------------------------------//
 	public void pausePlayback () {
-		
+
 		mVideoView.pause ();
 	}
 
@@ -163,7 +163,7 @@ public class MoaiMoviePlayer extends Activity implements OnCompletionListener, O
 	public void onPrepared ( MediaPlayer mediaPlayer ) {
 
 		MoaiLog.i ( "MoaiMoviePlayer onPrepared" );
-		
+
 		AKUNotifyMoviePlayerReady ();
 	}
 
@@ -174,7 +174,7 @@ public class MoaiMoviePlayer extends Activity implements OnCompletionListener, O
 	public void onCompletion ( MediaPlayer mediaPlayer ) {
 
 		MoaiLog.i ( "MoaiMoviePlayer onCompletion" );
-		
+
 		AKUNotifyMoviePlayerCompleted ();
 	}
 }
