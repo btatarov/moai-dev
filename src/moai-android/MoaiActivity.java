@@ -15,6 +15,7 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -163,7 +164,10 @@ public class MoaiActivity extends Activity {
 		Display display = (( WindowManager ) getSystemService ( Context.WINDOW_SERVICE )).getDefaultDisplay ();
 		ConfigurationInfo info = (( ActivityManager ) getSystemService ( Context.ACTIVITY_SERVICE )).getDeviceConfigurationInfo ();
 
-	    mMoaiView = new MoaiView ( this, display.getWidth (), display.getHeight (), info.reqGlEsVersion );
+		Point size = new Point ();
+		display.getSize ( size );
+
+	    mMoaiView = new MoaiView ( this, size.x, size.y, info.reqGlEsVersion );
 		mSensorManager = ( SensorManager ) getSystemService ( Context.SENSOR_SERVICE );
 		mLocationManager = (LocationManager) getSystemService ( Context.LOCATION_SERVICE );
 
