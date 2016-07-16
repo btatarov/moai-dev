@@ -294,7 +294,7 @@ void MOAIFmodStudio::OpenSoundSystem ( u32 channels ) {
     result = FMOD_System_SetOutput ( this->mSoundSys, FMOD_OUTPUTTYPE_AUDIOTRACK );
     if ( !MOAIFmodCheckError ( result ) ) return;
 
-    result = FMOD_System_SetDSPBufferSize ( this->mSoundSys, 512, 4 );
+    result = FMOD_System_SetDSPBufferSize ( this->mSoundSys, 256, 10 );
     if ( !MOAIFmodCheckError ( result ) ) return;
 #endif
 
