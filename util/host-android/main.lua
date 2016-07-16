@@ -28,8 +28,8 @@ config.LUA_WORKING_DIR				= 'bundle/assets/lua'
 config.LUA_MAIN						= 'main.lua'
 
 config.MANIFEST_DEBUGGABLE			= 'false'
-config.ANDROID_PLATFORM_TARGET		= 'android-17'
-config.VALID_ARCHITECTURES			= { 'armeabi', 'armeabi-v7a', 'x86' }
+config.ANDROID_PLATFORM_TARGET		= 'android-15'
+config.VALID_ARCHITECTURES			= { 'armeabi-v7a', 'x86' }
 
 config.COPY							= {}
 

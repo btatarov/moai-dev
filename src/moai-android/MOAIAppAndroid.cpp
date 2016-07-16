@@ -128,37 +128,6 @@ int MOAIAppAndroid::_getStatusBarHeight ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
-int MOAIAppAndroid::_isKindleFireDevice ( lua_State* L ) {
-
-	MOAILuaState state ( L );
-
-	JNI_GET_ENV ( jvm, env );
-
-	bool outVal = false;
-
-	jclass moai = env->FindClass ( "com/ziplinegames/moai/Moai" );
-    if ( moai == NULL ) {
-
-		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
-    } else {
-
-    	jmethodID isKindleFireDevice = env->GetStaticMethodID ( moai, "isKindleFireDevice", "()Z" );
-    	if ( isKindleFireDevice == NULL ) {
-
-			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "isKindleFireDevice" );
-    	} else {
-
-			outVal = env->CallStaticBooleanMethod ( moai, isKindleFireDevice );
-		}
-	}
-
-	lua_pushboolean ( L, outVal );
-
-	return 1;
-}
-
-//----------------------------------------------------------------//
-// TODO: doxygen
 int MOAIAppAndroid::_openURL ( lua_State* L ) {
 
 	MOAILuaState state ( L );
@@ -349,7 +318,6 @@ void MOAIAppAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIAppAndroid > },
 		{ "getUTCTime",				_getUTCTime },
 		{ "getStatusBarHeight",		_getStatusBarHeight },
-		{ "isKindleFireDevice",		_isKindleFireDevice },
 		{ "openURL",				_openURL },
 		{ "sendMail",				_sendMail },
 		{ "setListener",			&MOAIGlobalEventSource::_setListener < MOAIAppAndroid > },

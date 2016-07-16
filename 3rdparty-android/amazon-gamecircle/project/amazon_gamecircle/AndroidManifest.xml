@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="2.4.3" >
 
-    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="11" />
+    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="15" />
 
     <application android:label="GameCircleSDK" >
         <activity android:name="com.amazon.ags.html5.overlay.GameCircleUserInterface" android:theme="@style/GCOverlay" android:hardwareAccelerated="false"></activity>

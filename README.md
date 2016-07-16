@@ -22,7 +22,6 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * immersive mode
 * CHANGE: LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
 * MOAIAppAndroid::closeApp ()
-* MOAIAppAndroid::isKindleFireDevice ()
 * MOAIObbDownloaderAndroid (downloading extension files for googleplay)
 * adcolony-2.3.4 (rewarded video)
 * amazon ads (interstitial and banner)
@@ -31,7 +30,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * admob-8.4.0 (interstitial and banner)
 * chartboost-6.4.1 (interstitial)
 * crittercism-5.5.5
-* facebook-4.5.1 (4.6 and above require minSdkVersion=15)
+* facebook-4.5.1 (TODO: update to latest version)
 * heyzap-9.4.5 (interstitial and rewarded video)
 * google-play-services-8.4.0 (stripped)
 * revmob-9.0.8 (interstitial and rewarded video)

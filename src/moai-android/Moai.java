@@ -379,14 +379,6 @@ public class Moai {
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean isKindleFireDevice () {
-
-		return android.os.Build.MANUFACTURER.equals ( "Amazon" )
-			&& ( android.os.Build.MODEL.equals("Kindle Fire" )
-				|| android.os.Build.MODEL.startsWith ( "KF") );
-	}
-
-	//----------------------------------------------------------------//
 	public static void mount ( String virtualPath, String archive ) {
 
 		synchronized ( sAkuLock ) {

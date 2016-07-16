@@ -43,7 +43,6 @@ private:
 	static int	_getPicturePath			( lua_State* L );
 	static int	_getUTCTime				( lua_State* L );
 	static int 	_getStatusBarHeight 	( lua_State* L );
-	static int	_isKindleFireDevice		( lua_State* L );
 	static int	_openURL				( lua_State* L );
 	static int	_sendMail				( lua_State* L );
 	static int	_share					( lua_State* L );
