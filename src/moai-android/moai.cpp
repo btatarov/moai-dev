@@ -237,6 +237,7 @@
 	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUInit ( JNIEnv* env, jclass obj ) {
 
 		MOAIAppAndroid::Affirm ();
+		MOAIBillingAndroid::Affirm ();
 		MOAIBrowserAndroid::Affirm ();
 		MOAIDialogAndroid::Affirm ();
 		MOAIMoviePlayerAndroid::Affirm ();
@@ -244,16 +245,12 @@
 		MOAINotificationsAndroid::Affirm ();
 
 		REGISTER_LUA_CLASS ( MOAIAppAndroid );
+		REGISTER_LUA_CLASS ( MOAIBillingAndroid );
 		REGISTER_LUA_CLASS ( MOAIBrowserAndroid );
 		REGISTER_LUA_CLASS ( MOAIDialogAndroid );
 		REGISTER_LUA_CLASS ( MOAIMoviePlayerAndroid );
 		REGISTER_LUA_CLASS ( MOAIKeyboardAndroid );
 		REGISTER_LUA_CLASS ( MOAINotificationsAndroid );
-
-		#ifndef DISABLE_BILLING
-			MOAIBillingAndroid::Affirm ();
-			REGISTER_LUA_CLASS ( MOAIBillingAndroid );
-		#endif
 	}
 
 	//----------------------------------------------------------------//

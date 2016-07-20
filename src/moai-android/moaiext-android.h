@@ -5,14 +5,11 @@
 #define MOAIEXT_ANDROID_H
 
 #include <moai-android/MOAIAppAndroid.h>
+#include <moai-android/MOAIBillingAndroid.h>
 #include <moai-android/MOAIBrowserAndroid.h>
 #include <moai-android/MOAIDialogAndroid.h>
 #include <moai-android/MOAIKeyboardAndroid.h>
 #include <moai-android/MOAINotificationsAndroid.h>
 #include <moai-android/MOAIMoviePlayerAndroid.h>
-
-#ifndef DISABLE_BILLING
-    #include <moai-android/MOAIBillingAndroid.h>
-#endif
 
 #endif
