@@ -8,6 +8,7 @@
 #include <moai-android/MOAIBrowserAndroid.h>
 #include <moai-android/MOAIDialogAndroid.h>
 #include <moai-android/MOAIKeyboardAndroid.h>
+#include <moai-android/MOAINotificationsAndroid.h>
 #include <moai-android/MOAIMoviePlayerAndroid.h>
 
 #ifndef DISABLE_BILLING

@@ -4,15 +4,13 @@
 #ifndef	MOAINOTIFICATIONSANDROID_H
 #define	MOAINOTIFICATIONSANDROID_H
 
-#if AKU_WITH_ANDROID_NOTIFICATIONS
-
 #include <moai-core/headers.h>
 
 //================================================================//
 // MOAINotificationsAndroid
 //================================================================//
 /**	@lua	MOAINotificationsAndroid
-	@text	Wrapper for push notification integration on Android 
+	@text	Wrapper for push notification integration on Android
 			devices. Exposed to Lua via MOAINotifications on all
 			mobile platforms.
 
@@ -58,9 +56,9 @@ public:
 		REMOTE_NOTIFICATION_RESULT_UNREGISTERED,
         REMOTE_NOTIFICATION_RESULT_ERROR,
 	};
-	
+
 	MOAILuaStrongRef		mListeners [ TOTAL ];
-	
+
 			MOAINotificationsAndroid			();
 			~MOAINotificationsAndroid			();
 	void	NotifyLocalNotificationReceived		( int entries, cc8** keys, cc8** values );
@@ -68,7 +66,5 @@ public:
 	void	NotifyRemoteRegistrationComplete	( int code, cc8* registration );
 	void	RegisterLuaClass					( MOAILuaState& state );
 };
-
-#endif  //DISABLE_NOTIFICATIONS
 
 #endif  //MOAINOTIFICATIONS_H

@@ -654,18 +654,28 @@ public class Moai {
 
 		MoaiLog.i ( "Moai localNotificationInSeconds: Adding notification alarm" );
 
-		Calendar cal = Calendar.getInstance (); 	// get a Calendar object with current time
-        cal.setTimeInMillis ( System.currentTimeMillis ());
-		cal.add ( Calendar.SECOND, seconds );		// add desired time to the calendar object
+		AlarmManager am = ( AlarmManager ) sActivity.getSystemService ( Context.ALARM_SERVICE );
 
+		// Cancel previous notification
 		Intent intent = new Intent ( sActivity, MoaiLocalNotificationReceiver.class );
+		PendingIntent sender = PendingIntent.getBroadcast ( sActivity, 0, intent, 0 );
+		sender.cancel ();
+		am.cancel ( sender );
+
+		// Create the notification
+		intent = new Intent ( sActivity, MoaiLocalNotificationReceiver.class );
+		intent.putExtra ( "message", message );
+
 		for ( int i = 0; i < keys.length; ++i ) {
 			intent.putExtra ( keys [ i ], values [ i ]);
 		}
 
-		PendingIntent sender = PendingIntent.getBroadcast ( sActivity, 0, intent, 0 );
+		sender = PendingIntent.getBroadcast ( sActivity, 0, intent, 0 );
 
-		AlarmManager am = ( AlarmManager ) sActivity.getSystemService ( Context.ALARM_SERVICE );
+		Calendar cal = Calendar.getInstance (); 	// get a Calendar object with current time
+        cal.setTimeInMillis ( System.currentTimeMillis ());
+		cal.add ( Calendar.SECOND, seconds );		// add desired time to the calendar object
+
 		am.set ( AlarmManager.RTC_WAKEUP, cal.getTimeInMillis (), sender );
 	}
 

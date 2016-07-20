@@ -241,12 +241,14 @@
 		MOAIDialogAndroid::Affirm ();
 		MOAIMoviePlayerAndroid::Affirm ();
 		MOAIKeyboardAndroid::Affirm ();
+		MOAINotificationsAndroid::Affirm ();
 
 		REGISTER_LUA_CLASS ( MOAIAppAndroid );
 		REGISTER_LUA_CLASS ( MOAIBrowserAndroid );
 		REGISTER_LUA_CLASS ( MOAIDialogAndroid );
 		REGISTER_LUA_CLASS ( MOAIMoviePlayerAndroid );
 		REGISTER_LUA_CLASS ( MOAIKeyboardAndroid );
+		REGISTER_LUA_CLASS ( MOAINotificationsAndroid );
 
 		#ifndef DISABLE_BILLING
 			MOAIBillingAndroid::Affirm ();
