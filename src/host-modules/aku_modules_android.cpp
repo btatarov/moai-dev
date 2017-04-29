@@ -23,6 +23,10 @@ void AKUModulesAndroidAppFinalize () {
 		AKUAndroidAmazonAdsAppFinalize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_APPLOVIN
+		AKUAndroidAppLovinAppFinalize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_CHARTBOOST
 		AKUAndroidChartBoostAppFinalize ();
 	#endif
@@ -92,6 +96,10 @@ void AKUModulesAndroidAppInitialize () {
 		AKUAndroidAmazonAdsAppInitialize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_APPLOVIN
+		AKUAndroidAppLovinAppInitialize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_CHARTBOOST
 		AKUAndroidChartBoostAppInitialize ();
 	#endif
@@ -159,6 +167,10 @@ void AKUModulesAndroidContextInitialize () {
 
 	#if AKU_WITH_ANDROID_AMAZON_ADS
 		AKUAndroidAmazonAdsContextInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_APPLOVIN
+		AKUAndroidAppLovinContextInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_CHARTBOOST

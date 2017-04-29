@@ -8,6 +8,10 @@ FRAMEWORKS = {
         MOAI_SDK_HOME .. '3rdparty-ios/admob-7.14.0/GoogleMobileAds.framework'
     },
 
+    AppLovin = {
+        MOAI_SDK_HOME .. '3rdparty-ios/applovin-4.0.2/AppLovinSDK.framework'
+    },
+
     ChartBoost = {
         MOAI_SDK_HOME .. '3rdparty-ios/chartboost-6.4.2/Chartboost.framework'
     },

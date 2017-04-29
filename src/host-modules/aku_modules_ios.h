@@ -19,6 +19,10 @@
 	#include <moai-ios-admob/host.h>
 #endif
 
+#if AKU_WITH_IOS_APPLOVIN
+	#include <moai-ios-applovin/host.h>
+#endif
+
 #if AKU_WITH_IOS_BILLING
 	#include <moai-ios-billing/host.h>
 #endif

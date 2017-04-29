@@ -54,6 +54,7 @@ HOST_SETTINGS = {
             MODULES = {
                 'adcolony',
                 'admob',
+                'applovin',
                 'chartboost',
                 'google_billing',
                 'google_play_services',

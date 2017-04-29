@@ -50,6 +50,18 @@ MODULES = {
 	},
 
 	----------------------------------------------------------------
+	APPLOVIN = {
+
+		MODULE_DEFINE = 'AKU_WITH_ANDROID_APPLOVIN',
+
+		INCLUDES = {
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-applovin.mk',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-applovin',
+	},
+
+	----------------------------------------------------------------
 	BOX2D = {
 
 		MODULE_DEFINE = 'AKU_WITH_BOX2D',
@@ -411,6 +423,7 @@ STATIC_LIBRARIES = {
 	'libmoai-adcolony',
 	'libmoai-admob',
 	'libmoai-amazonads',
+	'libmoai-applovin',
 	'libmoai-chartboost',
 	'libmoai-crittercism',
 	'libmoai-facebook',

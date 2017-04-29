@@ -73,6 +73,7 @@ configureHost = function ()
             [ '@BUILD_NUMBER@' ] = hostconfig[ 'BUILD_NUMBER' ],
             [ '@FB_APP_ID@' ] = hostconfig[ 'FB_APP_ID' ],
             [ '@FB_APP_NAME@' ] = hostconfig[ 'FB_APP_NAME' ],
+            [ '@APPLOVIN_SDK_KEY@' ] = hostconfig[ 'APPLOVIN_SDK_KEY' ],
             [ '<string>UIInterfaceOrientationPortrait</string>' ] = orientationString,
         }
     })

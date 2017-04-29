@@ -28,6 +28,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * amazon billing v2
 * amazon gamecircle
 * admob-8.4.0 (interstitial and banner)
+* applovin-7.0.3-fireos (interstitial and rewarded video)
 * chartboost-6.4.1 (interstitial)
 * crittercism-5.5.5
 * facebook-4.5.1 (TODO: update to latest version)
@@ -45,6 +46,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * MOAILucidViewIOS (transparent view wrapper responding only to touches in child views)
 * adcolony-2.6.1 (rewarded video)
 * admob-7.14.0 (intersitial and banner)
+* applovin-4.0.2 (interstitial and rewarded video)
 * chartboost-6.4.2 (interstitial and rewarded video)
 * crittercism-5.5.1
 * facebook-4.17.0
@@ -52,7 +54,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * startapp-3.3.2 (interstitial, banner and return ad)
 * vungle-3.2.0 (rewarded video)
 * util/host-ios ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-ios/hosts.lua.sample))
-* TODO: missing samples (chartboost and adcolony)
+* TODO: missing samples (applovin, chartboost and adcolony)
 
 ### Samples
 * android-adcolony

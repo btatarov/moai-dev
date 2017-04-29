@@ -13,6 +13,10 @@
 		#define AKU_WITH_IOS_ADMOB 1
 	#endif
 
+	#ifndef AKU_WITH_IOS_APPLOVIN
+		#define AKU_WITH_IOS_APPLOVIN 1
+	#endif
+
 	#ifndef AKU_WITH_IOS_BILLING
 		#define AKU_WITH_IOS_BILLING 1
 	#endif

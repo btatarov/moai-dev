@@ -280,6 +280,14 @@ if config.REVMOB_APP_ID then
 	})
 end
 
+if config.APPLOVIN_APP_ID then
+	util.replaceInFiles ({
+		[ MOAI_PROJECT_PATH .. 'AndroidManifest.xml' ] = {
+			[ '@APPLOVIN_APP_ID@' ]				= config.APPLOVIN_APP_ID,
+		},
+	})
+end
+
 util.replaceInFiles ({
 
 	[ OUTPUT_DIR .. 'run-host.sh' ] = {
