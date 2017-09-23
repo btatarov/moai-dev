@@ -43,6 +43,7 @@ public class MoaiGameCircle {
 		@Override
         public void onServiceNotReady ( AmazonGamesStatus status ) {
 
+            sAGClient = null;
             AKUInvokeListener ( ListenerEvent.SERVICE_NOT_READY.ordinal () );
         }
 
@@ -125,7 +126,7 @@ public class MoaiGameCircle {
 
         if ( sAGClient != null && sLBClient != null ) {
 
-            sLBClient.showLeaderboardsOverlay( leaderboardId );
+            sLBClient.showLeaderboardOverlay ( leaderboardId );
         }
     }
 

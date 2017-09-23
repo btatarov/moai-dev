@@ -44,10 +44,10 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * CHANGE: framework directory separation (moved from 3rdparty to 3rdparty-ios)
 * MOAILucidViewIOS (transparent view wrapper responding only to touches in child views)
 * adcolony-2.6.1 (rewarded video)
-* admob-7.7.1 (intersitial and banner)
+* admob-7.14.0 (intersitial and banner)
 * chartboost-6.4.2 (interstitial and rewarded video)
 * crittercism-5.5.1
-* facebook-4.10.1
+* facebook-4.17.0
 * revmob-9.0.8 (interstitial, banner and rewarded video)
 * startapp-3.3.2 (interstitial, banner and return ad)
 * vungle-3.2.0 (rewarded video)

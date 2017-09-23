@@ -181,12 +181,12 @@ int MOAIFacebookIOS::_postToFeed ( lua_State* L ) {
 	content.contentDescription  = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 4, "" ) ];
 
 	FBSDKShareDialog *dialog = [ [ FBSDKShareDialog alloc ] init ];
-	dialog.mode = FBSDKShareDialogModeNative;
+	dialog.mode = FBSDKShareDialogModeAutomatic;
 	dialog.shareContent = content;
 	dialog.fromViewController = rootVC;
 	dialog.delegate = MOAIFacebookIOS::Get ().mShareDelegate;
 
-	if ( ! [ dialog canShow ] ) dialog.mode = FBSDKShareDialogModeFeedBrowser;
+	// if ( ! [ dialog canShow ] ) dialog.mode = FBSDKShareDialogModeFeedBrowser;
 	[ dialog show ];
 
 	[ dialog release ];

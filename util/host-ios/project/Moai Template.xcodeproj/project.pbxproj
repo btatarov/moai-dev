@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		431874EC1DD5131B0032CB25 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431874EB1DD5131B0032CB25 /* Bolts.framework */; };
 		432F17AF1CBD99660014E7E0 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432F17AC1CBD99660014E7E0 /* AdColony.framework */; };
 		432F17B01CBD99660014E7E0 /* Chartboost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432F17AD1CBD99660014E7E0 /* Chartboost.framework */; };
 		432F17B11CBD99660014E7E0 /* Crittercism.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432F17AE1CBD99660014E7E0 /* Crittercism.framework */; };
@@ -86,6 +87,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		431874EB1DD5131B0032CB25 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = libmoai/Bolts.framework; sourceTree = "<group>"; };
 		432F17AC1CBD99660014E7E0 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdColony.framework; path = libmoai/AdColony.framework; sourceTree = SOURCE_ROOT; };
 		432F17AD1CBD99660014E7E0 /* Chartboost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chartboost.framework; path = libmoai/Chartboost.framework; sourceTree = SOURCE_ROOT; };
 		432F17AE1CBD99660014E7E0 /* Crittercism.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crittercism.framework; path = libmoai/Crittercism.framework; sourceTree = SOURCE_ROOT; };
@@ -208,6 +210,7 @@
 				43B309A21CBD878800DF3017 /* libmoai-ios-zl-vfs.a in Frameworks */,
 				4367C4841D277B5200F51100 /* libmoai-ios-apple.a in Frameworks */,
 				432F17AF1CBD99660014E7E0 /* AdColony.framework in Frameworks */,
+				431874EC1DD5131B0032CB25 /* Bolts.framework in Frameworks */,
 				432F17B11CBD99660014E7E0 /* Crittercism.framework in Frameworks */,
 				432F17B01CBD99660014E7E0 /* Chartboost.framework in Frameworks */,
 				432F17C11CBDCB9B0014E7E0 /* FBSDKCoreKit.framework in Frameworks */,
@@ -287,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				432F17AC1CBD99660014E7E0 /* AdColony.framework */,
+				431874EB1DD5131B0032CB25 /* Bolts.framework */,
 				432F17AD1CBD99660014E7E0 /* Chartboost.framework */,
 				432F17AE1CBD99660014E7E0 /* Crittercism.framework */,
 				432F17BE1CBDCB9B0014E7E0 /* FBSDKCoreKit.framework */,

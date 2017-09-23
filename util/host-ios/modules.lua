@@ -5,7 +5,7 @@ FRAMEWORKS = {
     },
 
     AdMob = {
-        MOAI_SDK_HOME .. '3rdparty-ios/admob-7.7.1/GoogleMobileAds.framework'
+        MOAI_SDK_HOME .. '3rdparty-ios/admob-7.14.0/GoogleMobileAds.framework'
     },
 
     ChartBoost = {
@@ -17,9 +17,10 @@ FRAMEWORKS = {
     },
 
     Facebook = {
-        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.10.1/FBSDKCoreKit.framework',
-        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.10.1/FBSDKLoginKit.framework',
-        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.10.1/FBSDKShareKit.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.17.0/Bolts.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.17.0/FBSDKCoreKit.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.17.0/FBSDKLoginKit.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.17.0/FBSDKShareKit.framework',
     },
 
     RevMob = {
