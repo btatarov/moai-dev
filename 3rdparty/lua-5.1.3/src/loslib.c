@@ -4,6 +4,10 @@
 ** See Copyright Notice in lua.h
 */
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#define _XOPEN_SOURCE 500
+#include <ftw.h>
+#endif
 
 #include <errno.h>
 #include <locale.h>
@@ -35,8 +39,24 @@ static int os_pushresult (lua_State *L, int i, const char *filename) {
 }
 
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+static int unlink_cb(const char *fpath, const struct stat *sb, int typeflag, struct FTW *ftwbuf) {
+    int ret = remove(fpath);
+    if (ret) {
+        perror(fpath);
+    }
+    return ret;
+}
+#endif
+
+
 static int os_execute (lua_State *L) {
+  #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+  lua_pushinteger(L, (nftw(luaL_optstring(L, 1, NULL), unlink_cb, 64, FTW_DEPTH | FTW_PHYS)));
+  #else
   lua_pushinteger(L, system(luaL_optstring(L, 1, NULL)));
+  #endif
+
   return 1;
 }
 
@@ -240,4 +260,3 @@ LUALIB_API int luaopen_os (lua_State *L) {
   luaL_register(L, LUA_OSLIBNAME, syslib);
   return 1;
 }
-
