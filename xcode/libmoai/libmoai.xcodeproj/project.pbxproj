@@ -57,7 +57,6 @@
 				3E72B9CE19F703FA00A9DE30 /* PBXTargetDependency */,
 				3E72B9D019F703FA00A9DE30 /* PBXTargetDependency */,
 				CDB14A391A01CCFB008CEA54 /* PBXTargetDependency */,
-				43D328FB1CC35FF700612A15 /* PBXTargetDependency */,
 				3E72B9DA19F703FA00A9DE30 /* PBXTargetDependency */,
 				43DB54591CBDE7D900BC83B0 /* PBXTargetDependency */,
 				43EDBF2B1CC05A88000DF5D4 /* PBXTargetDependency */,
@@ -4628,13 +4627,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = CD27BE00191D9F44000A7770;
 			remoteInfo = "libmoai-ios-adcolony";
-		};
-		43D328FA1CC35FF700612A15 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 43D328DF1CC34B3A00612A15;
-			remoteInfo = "libmoai-ios-revmob";
 		};
 		43DA2D451CC024BE0025AF75 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -19371,11 +19363,6 @@
 			isa = PBXTargetDependency;
 			target = CD27BE00191D9F44000A7770 /* libmoai-ios-adcolony */;
 			targetProxy = 43B309771CBD400A00DF3017 /* PBXContainerItemProxy */;
-		};
-		43D328FB1CC35FF700612A15 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 43D328DF1CC34B3A00612A15 /* libmoai-ios-revmob */;
-			targetProxy = 43D328FA1CC35FF700612A15 /* PBXContainerItemProxy */;
 		};
 		43DA2D461CC024BE0025AF75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
