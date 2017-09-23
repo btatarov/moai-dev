@@ -2,6 +2,6 @@
 <meta-data android:name="com.revmob.app.id" android:value="@REVMOB_APP_ID@" />
 <activity
 	android:name="com.revmob.FullscreenActivity"
-	android:configChanges="keyboardHidden|orientation"
+	android:configChanges="keyboardHidden|orientation|screenSize"
 	android:theme="@android:style/Theme.Translucent">
 </activity>

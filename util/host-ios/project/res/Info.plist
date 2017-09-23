@@ -87,5 +87,13 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Adding events</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Taking selfies</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Taking selfies</string>
+	<key>NSMotionUsageDescription </key>
+	<string>Interactive ad controls</string>
 </dict>
 </plist>
