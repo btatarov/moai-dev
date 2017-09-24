@@ -44,7 +44,7 @@
 		43B309D01CBD8D7C00DF3017 /* libfmod_iphoneos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B309CE1CBD8D7C00DF3017 /* libfmod_iphoneos.a */; };
 		43B309D11CBD8D7C00DF3017 /* libfmod_iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B309CF1CBD8D7C00DF3017 /* libfmod_iphonesimulator.a */; };
 		43D328FD1CC4D32600612A15 /* libmoai-ios-revmob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D328FC1CC4D32600612A15 /* libmoai-ios-revmob.a */; };
-		43D328FF1CC4D40300612A15 /* RevMobAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D328FE1CC4D40300612A15 /* RevMobAds.framework */; };
+		43D328FF1CC4D40300612A15 /* RevMob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D328FE1CC4D40300612A15 /* RevMob.framework */; };
 		43D5B04B1EA61EEB004E385A /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D5B04A1EA61EEB004E385A /* GLKit.framework */; };
 		43D5B04E1EA622DE004E385A /* AppLovinSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D5B04D1EA622DE004E385A /* AppLovinSDK.framework */; };
 		43DA2D481CC0258C0025AF75 /* libmoai-ios-vungle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DA2D471CC0258C0025AF75 /* libmoai-ios-vungle.a */; };
@@ -127,7 +127,7 @@
 		43B309CE1CBD8D7C00DF3017 /* libfmod_iphoneos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmod_iphoneos.a; path = libmoai/libfmod_iphoneos.a; sourceTree = "<group>"; };
 		43B309CF1CBD8D7C00DF3017 /* libfmod_iphonesimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmod_iphonesimulator.a; path = libmoai/libfmod_iphonesimulator.a; sourceTree = "<group>"; };
 		43D328FC1CC4D32600612A15 /* libmoai-ios-revmob.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios-revmob.a"; path = "libmoai/libmoai-ios-revmob.a"; sourceTree = "<group>"; };
-		43D328FE1CC4D40300612A15 /* RevMobAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RevMobAds.framework; path = libmoai/RevMobAds.framework; sourceTree = "<group>"; };
+		43D328FE1CC4D40300612A15 /* RevMob.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RevMob.framework; path = libmoai/RevMob.framework; sourceTree = "<group>"; };
 		43D5B04A1EA61EEB004E385A /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		43D5B04D1EA622DE004E385A /* AppLovinSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppLovinSDK.framework; path = libmoai/AppLovinSDK.framework; sourceTree = "<group>"; };
 		43DA2D471CC0258C0025AF75 /* libmoai-ios-vungle.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios-vungle.a"; path = "libmoai/libmoai-ios-vungle.a"; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 				432F17C21CBDCB9B0014E7E0 /* FBSDKLoginKit.framework in Frameworks */,
 				432F17C31CBDCB9B0014E7E0 /* FBSDKShareKit.framework in Frameworks */,
 				43FEA3231CBF355000260EB1 /* GoogleMobileAds.framework in Frameworks */,
-				43D328FF1CC4D40300612A15 /* RevMobAds.framework in Frameworks */,
+				43D328FF1CC4D40300612A15 /* RevMob.framework in Frameworks */,
 				4365CBE41CC069C4005B8159 /* StartApp.framework in Frameworks */,
 				43DA2D4A1CC026820025AF75 /* VungleSDK.framework in Frameworks */,
 				63CF1AE01A06664500F731F1 /* AdSupport.framework in Frameworks */,
@@ -307,7 +307,7 @@
 				432F17BF1CBDCB9B0014E7E0 /* FBSDKLoginKit.framework */,
 				432F17C01CBDCB9B0014E7E0 /* FBSDKShareKit.framework */,
 				43FEA3221CBF355000260EB1 /* GoogleMobileAds.framework */,
-				43D328FE1CC4D40300612A15 /* RevMobAds.framework */,
+				43D328FE1CC4D40300612A15 /* RevMob.framework */,
 				4365CBE31CC069C4005B8159 /* StartApp.framework */,
 				43DA2D491CC026820025AF75 /* VungleSDK.framework */,
 				43B309CE1CBD8D7C00DF3017 /* libfmod_iphoneos.a */,

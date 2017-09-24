@@ -58,7 +58,7 @@
 	#endif
 
 	#ifndef AKU_WITH_IOS_REVMOB
-		#define AKU_WITH_IOS_REVMOB 0
+		#define AKU_WITH_IOS_REVMOB 1
 	#endif
 
 	#ifndef AKU_WITH_IOS_STARTAPP

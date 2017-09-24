@@ -50,7 +50,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * chartboost-6.4.2 (interstitial and rewarded video)
 * crittercism-5.5.1
 * facebook-4.17.0
-* revmob-9.0.8 (interstitial, banner and rewarded video)
+* revmob-10.0.0 (interstitial, banner and rewarded video)
 * startapp-3.3.2 (interstitial, banner and return ad)
 * vungle-3.2.0 (rewarded video)
 * util/host-ios ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-ios/hosts.lua.sample))

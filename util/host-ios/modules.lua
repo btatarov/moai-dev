@@ -28,7 +28,7 @@ FRAMEWORKS = {
     },
 
     RevMob = {
-        MOAI_SDK_HOME .. '3rdparty-ios/revmob-9.0.8/RevMobAds.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/revmob-10.0.0/RevMob.framework',
     },
 
     StartApp = {
