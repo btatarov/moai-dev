@@ -9,7 +9,7 @@ FRAMEWORKS = {
     },
 
     AppLovin = {
-        MOAI_SDK_HOME .. '3rdparty-ios/applovin-4.0.2/AppLovinSDK.framework'
+        MOAI_SDK_HOME .. '3rdparty-ios/applovin-4.3.1/AppLovinSDK.framework'
     },
 
     ChartBoost = {

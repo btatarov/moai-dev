@@ -46,7 +46,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * MOAILucidViewIOS (transparent view wrapper responding only to touches in child views)
 * adcolony-3.2.1 (rewarded video)
 * admob-7.14.0 (intersitial and banner)
-* applovin-4.0.2 (interstitial and rewarded video)
+* applovin-4.3.1 (interstitial and rewarded video)
 * chartboost-6.4.2 (interstitial and rewarded video)
 * crittercism-5.5.1
 * facebook-4.17.0
@@ -54,7 +54,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * startapp-3.3.2 (interstitial, banner and return ad)
 * vungle-5.2.0 (rewarded video)
 * util/host-ios ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-ios/hosts.lua.sample))
-* TODO: missing samples (applovin and chartboost)
+* TODO: missing sample (chartboost)
 
 ### Samples
 * android-adcolony
@@ -73,6 +73,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * fmod
 * ios-adcolony
 * ios-admob
+* ios-applovin
 * ios-facebook
 * ios-revmob
 * ios-startapp

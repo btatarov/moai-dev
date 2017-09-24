@@ -19630,7 +19630,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"../../3rdparty-ios/adcolony-3.2.1\"",
 					"\"../../3rdparty-ios/admob-7.14.0\"",
-					"\"../../3rdparty-ios/applovin-4.0.2\"",
+					"\"../../3rdparty-ios/applovin-4.3.1\"",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.17.0\"",
@@ -21796,7 +21796,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"../../3rdparty-ios/adcolony-3.2.1\"",
 					"\"../../3rdparty-ios/admob-7.14.0\"",
-					"\"../../3rdparty-ios/applovin-4.0.2\"",
+					"\"../../3rdparty-ios/applovin-4.3.1\"",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.17.0\"",
@@ -26228,7 +26228,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"../../3rdparty-ios/adcolony-3.2.1\"",
 					"\"../../3rdparty-ios/admob-7.14.0\"",
-					"\"../../3rdparty-ios/applovin-4.0.2\"",
+					"\"../../3rdparty-ios/applovin-4.3.1\"",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.17.0\"",
@@ -26661,7 +26661,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"../../3rdparty-ios/adcolony-3.2.1\"",
 					"\"../../3rdparty-ios/admob-7.14.0\"",
-					"\"../../3rdparty-ios/applovin-4.0.2\"",
+					"\"../../3rdparty-ios/applovin-4.3.1\"",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.17.0\"",
