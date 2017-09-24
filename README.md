@@ -48,7 +48,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * admob-7.14.0 (intersitial and banner)
 * applovin-4.3.1 (interstitial and rewarded video)
 * chartboost-7.0.1 (interstitial and rewarded video)
-* crittercism-5.5.1
+* crittercism-5.6.8
 * facebook-4.17.0
 * revmob-10.0.0 (interstitial, banner and rewarded video)
 * startapp-3.5.0 (interstitial, banner and return ad)

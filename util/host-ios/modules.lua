@@ -17,7 +17,7 @@ FRAMEWORKS = {
     },
 
     Crittercism = {
-        MOAI_SDK_HOME .. '3rdparty-ios/crittercism-5.5.1/Crittercism.framework'
+        MOAI_SDK_HOME .. '3rdparty-ios/crittercism-5.6.8/Crittercism.framework'
     },
 
     Facebook = {
