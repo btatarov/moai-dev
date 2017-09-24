@@ -38,7 +38,7 @@ thread:run( function ()
 	coroutine:yield ()
 
 	if MOAIAppLovinIOS.hasCachedInterstitial () then
-		print ( 'Showing Admob interstitial.' )
+		print ( 'Showing AppLovin interstitial.' )
 		MOAIAppLovinIOS.showInterstitial ()
 	else
 		print ( 'There is no cached interstitial.' )
@@ -48,7 +48,7 @@ thread:run( function ()
 	coroutine:yield ()
 
 	if MOAIAppLovinIOS.hasCachedRewardedVideo () then
-		print ( 'Showing Admob rewarded video.' )
+		print ( 'Showing AppLovin rewarded video.' )
 		MOAIAppLovinIOS.showRewardedVideo ()
 	else
 		print ( 'There is no cached rewarded video.' )

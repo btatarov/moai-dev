@@ -13,7 +13,7 @@ FRAMEWORKS = {
     },
 
     ChartBoost = {
-        MOAI_SDK_HOME .. '3rdparty-ios/chartboost-6.4.2/Chartboost.framework'
+        MOAI_SDK_HOME .. '3rdparty-ios/chartboost-7.0.1/Chartboost.framework'
     },
 
     Crittercism = {
