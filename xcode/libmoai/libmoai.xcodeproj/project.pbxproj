@@ -19628,7 +19628,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"../../3rdparty-ios/adcolony-2.6.1\"",
+					"\"../../3rdparty-ios/adcolony-3.2.1\"",
 					"\"../../3rdparty-ios/admob-7.14.0\"",
 					"\"../../3rdparty-ios/applovin-4.0.2\"",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
@@ -21794,7 +21794,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"../../3rdparty-ios/adcolony-2.6.1\"",
+					"\"../../3rdparty-ios/adcolony-3.2.1\"",
 					"\"../../3rdparty-ios/admob-7.14.0\"",
 					"\"../../3rdparty-ios/applovin-4.0.2\"",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
@@ -26226,7 +26226,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"../../3rdparty-ios/adcolony-2.6.1\"",
+					"\"../../3rdparty-ios/adcolony-3.2.1\"",
 					"\"../../3rdparty-ios/admob-7.14.0\"",
 					"\"../../3rdparty-ios/applovin-4.0.2\"",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",
@@ -26659,7 +26659,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"../../3rdparty-ios/adcolony-2.6.1\"",
+					"\"../../3rdparty-ios/adcolony-3.2.1\"",
 					"\"../../3rdparty-ios/admob-7.14.0\"",
 					"\"../../3rdparty-ios/applovin-4.0.2\"",
 					"\"../../3rdparty-ios/chartboost-6.4.2\"",

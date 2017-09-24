@@ -1,7 +1,7 @@
 FRAMEWORKS = {
 
     AdColony = {
-        MOAI_SDK_HOME .. '3rdparty-ios/adcolony-2.6.1/AdColony.framework'
+        MOAI_SDK_HOME .. '3rdparty-ios/adcolony-3.2.1/AdColony.framework'
     },
 
     AdMob = {
