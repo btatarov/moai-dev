@@ -19635,7 +19635,7 @@
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.17.0\"",
 					"\"../../3rdparty-ios/revmob-10.0.0\"",
-					"\"../../3rdparty-ios/startapp-3.3.2\"",
+					"\"../../3rdparty-ios/startapp-3.5.0\"",
 					"\"../../3rdparty-ios/vungle-5.2.0\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
@@ -21801,7 +21801,7 @@
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.17.0\"",
 					"\"../../3rdparty-ios/revmob-10.0.0\"",
-					"\"../../3rdparty-ios/startapp-3.3.2\"",
+					"\"../../3rdparty-ios/startapp-3.5.0\"",
 					"\"../../3rdparty-ios/vungle-5.2.0\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
@@ -26233,7 +26233,7 @@
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.17.0\"",
 					"\"../../3rdparty-ios/revmob-10.0.0\"",
-					"\"../../3rdparty-ios/startapp-3.3.2\"",
+					"\"../../3rdparty-ios/startapp-3.5.0\"",
 					"\"../../3rdparty-ios/vungle-5.2.0\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
@@ -26666,7 +26666,7 @@
 					"\"../../3rdparty-ios/crittercism-5.5.1\"",
 					"\"../../3rdparty-ios/facebook-4.17.0\"",
 					"\"../../3rdparty-ios/revmob-10.0.0\"",
-					"\"../../3rdparty-ios/startapp-3.3.2\"",
+					"\"../../3rdparty-ios/startapp-3.5.0\"",
 					"\"../../3rdparty-ios/vungle-5.2.0\"",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;

@@ -32,8 +32,8 @@ FRAMEWORKS = {
     },
 
     StartApp = {
-        MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.3.2/StartApp.bundle',
-        MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.3.2/StartApp.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.5.0/StartApp.bundle',
+        MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.5.0/StartApp.framework',
     },
 
     Vungle = {
