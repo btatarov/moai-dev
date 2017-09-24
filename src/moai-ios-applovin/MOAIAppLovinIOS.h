@@ -49,7 +49,7 @@ public:
 //================================================================//
 // MoaiAppLovinDelegate
 //================================================================//
-@interface MoaiAppLovinDelegate : NSObject < ALAdVideoPlaybackDelegate > {
+@interface MoaiAppLovinDelegate : NSObject < ALAdRewardDelegate > {
 @private
 }
 @end

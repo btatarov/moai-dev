@@ -78,7 +78,7 @@ int MOAIAppLovinIOS::_showRewardedVideo ( lua_State* L ) {
 
 	if ( [ ALIncentivizedInterstitialAd isReadyForDisplay ] ) {
 
-    	[ ALIncentivizedInterstitialAd showAndNotify: nil ];
+    	[ ALIncentivizedInterstitialAd showAndNotify:MOAIAppLovinIOS::Get ().mDelegate ];
 
 		lua_pushboolean ( state, true );
 		return 1;
@@ -137,15 +137,12 @@ void MOAIAppLovinIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	//================================================================//
 
 	//----------------------------------------------------------------//
-	- ( void ) videoPlaybackEndedInAd:( ALAd* )ad atPlaybackPercent:( NSNumber* )percentPlayed fullyWatched:( BOOL )wasFullyWatched {
+	- ( void ) rewardValidationRequestForAd:( ALAd * )ad didSucceedWithResponse:( NSDictionary * )response {
 
 		UNUSED ( ad );
-		UNUSED ( percentPlayed );
+		UNUSED ( response );
 
-		if ( wasFullyWatched ) {
-
-			MOAIAppLovinIOS::Get ().InvokeListener ( MOAIAppLovinIOS::REWARDED_VIDEO_COMPLETED );
-		}
+		MOAIAppLovinIOS::Get ().InvokeListener ( MOAIAppLovinIOS::REWARDED_VIDEO_COMPLETED );
 	}
 
 @end
