@@ -38,8 +38,8 @@ thread:run( function ()
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 
-    MOAIAdMobIOS.init ( '< YOUR UNIT ID >' )
-	MOAIAdMobIOS.initBannerWithParams ( '< YOUR UNIT ID >', 320, 0, 10, true )
+    MOAIAdMobIOS.init ( '< YOUR APP ID >', '< YOUR UNIT ID >' )
+	MOAIAdMobIOS.initBannerWithParams ( '< YOUR UNIT ID >', 10, true )
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
@@ -51,7 +51,7 @@ thread:run( function ()
     coroutine:yield ()
 
     if MOAIAdMobIOS.hasCachedInterstitial () then
-    	print ( "Showing Admob interstitial." )
+    	print ( "Showing AdMob interstitial." )
         MOAIAdMobIOS.showInterstitial ()
     else
     	print ( "There is no cached interstitial." )

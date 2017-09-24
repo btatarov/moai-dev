@@ -5,7 +5,7 @@ FRAMEWORKS = {
     },
 
     AdMob = {
-        MOAI_SDK_HOME .. '3rdparty-ios/admob-7.14.0/GoogleMobileAds.framework'
+        MOAI_SDK_HOME .. '3rdparty-ios/admob-7.24.0/GoogleMobileAds.framework'
     },
 
     AppLovin = {

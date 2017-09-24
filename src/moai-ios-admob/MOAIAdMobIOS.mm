@@ -80,7 +80,10 @@ int MOAIAdMobIOS::_init ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
-	cc8* unitID = lua_tostring ( state, 1 );
+	cc8* appID = lua_tostring ( state, 1 );
+	cc8* unitID = lua_tostring ( state, 2 );
+
+	[ GADMobileAds configureWithApplicationID:[ NSString stringWithUTF8String:appID ] ];
 
 	GADInterstitial* interstitial = MOAIAdMobIOS::Get ().mInterstitial;
 	[ interstitial initWithAdUnitID:[ NSString stringWithUTF8String:unitID ] ];
