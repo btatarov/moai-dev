@@ -37,7 +37,7 @@ FRAMEWORKS = {
     },
 
     Vungle = {
-        MOAI_SDK_HOME .. '3rdparty-ios/vungle-3.2.0/VungleSDK.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/vungle-5.2.0/VungleSDK.framework',
     },
 }
 

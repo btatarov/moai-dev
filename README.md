@@ -52,7 +52,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * facebook-4.17.0
 * revmob-10.0.0 (interstitial, banner and rewarded video)
 * startapp-3.3.2 (interstitial, banner and return ad)
-* vungle-3.2.0 (rewarded video)
+* vungle-5.2.0 (rewarded video)
 * util/host-ios ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-ios/hosts.lua.sample))
 * TODO: missing samples (applovin and chartboost)
 
