@@ -21,10 +21,10 @@ FRAMEWORKS = {
     },
 
     Facebook = {
-        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.17.0/Bolts.framework',
-        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.17.0/FBSDKCoreKit.framework',
-        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.17.0/FBSDKLoginKit.framework',
-        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.17.0/FBSDKShareKit.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.26.0/Bolts.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.26.0/FBSDKCoreKit.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.26.0/FBSDKLoginKit.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.26.0/FBSDKShareKit.framework',
     },
 
     RevMob = {

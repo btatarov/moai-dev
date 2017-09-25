@@ -164,6 +164,7 @@ int MOAIFacebookIOS::_logout ( lua_State* L ) {
  @in		string	description		The description of the link. See Facebook documentation.
  @out 	nil
  */
+ // TODO: change to postImageToFeed or similar
 int MOAIFacebookIOS::_postToFeed ( lua_State* L ) {
 
 	MOAILuaState state ( L );
@@ -173,14 +174,15 @@ int MOAIFacebookIOS::_postToFeed ( lua_State* L ) {
 	UIViewController* rootVC = [ window rootViewController ];
 
 	// content to share
-	FBSDKShareLinkContent *content = [ [ FBSDKShareLinkContent alloc ] init ];
+	FBSDKShareLinkContent *content = [ [ [ FBSDKShareLinkContent alloc ] init ] autorelease ];
 
 	content.contentURL          = [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* > ( 1, "" ) ] ];
-	content.imageURL            = [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* > ( 2, "" ) ] ];
-	content.contentTitle        = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 3, "" ) ];
-	content.contentDescription  = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 4, "" ) ];
+	// TODO: deprecated
+	// content.imageURL            = [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* > ( 2, "" ) ] ];
+	// content.contentTitle        = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 3, "" ) ];
+	// content.contentDescription = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 4, "" ) ];
 
-	FBSDKShareDialog *dialog = [ [ FBSDKShareDialog alloc ] init ];
+	FBSDKShareDialog *dialog = [ [ [ FBSDKShareDialog alloc ] init ] autorelease ];
 	dialog.mode = FBSDKShareDialogModeAutomatic;
 	dialog.shareContent = content;
 	dialog.fromViewController = rootVC;
@@ -188,9 +190,6 @@ int MOAIFacebookIOS::_postToFeed ( lua_State* L ) {
 
 	// if ( ! [ dialog canShow ] ) dialog.mode = FBSDKShareDialogModeFeedBrowser;
 	[ dialog show ];
-
-	[ dialog release ];
-	[ content release ];
 
 	return 0;
 }
