@@ -13,6 +13,7 @@
 #include <moai-util/MOAIFileStream.h>
 #include <moai-util/MOAIFileSystem.h>
 #include <moai-util/MOAIHashWriter.h>
+#include <moai-util/MOAIImageLoadTask.h>
 #include <moai-util/MOAIJsonParser.h>
 #include <moai-util/MOAIMath.h>
 #include <moai-util/MOAIMemStream.h>
@@ -35,7 +36,7 @@
 #if MOAI_WITH_TINYXML
   #include <moai-util/MOAIXmlParser.h>
   #include <moai-util/MOAIXmlWriter.h>
-#endif 
+#endif
 
 //================================================================//
 // moai_util

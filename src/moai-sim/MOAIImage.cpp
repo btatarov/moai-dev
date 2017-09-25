@@ -10,6 +10,7 @@
 #include <moai-sim/MOAIImage.h>
 #include <moai-sim/MOAIImageFormatMgr.h>
 #include <moai-sim/MOAIGfxDevice.h>
+#include <moai-util/MOAIImageLoadTask.h>
 #include <float.h>
 #include <contrib/edtaa3func.h>
 
@@ -558,6 +559,54 @@ int MOAIImage::_load ( lua_State* L ) {
 
 		self->Load ( filename, transform );
 	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	loadAsync
+	@text	Load an image asyncronously. This includes reading the file and decoding compressed data.
+
+ 	@overload
+		@in		MOAIImage self
+		@in		string filename			The path to the image file
+		@in		MOAITaskQueue queue		The queue to peform operation on
+		@opt	function callback		Callback that will receive loaded image
+		@opt	number transform		One of MOAIImage.POW_TWO, MOAIImage.QUANTIZE,
+										MOAIImage.TRUECOLOR, MOAIImage.PREMULTIPLY_ALPHA
+		@out	nil
+
+	@overload
+		@in		MOAIImage self
+		@in		MOAIDataBuffer data		Buffer containing the image data
+		@in		MOAITaskQueue queue		The queue to peform operation on
+		@opt	function callback		Callback that will receive loaded image
+		@opt	number transform		One of MOAIImage.POW_TWO, MOAIImage.QUANTIZE,
+										MOAIImage.TRUECOLOR, MOAIImage.PREMULTIPLY_ALPHA
+		@out	nil
+*/
+int MOAIImage::_loadAsync ( lua_State *L ) {
+	MOAI_LUA_SETUP ( MOAIImage, "U" )
+
+	MOAIDataBuffer* buffer	= state.GetLuaObject < MOAIDataBuffer >( 2, false );
+	MOAITaskQueue* queue	= state.GetLuaObject < MOAITaskQueue >( 3, true );
+	u32 transform			= state.GetValue < u32 >( 5, 0 );
+
+	if ( !queue ) {
+		return 0;
+	}
+
+	MOAIImageLoadTask* task = new MOAIImageLoadTask ();
+
+	if ( buffer ) {
+		task->Init ( *buffer, *self, transform );
+	}
+	else {
+		cc8* filename = state.GetValue < cc8* >( 2, "" );
+		task->Init ( filename, *self, transform );
+	}
+	task->SetCallback ( L, 4 );
+	task->Start ( *queue, MOAIMainThreadTaskSubscriber::Get ());
+
 	return 0;
 }
 
@@ -2627,6 +2676,7 @@ void MOAIImage::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "getSize",					_getSize },
 		{ "init",						_init },
 		{ "load",						_load },
+        { "loadAsync",					_loadAsync },
 		{ "loadFromBuffer",				_loadFromBuffer },
 		{ "mix",						_mix },
 		{ "padToPow2",					_padToPow2 },

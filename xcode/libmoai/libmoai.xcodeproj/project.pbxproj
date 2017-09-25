@@ -340,6 +340,8 @@
 		20A0B02A1A5020740072F513 /* edtaa3func.c in Sources */ = {isa = PBXBuildFile; fileRef = 20A0B0271A5020740072F513 /* edtaa3func.c */; };
 		20A0B02B1A5020740072F513 /* edtaa3func.h in Headers */ = {isa = PBXBuildFile; fileRef = 20A0B0281A5020740072F513 /* edtaa3func.h */; };
 		20A0B02C1A5020740072F513 /* edtaa3func.h in Headers */ = {isa = PBXBuildFile; fileRef = 20A0B0281A5020740072F513 /* edtaa3func.h */; };
+		432FC65D1F79B9D9009E6D5E /* MOAIImageLoadTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432FC65B1F79B9D5009E6D5E /* MOAIImageLoadTask.cpp */; };
+		432FC65E1F79B9D9009E6D5E /* MOAIImageLoadTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 432FC65C1F79B9D7009E6D5E /* MOAIImageLoadTask.h */; };
 		436795971EA672BA00CD08C7 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 4367958F1EA672AF00CD08C7 /* host.h */; };
 		436795981EA672BA00CD08C7 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 436795901EA672AF00CD08C7 /* host.mm */; };
 		436795991EA672BA00CD08C7 /* MOAIAppLovinIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 436795911EA672AF00CD08C7 /* MOAIAppLovinIOS.h */; };
@@ -5014,6 +5016,8 @@
 		0795297E1447907100143A72 /* jversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jversion.h; sourceTree = "<group>"; };
 		20A0B0271A5020740072F513 /* edtaa3func.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = edtaa3func.c; path = ../../3rdparty/contrib/edtaa3func.c; sourceTree = "<group>"; };
 		20A0B0281A5020740072F513 /* edtaa3func.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = edtaa3func.h; path = ../../3rdparty/contrib/edtaa3func.h; sourceTree = "<group>"; };
+		432FC65B1F79B9D5009E6D5E /* MOAIImageLoadTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIImageLoadTask.cpp; sourceTree = "<group>"; };
+		432FC65C1F79B9D7009E6D5E /* MOAIImageLoadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIImageLoadTask.h; sourceTree = "<group>"; };
 		436795851EA6432300CD08C7 /* libmoai-ios-applovin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-applovin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4367958F1EA672AF00CD08C7 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = host.h; path = "moai-ios-applovin/host.h"; sourceTree = "<group>"; };
 		436795901EA672AF00CD08C7 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = host.mm; path = "moai-ios-applovin/host.mm"; sourceTree = "<group>"; };
@@ -10379,6 +10383,8 @@
 				89BE6CCB1739A42500DFE837 /* MOAIDataIOTask.h */,
 				89BE6CCE1739A42500DFE837 /* MOAIFileSystem.cpp */,
 				89BE6CCF1739A42500DFE837 /* MOAIFileSystem.h */,
+				432FC65B1F79B9D5009E6D5E /* MOAIImageLoadTask.cpp */,
+				432FC65C1F79B9D7009E6D5E /* MOAIImageLoadTask.h */,
 				89BE6CD21739A42500DFE837 /* MOAIJsonParser.cpp */,
 				89BE6CD31739A42500DFE837 /* MOAIJsonParser.h */,
 				89BE6CD41739A42500DFE837 /* MOAIMath.cpp */,
@@ -13436,6 +13442,7 @@
 				CD1844D61A6269AB00FCCCE0 /* host.h in Headers */,
 				89BE6AF8173975E500DFE837 /* headers.h in Headers */,
 				89BE6AFC173975E500DFE837 /* host.h in Headers */,
+				432FC65E1F79B9D9009E6D5E /* MOAIImageLoadTask.h in Headers */,
 				89BE6B00173975E500DFE837 /* MOAICanary.h in Headers */,
 				89BE6B04173975E500DFE837 /* MOAIDeserializer.h in Headers */,
 				89BE6B08173975E500DFE837 /* MOAIEventSource.h in Headers */,
@@ -17012,6 +17019,7 @@
 				89BE6B1A173975E500DFE837 /* MOAILogMgr.cpp in Sources */,
 				CD3024C01A68AB4B00CCEE32 /* MOAITestMgr.cpp in Sources */,
 				89BE6B22173975E500DFE837 /* MOAILuaObject.cpp in Sources */,
+				432FC65D1F79B9D9009E6D5E /* MOAIImageLoadTask.cpp in Sources */,
 				CD1844E21A6269AB00FCCCE0 /* MOAIWebViewController.mm in Sources */,
 				CD1844DE1A6269AB00FCCCE0 /* MOAIKeyboardIOS.mm in Sources */,
 				89BE6B26173975E500DFE837 /* MOAILuaRef.cpp in Sources */,
