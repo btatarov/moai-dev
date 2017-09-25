@@ -53,6 +53,7 @@ configureHost = function ()
             [ 'Moai Template' ] = hostconfig[ 'APP_NAME' ],
             [ '%$%(MOAI_SDK_HOME%)' ] = string.match ( MOAI_SDK_HOME, '(.*)/$' ),
             [ '@IOS_TARGET@' ] = hostconfig[ 'IOS_TARGET' ],
+            [ '@DEVELOPMENT_TEAM@' ] = hostconfig[ 'DEVELOPMENT_TEAM' ],
         },
 
         [ util.wrap(pairs, projectfiles) ] = {
