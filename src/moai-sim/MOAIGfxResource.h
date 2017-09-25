@@ -73,9 +73,10 @@ protected:
 	//----------------------------------------------------------------//
 	bool			DoCPUAffirm					(); // gets ready to bind;
 	bool			DoGPUAffirm					(); // gets ready to bind;
+	void			ForceCPUCreate				();
 	void			FinishInit					(); // ready to CPU/GPU affirm; recover from STATE_NEW or STATE_ERROR
 	bool			HasReloader					();
-	
+
 	virtual bool	OnCPUCreate					() = 0; // load or initialize any CPU-side resources required to create the GPU-side resource
 	virtual void	OnCPUDestroy				() = 0; // clear any CPU-side memory used by class
 	virtual void	OnGPUBind					() = 0; // select GPU-side resource on device for use
@@ -90,7 +91,7 @@ public:
 	friend class MOAIGfxResourceMgr;
 
 	GET ( u32, State, mState );
-	
+
 	enum {
 		LOADING_POLICY_NONE,				// don't care and/or use global policy
 		LOADING_POLICY_CPU_GPU_ASAP,		// load everything asap

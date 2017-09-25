@@ -130,7 +130,7 @@ typedef STLSet < struct Table* > TableSet;
 			case LUA_TUSERDATA:
 
 				if ( lua_islightuserdata ( state, idx ) ) {
-					
+
 					ZLLog::LogF ( ZLLog::CONSOLE, format, lua_topointer ( state, idx ) , "light userdata", name );
 				}
 				else {
@@ -141,7 +141,7 @@ typedef STLSet < struct Table* > TableSet;
 
 						lua_getglobal ( state, "tostring" );
 						lua_pushvalue ( state, idx );
-						
+
 						lua_pcall ( state, 1, 1, 0 );
 
 						ZLLog::LogF ( ZLLog::CONSOLE, "\n\t%s", lua_tostring ( state, -1 ));
@@ -161,7 +161,7 @@ typedef STLSet < struct Table* > TableSet;
 	static void _dumpTypeByAddress ( lua_State* L, TValue* tvalue, const char *name, bool verbose, TableSet& foundTables ) {
 
 		MOAILuaState state ( L );
-		
+
 		lua_lock ( L );
 		setobj2s ( L, L->top, tvalue );
 		L->top++;
@@ -248,7 +248,7 @@ int MOAILuaRuntime::_dumpStack ( lua_State* L ) {
 			_dumpTypeByAddress ( state, tvalue, "", verbose, foundTables );
 		}
 	#endif
-	
+
 	return 0;
 }
 
@@ -276,7 +276,7 @@ int MOAILuaRuntime::_forceGC ( lua_State* L ) {
 */
 int MOAILuaRuntime::_getHistogram ( lua_State* L ) {
 	MOAILuaState state ( L );
-	
+
 	cc8* trackingGroup = state.GetValue < cc8* >( 1, 0 );
 	MOAILuaRuntime::Get ().PushHistogram ( state, trackingGroup );
 	return 1;
@@ -299,7 +299,7 @@ int MOAILuaRuntime::_panic ( lua_State *L ) {
 	MOAILuaState state ( L );
 	state.PrintStackTrace ( ZLLog::CONSOLE, NULL, 1 );
 	ZLLog::LogF ( ZLLog::CONSOLE, "PANIC: unprotected error in call to Lua API (%s)\n", lua_tostring ( L, -1 ));
-	
+
 	return 0;
 }
 
@@ -324,9 +324,9 @@ int MOAILuaRuntime::_reportHistogram ( lua_State* L ) {
 
 	cc8* filename			= state.GetValue < cc8* >( 1, 0 );
 	cc8* trackingGroup		= state.GetValue < cc8* >( 2, 0 );
-	
+
 	MOAILuaRuntime::Get ().ReportHistogram ( filename, trackingGroup );
-	
+
 	return 0;
 }
 
@@ -336,22 +336,22 @@ int MOAILuaRuntime::_reportHistogram ( lua_State* L ) {
 			report of where they were declared, and what Lua references (if any)
 			can be found. NOTE: This is incredibly slow, so only use to debug
 			leaking memory issues.
- 
+
 			This will also trigger a full garbage collection before performing
 			the required report. (Equivalent of collectgarbage("collect").)
- 
+
 	@opt	string filename
 	@opt	string trackingGroup
 	@out	nil
 */
 int MOAILuaRuntime::_reportLeaks ( lua_State* L ) {
 	MOAILuaState state ( L );
-	
+
 	cc8* filename			= state.GetValue < cc8* >( 1, 0 );
 	cc8* trackingGroup		= state.GetValue < cc8* >( 2, 0 );
-	
+
 	MOAILuaRuntime::Get ().ReportLeaksFormatted ( filename, trackingGroup );
-	
+
 	return 0;
 }
 
@@ -363,7 +363,7 @@ int MOAILuaRuntime::_reportLeaks ( lua_State* L ) {
 			being created. NOTE: This is expensive in terms of both CPU and
 			the extra memory associated with the stack info book-keeping. Use only
 			when tracking down leaks.
- 
+
 	@opt	number flags		Bitwise combination of TRACK_OBJECTS and TRACK_OBJECTS_STACK_TRACE. Default value is 0.
 	@out	nil
 */
@@ -376,28 +376,28 @@ int MOAILuaRuntime::_setTrackingFlags ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 int MOAILuaRuntime::_traceback ( lua_State *L ) {
-	
+
 	MOAILuaRuntime& runtime = MOAILuaRuntime::Get ();
 	MOAILuaState state ( L );
-	
+
 	cc8* msg = NULL;
 	if ( lua_isstring ( L, 1 )) {  // 'message' a string?
 		msg = lua_tostring ( L, 1 );
 	}
-	
+
 	if ( runtime.mTracebackFunc ) {
 		runtime.mTracebackFunc ( msg, L, 0 );
 	}
-	
+
 	if ( runtime.mTracebackRef ) {
-		
+
 		if ( runtime.mTracebackRef.PushRef ( state )) {
-			
+
 			lua_pushvalue ( state, 1 );
 			int result = lua_pcall ( state, 1, 0, 2 );
 
 			if ( !result ) return 0;
-			
+
 			ZLLog::LogF ( ZLLog::CONSOLE, "error in user supplied traceback func\n" );
 			ZLLog::LogF ( ZLLog::CONSOLE, "falling back on default error handler:\n" );
 		}
@@ -414,10 +414,10 @@ int MOAILuaRuntime::_traceback ( lua_State *L ) {
 //----------------------------------------------------------------//
 void* MOAILuaRuntime::_trackingAlloc ( void *ud, void *ptr, size_t osize, size_t nsize ) {
 	UNUSED ( ud );
-	
+
 	if ( MOAILuaRuntime::IsValid ()) {
 		MOAILuaRuntime& self = MOAILuaRuntime::Get ();
-		
+
 		if ( nsize == 0 ) {
 			self.mTotalBytes -= osize;
 			free ( ptr );
@@ -432,7 +432,7 @@ void* MOAILuaRuntime::_trackingAlloc ( void *ud, void *ptr, size_t osize, size_t
 		self.mTotalBytes += nsize;
 		return realloc ( ptr, nsize );
 	}
-	
+
 	if ( nsize == 0 ) {
 		free ( ptr );
 		return NULL;
@@ -450,13 +450,13 @@ void MOAILuaRuntime::BuildHistogram ( HistMap& histogram, cc8* trackingGroup ) {
 
 	TrackingMapIt trackingMapIt = this->mTrackingMap.begin ();
 	for ( ; trackingMapIt != this->mTrackingMap.end (); ++trackingMapIt ) {
-	
+
 		MOAILuaObjectInfo& info = trackingMapIt->second;
 		if ( trackingGroup && ( info.mTrackingGroup.compare ( trackingGroup ) != 0 )) continue;
-	
+
 		MOAILuaObject* obj = trackingMapIt->first;
 		cc8* name = obj->TypeName ();
-	
+
 		if ( !histogram.contains ( name )) {
 			histogram [ name ] = 1;
 		}
@@ -476,16 +476,16 @@ void MOAILuaRuntime::CacheUserdata ( MOAILuaState& state, int idx ) {
 			state.Pop ();
 		}
 	}
-	
+
 	if ( !this->mUserdataCache ) {
 		lua_newtable ( state );
 		this->mUserdataCache.SetRef ( state, -1 );
 	}
-	
+
 	lua_pushvalue ( state, idx );
 	lua_pushvalue ( state, idx );
 	lua_settable ( state, -3 );
-	
+
 	state.Pop ();
 }
 
@@ -531,17 +531,17 @@ void MOAILuaRuntime::FindLuaRefs ( lua_State* L, FILE* file, cc8* trackingGroup,
 	traversalState.mPathMap.clear ();
 
 	traversalState.mIgnoreTraversed = false;
-	
+
 	// check all the globals
 	lua_pushglobaltable ( state );
 	this->FindLuaRefs ( state, -1, file, "_G", trackingGroup, traversalState );
 	state.Pop ( 1 );
-	
+
 	traversalState.mIgnoreTraversed = true;
-	
+
 	// check the stack
 	this->FindLuaRefs ( state, file, "<caller>", trackingGroup, traversalState );
-	
+
 	// print the strong refs
 	this->mStrongRefs.PushRefTable ( state );
 	this->FindLuaRefs ( state, -1, file, "<STRONG REFS>", trackingGroup, traversalState );
@@ -555,16 +555,16 @@ void MOAILuaRuntime::FindLuaRefs ( lua_State* L, FILE* file, STLString path, cc8
 
 	lua_Debug ar;
 	for ( int level = 0; lua_getstack ( state, level, &ar ) != 0; ++level ) {
-	
+
 		STLString stackPath = STLString::build ( "%s[stack: %d]", path.c_str (), level );
-	
+
 		cc8* localname;
 		for ( int i = 1; ( localname = lua_getlocal ( state, &ar, i )) != NULL; ++i ) {
 			STLString localPath = STLString::build ( "%s.%s", stackPath.c_str (), localname );
 			this->FindLuaRefs ( state, -1, file, localPath.c_str (), trackingGroup, traversalState );
 			state.Pop ( 1 );
 		}
-		
+
 		lua_getinfo ( state, "f", &ar );
 		this->FindLuaRefs ( state, -1, file, STLString::build ( "%s.<func>", path.c_str ()), trackingGroup, traversalState );
 		state.Pop ( 1 );
@@ -580,9 +580,9 @@ void MOAILuaRuntime::FindLuaRefs ( lua_State* L, int idx, FILE* file, STLString 
 	L = L ? L : ( lua_State* )this->mState;
 	MOAILuaState state ( L );
 	idx = state.AbsIndex ( idx );
-	
+
 	int type = lua_type ( state, idx );
-	
+
 	if ( type == LUA_TUSERDATA ) {
 		MOAILuaObject* object = MOAILuaObject::IsMoaiUserdata ( state, idx ) ? ( MOAILuaObject* )state.GetPtrUserData ( idx ) : NULL;
 		if ( object && this->mTrackingMap.contains ( object )) {
@@ -594,43 +594,43 @@ void MOAILuaRuntime::FindLuaRefs ( lua_State* L, int idx, FILE* file, STLString 
 			}
 		}
 	}
-	
+
 	// bail if we've already iterated into this item
 	const void* addr = lua_topointer ( state, idx );
-	
+
 	if ( traversalState.mTraversalStack.contains ( addr ) || traversalState.mIgnoreSet.contains ( addr )) return;
 	traversalState.mTraversalStack.insert ( addr );
-	
+
 	if ( traversalState.mIgnoreTraversed && ( traversalState.mTraversalSet.contains ( addr ))) return;
 	traversalState.mTraversalSet.insert ( addr );
-	
+
 	//printf ( "%s\n", path.c_str ());
-	
+
 	switch ( type ) {
-	
+
 		// how to deal with weak tables?
 		case LUA_TTABLE: {
-			
+
 			u32 itr = state.PushTableItr ( idx );
 			while ( state.TableItrNext ( itr )) {
-				
+
 				STLString keyPath = path;
-				
+
 				int keyIdx = state.AbsIndex ( -2 );
 				int valIdx = state.AbsIndex ( -1 );
-				
+
 				int keyType = lua_type ( state, keyIdx );
-				
+
 				cc8* keyName = lua_tostring ( state, keyIdx );
-				
+
 				// update the path and follow the keys (if iterable)
 				switch ( keyType ) {
-					
+
 					case LUA_TBOOLEAN:
 					case LUA_TNUMBER:
 						keyPath.write ( "[%s]", keyName );
 						break;
-					
+
 					case LUA_TSTRING:
 						if ( MOAILuaRuntime::IsLuaIdentifier ( keyName )) {
 							keyPath.write ( ".%s", keyName );
@@ -639,23 +639,23 @@ void MOAILuaRuntime::FindLuaRefs ( lua_State* L, int idx, FILE* file, STLString 
 							keyPath.write ( "[\'%s\']", keyName );
 						}
 						break;
-					
+
 					default: {
-						
+
 						STLString keyTypeName;
 						const void* keyAddr = lua_topointer ( state, keyIdx );
-					
+
 						switch ( keyType ) {
 							case LUA_TFUNCTION:
 								keyTypeName = "function";
 								break;
-							
+
 							case LUA_TTABLE:
 								keyTypeName = "table";
 								break;
-								
+
 							case LUA_TUSERDATA:
-								
+
 								if ( MOAILuaObject::IsMoaiUserdata ( state, keyIdx )) {
 									MOAILuaObject* object = state.GetLuaObject < MOAILuaObject >( keyIdx, false );
 									keyTypeName = object->TypeName ();
@@ -666,61 +666,61 @@ void MOAILuaRuntime::FindLuaRefs ( lua_State* L, int idx, FILE* file, STLString 
 								}
 								break;
 						}
-						
+
 						keyPath.write ( "[%s: %p]", keyTypeName.c_str (), keyAddr );
 						this->FindLuaRefs ( state, keyIdx, file, STLString::build ( "%s(as key)", keyPath.c_str ()), trackingGroup, traversalState );
 					}
 				}
-				
+
 				// follow the values
 				this->FindLuaRefs ( state, valIdx, file, keyPath, trackingGroup, traversalState );
 			}
 			break;
 		}
-		
+
 		case LUA_TFUNCTION: {
-			
+
 			cc8* upname;
 			for ( int i = 1; ( upname = lua_getupvalue ( state, idx, i )) != NULL; ++i ) {
 				STLString upPath = STLString::build ( "%s.<upvalue: ", path.c_str ());
-				
+
 				if ( upname [ 0 ]) {
 					upPath.write ( "%s>", upname );
 				}
 				else {
 					upPath.write ( "%d>", i );
 				}
-				
+
 				this->FindLuaRefs ( state, -1, file, upPath.c_str (), trackingGroup, traversalState );
 				state.Pop ( 1 );
 			}
-			
+
 			lua_getfenv ( state, idx );
 			this->FindLuaRefs ( state, -1, file, STLString::build ( "%s.<env: %p>", path.c_str (), lua_topointer ( state, -1 )), trackingGroup, traversalState );
 			traversalState.mIgnoreSet.insert ( lua_topointer ( state, -1 ));
 			state.Pop ( 1 );
 			break;
 		}
-		
+
 		case LUA_TTHREAD: {
-			
+
 			STLString threadPath = STLString::build ( "%s.<thread>", path.c_str ());
 			MOAILuaState threadState ( lua_tothread ( state, idx ));
 			this->FindLuaRefs ( threadState, file, threadPath, trackingGroup, traversalState );
 			break;
 		}
 	}
-	
+
 	// follow the metatable
 	if (( type == LUA_TTABLE ) || ( type == LUA_TUSERDATA )) {
-	
+
 		MOAILuaObject* object = MOAILuaObject::IsMoaiUserdata ( state, idx ) ? ( MOAILuaObject* )state.GetPtrUserData ( idx ) : NULL;
 		if ( object ) {
-			
+
 			object->PushRefTable ( state );
 			this->FindLuaRefs ( state, -1, file, STLString::build ( "%s.<ref>", path.c_str ()), trackingGroup, traversalState );
 			state.Pop ( 1 );
-			
+
 			object->PushMemberTable ( state );
 			this->FindLuaRefs ( state, -1, file, STLString::build ( "%s.<member>", path.c_str ()), trackingGroup, traversalState );
 			state.Pop ( 1 );
@@ -732,7 +732,7 @@ void MOAILuaRuntime::FindLuaRefs ( lua_State* L, int idx, FILE* file, STLString 
 			}
 		}
 	}
-	
+
 	traversalState.mTraversalStack.erase ( addr );
 }
 
@@ -747,20 +747,20 @@ void MOAILuaRuntime::ForceGarbageCollection () {
 	//    calls the metamethod and marks the userdata as finalized. When
 	//    this userdata is collected again then Lua frees its corresponding
 	//    memory."
-	
+
 	// collect until no more changes in memory use or object count are registered
 	bool more = true;
 	while ( more ) {
-	
+
 		size_t b0 = this->mTotalBytes;
 		size_t c0 = this->mObjectCount;
-		
+
 		lua_gc ( L, LUA_GCCOLLECT, 0 );
 		lua_gc ( L, LUA_GCCOLLECT, 0 );
-		
+
 		size_t b1 = this->mTotalBytes;
 		size_t c1 = this->mObjectCount;
-		
+
 		if (( b0 == b1 ) && ( c0 == c1 )) {
 			more = false;
 		}
@@ -785,8 +785,8 @@ MOAILuaState& MOAILuaRuntime::GetMainState () {
 
 //----------------------------------------------------------------//
 int MOAILuaRuntime::GetRef ( MOAILuaState& state, int idx, u32 type ) {
-	
-	if ( lua_isnil ( state, idx )) return LUA_NOREF;
+
+	if ( state.IsNilOrNone ( idx )) return LUA_NOREF;
 	return ( type == MOAILuaRef::MAKE_WEAK ) ? ( this->mWeakRefs.Ref ( state, idx ) | WEAK_REF_BIT ) : this->mStrongRefs.Ref ( state, idx );
 }
 
@@ -817,13 +817,13 @@ int MOAILuaRuntime::MakeStrong ( int refID ) {
 
 	if ( refID == LUA_NOREF ) return LUA_NOREF;
 	if ( !( refID & WEAK_REF_BIT )) return refID;
-	
+
 	this->mWeakRefs.PushRef ( this->mState, refID );
 	this->mWeakRefs.Unref ( refID & REF_MASK );
-	
+
 	refID = this->GetRef ( this->mState, refID, false );
 	this->mState.Pop ();
-	
+
 	return refID;
 }
 
@@ -832,13 +832,13 @@ int MOAILuaRuntime::MakeWeak ( int refID ) {
 
 	if ( refID == LUA_NOREF ) return LUA_NOREF;
 	if ( refID & WEAK_REF_BIT ) return refID;
-	
+
 	this->mStrongRefs.PushRef ( this->mState, refID );
 	this->mStrongRefs.Unref ( refID & REF_MASK );
-	
+
 	refID = this->GetRef ( this->mState, refID, true );
 	this->mState.Pop ();
-	
+
 	return refID;
 }
 
@@ -859,8 +859,6 @@ MOAILuaRuntime::~MOAILuaRuntime () {
 
 //----------------------------------------------------------------//
 void MOAILuaRuntime::OnGlobalsFinalize () {
-
-	this->Close ();
 }
 
 //----------------------------------------------------------------//
@@ -876,13 +874,13 @@ MOAIScopedLuaState MOAILuaRuntime::Open () {
 	#else
 		this->mState = lua_newstate ( _trackingAlloc, NULL );
 	#endif
-	
+
 	lua_atpanic ( this->mState, &_panic );
 
 	// set up the ref tables
 	this->mStrongRefs.InitStrong ();
 	this->mWeakRefs.InitWeak ();
-	
+
 	return MOAIScopedLuaState ( this->mState );
 }
 
@@ -892,7 +890,7 @@ void MOAILuaRuntime::PurgeUserdata ( MOAILuaState& state, int idx ) {
 	idx = state.AbsIndex ( idx );
 
 	if ( this->mUserdataCache.PushRef ( state )) {
-	
+
 		lua_pushvalue ( state, idx );
 		lua_pushnil ( state );
 		lua_settable ( state, -3 );
@@ -908,18 +906,18 @@ void MOAILuaRuntime::PurgeUserdataCache () {
 
 //----------------------------------------------------------------//
 void MOAILuaRuntime::PushHistogram ( MOAILuaState& state, cc8* trackingGroup  ) {
-	
+
 	lua_newtable ( state );
-	
+
 	HistMap histogram;
 	this->BuildHistogram ( histogram, trackingGroup );
-	
+
 	HistMap::iterator histogramIt = histogram.begin ();
 	for ( ; histogramIt != histogram.end (); ++histogramIt ) {
-	
+
 		const STLString& name = histogramIt->first;
 		size_t count = histogramIt->second;
-		
+
 		lua_pushstring ( state, name );
 		lua_pushnumber ( state, count );
 		lua_settable ( state, -3 );
@@ -945,7 +943,7 @@ bool MOAILuaRuntime::PushRef ( MOAILuaState& state, int refID ) {
 
 //----------------------------------------------------------------//
 void MOAILuaRuntime::PushTraceback ( MOAILuaState& state ) {
-	
+
 	state.Push ( _traceback );
 }
 
@@ -953,7 +951,7 @@ void MOAILuaRuntime::PushTraceback ( MOAILuaState& state ) {
 void MOAILuaRuntime::PrintTracking ( MOAILuaObject& object ) {
 
 	if ( this->mTrackingMap.contains ( &object )) {
-	
+
 		printf ( "Object <%p> created at:\n", &object );
 		printf ( "%s", this->mTrackingMap [ &object ].mStackTrace.c_str ());
 	}
@@ -1002,9 +1000,9 @@ void MOAILuaRuntime::RegisterObject ( MOAILuaObject& object ) {
 	if ( this != &object ) {
 
 		this->mObjectCount++;
-		
+
 		if ( this->mTrackingFlags & TRACK_OBJECTS ) {
-		
+
 			MOAILuaObjectInfo& info = this->mTrackingMap [ &object ];
 			info.mTrackingGroup = this->mTrackingGroup;
 		}
@@ -1015,9 +1013,9 @@ void MOAILuaRuntime::RegisterObject ( MOAILuaObject& object ) {
 void MOAILuaRuntime::RegisterObject ( MOAILuaState& state, MOAILuaObject& object ) {
 
 	if ( this != &object ) {
-	
+
 		if ( this->mTrackingFlags & TRACK_OBJECTS_STACK_TRACE ) {
-		
+
 			MOAILuaObjectInfo& info = this->mTrackingMap [ &object ];
 			info.mStackTrace = state.GetStackTrace ( "object allocation:", 1 );
 		}
@@ -1026,32 +1024,32 @@ void MOAILuaRuntime::RegisterObject ( MOAILuaState& state, MOAILuaObject& object
 
 //----------------------------------------------------------------//
 void MOAILuaRuntime::ReportHistogram ( cc8* filename, cc8* trackingGroup ) {
-	
+
 	FILE* file	= MOAILogMgr::Get ().GetFile ();
 	FILE* log	= 0;
-	
+
 	if ( filename ) {
 		log = fopen ( filename, "w" );
 		file = log;
 		assert ( log );
 	}
-	
+
 	size_t totalTracked = this->mTrackingMap.size ();
 	ZLLog::LogF ( file, "tracking %d of %d allocated MOAIObjects\n", ( int )totalTracked, ( int )this->mObjectCount );
-	
+
 	HistMap histogram;
 	this->BuildHistogram ( histogram, trackingGroup );
-	
+
 	HistMap::iterator histogramIt = histogram.begin ();
 	for ( ; histogramIt != histogram.end (); ++histogramIt ) {
-	
+
 		const STLString& name = histogramIt->first;
 		size_t count = histogramIt->second;
 		float percent = (( float )count / ( float )totalTracked ) * 100.0f;
-	
+
 		ZLLog::LogF ( file, "%-32.32s %d (%.2f%% of %d)\n", name.str (), ( int )count, percent, ( int )totalTracked );
 	}
-	
+
 	if ( log ) {
 		fclose ( log );
 	}
@@ -1062,7 +1060,7 @@ void MOAILuaRuntime::ReportLeaksFormatted ( cc8* filename, cc8* trackingGroup ) 
 
 	FILE* file	= MOAILogMgr::Get ().GetFile ();
 	FILE* log	= 0;
-	
+
 	if ( filename ) {
 		log = fopen ( filename, "w" );
 		file = log;
@@ -1070,39 +1068,39 @@ void MOAILuaRuntime::ReportLeaksFormatted ( cc8* filename, cc8* trackingGroup ) 
 	}
 
 	MOAILuaState& state = this->mState;
-	
+
 	// Update Lua references for all tracked objects
 	MOAILuaTraversalState traversalState;
 	this->FindLuaRefs ( state, file, trackingGroup, traversalState );
-	
+
 	// Correlate leaks by identical stack traces.
 	LeakStackMap stacks;
-	
+
 	for ( TrackingMapConstIt i = this->mTrackingMap.begin (); i != this->mTrackingMap.end (); ++i ) {
 		const MOAILuaObjectInfo& info = i->second;
 		if ( trackingGroup && ( info.mTrackingGroup.compare ( trackingGroup ) != 0 )) continue;
-		
+
 		ObjectSet& objectSet = stacks [ info.mStackTrace ];
 		objectSet.affirm ( i->first );
 	}
-	
+
 	ZLLog::LogF ( file, "------------------------------------------------\n" );
 	ZLLog::LogF ( file, "-- BEGIN LUA OBJECT LEAKS --\n" );
-	
+
 	// Then, print out each unique allocation spot along with all references
 	// (including multiple references) followed by the alloction stack
 	int top = state.GetTop ();
 	UNUSED ( top );
-	
+
 	for ( LeakStackMapIt i = stacks.begin (); i != stacks.end (); ++i ) {
-		
+
 		const ObjectSet& objectSet = i->second;
 		ZLLog::LogF ( file, "Allocation: %lu\n", objectSet.size ());
-		
+
 		for ( ObjectSetIt objectSetIt = objectSet.begin (); objectSetIt != objectSet.end (); ++objectSetIt ) {
 			MOAILuaObject* object = *objectSetIt;
 			ZLLog::LogF ( file, "<%s> %p\n", object->TypeName (), object );
-			
+
 			if ( traversalState.mPathMap.contains ( object )) {
 				MOAILuaTraversalState::StringSet& pathSet = traversalState.mPathMap [ object ];
 				for ( MOAILuaTraversalState::StringSetIt j = pathSet.begin (); j != pathSet.end (); ++j ) {
@@ -1110,16 +1108,16 @@ void MOAILuaRuntime::ReportLeaksFormatted ( cc8* filename, cc8* trackingGroup ) 
 				}
 			}
 		}
-		
+
 		// print the stack trace
 		ZLLog::LogF ( file, i->first.c_str ());
 		ZLLog::LogF ( file, "\n" );
 	}
-	
+
 	assert ( top == state.GetTop ());
-	
+
 	ZLLog::LogF ( file, "-- END LUA LEAKS --\n" );
-	
+
 	if ( log ) {
 		fclose ( log );
 	}
@@ -1130,7 +1128,7 @@ void MOAILuaRuntime::ReportLeaksRaw ( cc8* filename, cc8* trackingGroup ) {
 
 	FILE* file	= MOAILogMgr::Get ().GetFile ();
 	FILE* log	= 0;
-	
+
 	if ( filename ) {
 		log = fopen ( filename, "w" );
 		file = log;
@@ -1138,10 +1136,10 @@ void MOAILuaRuntime::ReportLeaksRaw ( cc8* filename, cc8* trackingGroup ) {
 	}
 
 	this->ForceGarbageCollection ();
-	
+
 	ZLLog::LogF ( file, "-- LUA OBJECT LEAK REPORT ------------\n" );
 	u32 count = 0;
-	
+
 	for ( TrackingMap::const_iterator i = this->mTrackingMap.begin () ; i != this->mTrackingMap.end (); ++i ) {
 		const MOAILuaObjectInfo& info = i->second;
 		if ( trackingGroup && ( info.mTrackingGroup.compare ( trackingGroup ) != 0 )) continue;
@@ -1149,7 +1147,7 @@ void MOAILuaRuntime::ReportLeaksRaw ( cc8* filename, cc8* trackingGroup ) {
 		count++;
 	}
 	ZLLog::LogF ( file, "-- END LEAK REPORT (Total Objects: %d) ---------\n", count );
-	
+
 	if ( log ) {
 		fclose ( log );
 	}
@@ -1180,7 +1178,7 @@ void MOAILuaRuntime::SetPath ( cc8* path ) {
 void MOAILuaRuntime::SetTrackingFlags ( u32 flags ) {
 
 	this->mTrackingFlags = flags;
-	
+
 	if ( !flags ) {
 		this->ResetTracking ();
 	}
@@ -1203,4 +1201,3 @@ MOAIScopedLuaState MOAILuaRuntime::State () {
 
 	return MOAIScopedLuaState ( this->mState );
 }
-
