@@ -8,10 +8,13 @@
 #define MOAIFACEBOOKIOS_H
 
 #import <Foundation/Foundation.h>
-#import <moai-core/headers.h>
+#import <UIKit/UIKit.h>
+
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
+
+#import <moai-core/headers.h>
 
 @class MoaiFacebookShareDelegate;
 @class MoaiFacebookAppInviteDelegate;
@@ -41,6 +44,7 @@ private:
 	static int		_isUserLoggedIn				( lua_State* L );
 	static int		_login						( lua_State* L );
 	static int		_logout						( lua_State* L );
+	static int		_postImage					( lua_State* L );
 	static int		_postToFeed					( lua_State* L );
 
 public:

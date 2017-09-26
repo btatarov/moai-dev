@@ -7,6 +7,9 @@
 #import <moai-ios/headers.h>
 #import <moai-ios-facebook/MOAIFacebookIOS.h>
 
+#import <moai-sim/MOAIImage.h>
+#import <moai-util/MOAIDataBuffer.h>
+
 //================================================================//
 // lua
 //================================================================//
@@ -154,6 +157,31 @@ int MOAIFacebookIOS::_logout ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIFacebookIOS::_postImage ( lua_State* L ) {
+
+	MOAILuaState state ( L );
+
+	cc8* filename = state.GetValue < cc8* >( 1, "" );
+	STLString file_path = ZLFileSys::GetAbsoluteFilePath ( filename );
+
+	// root view controller
+	UIWindow* window = [ [ UIApplication sharedApplication ] keyWindow ];
+	UIViewController* rootVC = [ window rootViewController ];
+
+	UIImage *image = [ UIImage imageWithContentsOfFile:[ NSString stringWithUTF8String:file_path.c_str () ] ];
+
+	FBSDKSharePhoto *fbphoto = [ FBSDKSharePhoto photoWithImage:image userGenerated:YES ];
+
+	FBSDKSharePhotoContent *content = [ [ FBSDKSharePhotoContent alloc] init ];
+	content.photos = @[ fbphoto ];
+
+	[ FBSDKShareDialog showFromViewController:rootVC withContent:content delegate:MOAIFacebookIOS::Get ().mShareDelegate ];
+
+	lua_pushboolean ( L, true );
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	postToFeed
  @text	Post a message to the logged in users' news feed.
 
@@ -164,7 +192,6 @@ int MOAIFacebookIOS::_logout ( lua_State* L ) {
  @in		string	description		The description of the link. See Facebook documentation.
  @out 	nil
  */
- // TODO: change to postImageToFeed or similar
 int MOAIFacebookIOS::_postToFeed ( lua_State* L ) {
 
 	MOAILuaState state ( L );
@@ -236,6 +263,7 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "isUserLoggedIn",				_isUserLoggedIn },
 		{ "login",						_login },
 		{ "logout",						_logout },
+		{ "postImage",					_postImage },
 		{ "postToFeed",					_postToFeed },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIFacebookIOS > },
 		{ NULL, NULL }
