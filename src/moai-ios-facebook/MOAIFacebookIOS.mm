@@ -39,6 +39,18 @@ int MOAIFacebookIOS::_getUserID ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIFacebookIOS::_isFacebookAppInstalled ( lua_State* L ) {
+
+	MOAILuaState state ( L );
+
+	BOOL isInstalled = [ [ UIApplication sharedApplication ] canOpenURL:[ NSURL URLWithString:@"fb://" ] ];
+
+	lua_pushboolean ( state, isInstalled );
+
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	inviteFriends
 	@text	Send an app request to the logged in users' friends.
 	@in		string	url				The URL that the post links to. See Facebook documentation.
@@ -259,6 +271,7 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIFacebookIOS > },
 		{ "getToken",					_getToken },
 		{ "getUserID",					_getUserID },
+		{ "isFacebookAppInstalled",		_isFacebookAppInstalled },
 		{ "inviteFriends",				_inviteFriends },
 		{ "isUserLoggedIn",				_isUserLoggedIn },
 		{ "login",						_login },

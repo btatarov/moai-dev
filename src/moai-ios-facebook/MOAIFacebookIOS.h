@@ -40,6 +40,7 @@ private:
 	//----------------------------------------------------------------//
 	static int		_getToken					( lua_State* L );
 	static int		_getUserID					( lua_State* L );
+	static int		_isFacebookAppInstalled		( lua_State* L );
 	static int		_inviteFriends				( lua_State* L );
 	static int		_isUserLoggedIn				( lua_State* L );
 	static int		_login						( lua_State* L );
