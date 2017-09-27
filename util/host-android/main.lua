@@ -272,14 +272,6 @@ util.replaceInFiles ({
 	},
 })
 
-if config.REVMOB_APP_ID then
-	util.replaceInFiles ({
-		[ MOAI_PROJECT_PATH .. 'AndroidManifest.xml' ] = {
-			[ '@REVMOB_APP_ID@' ]				= config.REVMOB_APP_ID,
-		},
-	})
-end
-
 if config.APPLOVIN_APP_ID then
 	util.replaceInFiles ({
 		[ MOAI_PROJECT_PATH .. 'AndroidManifest.xml' ] = {

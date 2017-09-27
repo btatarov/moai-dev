@@ -84,7 +84,7 @@ MODULES = {
     },
 
     revmob = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/revmob-9.0.8',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/revmob-10.0.0',
         src		= MOAI_SDK_HOME .. 'src/moai-android-revmob',
     },
 
