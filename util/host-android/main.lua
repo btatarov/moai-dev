@@ -71,6 +71,11 @@ local importLib = function ( path )
 
 	local libPath = path .. 'lib/'
 	if MOAIFileSystem.checkPathExists ( libPath ) then
+		-- support for different jars per platform
+		if MOAIFileSystem.checkPathExists ( libPath .. SCRIPT_PARAM .. '/' ) then
+			libPath = libPath .. SCRIPT_PARAM .. '/'
+		end
+
 		for i, filename in ipairs ( util.listFiles ( libPath, 'jar' )) do
 			MOAIFileSystem.copy (  libPath .. filename, MOAI_PROJECT_PATH .. 'libs/' .. filename )
 		end
