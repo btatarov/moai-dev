@@ -68,7 +68,7 @@ MODULES = {
     },
 
     heyzap = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/heyzap-9.4.5',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/heyzap-9.13.3',
         src		= MOAI_SDK_HOME .. 'src/moai-android-heyzap',
     },
 

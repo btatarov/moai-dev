@@ -28,7 +28,7 @@ thread:run( function ()
     coroutine:yield ()
 
     MOAIStartAppAndroid.setListener (
-        MOAIStartAppAndroid.REWARDEDVIDEOAD_COMPLETED,
+        MOAIStartAppAndroid.REWARDED_VIDEO_COMPLETED,
         function ()
             print ( "Rewarded video successfully completed." )
         end

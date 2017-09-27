@@ -32,7 +32,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * chartboost-6.4.1 (interstitial)
 * crittercism-5.5.5
 * facebook-4.5.1 (TODO: update to latest version)
-* heyzap-9.4.5 (interstitial and rewarded video)
+* heyzap-9.13.3 (interstitial and rewarded video)
 * google-play-services-8.4.0 (stripped)
 * revmob-10.0.0 (interstitial and rewarded video)
 * startapp-3.3.2 (interstitial, rewarded video, return ad and exit ad)

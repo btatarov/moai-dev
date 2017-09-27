@@ -69,14 +69,16 @@ class MoaiHeyZap {
 			HeyzapAds.start ( publisherID, sActivity );
 		}
 
-		IncentivizedAd.setOnIncentiveResultListener(new OnIncentiveResultListener() {
+		IncentivizedAd.setOnIncentiveResultListener ( new OnIncentiveResultListener () {
+
 		    @Override
-		    public void onComplete(String tag) {
+		    public void onComplete ( String tag ) {
+
 		        AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_COMPLETED.ordinal () );
 		    }
 
 		    @Override
-		    public void onIncomplete(String tag) {}
+		    public void onIncomplete ( String tag ) {}
 		});
 	}
 
