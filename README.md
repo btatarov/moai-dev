@@ -28,7 +28,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * amazon billing v2
 * amazon gamecircle
 * admob-8.4.0 (interstitial and banner)
-* applovin-7.0.3-fireos (interstitial and rewarded video)
+* applovin-7.3.1-fireos (interstitial and rewarded video)
 * chartboost-6.4.1 (interstitial)
 * crittercism-5.5.5
 * facebook-4.5.1 (TODO: update to latest version)
