@@ -53,3 +53,4 @@ if [ ! -e "$moai_root/util/moai" ]; then
    cp $libprefix/bin/moai $moai_root/util/moai
 fi
 
+exit 0

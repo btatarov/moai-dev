@@ -19,27 +19,3 @@ pushd `dirname $0`
 bash build-osx.sh
 echo OSX Lib Build Successful
 popd
-
-pushd `dirname $0`
-bash build-ios.sh
-echo IOS Lib Build Successful
-popd
-
-pushd `dirname $0`/..
-echo Creating and building android host
-sudo chmod a+x util/moai
-sudo chmod a+x util/moaiutil
-export MOAI_ROOT=$(pwd)
-popd
-
-pushd ~
-mkdir testhost
-cd testhost
-cp -R $MOAI_ROOT/samples/hello-moai src/
-moaiutil host init
-moaiutil host build ios
-popd
-
-
-
-
