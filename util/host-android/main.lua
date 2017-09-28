@@ -46,16 +46,29 @@ local processModulesFiles
 local projectCounter = 0
 
 ----------------------------------------------------------------
-local importBin = function ( path )
+local resolvePath = function ( path )
+	return path and ( string.find ( path, '^/' ) and path or SCRIPT_DIR .. path )
+end
 
-	if not path then return end
+----------------------------------------------------------------
+local importBin = function ( binTable )
 
-	for _, arch in ipairs(config.VALID_ARCHITECTURES) do
-		local newpath = string.gsub(path, '<arch>', arch)
-		local filename = util.getFilenameFromPath(newpath)
+	if not binTable then return end
 
-		MOAIFileSystem.affirmPath(MOAI_PROJECT_PATH .. 'libs/' .. arch .. '/')
-		MOAIFileSystem.copy(newpath, MOAI_PROJECT_PATH .. 'libs/' .. arch .. '/' .. filename)
+	if ( type ( binTable ) ~= "table" ) then
+		binTable = { binTable }
+	end
+
+	for _, path in ipairs( binTable ) do
+		path = MOAIFileSystem.getAbsoluteFilePath ( resolvePath ( path ) )
+
+		for _, arch in ipairs(config.VALID_ARCHITECTURES) do
+			local newpath = string.gsub(path, '<arch>', arch)
+			local filename = util.getFilenameFromPath(newpath)
+
+			MOAIFileSystem.affirmPath(MOAI_PROJECT_PATH .. 'libs/' .. arch .. '/')
+			MOAIFileSystem.copy(newpath, MOAI_PROJECT_PATH .. 'libs/' .. arch .. '/' .. filename)
+		end
 	end
 end
 
@@ -156,11 +169,6 @@ processModulesFile = function ( filename )
 	config['MODULES'] = modTable['MODULES']
 end
 
-----------------------------------------------------------------
-local resolvePath = function ( path )
-	return path and ( string.find ( path, '^/' ) and path or SCRIPT_DIR .. path )
-end
-
 -- =============================================================
 -- Main
 -- =============================================================
@@ -207,13 +215,13 @@ processModulesFile('modules.lua')
 for name, mod in pairs (config['MODULES']) do
 	local src = resolvePath ( mod.src )
 	local lib = resolvePath ( mod.lib )
-	local bin = resolvePath ( mod.bin )
+	local bin = mod.bin
 
 	MODULES [ name ] = {
 		namespace = mod.namespace,
 		src = src and MOAIFileSystem.getAbsoluteDirectoryPath ( src ),
 		lib = lib and MOAIFileSystem.getAbsoluteDirectoryPath ( lib ),
-		bin = bin and MOAIFileSystem.getAbsoluteFilePath ( bin ),
+		bin = bin,
 
 		-- true or nil (for facebook and gamecircle projects)
 		project = mod.project,
