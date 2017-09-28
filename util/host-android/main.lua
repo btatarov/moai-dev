@@ -77,7 +77,7 @@ local importLib = function ( path )
 		end
 
 		for i, filename in ipairs ( util.listFiles ( libPath, 'jar' )) do
-			MOAIFileSystem.copy (  libPath .. filename, MOAI_PROJECT_PATH .. 'libs/' .. filename )
+			MOAIFileSystem.copy ( libPath .. filename, MOAI_PROJECT_PATH .. 'libs/' .. filename )
 		end
 	end
 

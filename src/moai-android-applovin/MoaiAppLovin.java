@@ -92,7 +92,7 @@ class MoaiAppLovin {
 
 		if ( sRewardedVideo.isAdReadyToDisplay () ) {
 
-			sRewardedVideo.show ( sActivity, null, sAppLovinListener, null, null);
+			sRewardedVideo.show ( sActivity, null, sAppLovinListener, null, null );
 		}
 	}
 }
