@@ -40,6 +40,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * vungle-3.3.4 (rewarded video)
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
 * no multi-dex build (via stripped google play services, see strip.sh)
+* TODO: remove support for Chartboost and Vungle
 
 ### iOS
 * CHANGE: framework directory separation (moved from 3rdparty to 3rdparty-ios)
