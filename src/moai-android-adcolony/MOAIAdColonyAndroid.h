@@ -15,23 +15,23 @@ class MOAIAdColonyAndroid :
 	public JniUtils {
 private:
 
+	jmethodID	mJava_CacheRewardedVideo;
+	jmethodID	mJava_HasCachedRewardedVideo;
 	jmethodID	mJava_Init;
-	jmethodID	mJava_IsVideoReady;
-	jmethodID	mJava_PlayVideo;
+	jmethodID	mJava_ShowRewardedVideo;
 
 	//----------------------------------------------------------------//
-	static int	_init				( lua_State* L );
-	static int	_playVideo			( lua_State* L );
-	static int	_videoReadyForZone	( lua_State* L );
+	static int	_cacheRewardedVideo		( lua_State* L );
+	static int	_hasCachedRewardedVideo	( lua_State* L );
+	static int	_init	 				( lua_State* L );
+	static int	_showRewardedVideo 		( lua_State* L );
 
 public:
 
 	DECL_LUA_SINGLETON ( MOAIAdColonyAndroid );
 
 	enum {
-		VIDEO_STARTED,
-		VIDEO_SHOWN,
-		VIDEO_FAILED,
+		REWARDED_VIDEO_COMPLETED,
 	};
 
 	//----------------------------------------------------------------//

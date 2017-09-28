@@ -1,7 +1,11 @@
 MODULES = {
 
     adcolony = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/adcolony-2.3.4',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/adcolony-3.2.1',
+        bin     = {
+                MOAI_SDK_HOME .. '3rdparty-android/adcolony-3.2.1/bin/<arch>/libadcolony.so',
+                MOAI_SDK_HOME .. '3rdparty-android/adcolony-3.2.1/bin/<arch>/libjs.so',
+        },
         src		= MOAI_SDK_HOME .. 'src/moai-android-adcolony',
     },
 

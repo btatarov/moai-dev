@@ -78,6 +78,17 @@ public class MoaiActivity extends Activity {
 			MoaiLog.i ( "FMod is disabled." );
 		}
 
+		// load adcolony only if exists
+		try {
+
+			MoaiLog.i ( "Loading libadcolony.so" );
+			System.loadLibrary ( "js" );
+			System.loadLibrary ( "adcolony" );
+		} catch ( UnsatisfiedLinkError e ) {
+
+			MoaiLog.i ( "AdColony is disabled." );
+		}
+
 		MoaiLog.i ( "Loading libmoai.so" );
 		System.loadLibrary ( "moai" );
 	}

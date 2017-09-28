@@ -9,24 +9,43 @@ package com.ziplinegames.moai;
 import android.app.Activity;
 import android.os.Bundle;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-
-import com.jirbo.adcolony.*;
+import com.adcolony.sdk.*;
 
 //================================================================//
 // MoaiAdColony
 //================================================================//
 
-public class MoaiAdColony implements AdColonyAdListener {
+public class MoaiAdColony {
 
 	public enum ListenerEvent {
-		VIDEO_STARTED,
-		VIDEO_SHOWN,
-		VIDEO_FAILED,
+		REWARDED_VIDEO_COMPLETED,
     }
 
 	private static Activity sActivity = null;
+
+	private static AdColonyInterstitial sInterstitial;
+
+	private static AdColonyInterstitialListener sListener = new AdColonyInterstitialListener () {
+
+		@Override
+        public void onRequestFilled ( AdColonyInterstitial ad ) {
+
+			sInterstitial = ad;
+		}
+
+        @Override
+        public void onRequestNotFilled ( AdColonyZone zone ) {}
+
+        @Override
+        public void onOpened ( AdColonyInterstitial ad ) {}
+
+        @Override
+        public void onExpiring( AdColonyInterstitial ad ) {}
+	};
+
+	private static AdColonyAdOptions sAdOptions = new AdColonyAdOptions ()
+                .enableConfirmationDialog ( false )
+                .enableResultsDialog ( false );
 
 	protected static native void AKUInvokeListener ( int eventID );
 
@@ -42,16 +61,12 @@ public class MoaiAdColony implements AdColonyAdListener {
 	public static void onPause ( ) {
 
 		MoaiLog.i ( "MoaiAdColony: onPause" );
-
-		AdColony.pause ();
 	}
 
 	//----------------------------------------------------------------//
 	public static void onResume ( ) {
 
 		MoaiLog.i ( "MoaiAdColony: onResume" );
-
-		AdColony.resume ( sActivity );
 	}
 
 	//================================================================//
@@ -59,52 +74,43 @@ public class MoaiAdColony implements AdColonyAdListener {
 	//================================================================//
 
 	//----------------------------------------------------------------//
-	public static void init ( String appId, String clientOptions, String [] zoneIds ) {
+	public static void cacheRewardedVideo ( String zoneId ) {
 
-		AdColony.configure ( sActivity, clientOptions, appId, zoneIds );
+		AdColony.requestInterstitial ( zoneId, sListener, sAdOptions );
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean isVideoReady ( String zoneId ) {
+	public static boolean hasCachedRewardedVideo () {
 
-		String zoneStatus = AdColony.statusForZone ( zoneId );
-
-		boolean result = new AdColonyVideoAd ( zoneId ).isReady ();
-
-		return result;
+		return ( ! ( sInterstitial == null || sInterstitial.isExpired () ) );
 	}
 
 	//----------------------------------------------------------------//
-	public static void playVideo ( String zoneId, boolean showPrompt, boolean showConfirmation ) {
+	public static void init ( String appId, boolean amazon_store, String [] zoneIds ) {
 
-		AdColonyVideoAd ad = new AdColonyVideoAd ( zoneId ).withListener ( new MoaiAdColony ());
-		ad.show ();
-	}
+		AdColonyAppOptions app_options = new AdColonyAppOptions ();
 
-	//================================================================//
-	// AdColonyAdListener methods
-	//================================================================//
+		if ( amazon_store )
+			app_options.setOriginStore ( "amazon" );
 
-	//----------------------------------------------------------------//
-	public void onAdColonyAdAttemptFinished ( AdColonyAd ad ) {
+		AdColony.configure ( sActivity, app_options, appId, zoneIds );
 
-		ListenerEvent eventID = null;
+		AdColony.setRewardListener ( new AdColonyRewardListener () {
 
-		synchronized ( Moai.sAkuLock ) {
-			if ( ad.shown ()) {
-				MoaiAdColony.AKUInvokeListener ( ListenerEvent.VIDEO_SHOWN.ordinal ());
-			}
-			else {
-				MoaiAdColony.AKUInvokeListener ( ListenerEvent.VIDEO_FAILED.ordinal ());
-			}
-		}
+			@Override
+    		public void onReward ( AdColonyReward reward ) {
+
+				AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_COMPLETED.ordinal () );
+    		}
+		} );
 	}
 
 	//----------------------------------------------------------------//
-	public void onAdColonyAdStarted ( AdColonyAd ad ) {
+	public static void showRewardedVideo () {
 
-		synchronized ( Moai.sAkuLock ) {
-			MoaiAdColony.AKUInvokeListener ( ListenerEvent.VIDEO_STARTED.ordinal ());
+		if ( ! ( sInterstitial == null || sInterstitial.isExpired () ) ) {
+
+			sInterstitial.show ();
 		}
 	}
 }
