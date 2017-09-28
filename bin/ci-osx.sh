@@ -8,9 +8,9 @@ export PATH=$PATH:$UTIL_PATH
 
 echo "getting latest cmake"
 pushd ~
-wget http://www.cmake.org/files/v3.1/cmake-3.1.3-Darwin-x86_64.tar.gz
-tar xvf cmake-3.1.3-Darwin-x86_64.tar.gz
-cd cmake-3.1.3-Darwin-x86_64/bin
+wget --quiet http://www.cmake.org/files/v3.1/cmake-3.1.3-Darwin-x86_64.tar.gz
+tar xf cmake-3.1.3-Darwin-x86_64.tar.gz
+cd cmake-3.1.3-Darwin-x86_64/CMake.app/Contents/bin/
 export PATH=$(pwd):$PATH
 popd
 
