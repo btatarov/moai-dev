@@ -35,7 +35,7 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * heyzap-9.13.3 (interstitial and rewarded video)
 * google-play-services-8.4.0 (stripped)
 * revmob-10.0.0 (interstitial and rewarded video)
-* startapp-3.3.2 (interstitial, rewarded video, return ad and exit ad)
+* startapp-3.6.6 (interstitial, rewarded video, return ad and exit ad)
 * twitter4j-4.0.4
 * vungle-3.3.4 (rewarded video)
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))

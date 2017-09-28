@@ -89,7 +89,7 @@ MODULES = {
     },
 
     startapp = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/startapp-3.3.2',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/startapp-3.6.6',
         src		= MOAI_SDK_HOME .. 'src/moai-android-startapp',
     },
 

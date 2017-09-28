@@ -8,12 +8,12 @@ package com.ziplinegames.moai;
 
 import android.app.Activity;
 
-import com.startapp.android.publish.Ad;
-import com.startapp.android.publish.AdEventListener;
-import com.startapp.android.publish.StartAppAd;
-import com.startapp.android.publish.StartAppAd.AdMode;
-import com.startapp.android.publish.StartAppSDK;
-import com.startapp.android.publish.video.VideoListener;
+import com.startapp.android.publish.adsCommon.Ad;
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.StartAppAd.AdMode;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
+import com.startapp.android.publish.adsCommon.VideoListener;
+import com.startapp.android.publish.adsCommon.adListeners.AdEventListener;
 
 class MoaiStartApp {
 

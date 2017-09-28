@@ -40,9 +40,19 @@ thread:run( function ()
     coroutine:yield ()
 
     MOAIStartAppAndroid.cacheRewardedVideo ()
-    MOAIStartAppAndroid.cacheInterstitial () -- to test back button
+    MOAIStartAppAndroid.cacheInterstitial ()
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
+    coroutine:yield ()
+
+	if MOAIStartAppAndroid.hasCachedInterstitial () then
+    	print ( "Showing StartApp interstitial." )
+        MOAIStartAppAndroid.showInterstitial ()
+    else
+    	print ( "There is no cached interstitial." )
+    end
+
+	MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 
     if MOAIStartAppAndroid.hasCachedRewardedVideo () then
