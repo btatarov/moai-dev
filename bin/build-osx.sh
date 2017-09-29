@@ -57,7 +57,7 @@ if [ ! -e "$moai_root/util/moai" ]; then
 fi
 
 if [ ! -e "$libprefix/bin/moai" ]; then
-    exit 0
+    exit 1
 fi
 
-exit 1
+exit 0
