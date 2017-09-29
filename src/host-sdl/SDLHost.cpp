@@ -28,6 +28,9 @@
 #include <limits.h>
 #endif
 
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
+
 #define UNUSED(p) (( void )p)
 
 namespace InputDeviceID {
