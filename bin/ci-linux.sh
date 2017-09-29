@@ -7,12 +7,12 @@ UTIL_PATH=$(cd $UTIL_PATH/../util; pwd)
 export PATH=$PATH:$UTIL_PATH
 
 echo "Push latest changes to OSX branch"
-git remote add authorigin https://${GH_TOKEN}@github.com/btatarov/moai-sdk.git > /dev/null
-git fetch origin travis-osx
+git config --global user.email "travis-job@example.com"
+git config --global user.name "Travis Job"
+git fetch origin travis-osx:travis-osx
 git checkout travis-osx
-git merge postmorph
-git push origin
-git push authorigin travis-osx
+git merge -m 'Get latest changes from postmorph branch' postmorph
+git push https://${GH_TOKEN}@github.com/moaiforge/moai-sdk.git travis-osx:travis-osx > /dev/null
 git checkout postmorph
 
 echo "getting latest cmake"
