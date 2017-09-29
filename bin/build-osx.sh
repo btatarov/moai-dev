@@ -23,6 +23,7 @@ cd `dirname $0`/..
 
 moai_root=$(pwd)
 
+exit 1
 
 # HACK: get fmod lib from Vavius' branch
 mkdir -p $moai_root/3rdparty/fmod/lib/osx/
@@ -58,5 +59,3 @@ set -o pipefail && cmake --build . --target install --config Release | xcpretty
 if [ ! -e "$moai_root/util/moai" ]; then
    cp $libprefix/bin/moai $moai_root/util/moai
 fi
-
-exit 0
