@@ -19,7 +19,6 @@ mkdir -p $libprefix
 libprefix=$(cd $libprefix; pwd)
 
 cd `dirname $0`/..
-exit 1
 
 moai_root=$(pwd)
 
@@ -28,7 +27,6 @@ mkdir -p $moai_root/3rdparty/fmod/lib/osx/
 pushd $moai_root/3rdparty/fmod/lib/osx/
 #wget --quiet https://github.com/Vavius/moai-fmod-studio/raw/master/fmod/lib/osx/libfmod.dylib
 popd
-
 
 if ! [ -d "build" ]
 then
