@@ -23,36 +23,38 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * CHANGE: LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
 * MOAIAppAndroid::closeApp ()
 * MOAIObbDownloaderAndroid (downloading extension files for googleplay)
-* adcolony-2.3.4 (rewarded video)
+* adcolony-3.2.1 (rewarded video)
 * amazon ads (interstitial and banner)
 * amazon billing v2
 * amazon gamecircle
 * admob-8.4.0 (interstitial and banner)
+* applovin-7.3.2 (interstitial and rewarded video)
 * chartboost-6.4.1 (interstitial)
 * crittercism-5.5.5
 * facebook-4.5.1 (TODO: update to latest version)
-* heyzap-9.4.5 (interstitial and rewarded video)
+* heyzap-9.13.3 (interstitial and rewarded video)
 * google-play-services-8.4.0 (stripped)
-* revmob-9.0.8 (interstitial and rewarded video)
-* startapp-3.3.2 (interstitial, rewarded video, return ad and exit ad)
+* revmob-10.0.0 (interstitial and rewarded video)
+* startapp-3.6.6 (interstitial, rewarded video, return ad and exit ad)
 * twitter4j-4.0.4
 * vungle-3.3.4 (rewarded video)
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
 * no multi-dex build (via stripped google play services, see strip.sh)
+* TODO: remove support for Chartboost and Vungle
 
 ### iOS
 * CHANGE: framework directory separation (moved from 3rdparty to 3rdparty-ios)
 * MOAILucidViewIOS (transparent view wrapper responding only to touches in child views)
-* adcolony-2.6.1 (rewarded video)
-* admob-7.7.1 (intersitial and banner)
-* chartboost-6.4.2 (interstitial and rewarded video)
-* crittercism-5.5.1
-* facebook-4.10.1
-* revmob-9.0.8 (interstitial, banner and rewarded video)
-* startapp-3.3.2 (interstitial, banner and return ad)
-* vungle-3.2.0 (rewarded video)
+* adcolony-3.2.1 (rewarded video)
+* admob-7.24.0 (intersitial and banner)
+* applovin-4.3.1 (interstitial and rewarded video)
+* chartboost-7.0.1 (interstitial and rewarded video)
+* crittercism-5.6.8
+* facebook-4.26.0
+* revmob-10.0.0 (interstitial, banner and rewarded video)
+* startapp-3.5.0 (interstitial, banner and return ad)
+* vungle-5.2.0 (rewarded video)
 * util/host-ios ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-ios/hosts.lua.sample))
-* TODO: missing samples (chartboost and adcolony)
 
 ### Samples
 * android-adcolony
@@ -69,7 +71,10 @@ Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?br
 * android-twitter
 * android-vungle
 * fmod
+* ios-adcolony
 * ios-admob
+* ios-applovin
+* ios-chartboost
 * ios-facebook
 * ios-revmob
 * ios-startapp

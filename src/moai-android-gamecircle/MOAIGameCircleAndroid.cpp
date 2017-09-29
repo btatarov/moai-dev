@@ -96,7 +96,7 @@ MOAIGameCircleAndroid::MOAIGameCircleAndroid () {
 	this->mJava_Connect						= this->GetStaticMethod ( "connect", "()V");
 	this->mJava_IsConnected					= this->GetStaticMethod ( "isConnected", "()Z" );
 	this->mJava_ShowDefaultAchievements		= this->GetStaticMethod ( "showDefaultAchievements", "()V");
-	this->mJava_ShowLeaderboard				= this->GetStaticMethod ( "showLeaderboard", "(Ljava/lang/String;J)V");
+	this->mJava_ShowLeaderboard				= this->GetStaticMethod ( "showLeaderboard", "(Ljava/lang/String;)V");
 	this->mJava_ReportScore					= this->GetStaticMethod ( "reportScore", "(Ljava/lang/String;J)V");
 	this->mJava_ReportAchievementProgress	= this->GetStaticMethod ( "reportAchievementProgress", "(Ljava/lang/String;J)V");
 }

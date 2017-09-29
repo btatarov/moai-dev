@@ -140,6 +140,7 @@ public class Moai {
 		"com.ziplinegames.moai.MoaiAdMob",
 		"com.ziplinegames.moai.MoaiAmazonAds",
 		"com.ziplinegames.moai.MoaiAmazonBilling",
+		"com.ziplinegames.moai.MoaiAppLovin",
 		"com.ziplinegames.moai.MoaiChartBoost",
 		"com.ziplinegames.moai.MoaiCrittercism",
 		"com.ziplinegames.moai.MoaiFacebook",

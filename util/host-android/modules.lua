@@ -1,7 +1,11 @@
 MODULES = {
 
     adcolony = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/adcolony-2.3.4',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/adcolony-3.2.1',
+        bin     = {
+                MOAI_SDK_HOME .. '3rdparty-android/adcolony-3.2.1/bin/<arch>/libadcolony.so',
+                MOAI_SDK_HOME .. '3rdparty-android/adcolony-3.2.1/bin/<arch>/libjs.so',
+        },
         src		= MOAI_SDK_HOME .. 'src/moai-android-adcolony',
     },
 
@@ -25,6 +29,11 @@ MODULES = {
 		src		= MOAI_SDK_HOME .. 'src/moai-android-gamecircle',
         project = true,
 	},
+
+    applovin = {
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/applovin-7.3.2',
+        src		= MOAI_SDK_HOME .. 'src/moai-android-applovin',
+    },
 
     chartboost = {
         lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost-6.4.1',
@@ -63,7 +72,7 @@ MODULES = {
     },
 
     heyzap = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/heyzap-9.4.5',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/heyzap-9.13.3',
         src		= MOAI_SDK_HOME .. 'src/moai-android-heyzap',
     },
 
@@ -79,12 +88,12 @@ MODULES = {
     },
 
     revmob = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/revmob-9.0.8',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/revmob-10.0.0',
         src		= MOAI_SDK_HOME .. 'src/moai-android-revmob',
     },
 
     startapp = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/startapp-3.3.2',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/startapp-3.6.6',
         src		= MOAI_SDK_HOME .. 'src/moai-android-startapp',
     },
 

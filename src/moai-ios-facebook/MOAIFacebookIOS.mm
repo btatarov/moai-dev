@@ -7,6 +7,9 @@
 #import <moai-ios/headers.h>
 #import <moai-ios-facebook/MOAIFacebookIOS.h>
 
+#import <moai-sim/MOAIImage.h>
+#import <moai-util/MOAIDataBuffer.h>
+
 //================================================================//
 // lua
 //================================================================//
@@ -31,6 +34,18 @@ int MOAIFacebookIOS::_getUserID ( lua_State* L ) {
 	NSString* userID = [ [ FBSDKAccessToken currentAccessToken ] userID ];
 
 	lua_pushstring ( state, [ userID UTF8String ] );
+
+	return 1;
+}
+
+//----------------------------------------------------------------//
+int MOAIFacebookIOS::_isFacebookAppInstalled ( lua_State* L ) {
+
+	MOAILuaState state ( L );
+
+	BOOL isInstalled = [ [ UIApplication sharedApplication ] canOpenURL:[ NSURL URLWithString:@"fb://" ] ];
+
+	lua_pushboolean ( state, isInstalled );
 
 	return 1;
 }
@@ -154,6 +169,31 @@ int MOAIFacebookIOS::_logout ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIFacebookIOS::_postImage ( lua_State* L ) {
+
+	MOAILuaState state ( L );
+
+	cc8* filename = state.GetValue < cc8* >( 1, "" );
+	STLString file_path = ZLFileSys::GetAbsoluteFilePath ( filename );
+
+	// root view controller
+	UIWindow* window = [ [ UIApplication sharedApplication ] keyWindow ];
+	UIViewController* rootVC = [ window rootViewController ];
+
+	UIImage *image = [ UIImage imageWithContentsOfFile:[ NSString stringWithUTF8String:file_path.c_str () ] ];
+
+	FBSDKSharePhoto *fbphoto = [ FBSDKSharePhoto photoWithImage:image userGenerated:YES ];
+
+	FBSDKSharePhotoContent *content = [ [ FBSDKSharePhotoContent alloc] init ];
+	content.photos = @[ fbphoto ];
+
+	[ FBSDKShareDialog showFromViewController:rootVC withContent:content delegate:MOAIFacebookIOS::Get ().mShareDelegate ];
+
+	lua_pushboolean ( L, true );
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	postToFeed
  @text	Post a message to the logged in users' news feed.
 
@@ -173,24 +213,22 @@ int MOAIFacebookIOS::_postToFeed ( lua_State* L ) {
 	UIViewController* rootVC = [ window rootViewController ];
 
 	// content to share
-	FBSDKShareLinkContent *content = [ [ FBSDKShareLinkContent alloc ] init ];
+	FBSDKShareLinkContent *content = [ [ [ FBSDKShareLinkContent alloc ] init ] autorelease ];
 
 	content.contentURL          = [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* > ( 1, "" ) ] ];
-	content.imageURL            = [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* > ( 2, "" ) ] ];
-	content.contentTitle        = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 3, "" ) ];
-	content.contentDescription  = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 4, "" ) ];
+	// TODO: deprecated
+	// content.imageURL            = [ NSURL URLWithString:[ NSString stringWithUTF8String:state.GetValue < cc8* > ( 2, "" ) ] ];
+	// content.contentTitle        = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 3, "" ) ];
+	// content.contentDescription = [ NSString stringWithUTF8String:state.GetValue < cc8* > ( 4, "" ) ];
 
-	FBSDKShareDialog *dialog = [ [ FBSDKShareDialog alloc ] init ];
-	dialog.mode = FBSDKShareDialogModeNative;
+	FBSDKShareDialog *dialog = [ [ [ FBSDKShareDialog alloc ] init ] autorelease ];
+	dialog.mode = FBSDKShareDialogModeAutomatic;
 	dialog.shareContent = content;
 	dialog.fromViewController = rootVC;
 	dialog.delegate = MOAIFacebookIOS::Get ().mShareDelegate;
 
-	if ( ! [ dialog canShow ] ) dialog.mode = FBSDKShareDialogModeFeedBrowser;
+	// if ( ! [ dialog canShow ] ) dialog.mode = FBSDKShareDialogModeFeedBrowser;
 	[ dialog show ];
-
-	[ dialog release ];
-	[ content release ];
 
 	return 0;
 }
@@ -233,10 +271,12 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIFacebookIOS > },
 		{ "getToken",					_getToken },
 		{ "getUserID",					_getUserID },
+		{ "isFacebookAppInstalled",		_isFacebookAppInstalled },
 		{ "inviteFriends",				_inviteFriends },
 		{ "isUserLoggedIn",				_isUserLoggedIn },
 		{ "login",						_login },
 		{ "logout",						_logout },
+		{ "postImage",					_postImage },
 		{ "postToFeed",					_postToFeed },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIFacebookIOS > },
 		{ NULL, NULL }

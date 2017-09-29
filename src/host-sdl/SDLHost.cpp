@@ -101,6 +101,10 @@ void _AKUOpenWindowFunc ( const char* title, int width, int height ) {
 		sWindow = SDL_CreateWindow ( title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
 		SDL_GL_CreateContext ( sWindow );
 		SDL_GL_SetSwapInterval ( 1 );
+
+        GLint buffer;
+        glGetIntegerv ( GL_FRAMEBUFFER_BINDING, &buffer );
+
 		AKUDetectGfxContext ();
 		AKUSetViewSize ( width, height );
 		AKUSdlSetWindow ( sWindow );

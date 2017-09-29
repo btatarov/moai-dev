@@ -78,6 +78,17 @@ public class MoaiActivity extends Activity {
 			MoaiLog.i ( "FMod is disabled." );
 		}
 
+		// load adcolony only if exists
+		try {
+
+			MoaiLog.i ( "Loading libadcolony.so" );
+			System.loadLibrary ( "js" );
+			System.loadLibrary ( "adcolony" );
+		} catch ( UnsatisfiedLinkError e ) {
+
+			MoaiLog.i ( "AdColony is disabled." );
+		}
+
 		MoaiLog.i ( "Loading libmoai.so" );
 		System.loadLibrary ( "moai" );
 	}
@@ -110,32 +121,36 @@ public class MoaiActivity extends Activity {
 		getWindow ().addFlags ( WindowManager.LayoutParams.FLAG_FULLSCREEN );
 		getWindow ().setSoftInputMode ( WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN );
 
+		int apiVersion = android.os.Build.VERSION.SDK_INT;
+
 		// Immersive mode
-		final Handler mHideSystemUiHandler = new Handler ();
-		final Runnable mHideSystemUiCallback = new Runnable () {
-			@Override
-			public void run () {
-				getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
-    		}
-		};
+		if ( apiVersion >= 19 ) {
 
-		getWindow ().getDecorView ().setOnSystemUiVisibilityChangeListener ( new View.OnSystemUiVisibilityChangeListener () {
-			@Override
-			public void onSystemUiVisibilityChange ( int visibility ) {
-				if ( ( visibility & ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION ) ) == 0 ) {
-            		mHideSystemUiHandler.removeCallbacks ( mHideSystemUiCallback );
-            		mHideSystemUiHandler.postDelayed ( mHideSystemUiCallback, 3000 );
-        		}
-    		}
-		} );
+			final Handler mHideSystemUiHandler = new Handler ();
+			final Runnable mHideSystemUiCallback = new Runnable () {
+				@Override
+				public void run () {
+					getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+	    		}
+			};
 
-		getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+			getWindow ().getDecorView ().setOnSystemUiVisibilityChangeListener ( new View.OnSystemUiVisibilityChangeListener () {
+				@Override
+				public void onSystemUiVisibilityChange ( int visibility ) {
+					if ( ( visibility & ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION ) ) == 0 ) {
+	            		mHideSystemUiHandler.removeCallbacks ( mHideSystemUiCallback );
+	            		mHideSystemUiHandler.postDelayed ( mHideSystemUiCallback, 3000 );
+	        		}
+	    		}
+			} );
+
+			getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+		}
 
 		try {
 
 			ApplicationInfo myApp = getPackageManager ().getApplicationInfo ( getPackageName (), 0 );
 
-			int apiVersion = android.os.Build.VERSION.SDK_INT;
 			if ( apiVersion >= 16 ) {
 			    // Jelly Bean or later
 			    Moai.mount ( "bundle", myApp.sourceDir );

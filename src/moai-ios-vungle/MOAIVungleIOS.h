@@ -22,6 +22,7 @@ private:
 	MoaiVungleDelegate*	mDelegate;
 
 	//----------------------------------------------------------------//
+	static int		_cacheRewardedVideo				( lua_State* L );
 	static int		_hasCachedRewardedVideo			( lua_State* L );
 	static int		_init							( lua_State* L );
 	static int		_showRewardedVideo				( lua_State* L );

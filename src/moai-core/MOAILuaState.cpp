@@ -46,52 +46,52 @@ bool MOAILuaState::CheckParams ( int idx, cc8* format, bool verbose ) {
 	idx = this->AbsIndex ( idx );
 
 	for ( int i = 0; format [ i ]; ++i ) {
-	
+
 		int pos = idx + i ;
 		int type = LUA_TNIL;
 		int expected = LUA_TNONE;
-		
+
 		if ( pos <= this->GetTop ()) {
 			type = lua_type ( this->mState, pos );
 		}
-		
+
 		switch ( format [ i ]) {
-		
+
 			// boolean
 			case 'B':
 				if ( type != LUA_TBOOLEAN ) expected = LUA_TBOOLEAN;
 				break;
-		
+
 			// coroutine
 			case 'C':
 				if ( type != LUA_TTHREAD ) expected = LUA_TTHREAD;
 				break;
-		
+
 			// function
 			case 'F':
 				if ( type != LUA_TFUNCTION ) expected = LUA_TFUNCTION;
 				break;
-		
+
 			// light userdata
 			case 'L':
 				if ( type != LUA_TLIGHTUSERDATA ) expected = LUA_TLIGHTUSERDATA;
 				break;
-		
+
 			// number
 			case 'N':
 				if ( type != LUA_TNUMBER ) expected = LUA_TNUMBER;
 				break;
-			
+
 			// string
 			case 'S':
 				if ( type != LUA_TSTRING ) expected = LUA_TSTRING;
 				break;
-			
+
 			// table
 			case 'T':
 				if ( type != LUA_TTABLE ) expected = LUA_TTABLE;
 				break;
-			
+
 			// userdata
 			case 'U':
 				if ( type != LUA_TUSERDATA ) expected = LUA_TUSERDATA;
@@ -101,31 +101,31 @@ bool MOAILuaState::CheckParams ( int idx, cc8* format, bool verbose ) {
 			case '*':
 			case '.':
 				break;
-			
+
 			// any non-nil type
 			case '@':
 				if ( type == LUA_TNIL ) return false; // TODO: log a message
 				break;
-			
+
 			// nil
 			case '-':
 				if ( type != LUA_TNIL ) expected = LUA_TNIL;
 				break;
 		}
-		
+
 		if ( expected != LUA_TNONE ) {
-		
+
 			if ( verbose ) {
-				
+
 				cc8* expectedName = MOAILuaState::GetLuaTypeName ( expected );
 				cc8* gotName = MOAILuaState::GetLuaTypeName ( type );
-			
+
 				MOAILog ( *this, MOAILogMessages::MOAI_ParamTypeMismatch_DSS, pos, expectedName, gotName );
 			}
 			return false;
 		}
 	}
-	
+
 	return true;
 }
 
@@ -157,7 +157,7 @@ void MOAILuaState::ClearField ( int idx, cc8* key ) {
 
 //----------------------------------------------------------------//
 void MOAILuaState::CloneTable ( int idx ) {
-	
+
 	lua_pushvalue ( this->mState, idx );
 	idx = lua_gettop ( this->mState );
 
@@ -165,21 +165,21 @@ void MOAILuaState::CloneTable ( int idx ) {
 		lua_pushnil ( this->mState );
 		return;
 	}
-	
+
 	lua_newtable ( this->mState );
 	int tableIdx = idx + 1;
-	
+
 	u32 itr = this->PushTableItr ( idx );
 	while ( this->TableItrNext ( itr )) {
 		lua_pushvalue ( this->mState, -2 );
 		lua_pushvalue ( this->mState, -2 );
 		lua_settable ( this->mState, tableIdx );
 	}
-	
+
 	if ( lua_getmetatable ( this->mState, idx )) {
 		lua_setmetatable ( this->mState, tableIdx );
 	}
-	
+
 	lua_replace ( this->mState, idx );
 }
 
@@ -191,7 +191,7 @@ void MOAILuaState::CopyToTop ( int idx ) {
 
 //----------------------------------------------------------------//
 int MOAILuaState::DebugCall ( int nArgs, int nResults ) {
-	
+
 	int errIdx = this->AbsIndex ( -( nArgs + 1 ));
 
 	MOAILuaRuntime::Get ().PushTraceback ( *this );
@@ -215,32 +215,32 @@ bool MOAILuaState::Decode ( int idx, ZLStreamAdapter& reader ) {
 
 	size_t len;
 	void* buffer = ( void* )lua_tolstring ( this->mState, idx, &len );
-	
+
 	if ( !len ) {
 		lua_pushstring ( this->mState, "" );
 		return true;
 	}
-	
+
 	ZLByteStream cryptStream;
 	cryptStream.SetBuffer ( buffer, len );
 	cryptStream.SetLength ( len );
-	
+
 	ZLMemStream plainStream;
-	
+
 	reader.Open ( &cryptStream );
 	plainStream.WriteStream ( reader );
 	reader.Close ();
-	
+
 	len = plainStream.GetLength ();
 	buffer = malloc ( len );
-	
+
 	plainStream.Seek ( 0, SEEK_SET );
 	plainStream.ReadBytes ( buffer, len );
-	
+
 	lua_pushlstring ( this->mState, ( cc8* )buffer, len );
-	
+
 	free ( buffer );
-	
+
 	return true;
 }
 
@@ -261,28 +261,28 @@ bool MOAILuaState::Encode ( int idx, ZLStreamAdapter& writer ) {
 
 	size_t len;
 	cc8* buffer = lua_tolstring ( this->mState, idx, &len );
-	
+
 	if ( !len ) {
 		lua_pushstring ( this->mState, "" );
 		return true;
 	}
-	
+
 	ZLMemStream stream;
-	
+
 	writer.Open ( &stream );
 	writer.WriteBytes ( buffer, len );
 	writer.Close ();
-	
+
 	len = stream.GetLength ();
 	void* temp = malloc ( len );
-	
+
 	stream.Seek ( 0, SEEK_SET );
 	stream.ReadBytes (( void* )temp, len );
-	
+
 	lua_pushlstring ( this->mState, ( cc8* )temp, len );
-	
+
 	free ( temp );
-	
+
 	return true;
 }
 
@@ -294,11 +294,11 @@ ZLBox MOAILuaState::GetBox ( int idx ) {
 	box.mMin.mX = this->GetValue < float >( idx++, 0.0f );
 	box.mMin.mY = this->GetValue < float >( idx++, 0.0f );
 	box.mMin.mZ = this->GetValue < float >( idx++, 0.0f );
-	
+
 	box.mMax.mX = this->GetValue < float >( idx++, 0.0f );
 	box.mMax.mY = this->GetValue < float >( idx++, 0.0f );
 	box.mMax.mZ = this->GetValue < float >( idx++, 0.0f );
-	
+
 	return box;
 }
 
@@ -310,7 +310,7 @@ ZLColorVec MOAILuaState::GetColor ( int idx, float r, float g, float b, float a 
 	color.mG = this->GetValue < float >( idx++, g );
 	color.mB = this->GetValue < float >( idx++, b );
 	color.mA = this->GetValue < float >( idx++, a );
-	
+
 	return color;
 }
 
@@ -419,35 +419,35 @@ bool MOAILuaState::GetSubfieldWithType ( int idx, cc8* format, int type, ... ) {
 
 	va_list args;
 	va_start ( args, type );
-	
+
 	idx = this->AbsIndex ( idx );
 	lua_pushvalue ( this->mState, idx );
 
 	for ( cc8* c = format; *c; ++c ) {
-		
+
 		switch ( *c ) {
-		
+
 			// number
 			case 'N':
 				lua_pushnumber ( this->mState, va_arg ( args, int ));
 				lua_gettable ( this->mState, -1 );
 				break;
-			
+
 			// string
 			case 'S':
 				lua_getfield ( this->mState, -1, va_arg ( args, char* ));
 				break;
-			
+
 			default:
 				lua_pushnil ( this->mState );
 		}
-	
+
 		if ( lua_isnil ( this->mState, -1 )) break;
 		lua_replace ( this->mState, -2 );
 	}
-	
+
 	va_end ( args );
-	
+
 	if ( lua_type ( this->mState, -1 ) != type ) {
 		lua_pop ( this->mState, 1 );
 		return false;
@@ -472,7 +472,7 @@ int MOAILuaState::GetLuaThreadStatus ( lua_State* thread ) {
 	if ( thread == running ) return THREAD_RUNNING;
 
 	switch ( lua_status ( thread )) {
-	
+
 		case LUA_YIELD:
 			return THREAD_SUSPENDED;
 
@@ -491,7 +491,7 @@ int MOAILuaState::GetLuaThreadStatus ( lua_State* thread ) {
 		default:  // some error occured
 			return THREAD_ERROR;
 	}
-	
+
 	return THREAD_UNKNOWN;
 }
 
@@ -512,7 +512,7 @@ cc8* MOAILuaState::GetLuaThreadStatusName ( int status ) {
 cc8* MOAILuaState::GetLuaTypeName ( int type ) {
 
 	switch ( type ) {
-	
+
 		case LUA_TNONE:				return "none";
 		case LUA_TNIL:				return "nil";
 		case LUA_TBOOLEAN:			return "boolean";
@@ -595,42 +595,42 @@ STLString MOAILuaState::GetStackTrace ( cc8* title, int level ) {
 
 	int firstpart = 1;  /* still before eventual `...' */
 	lua_Debug ar;
-	
+
 	lua_State* L = this->mState;
 
 	STLString out;
-	
+
 	out.append ( title ? title : "stack traceback:" );
-	
+
 	while ( lua_getstack ( L, level++, &ar )) {
-		
+
 		if ( level > LEVELS1 && firstpart ) {
-			
+
 			if ( !lua_getstack ( L, level + LEVELS2, &ar )) {
 				level--;
 			}
 			else {
 				// too many levels
 				out.append ( "\n\t..." );  /* too many levels */
-				
+
 				// find last levels */
-				while ( lua_getstack ( L, level + LEVELS2, &ar ))  
+				while ( lua_getstack ( L, level + LEVELS2, &ar ))
 					level++;
 			}
 			firstpart = 0;
 			continue;
 		}
-		
+
 		out.append ( "\n\t" );
-		
+
 		lua_getinfo ( L, "Snl", &ar );
-		
+
 		out.append ( ar.short_src );
-		
+
 		if ( ar.currentline > 0 ) {
 			out.write ( ":%d", ar.currentline );
 		}
-		
+
 		if ( *ar.namewhat != '\0' ) {
 			out.write ( " in function '%s'", ar.name );
 		}
@@ -646,7 +646,7 @@ STLString MOAILuaState::GetStackTrace ( cc8* title, int level ) {
 			}
 		}
 	}
-	
+
 	out.append ( "\n" );
 	return out;
 }
@@ -840,17 +840,17 @@ template <>
 ZLBox MOAILuaState::GetValue < ZLBox >( int idx, const ZLBox value ) {
 
 	if ( this->CheckParams ( idx, "NNNNNN" )) {
-	
+
 		ZLBox box;
-		
+
 		box.mMin.mX		= lua_tonumber ( this->mState, idx + 0 );
 		box.mMin.mY		= lua_tonumber ( this->mState, idx + 1 );
 		box.mMin.mZ		= lua_tonumber ( this->mState, idx + 2 );
-		
+
 		box.mMax.mX		= lua_tonumber ( this->mState, idx + 3 );
 		box.mMax.mY		= lua_tonumber ( this->mState, idx + 4 );
 		box.mMax.mZ		= lua_tonumber ( this->mState, idx + 5 );
-		
+
 		return box;
 	}
 	return value;
@@ -861,14 +861,14 @@ template <>
 ZLColorVec MOAILuaState::GetValue < ZLColorVec >( int idx, const ZLColorVec value ) {
 
 	if ( this->CheckParams ( idx, "NNNN" )) {
-	
+
 		ZLColorVec color;
-		
+
 		color.mR		= lua_tonumber ( this->mState, idx + 0 );
 		color.mG		= lua_tonumber ( this->mState, idx + 1 );
 		color.mB		= lua_tonumber ( this->mState, idx + 2 );
 		color.mA		= lua_tonumber ( this->mState, idx + 3 );
-		
+
 		return color;
 	}
 	return value;
@@ -879,14 +879,14 @@ template <>
 ZLRect MOAILuaState::GetValue < ZLRect >( int idx, const ZLRect value ) {
 
 	if ( this->CheckParams ( idx, "NNNN" )) {
-	
+
 		ZLRect color;
-		
+
 		color.mXMin		= lua_tonumber ( this->mState, idx + 0 );
 		color.mYMin		= lua_tonumber ( this->mState, idx + 1 );
 		color.mXMax		= lua_tonumber ( this->mState, idx + 2 );
 		color.mYMax		= lua_tonumber ( this->mState, idx + 3 );
-		
+
 		return color;
 	}
 	return value;
@@ -897,12 +897,12 @@ template <>
 ZLVec2D MOAILuaState::GetValue < ZLVec2D >( int idx, const ZLVec2D value ) {
 
 	if ( this->CheckParams ( idx, "NN" )) {
-	
+
 		ZLVec2D vec;
-		
+
 		vec.mX			= lua_tonumber ( this->mState, idx + 0 );
 		vec.mY			= lua_tonumber ( this->mState, idx + 1 );
-		
+
 		return vec;
 	}
 	return value;
@@ -913,13 +913,13 @@ template <>
 ZLVec3D MOAILuaState::GetValue < ZLVec3D >( int idx, const ZLVec3D value ) {
 
 	if ( this->CheckParams ( idx, "NN" )) {
-	
+
 		ZLVec3D vec;
-		
+
 		vec.mX			= lua_tonumber ( this->mState, idx + 0 );
 		vec.mY			= lua_tonumber ( this->mState, idx + 1 );
 		vec.mZ			= lua_tonumber ( this->mState, idx + 2 );
-		
+
 		return vec;
 	}
 	return value;
@@ -931,7 +931,7 @@ bool MOAILuaState::HasField ( int idx, cc8* name ) {
 	lua_getfield ( this->mState, idx, name );
 	bool hasField = ( lua_isnil ( this->mState, -1 ) == false );
 	lua_pop ( this->mState, 1 );
-	
+
 	return hasField;
 }
 
@@ -941,7 +941,7 @@ bool MOAILuaState::HasField ( int idx, int key ) {
 	this->GetField ( idx, key );
 	bool hasField = ( lua_isnil ( this->mState, -1 ) == false );
 	lua_pop ( this->mState, 1 );
-	
+
 	return hasField;
 }
 
@@ -951,7 +951,7 @@ bool MOAILuaState::HasField ( int idx, cc8* name, int type ) {
 	lua_getfield ( this->mState, idx, name );
 	bool hasField = ( lua_type ( this->mState, -1 ) == type );
 	lua_pop ( this->mState, 1 );
-	
+
 	return hasField;
 }
 
@@ -961,7 +961,7 @@ bool MOAILuaState::HasField ( int idx, int key, int type ) {
 	this->GetField ( idx, key );
 	bool hasField = ( lua_type ( this->mState, -1 ) == type );
 	lua_pop ( this->mState, 1 );
-	
+
 	return hasField;
 }
 
@@ -997,20 +997,21 @@ bool MOAILuaState::Inflate ( int idx, int windowBits ) {
 
 	ZLDeflateReader inflater;
 	inflater.SetWindowBits ( windowBits );
-	
+
 	return this->Decode ( idx, inflater );
-}
-
-//----------------------------------------------------------------//
-bool MOAILuaState::IsNil () {
-
-	return ( !this->mState );
 }
 
 //----------------------------------------------------------------//
 bool MOAILuaState::IsNil ( int idx ) {
 
 	return lua_isnil ( this->mState, idx );
+}
+
+//----------------------------------------------------------------//
+bool MOAILuaState::IsNilOrNone ( int idx ) {
+
+	int t = lua_type ( this->mState, idx );
+	return (( t == LUA_TNONE ) || ( t == LUA_TNIL ));
 }
 
 //----------------------------------------------------------------//
@@ -1037,9 +1038,17 @@ bool MOAILuaState::IsType ( int idx, int type ) {
 
 //----------------------------------------------------------------//
 bool MOAILuaState::IsType ( int idx, cc8* name, int type ) {
-	
+
 	return this->HasField ( idx, name, type );
 }
+
+//----------------------------------------------------------------//
+bool MOAILuaState::IsValid () {
+
+	return ( this->mState != 0 );
+}
+
+//----------------------------------------------------------------//
 
 //----------------------------------------------------------------//
 void MOAILuaState::LoadLibs () {
@@ -1080,10 +1089,10 @@ void MOAILuaState::Pop ( int n ) {
 bool MOAILuaState::PrepMemberFunc ( int idx, cc8* name ) {
 
 	idx = this->AbsIndex ( idx );
-	
+
 	if ( !this->GetFieldWithType ( idx, name, LUA_TFUNCTION )) return false;
 	this->CopyToTop ( idx );
-	
+
 	return true;
 }
 
@@ -1091,7 +1100,7 @@ bool MOAILuaState::PrepMemberFunc ( int idx, cc8* name ) {
 bool MOAILuaState::PrintErrors ( FILE* file, int status ) {
 
 	if ( status != 0 ) {
-	
+
 		cc8* error = lua_tostring ( this->mState, -1 );
 		if ( error ) {
 			STLString msg = lua_tostring ( this->mState, -1 );
@@ -1182,7 +1191,7 @@ void MOAILuaState::Push ( const ZLBox& value ) {
 	lua_pushnumber ( this->mState, value.mMin.mX );
 	lua_pushnumber ( this->mState, value.mMin.mY );
 	lua_pushnumber ( this->mState, value.mMin.mZ );
-	
+
 	lua_pushnumber ( this->mState, value.mMax.mX );
 	lua_pushnumber ( this->mState, value.mMax.mY );
 	lua_pushnumber ( this->mState, value.mMax.mZ );
@@ -1271,7 +1280,7 @@ int MOAILuaState::PushTableItr ( int idx ) {
 	lua_pushnil ( this->mState );
 	lua_pushnil ( this->mState );
 	lua_pushnil ( this->mState );
-	
+
 	return itr;
 }
 
@@ -1286,25 +1295,25 @@ void MOAILuaState::RegisterModule ( int idx, cc8* name, bool autoload ) {
 	lua_pushstring ( this->mState, name );
 	lua_pushvalue ( this->mState, idx );
 	lua_settable ( this->mState, -3 );
-	
+
 	// pop 'preload'
 	lua_pop ( this->mState, 1 );
-	
+
 	if ( autoload ) {
-	
+
 		lua_getfield ( this->mState, -1, "loaded" );
-		
+
 		// push the name
 		lua_pushstring ( this->mState, name );
-		
+
 		// push the table
 		lua_pushvalue ( this->mState, idx );
 		lua_pushstring ( this->mState, name );
 		lua_pcall ( this->mState, 1, 1, 0 );
-		
+
 		// loaded [ name ] = table
 		lua_settable ( this->mState, -3 );
-		
+
 		// pop 'loaded'
 		lua_pop ( this->mState, 1 );
 	}
@@ -1352,11 +1361,11 @@ int MOAILuaState::Run ( void* data, size_t size, int nArgs, int nResults ) {
 	lua_getglobal ( this->mState, "loadstring" );
 	this->Push ( data, size );
 	this->DebugCall ( 1, 1 );
-	
+
 	if ( nArgs ) {
 		lua_insert ( this->mState, -( nArgs + 1 ));
 	}
-	
+
 	return this->DebugCall ( nArgs, nResults );
 }
 
@@ -1367,11 +1376,11 @@ void MOAILuaState::SetPath ( cc8* path ) {
 
 	lua_getglobal ( this->mState, "package" );
 	int packageIdx = lua_gettop ( this->mState );
-	
+
 	lua_pushstring ( this->mState, "path" );
 	lua_pushstring ( this->mState, path );
 	lua_settable ( this->mState, packageIdx );
-	
+
 	lua_settop ( this->mState, top );
 }
 
@@ -1386,7 +1395,7 @@ bool MOAILuaState::TableItrNext ( int itr ) {
 
 	// pop the prev key/value; leave the key
 	lua_pop ( this->mState, 2 );
-	
+
 	if ( lua_next ( this->mState, itr ) != 0 ) {
 		this->CopyToTop ( -2 );
 		this->MoveToTop ( -2 );

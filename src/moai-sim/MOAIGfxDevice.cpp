@@ -53,17 +53,17 @@ int MOAIGfxDevice::_getMaxTextureUnits ( lua_State* L ) {
 //----------------------------------------------------------------//
 /**	@lua	getViewSize
 	@text	Returns the width and height of the view
-	
+
 	@out	number width
 	@out	number height
 */
 int MOAIGfxDevice::_getViewSize ( lua_State* L  ) {
 
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
-	
+
 	lua_pushnumber ( L, gfxDevice.GetWidth ());
 	lua_pushnumber ( L, gfxDevice.GetHeight ());
-	
+
 	return 2;
 }
 
@@ -79,7 +79,7 @@ int MOAIGfxDevice::_isProgrammable ( lua_State* L ) {
 
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
 	lua_pushboolean ( L, gfxDevice.IsProgrammable ());
-	
+
 	return 1;
 }
 
@@ -91,7 +91,7 @@ int MOAIGfxDevice::_setDefaultTexture ( lua_State* L ) {
 	MOAIGfxDevice& device = MOAIGfxDevice::Get ();
 
 	MOAITexture* texture = state.GetLuaObject < MOAITexture >( 1, false );
-	
+
 	if ( !texture ) {
 		texture = new MOAITexture ();
 		if ( !texture->Init ( state, 1 )) {
@@ -237,34 +237,34 @@ void MOAIGfxDevice::ClearSurface ( u32 clearFlags ) {
 void MOAIGfxDevice::DetectContext () {
 
 	this->mHasContext = true;
-	
+
 	zglBegin ();
-	
+
 	zglInitialize ();
-	
+
 	this->mIsProgrammable = zglGetCap ( ZGL_CAPS_IS_PROGRAMMABLE ) == 1;
 	this->mIsFramebufferSupported = zglGetCap ( ZGL_CAPS_IS_FRAMEBUFFER_SUPPORTED ) == 1;
-	
+
 	u32 maxTextureUnits = zglGetCap ( ZGL_CAPS_MAX_TEXTURE_UNITS );
 	this->mTextureUnits.Init ( maxTextureUnits );
 	this->mTextureUnits.Fill ( 0 );
-	
+
 	this->mMaxTextureSize = zglGetCap ( ZGL_CAPS_MAX_TEXTURE_SIZE );
 
-	MOAIGfxResourceMgr::Get ().RenewResources ();
-	
 	this->mDefaultBuffer->DetectGLFrameBufferID ();
-	
+
+	MOAIGfxResourceMgr::Get ().RenewResources ();
+
 	zglEnd ();
 }
 
 //----------------------------------------------------------------//
 void MOAIGfxDevice::DetectFramebuffer () {
-	
+
 	zglBegin ();
-	
+
 	this->mDefaultBuffer->DetectGLFrameBufferID ();
-	
+
 	zglEnd ();
 }
 
@@ -272,22 +272,22 @@ void MOAIGfxDevice::DetectFramebuffer () {
 void MOAIGfxDevice::DisableTextureUnits ( u32 activeTextures ) {
 
 	if ( activeTextures < this->mActiveTextures ) {
-		
+
 		this->Flush ();
-	
+
 		for ( u32 i = activeTextures; i < this->mActiveTextures; ++i ) {
-			
+
 			#if USE_OPENGLES1
 				if ( !this->IsProgrammable ()) {
 					zglActiveTexture ( i );
 					zglDisable ( ZGL_PIPELINE_TEXTURE_2D );
 				}
 			#endif
-			
+
 			this->mTextureUnits [ i ] = 0;
 		}
 	}
-	
+
 	this->mActiveTextures = activeTextures;
 }
 
@@ -315,11 +315,11 @@ void MOAIGfxDevice::DrawPrims () {
 //	if ( !( buffer && size )) return;
 //
 //	this->SetVertexFormat ();
-//	
+//
 //	// draw the prims
 //	u32 nVerts = ( u32 )( size / format.GetVertexSize ());
 //	if ( nVerts ) {
-//		
+//
 //		format.Bind ( buffer );
 //
 //		if ( indices ) {
@@ -339,7 +339,7 @@ void MOAIGfxDevice::EndPrim () {
 		this->mTop = this->mPrimTop;
 	}
 	++this->mPrimCount;
-	
+
 	if (( this->mPrimSize == 0 ) || ( this->mPrimCount >= this->mMaxPrims )) {
 		this->Flush ();
 	}
@@ -378,11 +378,11 @@ ZLMatrix4x4 MOAIGfxDevice::GetNormToWndMtx () const {
 	// Wnd
 	ZLMatrix4x4 normToWnd;
 	normToWnd.Scale ( hWidth, -hHeight, 1.0f );
-	
+
 	ZLMatrix4x4 mtx;
 	mtx.Translate ( hWidth + rect.mXMin, hHeight + rect.mYMin, 0.0f );
 	normToWnd.Append ( mtx );
-	
+
 	return normToWnd;
 }
 
@@ -427,12 +427,12 @@ ZLMatrix4x4 MOAIGfxDevice::GetViewProjMtx () const {
 //
 //	ZLMatrix4x4 invMtx;
 //	invMtx.Inverse ( this->GetViewProjMtx ());
-//	
+//
 //	quad.mV [ 0 ].Init ( -1.0f, 1.0f );
 //	quad.mV [ 1 ].Init ( 1.0f, 1.0f );
 //	quad.mV [ 2 ].Init ( 1.0f, -1.0f );
 //	quad.mV [ 3 ].Init ( -1.0f, -1.0f );
-//	
+//
 //	invMtx.TransformQuad ( quad.mV );
 //	return quad;
 //}
@@ -454,7 +454,7 @@ ZLMatrix4x4 MOAIGfxDevice::GetWorldToWndMtx () const {
 
 	ZLMatrix4x4 worldToWnd = this->GetViewProjMtx ();
 	worldToWnd.Append ( MOAIGfxDevice::GetNormToWndMtx ());
-	
+
 	return worldToWnd;
 }
 
@@ -469,11 +469,11 @@ ZLMatrix4x4 MOAIGfxDevice::GetWndToNormMtx () const {
 	// Inv Wnd
 	ZLMatrix4x4 wndToNorm;
 	wndToNorm.Translate ( -hWidth - rect.mXMin, -hHeight - rect.mYMin, 0.0f );
-	
+
 	ZLMatrix4x4 mtx;
 	mtx.Scale (( 1.0f / hWidth ), -( 1.0f / hHeight ), 1.0f );
 	wndToNorm.Append ( mtx );
-	
+
 	return wndToNorm;
 }
 
@@ -481,12 +481,12 @@ ZLMatrix4x4 MOAIGfxDevice::GetWndToNormMtx () const {
 ZLMatrix4x4 MOAIGfxDevice::GetWndToWorldMtx () const {
 
 	ZLMatrix4x4 wndToWorld = MOAIGfxDevice::GetWndToNormMtx ();
-	
+
 	// inv viewproj
 	ZLMatrix4x4 mtx = this->GetViewProjMtx ();
 	mtx.Inverse ();
 	wndToWorld.Append ( mtx );
-	
+
 	return wndToWorld;
 }
 
@@ -501,7 +501,7 @@ void MOAIGfxDevice::GpuLoadMatrix ( const ZLMatrix4x4& mtx ) const {
 //----------------------------------------------------------------//
 void MOAIGfxDevice::GpuMultMatrix ( const ZLMatrix4x4& mtx ) const {
 	UNUSED ( mtx );
-	
+
 	#if USE_OPENGLES1
 		zglMultMatrix ( mtx.m );
 	#endif
@@ -509,7 +509,7 @@ void MOAIGfxDevice::GpuMultMatrix ( const ZLMatrix4x4& mtx ) const {
 
 //----------------------------------------------------------------//
 bool MOAIGfxDevice::IsOpaque () const {
-	
+
 	assert ( this->mDefaultBuffer );
 	return this->mDefaultBuffer->IsOpaque ();
 }
@@ -568,24 +568,24 @@ MOAIGfxDevice::MOAIGfxDevice () :
 	mVertexFormatBuffer ( 0 ),
 	mVertexMtxInput ( VTX_STAGE_MODEL ),
 	mVertexMtxOutput ( VTX_STAGE_MODEL ) {
-	
+
 	RTTI_SINGLE ( MOAIGlobalEventSource )
-	
+
 	this->Reserve ( DEFAULT_BUFFER_SIZE );
-	
+
 	for ( u32 i = 0; i < TOTAL_VTX_TRANSFORMS; ++i ) {
 		this->mVertexTransforms [ i ].Ident ();
 		this->mCpuVertexTransformCache [ i ] = false;
 	}
 	this->mUVTransform.Ident ();
 	this->mCpuVertexTransformMtx.Ident ();
-	
+
 	this->mAmbientColor.Set ( 1.0f, 1.0f, 1.0f, 1.0f );
 	this->mFinalColor.Set ( 1.0f, 1.0f, 1.0f, 1.0f );
 	this->mPenColor.Set ( 1.0f, 1.0f, 1.0f, 1.0f );
 	this->mViewRect.Init ( 0.0f, 0.0f, 0.0f, 0.0f );
 	this->mScissorRect.Init ( 0.0f, 0.0f, 0.0f, 0.0f );
-	
+
 	this->mDefaultBuffer.Set ( *this, new MOAIFrameBuffer ());
 	this->mFrameBuffer = this->mDefaultBuffer;
 }
@@ -594,7 +594,7 @@ MOAIGfxDevice::MOAIGfxDevice () :
 MOAIGfxDevice::~MOAIGfxDevice () {
 
 	this->mDefaultBuffer.Set ( *this, 0 );
-	
+
 	// this->ProcessDeleters (); // TODO: same issue as OnGlobalsFinalize
 	this->Clear ();
 }
@@ -672,7 +672,7 @@ void MOAIGfxDevice::ResetState () {
 	}
 	this->mUVTransform.Ident ();
 	this->mCpuVertexTransformMtx.Ident ();
-	
+
 	this->mVertexMtxInput = VTX_STAGE_MODEL;
 	this->mVertexMtxOutput = VTX_STAGE_MODEL;
 
@@ -681,64 +681,64 @@ void MOAIGfxDevice::ResetState () {
 
 	// turn off texture
 	#if USE_OPENGLES1
-		if ( !this->IsProgrammable ()) {	
-			zglDisable ( ZGL_PIPELINE_TEXTURE_2D );	
+		if ( !this->IsProgrammable ()) {
+			zglDisable ( ZGL_PIPELINE_TEXTURE_2D );
 		}
 	#endif
 	this->mTextureUnits [ 0 ] = 0;
-	
+
 	// turn off blending
 	zglDisable ( ZGL_PIPELINE_BLEND );
 	this->mBlendEnabled = false;
-	
+
 	// disable backface culling
 	zglDisable ( ZGL_PIPELINE_CULL );
 	this->mCullFunc = 0;
-	
+
 	// disable depth test
 	zglDisable ( ZGL_PIPELINE_DEPTH );
 	this->mDepthFunc = 0;
-	
+
 	// disable depth write
 	zglDepthMask ( false );
 	this->mDepthMask = false;
-	
+
 	// clear the vertex format
 	this->SetVertexFormat ();
 
 	// clear the shader
 	this->mShaderProgram = 0;
-	
+
 	// reset the pen width
 	this->mPenWidth = 1.0f;
 	zglLineWidth ( this->mPenWidth );
-	
+
 	// reset the point size
 	this->mPointSize = 1.0f;
-	
+
 	// reset the scissor rect
 	ZLRect scissorRect = this->mFrameBuffer->GetBufferRect ();
 	zglScissor (( s32 )scissorRect.mXMin, ( s32 )scissorRect.mYMin, ( u32 )scissorRect.Width (), ( u32 )scissorRect.Height ());
-	
+
 	this->mScissorRect = scissorRect;
-	
+
 	// fixed function reset
 	#if USE_OPENGLES1
 		if ( !this->IsProgrammable ()) {
-			
+
 			// load identity matrix
 			zglMatrixMode ( ZGL_MATRIX_MODELVIEW );
 			zglLoadIdentity ();
-			
+
 			zglMatrixMode ( ZGL_MATRIX_PROJECTION );
 			zglLoadIdentity ();
-			
+
 			zglMatrixMode ( ZGL_MATRIX_TEXTURE );
 			zglLoadIdentity ();
-			
+
 			// reset the current vertex color
 			zglColor ( 1.0f, 1.0f, 1.0f, 1.0f );
-			
+
 			// reset the point size
 			zglPointSize ( this->mPointSize );
 		}
@@ -801,7 +801,7 @@ void MOAIGfxDevice::SetBlendMode ( int srcFactor, int dstFactor, int equation ) 
 	MOAIBlendMode blendMode;
 	blendMode.SetBlend ( srcFactor, dstFactor );
 	blendMode.SetBlendEquation( equation );
-	
+
 	this->SetBlendMode ( blendMode );
 }
 
@@ -827,10 +827,10 @@ void MOAIGfxDevice::SetCullFunc () {
 void MOAIGfxDevice::SetCullFunc ( int cullFunc ) {
 
 	if ( this->mCullFunc != cullFunc ) {
-	
+
 		this->Flush ();
 		this->mCullFunc = cullFunc;
-	
+
 		if ( cullFunc ) {
 			zglEnable ( ZGL_PIPELINE_CULL );
 			zglCullFace ( this->mCullFunc );
@@ -851,10 +851,10 @@ void MOAIGfxDevice::SetDepthFunc () {
 void MOAIGfxDevice::SetDepthFunc ( int depthFunc ) {
 
 	if ( this->mDepthFunc != depthFunc ) {
-	
+
 		this->Flush ();
 		this->mDepthFunc = depthFunc;
-	
+
 		if ( depthFunc ) {
 			zglEnable ( ZGL_PIPELINE_DEPTH );
 			zglDepthFunc ( this->mDepthFunc );
@@ -888,7 +888,7 @@ void MOAIGfxDevice::SetFrameBuffer ( MOAIFrameBuffer* frameBuffer ) {
 		else {
 			zglBindFramebuffer ( ZGL_FRAMEBUFFER_TARGET_DRAW_READ, this->mDefaultBuffer->mGLFrameBufferID );
 			this->mFrameBuffer = this->mDefaultBuffer;
-		}	
+		}
 	}
 }
 
@@ -954,15 +954,15 @@ void MOAIGfxDevice::SetPrimType ( u32 primType ) {
 		this->mPrimType = primType;
 
 		switch ( primType ) {
-			
+
 			case ZGL_PRIM_LINES:
 				this->mPrimSize = 2;
 				break;
-			
+
 			case ZGL_PRIM_TRIANGLES:
 				this->mPrimSize = 3;
 				break;
-			
+
 			case ZGL_PRIM_POINTS:
 			case ZGL_PRIM_LINE_LOOP:
 			case ZGL_PRIM_LINE_STRIP:
@@ -984,33 +984,33 @@ void MOAIGfxDevice::SetScissorRect () {
 
 //----------------------------------------------------------------//
 void MOAIGfxDevice::SetScissorRect ( ZLRect rect ) {
-	
+
 	rect.Bless ();
 	this->mViewRect.Clip ( rect );
 
 	ZLRect& current = this->mScissorRect;
-	
+
 	if (	( current.mXMin != rect.mXMin ) ||
 			( current.mYMin != rect.mYMin ) ||
 			( current.mXMax != rect.mXMax ) ||
 			( current.mYMax != rect.mYMax )) {
-		
+
 		this->Flush ();
 
 		ZLRect deviceRect = this->mFrameBuffer->WndRectToDevice ( rect );
 
 		s32 x = ( s32 )deviceRect.mXMin;
 		s32 y = ( s32 )deviceRect.mYMin;
-		
+
 		u32 w = ( u32 )( deviceRect.Width () + 0.5f );
 		u32 h = ( u32 )( deviceRect.Height () + 0.5f );
 
 		w = h == 0 ? 0 : w;
 		h = w == 0 ? 0 : h;
-		
+
 		zglScissor ( x, y, w, h );
 		this->mScissorRect = rect;
-	
+
 		zglEnable ( ZGL_PIPELINE_SCISSOR );
 	}
 }
@@ -1040,7 +1040,7 @@ void MOAIGfxDevice::SetShader ( MOAIShader* shader ) {
 	}
 	else {
 		this->SetShaderProgram ( 0 );
-	}	
+	}
 }
 
 //----------------------------------------------------------------//
@@ -1053,10 +1053,10 @@ void MOAIGfxDevice::SetShaderPreset ( u32 preset ) {
 void MOAIGfxDevice::SetShaderProgram ( MOAIShaderProgram* program ) {
 
 	if (( this->mShaderProgram != program ) && this->mIsProgrammable ) {
-	
+
 		this->Flush ();
 		this->mShaderProgram = program;
-		
+
 		if ( program ) {
 			program->Bind ();
 		}
@@ -1066,18 +1066,18 @@ void MOAIGfxDevice::SetShaderProgram ( MOAIShaderProgram* program ) {
 
 //----------------------------------------------------------------//
 bool MOAIGfxDevice::SetTexture () {
-	
+
 	this->DisableTextureUnits ( 0 );
 	return true;
 }
 
 //----------------------------------------------------------------//
 bool MOAIGfxDevice::SetTexture ( MOAITextureBase* texture ) {
-	
+
 	if ( !texture ) {
 		return this->SetTexture ();
 	}
-	
+
 	this->DisableTextureUnits ( 1 );
 	return this->SetTexture ( 0, texture );
 }
@@ -1088,20 +1088,20 @@ bool MOAIGfxDevice::SetTexture ( MOAIMultiTexture* multi ) {
 	if ( !multi ) {
 		return this->SetTexture ();
 	}
-	
+
 	u32 total = 0;
 	u32 multiSize = multi->mTextures.Size ();
 	for ( ; total < multiSize; ++total ) {
 		if ( !multi->mTextures [ total ]) break;
 	}
-	
+
 	if ( total > this->mTextureUnits.Size ()) {
 		total = this->mTextureUnits.Size ();
 	}
-	
+
 	// disable any unused textures
 	this->DisableTextureUnits ( total );
-	
+
 	for ( u32 i = 0; i < total; ++i ) {
 		this->SetTexture ( i, multi->mTextures [ i ]);
 	}
@@ -1110,29 +1110,29 @@ bool MOAIGfxDevice::SetTexture ( MOAIMultiTexture* multi ) {
 
 //----------------------------------------------------------------//
 bool MOAIGfxDevice::SetTexture ( u32 textureUnit, MOAITextureBase* texture ) {
-	
+
 	if ( !texture ) {
 		// TODO: is this right?
 		this->mTextureUnits [ textureUnit ] = 0;
 		return false;
 	}
-	
+
 	if ( this->mTextureUnits [ textureUnit ] == texture ) return true;
-	
+
 	this->Flush ();
-	
+
 	zglActiveTexture ( textureUnit );
-	
+
 	#if USE_OPENGLES1
 		if (( !this->mTextureUnits [ textureUnit ]) && ( !this->IsProgrammable ())) {
 			zglEnable ( ZGL_PIPELINE_TEXTURE_2D );
 		}
 	#endif
-	
+
 	if ( !texture->Bind ()) {
 		return this->SetTexture ( textureUnit, this->mDefaultTexture );
 	}
-	
+
 	this->mTextureUnits [ textureUnit ] = texture;
 	return true;
 }
@@ -1141,10 +1141,10 @@ bool MOAIGfxDevice::SetTexture ( u32 textureUnit, MOAITextureBase* texture ) {
 void MOAIGfxDevice::SetUVMtxMode ( u32 input, u32 output ) {
 
 	if (( this->mUVMtxInput != input ) || ( this->mUVMtxOutput != output )) {
-		
+
 		this->mUVMtxInput = input;
 		this->mUVMtxOutput = output;
-		
+
 		this->UpdateUVMtx ();
 	}
 }
@@ -1178,7 +1178,7 @@ void MOAIGfxDevice::SetUVTransform ( const ZLMatrix4x4& transform ) {
 void MOAIGfxDevice::SetVertexFormat () {
 
 	this->Flush ();
-	
+
 	if ( this->mVertexFormat ) {
 		this->mVertexFormat->Unbind ();
 	}
@@ -1206,17 +1206,17 @@ void MOAIGfxDevice::SetVertexFormat ( const MOAIVertexFormat& format, void* buff
 
 //----------------------------------------------------------------//
 void MOAIGfxDevice::SetVertexMtxMode ( u32 input, u32 output ) {
-	
+
 	if (( this->mVertexMtxInput != input ) || ( this->mVertexMtxOutput != output )) {
 
 		this->mVertexMtxInput = input;
 		this->mVertexMtxOutput = output;
-		
+
 		// Invalidate the lower level matrices (i.e. modelview, etc) matrix in this case to force recalc
 		for ( u32 i = input; i < output; ++i ) {
 			this->mCpuVertexTransformCache [ i ] = false;
 		}
-		
+
 		this->UpdateCpuVertexMtx ();
 		this->UpdateGpuVertexMtx ();
 	}
@@ -1252,10 +1252,10 @@ void MOAIGfxDevice::SetVertexTransform ( u32 id, const ZLMatrix4x4& transform ) 
 	if ( !this->mVertexTransforms [ id ].IsSame ( transform )) {
 
 		this->mVertexTransforms [ id ] = transform;
-		
+
 		// check to see if this is a CPU or GPU matrix and update accordingly
 		if ( id < this->mVertexMtxOutput ) {
-		
+
 			// Invalidate the lower level matrices (i.e. modelview, etc) matrix in this case to force recalc
 			for ( u32 i = this->mVertexMtxInput; i <= id; ++i ) {
 				this->mCpuVertexTransformCache [ i ] = false;
@@ -1266,7 +1266,7 @@ void MOAIGfxDevice::SetVertexTransform ( u32 id, const ZLMatrix4x4& transform ) 
 			this->UpdateGpuVertexMtx ();
 		}
 	}
-	
+
 	this->mShaderDirty = true;
 }
 
@@ -1278,7 +1278,7 @@ void MOAIGfxDevice::SetViewRect () {
 
 	MOAIViewport rect;
 	rect.Init ( 0.0f, 0.0f, width, height );
-	
+
 	this->SetViewRect ( rect );
 }
 
@@ -1286,17 +1286,17 @@ void MOAIGfxDevice::SetViewRect () {
 void MOAIGfxDevice::SetViewRect ( ZLRect rect ) {
 
 	ZLRect deviceRect;
-	
+
 	deviceRect = this->mFrameBuffer->WndRectToDevice ( rect );
-	
+
 	s32 x = ( s32 )deviceRect.mXMin;
 	s32 y = ( s32 )deviceRect.mYMin;
-	
+
 	u32 w = ( u32 )( deviceRect.Width () + 0.5f );
 	u32 h = ( u32 )( deviceRect.Height () + 0.5f );
-	
+
 	zglViewport ( x, y, w, h );
-	
+
 	this->mViewRect = rect;
 	this->mShaderDirty = true;
 }
@@ -1307,47 +1307,47 @@ void MOAIGfxDevice::TransformAndWriteQuad ( ZLVec4D* vtx, ZLVec2D* uv ) {
 	if ( this->mCpuVertexTransform ) {
 		this->mCpuVertexTransformMtx.TransformQuad ( vtx );
 	}
-	
+
 	if ( this->mCpuUVTransform ) {
 		this->mUVTransform.TransformQuad ( uv );
 	}
-	
+
 	this->BeginPrim ();
-	
+
 		// left top
 		this->Write ( vtx [ 0 ]);
 		this->Write ( uv [ 0 ]);
 		this->WriteFinalColor4b ();
-		
+
 		// left bottom
 		this->Write ( vtx [ 3 ]);
 		this->Write ( uv [ 3 ]);
-		this->WriteFinalColor4b ();	
-	
+		this->WriteFinalColor4b ();
+
 		// right bottom
 		this->Write ( vtx[ 2 ]);
 		this->Write ( uv [ 2 ]);
 		this->WriteFinalColor4b ();
-		
+
 	this->EndPrim ();
-	
+
 	this->BeginPrim ();
-	
+
 		// left top
 		this->Write ( vtx [ 0 ]);
 		this->Write ( uv [ 0 ]);
-		this->WriteFinalColor4b ();	
-	
+		this->WriteFinalColor4b ();
+
 		// right bottom
 		this->Write ( vtx [ 2 ]);
 		this->Write ( uv [ 2 ]);
-		this->WriteFinalColor4b ();	
-	
+		this->WriteFinalColor4b ();
+
 		// right top
 		this->Write ( vtx [ 1 ]);
 		this->Write ( uv [ 1 ]);
 		this->WriteFinalColor4b ();
-		
+
 	this->EndPrim ();
 }
 
@@ -1360,13 +1360,13 @@ void MOAIGfxDevice::UpdateFinalColor () {
 	this->mFinalColor.mA = this->mAmbientColor.mA * this->mPenColor.mA;
 
 	this->mFinalColor32 = this->mFinalColor.PackRGBA ();
-	
+
 	this->mShaderDirty = true;
 }
 
 //----------------------------------------------------------------//
 void MOAIGfxDevice::UpdateCpuVertexMtx () {
-	
+
 	// Used signed, so we can roll "under" to -1 without an extra range check
 	int start = this->mVertexMtxInput;
 	int finish = this->mVertexMtxOutput;
@@ -1378,7 +1378,7 @@ void MOAIGfxDevice::UpdateCpuVertexMtx () {
 	// changed since the last update request).
 
 	int i = finish - 1;
-	
+
 	if ( this->mCpuVertexTransformCache [ i ]) {
 		while ( i >= start && this->mCpuVertexTransformCache [ i ]) {
 			--i;
@@ -1388,7 +1388,7 @@ void MOAIGfxDevice::UpdateCpuVertexMtx () {
 	else {
 		this->mCpuVertexTransformMtx.Ident();
 	}
-	
+
 	for ( ; i >= start; --i ) {
 		this->mCpuVertexTransformMtx.Prepend ( this->mVertexTransforms [ i ]);
 		this->mCpuVertexTransformCacheMtx [ i ] = this->mCpuVertexTransformMtx;
@@ -1408,46 +1408,46 @@ void MOAIGfxDevice::UpdateGpuVertexMtx () {
 
 		// update the gpu matrices
 		switch ( this->mVertexMtxOutput ) {
-			
+
 			case VTX_STAGE_MODEL:
-			
+
 				zglMatrixMode ( ZGL_MATRIX_MODELVIEW );
 				this->GpuLoadMatrix ( this->mVertexTransforms [ VTX_WORLD_TRANSFORM ]);
 				this->GpuMultMatrix ( this->mVertexTransforms [ VTX_VIEW_TRANSFORM ]);
-			
+
 				zglMatrixMode ( ZGL_MATRIX_PROJECTION );
 				this->GpuLoadMatrix ( this->mVertexTransforms [ VTX_PROJ_TRANSFORM ]);
-				
+
 				break;
-				
+
 			case VTX_STAGE_WORLD:
-				
+
 				zglMatrixMode ( ZGL_MATRIX_MODELVIEW );
 				this->GpuLoadMatrix ( this->mVertexTransforms [ VTX_VIEW_TRANSFORM ]);
-				
+
 				zglMatrixMode ( ZGL_MATRIX_PROJECTION );
 				this->GpuLoadMatrix ( this->mVertexTransforms [ VTX_PROJ_TRANSFORM ]);
-			
+
 				break;
-				
+
 			case VTX_STAGE_VIEW:
-				
+
 				zglMatrixMode ( ZGL_MATRIX_MODELVIEW );
 				zglLoadIdentity ();
-				
+
 				zglMatrixMode ( ZGL_MATRIX_PROJECTION );
 				this->GpuLoadMatrix ( this->mVertexTransforms [ VTX_PROJ_TRANSFORM ]);
-				
+
 				break;
-			
+
 			case VTX_STAGE_PROJ:
-			
+
 				zglMatrixMode ( ZGL_MATRIX_MODELVIEW );
 				zglLoadIdentity ();
-				
+
 				zglMatrixMode ( ZGL_MATRIX_PROJECTION );
 				zglLoadIdentity ();
-			
+
 				break;
 		}
 	#endif
@@ -1466,7 +1466,7 @@ void MOAIGfxDevice::UpdateShaderGlobals () {
 void MOAIGfxDevice::UpdateUVMtx () {
 
 	if ( this->mUVMtxOutput == UV_STAGE_TEXTURE ) {
-		
+
 		this->mCpuUVTransform = !this->mUVTransform.IsIdent ();
 
 		#if USE_OPENGLES1
@@ -1479,7 +1479,7 @@ void MOAIGfxDevice::UpdateUVMtx () {
 		#endif
 	}
 	else {
-		
+
 		this->mCpuUVTransform = false;
 
 		#if USE_OPENGLES1
@@ -1505,22 +1505,22 @@ void MOAIGfxDevice::UpdateViewVolume () {
 void MOAIGfxDevice::WriteQuad ( const ZLVec2D* vtx, const ZLVec2D* uv ) {
 
 	ZLVec4D vtxBuffer [ 4 ];
-	
+
 	vtxBuffer [ 0 ].mX = vtx [ 0 ].mX;
 	vtxBuffer [ 0 ].mY = vtx [ 0 ].mY;
 	vtxBuffer [ 0 ].mZ = 0.0f;
 	vtxBuffer [ 0 ].mW = 1.0f;
-	
+
 	vtxBuffer [ 1 ].mX = vtx [ 1 ].mX;
 	vtxBuffer [ 1 ].mY = vtx [ 1 ].mY;
 	vtxBuffer [ 1 ].mZ = 0.0f;
 	vtxBuffer [ 1 ].mW = 1.0f;
-	
+
 	vtxBuffer [ 2 ].mX = vtx [ 2 ].mX;
 	vtxBuffer [ 2 ].mY = vtx [ 2 ].mY;
 	vtxBuffer [ 2 ].mZ = 0.0f;
 	vtxBuffer [ 2 ].mW = 1.0f;
-	
+
 	vtxBuffer [ 3 ].mX = vtx [ 3 ].mX;
 	vtxBuffer [ 3 ].mY = vtx [ 3 ].mY;
 	vtxBuffer [ 3 ].mZ = 0.0f;
@@ -1528,7 +1528,7 @@ void MOAIGfxDevice::WriteQuad ( const ZLVec2D* vtx, const ZLVec2D* uv ) {
 
 	ZLVec2D uvBuffer [ 4 ];
 	memcpy ( uvBuffer, uv, sizeof ( ZLVec2D ) * 4 );
-	
+
 	this->TransformAndWriteQuad ( vtxBuffer, uvBuffer );
 }
 
@@ -1536,30 +1536,30 @@ void MOAIGfxDevice::WriteQuad ( const ZLVec2D* vtx, const ZLVec2D* uv ) {
 void MOAIGfxDevice::WriteQuad ( const ZLVec2D* vtx, const ZLVec2D* uv, float xOff, float yOff, float zOff ) {
 
 	ZLVec4D vtxBuffer [ 4 ];
-	
+
 	vtxBuffer [ 0 ].mX = vtx [ 0 ].mX + xOff;
 	vtxBuffer [ 0 ].mY = vtx [ 0 ].mY + yOff;
 	vtxBuffer [ 0 ].mZ = zOff;
 	vtxBuffer [ 0 ].mW = 1.0f;
-	
+
 	vtxBuffer [ 1 ].mX = vtx [ 1 ].mX + xOff;
 	vtxBuffer [ 1 ].mY = vtx [ 1 ].mY + yOff;
 	vtxBuffer [ 1 ].mZ = zOff;
 	vtxBuffer [ 1 ].mW = 1.0f;
-	
+
 	vtxBuffer [ 2 ].mX = vtx [ 2 ].mX + xOff;
 	vtxBuffer [ 2 ].mY = vtx [ 2 ].mY + yOff;
 	vtxBuffer [ 2 ].mZ = zOff;
 	vtxBuffer [ 2 ].mW = 1.0f;
-	
+
 	vtxBuffer [ 3 ].mX = vtx [ 3 ].mX + xOff;
 	vtxBuffer [ 3 ].mY = vtx [ 3 ].mY + yOff;
 	vtxBuffer [ 3 ].mZ = zOff;
 	vtxBuffer [ 3 ].mW = 1.0f;
-	
+
 	ZLVec2D uvBuffer [ 4 ];
 	memcpy ( uvBuffer, uv, sizeof ( ZLVec2D ) * 4 );
-	
+
 	this->TransformAndWriteQuad ( vtxBuffer, uvBuffer );
 }
 
@@ -1567,12 +1567,12 @@ void MOAIGfxDevice::WriteQuad ( const ZLVec2D* vtx, const ZLVec2D* uv, float xOf
 void MOAIGfxDevice::WriteQuad ( const ZLVec2D* vtx, const ZLVec2D* uv, float xOff, float yOff, float zOff, float xScale, float yScale ) {
 
 	ZLVec4D vtxBuffer [ 4 ];
-	
+
 	vtxBuffer [ 0 ].mX = ( vtx [ 0 ].mX * xScale ) + xOff;
 	vtxBuffer [ 0 ].mY = ( vtx [ 0 ].mY * yScale ) + yOff;
 	vtxBuffer [ 0 ].mZ = zOff;
 	vtxBuffer [ 0 ].mW = 1.0f;
-	
+
 	vtxBuffer [ 1 ].mX = ( vtx [ 1 ].mX * xScale ) + xOff;
 	vtxBuffer [ 1 ].mY = ( vtx [ 1 ].mY * yScale ) + yOff;
 	vtxBuffer [ 1 ].mZ = zOff;
@@ -1582,15 +1582,15 @@ void MOAIGfxDevice::WriteQuad ( const ZLVec2D* vtx, const ZLVec2D* uv, float xOf
 	vtxBuffer [ 2 ].mY = ( vtx [ 2 ].mY * yScale ) + yOff;
 	vtxBuffer [ 2 ].mZ = zOff;
 	vtxBuffer [ 2 ].mW = 1.0f;
-	
+
 	vtxBuffer [ 3 ].mX = ( vtx [ 3 ].mX * xScale ) + xOff;
 	vtxBuffer [ 3 ].mY = ( vtx [ 3 ].mY * yScale ) + yOff;
 	vtxBuffer [ 3 ].mZ = zOff;
 	vtxBuffer [ 3 ].mW = 1.0f;
-	
+
 	ZLVec2D uvBuffer [ 4 ];
 	memcpy ( uvBuffer, uv, sizeof ( ZLVec2D ) * 4 );
-	
+
 	this->TransformAndWriteQuad ( vtxBuffer, uvBuffer );
 }
 
@@ -1598,12 +1598,12 @@ void MOAIGfxDevice::WriteQuad ( const ZLVec2D* vtx, const ZLVec2D* uv, float xOf
 void MOAIGfxDevice::WriteQuad ( const ZLVec2D* vtx, const ZLVec2D* uv, float xOff, float yOff, float zOff, float xScale, float yScale, float uOff, float vOff, float uScale, float vScale ) {
 
 	ZLVec4D vtxBuffer [ 4 ];
-	
+
 	vtxBuffer [ 0 ].mX = ( vtx [ 0 ].mX * xScale ) + xOff;
 	vtxBuffer [ 0 ].mY = ( vtx [ 0 ].mY * yScale ) + yOff;
 	vtxBuffer [ 0 ].mZ = zOff;
 	vtxBuffer [ 0 ].mW = 1.0f;
-	
+
 	vtxBuffer [ 1 ].mX = ( vtx [ 1 ].mX * xScale ) + xOff;
 	vtxBuffer [ 1 ].mY = ( vtx [ 1 ].mY * yScale ) + yOff;
 	vtxBuffer [ 1 ].mZ = zOff;
@@ -1613,26 +1613,25 @@ void MOAIGfxDevice::WriteQuad ( const ZLVec2D* vtx, const ZLVec2D* uv, float xOf
 	vtxBuffer [ 2 ].mY = ( vtx [ 2 ].mY * yScale ) + yOff;
 	vtxBuffer [ 2 ].mZ = zOff;
 	vtxBuffer [ 2 ].mW = 1.0f;
-	
+
 	vtxBuffer [ 3 ].mX = ( vtx [ 3 ].mX * xScale ) + xOff;
 	vtxBuffer [ 3 ].mY = ( vtx [ 3 ].mY * yScale ) + yOff;
 	vtxBuffer [ 3 ].mZ = zOff;
 	vtxBuffer [ 3 ].mW = 1.0f;
-	
+
 	ZLVec2D uvBuffer [ 4 ];
-	
+
 	uvBuffer [ 0 ].mX = ( uv [ 0 ].mX * uScale ) + uOff;
 	uvBuffer [ 0 ].mY = ( uv [ 0 ].mY * vScale ) + vOff;
-	
+
 	uvBuffer [ 1 ].mX = ( uv [ 1 ].mX * uScale ) + uOff;
 	uvBuffer [ 1 ].mY = ( uv [ 1 ].mY * vScale ) + vOff;
 
 	uvBuffer [ 2 ].mX = ( uv [ 2 ].mX * uScale ) + uOff;
 	uvBuffer [ 2 ].mY = ( uv [ 2 ].mY * vScale ) + vOff;
-	
+
 	uvBuffer [ 3 ].mX = ( uv [ 3 ].mX * uScale ) + uOff;
 	uvBuffer [ 3 ].mY = ( uv [ 3 ].mY * vScale ) + vOff;
-	
+
 	this->TransformAndWriteQuad ( vtxBuffer, uvBuffer );
 }
-

@@ -1,0 +1,6 @@
+<!-- RevMob -->
+<activity
+	android:name="rm.com.android.sdk.RmInterstitial"
+	android:configChanges="keyboardHidden|orientation|screenSize"
+	android:theme="@android:style/Theme.Translucent">
+</activity>

@@ -1,38 +1,43 @@
 FRAMEWORKS = {
 
     AdColony = {
-        MOAI_SDK_HOME .. '3rdparty-ios/adcolony-2.6.1/AdColony.framework'
+        MOAI_SDK_HOME .. '3rdparty-ios/adcolony-3.2.1/AdColony.framework'
     },
 
     AdMob = {
-        MOAI_SDK_HOME .. '3rdparty-ios/admob-7.7.1/GoogleMobileAds.framework'
+        MOAI_SDK_HOME .. '3rdparty-ios/admob-7.24.0/GoogleMobileAds.framework'
+    },
+
+    AppLovin = {
+        MOAI_SDK_HOME .. '3rdparty-ios/applovin-4.3.1/AppLovinSDK.framework'
     },
 
     ChartBoost = {
-        MOAI_SDK_HOME .. '3rdparty-ios/chartboost-6.4.2/Chartboost.framework'
+        MOAI_SDK_HOME .. '3rdparty-ios/chartboost-7.0.1/Chartboost.framework'
     },
 
     Crittercism = {
-        MOAI_SDK_HOME .. '3rdparty-ios/crittercism-5.5.1/Crittercism.framework'
+        MOAI_SDK_HOME .. '3rdparty-ios/crittercism-5.6.8/Crittercism.framework'
     },
 
     Facebook = {
-        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.10.1/FBSDKCoreKit.framework',
-        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.10.1/FBSDKLoginKit.framework',
-        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.10.1/FBSDKShareKit.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.26.0/Bolts.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.26.0/FBSDKCoreKit.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.26.0/FBSDKLoginKit.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.26.0/FBSDKShareKit.framework',
     },
 
     RevMob = {
-        MOAI_SDK_HOME .. '3rdparty-ios/revmob-9.0.8/RevMobAds.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/revmob-10.0.0/RevMob.framework',
     },
 
     StartApp = {
-        MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.3.2/StartApp.bundle',
-        MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.3.2/StartApp.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.5.0/StartApp.bundle',
+        MOAI_SDK_HOME .. '3rdparty-ios/startapp-3.5.0/StartApp.framework',
     },
 
     Vungle = {
-        MOAI_SDK_HOME .. '3rdparty-ios/vungle-3.2.0/VungleSDK.framework',
+        MOAI_SDK_HOME .. '3rdparty-ios/vungle-5.2.0/VungleSDK.framework',
     },
 }
 

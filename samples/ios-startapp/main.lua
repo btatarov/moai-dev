@@ -48,7 +48,7 @@ thread:run( function ()
     coroutine:yield ()
 
 	if MOAIStartAppIOS.hasCachedBanner () then
-    	print ( 'Showing AdMob banner.' )
+    	print ( 'Showing StartApp banner.' )
         MOAIStartAppIOS.showBanner ()
     else
     	print ( 'There is no cached banner.' )
@@ -58,7 +58,7 @@ thread:run( function ()
     coroutine:yield ()
 
     if MOAIStartAppIOS.hasCachedInterstitial () then
-    	print ( 'Showing Admob interstitial.' )
+    	print ( 'Showing StartApp interstitial.' )
         MOAIStartAppIOS.showInterstitial ()
     else
     	print ( 'There is no cached interstitial.' )
@@ -67,6 +67,6 @@ thread:run( function ()
 	MOAICoroutine.blockOnAction ( delay_timer:start () )
 	coroutine:yield ()
 
-	print ( 'Hiding AdMob banner.' )
+	print ( 'Hiding StartApp banner.' )
 	MOAIStartAppIOS.hideBanner ()
 end )

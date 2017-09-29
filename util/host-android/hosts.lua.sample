@@ -24,7 +24,6 @@ HOST_SETTINGS = {
             VERSION_NAME = '1.0',
 
             GOOGLE_PLAY_APP_ID  = '< YOUR GOOGLE PLAY SERVICES APP ID >',
-            REVMOB_APP_ID       = '< YOUR REVMOB MEDIA ID >',
 
             MODULES = {
                 'adcolony',
@@ -49,11 +48,11 @@ HOST_SETTINGS = {
             VERSION_NAME = '1.0',
 
             GOOGLE_PLAY_APP_ID  = '', -- unused
-            REVMOB_APP_ID       = '< YOUR REVMOB MEDIA ID >',
 
             MODULES = {
                 'adcolony',
                 'admob',
+                'applovin',
                 'chartboost',
                 'google_billing',
                 'google_play_services',

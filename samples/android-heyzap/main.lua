@@ -28,18 +28,30 @@ thread:run( function ()
     coroutine:yield ()
 
     MOAIHeyZapAndroid.setListener (
-        MOAIHeyZapAndroid.REWARDEDVIDEOAD_COMPLETED,
+        MOAIHeyZapAndroid.REWARDED_VIDEO_COMPLETED,
         function ()
             print ( "Rewarded video successfully completed." )
         end
     )
 
-    MOAIHeyZapAndroid.init ( '< YOUR PUBLISHER ID >' )
+    local AMAZON_STORE = false
+    MOAIHeyZapAndroid.init ( '< YOUR PUBLISHER ID >', AMAZON_STORE )
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 
+    MOAIHeyZapAndroid.cacheInterstitial ()
     MOAIHeyZapAndroid.cacheRewardedVideo ()
+
+    MOAICoroutine.blockOnAction ( delay_timer:start () )
+    coroutine:yield ()
+
+    if MOAIHeyZapAndroid.hasCachedInterstitial () then
+    	print ( "Showing HeyZap interstitial." )
+        MOAIHeyZapAndroid.showInterstitial ()
+    else
+    	print ( "There is no cached interstitial." )
+    end
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()

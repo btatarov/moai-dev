@@ -23,6 +23,7 @@ class MOAILuaObject :
 private:
 
 	bool					mCollected;
+	u32						mActiveUserdataCount;
 	MOAILuaWeakRef			mUserdata;			// ref to userdata (weak)
 	MOAILuaStrongRef		mFinalizer;			// ref to finalizer (strong)
 
@@ -81,11 +82,11 @@ public:
 	virtual	void			SerializeIn					( MOAILuaState& state, MOAIDeserializer& serializer );
 	virtual	void			SerializeOut				( MOAILuaState& state, MOAISerializer& serializer );
 	bool					WasCollected				();
-	
+
 	//----------------------------------------------------------------//
 	template < typename TYPE, lua_CFunction FUNC >
 	static int WrapInstanceFuncAsGlobal ( lua_State* L ) {
-	
+
 		TYPE* type = MOAIGlobalsMgr::Get ()->GetGlobal < TYPE >();
 		assert ( type );
 		return InjectAndCall ( FUNC, type, L );

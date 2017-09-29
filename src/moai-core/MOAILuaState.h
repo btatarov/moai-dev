@@ -32,7 +32,7 @@ public:
 		THREAD_RUNNING		= 0x08,
 		THREAD_SUSPENDED	= 0x10,
 	};
-	
+
 	static const int THREAD_VALID_MASK = THREAD_SUSPENDED | THREAD_NORMAL | THREAD_RUNNING;
 
 	//----------------------------------------------------------------//
@@ -79,12 +79,13 @@ public:
 	bool			HexDecode					( int idx );
 	bool			HexEncode					( int idx );
 	bool			Inflate						( int idx, int windowBits );
-	bool			IsNil						();
 	bool			IsNil						( int idx );
+	bool			IsNilOrNone					( int idx );
 	bool			IsTableOrUserdata			( int idx );
 	bool			IsTrueOrNotNil				( int idx );
 	bool			IsType						( int idx, int type );
 	bool			IsType						( int idx, cc8* name, int type );
+	bool			IsValid						();
 	void			LoadLibs					();
 					MOAILuaState				();
 					MOAILuaState				( lua_State* state );
@@ -96,7 +97,7 @@ public:
 	void			PrintStackDump				();
 	void			PrintStackDump				( FILE* file );
 	void			PrintStackTrace				( FILE* file, cc8* title, int level );
-	
+
 	void			Push						();
 	void			Push						( bool value );
 	void			Push						( cc8* value );
@@ -106,19 +107,19 @@ public:
 	void			Push						( u16 value );
 	void			Push						( u32 value );
 	void			Push						( u64 value );
-	
+
 	void			Push						( const ZLBox& value );
 	void			Push						( const ZLColorVec& value );
 	void			Push						( const ZLRect& value );
 	void			Push						( const ZLVec2D& value );
 	void			Push						( const ZLVec3D& value );
-	
+
 	void			Push						( lua_CFunction value );
 	void			Push						( MOAILuaObject* luaObject );
 	void			Push						( MOAILuaRef& ref );
 	void			Push						( const void* value );
 	void			Push						( void* data, size_t size );
-	
+
 	void			PushPtrUserData				( void* ptr );
 	int				PushTableItr				( int idx );
 	void			RegisterModule				( int idx, cc8* name, bool autoLoad );
@@ -130,7 +131,7 @@ public:
 	void			SetTop						( int top );
 	bool			TableItrNext				( int itr );
 	int				YieldThread					( int nResults );
-	
+
 	//----------------------------------------------------------------//
 	inline lua_State* operator -> () const {
 		return mState;
@@ -150,7 +151,7 @@ public:
 	inline operator bool () {
 		return ( this->mState != 0 );
 	}
-	
+
 	//----------------------------------------------------------------//
 	template < typename TYPE > TYPE						GetField			( int idx, int key, TYPE value );
 	template < typename TYPE > TYPE						GetField			( int idx, cc8* key, TYPE value );

@@ -8,9 +8,8 @@ package com.ziplinegames.moai;
 
 import android.app.Activity;
 
-import com.revmob.RevMob;
-import com.revmob.RevMobAdsListener;
-import com.revmob.ads.interstitial.RevMobFullscreen;
+import rm.com.android.sdk.Rm;
+import rm.com.android.sdk.RmListener;
 
 class MoaiRevMob {
 
@@ -19,26 +18,26 @@ class MoaiRevMob {
     }
 
 	private static Activity sActivity = null;
-	private static RevMob revmob;
-	private static RevMobFullscreen fullscreen;
-	private static RevMobFullscreen rewardedVideo;
 
-	private static RevMobAdsListener revmobListener = new RevMobAdsListener () {
+	private static RmListener.ShowRewardedVideo revmobListener = new RmListener.ShowRewardedVideo () {
 
 		@Override
-        public void onRevMobAdReceived () {
-            MoaiLog.i("MoaiRevMob: fullscreen ad has been cached.");
-        }
+		public void onRmRewardedVideoCompleted () {
 
-		@Override
-		public void onRevMobRewardedVideoCompleted () {
 			AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_COMPLETED.ordinal () );
 		}
 
 		@Override
-		public void onRevMobRewardedVideoLoaded () {
-			MoaiLog.i("MoaiRevMob: rewarded video has been cached.");
-		}
+		public void onRmAdDisplayed () {}
+
+		@Override
+		public void onRmAdFailed ( String message ) {}
+
+		@Override
+		public void onRmAdDismissed() {}
+
+		@Override
+		public void onRmAdClicked() {}
 	};
 
 	protected static native void AKUInvokeListener ( int eventID );
@@ -55,50 +54,50 @@ class MoaiRevMob {
 	//================================================================//
 
 	//----------------------------------------------------------------//
-	public static void cacheInterstitial () {
+	public static void cacheInterstitial ( String placementId ) {
 
-		fullscreen = revmob.createFullscreen ( sActivity, revmobListener );
+		Rm.cacheInterstitial ( placementId );
 	}
 
 	//----------------------------------------------------------------//
-	public static void cacheRewardedVideo () {
+	public static void cacheRewardedVideo ( String placementId ) {
 
-		rewardedVideo = revmob.createRewardedVideo ( sActivity, revmobListener );
+		Rm.cacheRewardedVideo ( placementId );
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean hasCachedInterstitial () {
+	public static boolean hasCachedInterstitial ( String placementId ) {
 
-		return revmob.isAdLoaded ();
+		return Rm.isInterstitialLoaded ( placementId );
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean hasCachedRewardedVideo () {
+	public static boolean hasCachedRewardedVideo ( String placementId ) {
 
-		return revmob.isRewardedVideoLoaded ();
+		return Rm.isRewardedVideoLoaded ( placementId );
 	}
 
 	//----------------------------------------------------------------//
-	public static void init () {
+	public static void init ( String appId ) {
 
-		revmob = RevMob.startWithListener ( sActivity, revmobListener );
+		Rm.init ( sActivity, appId );
 	}
 
 	//----------------------------------------------------------------//
-	public static void showInterstitial () {
+	public static void showInterstitial ( String placementId ) {
 
-		if ( revmob.isAdLoaded () ) {
+		if ( Rm.isInterstitialLoaded ( placementId ) ) {
 
-			fullscreen.show ();
+			Rm.showInterstitial ( sActivity, placementId );
 		}
 	}
 
 	//----------------------------------------------------------------//
-	public static void showRewardedVideo () {
+	public static void showRewardedVideo ( String placementId ) {
 
-		if ( revmob.isRewardedVideoLoaded () ) {
+		if ( Rm.isRewardedVideoLoaded ( placementId ) ) {
 
-			rewardedVideo.showRewardedVideo ();
+			Rm.showRewardedVideo ( sActivity, placementId, revmobListener );
 		}
 	}
 }

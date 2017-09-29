@@ -33,7 +33,7 @@ MOAIGfxState::~MOAIGfxState () {
 			since the resource was last bound. It is part of the
 			render count, not a timestamp. This may change to be
 			time-based in future releases.
- 
+
 	@in		MOAIGfxResource self
 	@out	number age
 */
@@ -53,11 +53,11 @@ int MOAIGfxResource::_getAge ( lua_State* L ) {
 			will only be released if it is renewable (i.e. has a renew
 			callback or contains all information needed to reload the
 			resources on demand).
-			
+
 			Using soft release can save an app in extreme memory
 			circumstances, but may trigger reloads of resources during
 			runtime which can significantly degrade performance.
- 
+
 	@in		MOAIGfxResource self
 	@opt	number age				Release only if the texture hasn't been used in X frames.
 	@out	boolean released		True if the texture was actually released.
@@ -123,7 +123,7 @@ bool MOAIGfxResource::DoCPUAffirm () {
 	}
 
 	u32 loadingPolicy = this->GetLoadingPolicy ();
-	
+
 	// if we're deferring both CPU and GPU, bail
 	if ( loadingPolicy == LOADING_POLICY_CPU_GPU_BIND ) return true;
 
@@ -131,34 +131,34 @@ bool MOAIGfxResource::DoCPUAffirm () {
 	if ( this->mState == STATE_NEEDS_CPU_CREATE ) {
 		this->mState = this->OnCPUCreate () ? STATE_NEEDS_GPU_CREATE : STATE_ERROR;
 	}
-	
+
 	// turns out we want to do the GPU piece ASAP as well
 	if ( this->mState == STATE_NEEDS_GPU_CREATE ) {
-	
+
 		if ( loadingPolicy == LOADING_POLICY_CPU_ASAP_GPU_NEXT ) {
-	
+
 			MOAIGfxResourceMgr::Get ().ScheduleGPUAffirm ( *this );
 		}
 		else if ( loadingPolicy == LOADING_POLICY_CPU_GPU_ASAP ) {
-		
+
 			#if MOAI_USE_GFX_THREAD
-			
+
 				MOAIGfxResourceMgr::Get ().ScheduleGPUAffirm ( *this );
-			
+
 			#else
-			
+
 				zglBegin ();
 				this->mState = this->OnGPUCreate () ? STATE_READY_TO_BIND : STATE_ERROR;
 				if ( this->mState == STATE_READY_TO_BIND ) {
 					this->OnCPUDestroy ();
 				}
 				zglEnd ();
-			
+
 			#endif
-		
+
 		}
 	}
-	
+
 	return this->mState != STATE_ERROR;
 }
 
@@ -181,6 +181,14 @@ bool MOAIGfxResource::DoGPUAffirm () {
 		}
 	}
 	return this->mState == STATE_READY_TO_BIND;
+}
+
+//----------------------------------------------------------------//
+void MOAIGfxResource::ForceCPUCreate () {
+
+	if ( this->mState == STATE_NEEDS_CPU_CREATE ) {
+		this->mState = this->OnCPUCreate () ? STATE_NEEDS_GPU_CREATE : STATE_ERROR;
+	}
 }
 
 //----------------------------------------------------------------//
@@ -227,7 +235,7 @@ MOAIGfxResource::MOAIGfxResource () :
 	RTTI_SINGLE ( MOAIGfxState )
 
 	this->mLink.Data ( this );
-	
+
 	MOAIGfxResourceMgr::Get ().InsertGfxResource ( *this );
 }
 
@@ -243,7 +251,7 @@ MOAIGfxResource::~MOAIGfxResource () {
 //----------------------------------------------------------------//
 void MOAIGfxResource::RegisterLuaClass ( MOAILuaState& state ) {
 	UNUSED ( state );
-	
+
 	state.SetField ( -1, "LOADING_POLICY_NONE",					( u32 )LOADING_POLICY_NONE );
 	state.SetField ( -1, "LOADING_POLICY_CPU_GPU_ASAP",			( u32 )LOADING_POLICY_CPU_GPU_ASAP );
 	state.SetField ( -1, "LOADING_POLICY_CPU_ASAP_GPU_NEXT",	( u32 )LOADING_POLICY_CPU_ASAP_GPU_NEXT );

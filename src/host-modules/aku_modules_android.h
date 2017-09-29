@@ -19,6 +19,10 @@
 	#include <moai-android-amazonads/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_APPLOVIN
+	#include <moai-android-applovin/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_CHARTBOOST
 	#include <moai-android-chartboost/host.h>
 #endif

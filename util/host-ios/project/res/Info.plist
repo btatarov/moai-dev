@@ -52,6 +52,7 @@
 	<true/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>fb</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
@@ -87,5 +88,15 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Adding events</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Taking selfies</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Taking selfies</string>
+	<key>NSMotionUsageDescription </key>
+	<string>Interactive ad controls</string>
+	<key>AppLovinSdkKey</key>
+	<string>@APPLOVIN_SDK_KEY@</string>
 </dict>
 </plist>

@@ -129,7 +129,6 @@ private:
 	void					FindLuaRefs				( lua_State* L, FILE* file, cc8* trackingGroup, MOAILuaTraversalState& traversalState );
 	void					FindLuaRefs				( lua_State* L, FILE* file, STLString path, cc8* trackingGroup, MOAILuaTraversalState& traversalState );
 	void					FindLuaRefs				( lua_State* L, int idx, FILE* file, STLString path, cc8* trackingGroup, MOAILuaTraversalState& traversalState );
-	int						GetRef					( MOAILuaState& state, int idx, u32 type );
 	static bool				IsLuaIdentifier			( const char *str );
 	int						MakeStrong				( int refID );
 	int						MakeWeak				( int refID );
@@ -166,6 +165,7 @@ public:
 	void					ForceGarbageCollection		();
 	size_t					GetMemoryUsage				();
 	MOAILuaState&			GetMainState				();
+	int						GetRef						( MOAILuaState& state, int idx, u32 type );
 	bool					IsMainThread				( lua_State* L );
 	bool					IsOpen						();
 	void					LoadLibs					();

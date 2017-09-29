@@ -18,33 +18,34 @@ layer:insertProp ( prop )
 
 prop:moveRot ( 720, 2.0 )
 
-appId        = '< YOUR APP ID >'
-adcolonyZone = '< YOUR ADOCLONY ZONE >'
-
--- wait 10 seconds between interactions
+-- wait 15 seconds between interactions
 local thread = MOAICoroutine.new ()
 thread:run( function ()
     local delay_timer = MOAITimer:new ()
     delay_timer:setSpan ( 10 )
 
-    MOAICoroutine.blockOnAction ( delay_timer:start () )
-    coroutine:yield ()
-
     MOAIAdColonyAndroid.setListener (
-        MOAIAdColonyAndroid.VIDEO_SHOWN,
+        MOAIAdColonyAndroid.REWARDED_VIDEO_COMPLETED,
         function ()
             print ( "Rewarded video successfully completed." )
         end
     )
 
-    MOAIAdColonyAndroid.init ( appId, "version:1.0,store:google", { adcolonyZone } )
+    local AMAZON_STORE = false
+    local ZONE_ID = '< YOUR ZONE ID >'
+    MOAIAdColonyAndroid.init ( '< YOUR PUBLISHER ID >', AMAZON_STORE, { ZONE_ID } )
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 
-    if MOAIAdColonyAndroid.videoReadyForZone ( adcolonyZone ) then
+    MOAIAdColonyAndroid.cacheRewardedVideo ( ZONE_ID )
+
+    MOAICoroutine.blockOnAction ( delay_timer:start () )
+    coroutine:yield ()
+
+    if MOAIAdColonyAndroid.hasCachedRewardedVideo () then
     	print ( "Showing AdColony rewarded video." )
-        MOAIAdColonyAndroid.playVideo ( adcolonyZone, false, true )
+        MOAIAdColonyAndroid.showRewardedVideo ()
     else
     	print ( "There is no cached rewarded video." )
     end

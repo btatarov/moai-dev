@@ -30,7 +30,7 @@ public:
 			this->mRef = MOAILuaRuntime::Get ().GetRef ( state, -1, false );
 		}
 	}
-	
+
 	//----------------------------------------------------------------//
 	~MOAILuaLocal () {
 		if ( MOAILuaRuntime::IsValid ()) {

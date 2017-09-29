@@ -25,7 +25,7 @@
 */
 int MOAIImageTexture::_updateRegion ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIImageTexture, "U" )
-	
+
 	if ( state.GetTop () > 1 ) {
 		ZLIntRect rect = state.GetRect < int >( 2 );
 		self->UpdateRegion ( rect );
@@ -43,7 +43,7 @@ int MOAIImageTexture::_updateRegion ( lua_State* L ) {
 //----------------------------------------------------------------//
 MOAIImageTexture::MOAIImageTexture () :
 	mStatus ( INVALID ) {
-	
+
 	RTTI_BEGIN
 		RTTI_EXTEND ( MOAITextureBase )
 		RTTI_EXTEND ( MOAIImage )
@@ -76,13 +76,13 @@ bool MOAIImageTexture::OnGPUCreate () {
 void MOAIImageTexture::OnImageStatusChanged	( bool isOK ) {
 
 	if ( isOK ) {
-		this->DoCPUAffirm ();
+		this->FinishInit ();
 	}
 }
 
 //----------------------------------------------------------------//
 void MOAIImageTexture::RegisterLuaClass ( MOAILuaState& state ) {
-	
+
 	MOAITextureBase::RegisterLuaClass ( state );
 	MOAIImage::RegisterLuaClass ( state );
 }
@@ -92,7 +92,7 @@ void MOAIImageTexture::RegisterLuaFuncs ( MOAILuaState& state ) {
 
 	MOAITextureBase::RegisterLuaFuncs ( state );
 	MOAIImage::RegisterLuaFuncs ( state );
-	
+
 	luaL_Reg regTable [] = {
 		{ "invalidate",					_updateRegion }, // TODO: deprecate
 		{ "updateRegion",				_updateRegion },
@@ -114,17 +114,17 @@ void MOAIImageTexture::SerializeOut ( MOAILuaState& state, MOAISerializer& seria
 
 //----------------------------------------------------------------//
 void MOAIImageTexture::UpdateRegion () {
-	
+
 	this->mRegion = this->GetRect ();
 	this->mStatus = INVALID;
 }
 
 //----------------------------------------------------------------//
 void MOAIImageTexture::UpdateRegion ( ZLIntRect rect ) {
-	
+
 	rect.Bless ();
 	this->GetRect ().Clip ( rect );
-	
+
 	if ( this->mStatus == VALID ) {
 		this->mRegion = rect;
 	}

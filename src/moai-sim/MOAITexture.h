@@ -23,10 +23,11 @@ private:
 	// for loading from file
 	STLString			mFilename;
 	u32					mTransform;
-	
+
 	// for loading from image
 	MOAILuaSharedPtr < MOAIImage> mImage;
-	
+	bool				mAutoClearImage;
+
 	// for loading compressed data
 	void*				mTextureData;
 	size_t				mTextureDataSize;
@@ -42,11 +43,11 @@ private:
 	bool				OnGPUCreate					();
 
 public:
-	
+
 	DECL_LUA_FACTORY ( MOAITexture )
-	
+
 	static const u32 DEFAULT_TRANSFORM = MOAIImageTransform::TRUECOLOR | MOAIImageTransform::PREMULTIPLY_ALPHA;
-	
+
 	//----------------------------------------------------------------//
 	static MOAIGfxState*	AffirmTexture			( MOAILuaState& state, int idx );
 	void					Clear					();

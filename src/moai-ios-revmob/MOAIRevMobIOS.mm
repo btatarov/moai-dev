@@ -12,59 +12,10 @@
 
 //----------------------------------------------------------------//
 int MOAIRevMobIOS::_cacheBanner ( lua_State* L ) {
-	
-	MOAILuaState state ( L );
-	
-	MOAIRevMobIOS::Get ().mBanner = [[RevMobAds session] bannerView ];
 
-	[ MOAIRevMobIOS::Get ().mBanner
-		loadWithSuccessHandler:^( RevMobBannerView* bannerView )  {
-			
-			// Sizes taken from RevMobAds.h
-			CGFloat ratio;
-			if ( UI_USER_INTERFACE_IDIOM () == UIUserInterfaceIdiomPad ) {
-				
-				ratio = 114.0 / 768.0;
-			} else {
-				
-				ratio = 50.0 / 320.0;
-			}
-			
-			MoaiRevMobContainerView* container = MOAIRevMobIOS::Get ().mContainerView;
-			CGRect viewFrame = container.frame;
-			CGRect bannerFrame = CGRectMake ( 0, 0, viewFrame.size.width, viewFrame.size.width * ratio );
-			
-			CGRect screenRect = [[ UIScreen mainScreen ] bounds ];
-			CGFloat scale = [[ UIScreen mainScreen ] scale ];
-			CGFloat screenHeight = screenRect.size.height;
-			
-			if ( container.atBottom ) {
-				
-				viewFrame.origin.y = screenHeight - bannerFrame.size.height - container.margin / scale;
-			} else {
-				
-				viewFrame.origin.y = container.margin / scale;
-			}
-			
-			bannerView.hidden = YES;
-			[ bannerView setFrame:bannerFrame ];
-			
-			[ container setFrame:viewFrame ];
-			[ container addSubview:bannerView ];
-			
-			MOAIRevMobIOS::Get ().mHasBanner = YES;
-		}
-	 
-		 andLoadFailHandler:^( RevMobBannerView* bannerView, NSError* error ) {
-			 
-			 UNUSED ( bannerView );
-			 UNUSED ( error );
-		 }
-		onClickHandler:^( RevMobBannerView* bannerView ) {
-			
-			UNUSED ( bannerView );
-		}
-	];
+	MOAILuaState state ( L );
+
+	[ Revmob cacheBanner ];
 
 	return 0;
 }
@@ -73,10 +24,8 @@ int MOAIRevMobIOS::_cacheBanner ( lua_State* L ) {
 int MOAIRevMobIOS::_cacheInterstitial ( lua_State* L ) {
 
 	MOAILuaState state ( L );
-	
-	MOAIRevMobIOS::Get ().mInterstitial = [ [ RevMobAds session ] fullscreen ];
-	MOAIRevMobIOS::Get ().mInterstitial.delegate = MOAIRevMobIOS::Get ().mInterstitialDelegate;
-	[ MOAIRevMobIOS::Get ().mInterstitial loadAd ];
+
+	[ Revmob cacheInterstitial ];
 
 	return 0;
 }
@@ -85,10 +34,8 @@ int MOAIRevMobIOS::_cacheInterstitial ( lua_State* L ) {
 int MOAIRevMobIOS::_cacheRewardedVideo ( lua_State* L ) {
 
 	MOAILuaState state ( L );
-	
-	MOAIRevMobIOS::Get ().mRewardedVideo = [ [ RevMobAds session ] fullscreen ];
-	MOAIRevMobIOS::Get ().mRewardedVideo.delegate = MOAIRevMobIOS::Get ().mRewardedVideoDelegate;
-	[ MOAIRevMobIOS::Get ().mRewardedVideo loadRewardedVideo ];
+
+	[ Revmob cacheRewardedVideo ];
 
 	return 0;
 }
@@ -108,7 +55,7 @@ int MOAIRevMobIOS::_hasCachedInterstitial ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
-	lua_pushboolean ( state, MOAIRevMobIOS::Get ().mHasInterstitial );
+	lua_pushboolean ( state, [ Revmob hasAdCachedOnAdUnit:RMInterstitial withPlacement:nil ] );
 
 	return 1;
 }
@@ -118,7 +65,7 @@ int MOAIRevMobIOS::_hasCachedRewardedVideo ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
-	lua_pushboolean ( state, MOAIRevMobIOS::Get ().mHasRewardedVideo );
+	lua_pushboolean ( state, [ Revmob hasAdCachedOnAdUnit:RMRewardedVideo withPlacement:nil ] );
 
 	return 1;
 }
@@ -127,9 +74,9 @@ int MOAIRevMobIOS::_hasCachedRewardedVideo ( lua_State* L ) {
 int MOAIRevMobIOS::_hideBanner ( lua_State* L ) {
 
 	MOAILuaState state ( L );
-	
-	MOAIRevMobIOS::Get ().mBanner.hidden = YES;
-	[ MOAIRevMobIOS::Get ().mBanner removeFromSuperview ];
+
+	// MOAIRevMobIOS::Get ().mBannerView.hidden = YES;
+	[ MOAIRevMobIOS::Get ().mBannerView removeFromSuperview ];
 
 	return 0;
 }
@@ -140,53 +87,49 @@ int MOAIRevMobIOS::_init ( lua_State* L ) {
 	MOAILuaState state ( L );
 
 	cc8* appID = lua_tostring ( state, 1 );
-	
-	[ RevMobAds
-		startSessionWithAppID:[ NSString stringWithUTF8String:appID ]
-		withSuccessHandler:^{
-		   
-			MOAIRevMobIOS::Get ().InvokeListener ( MOAIRevMobIOS::REVMOB_ADS_INITALIZED );
-		}
-		andFailHandler:^( NSError* error ) {
-			
-			UNUSED ( error );
-			
-			MOAIRevMobIOS::Get ().InvokeListener ( MOAIRevMobIOS::REVMOB_ADS_FAILED );
-		}
-	 ];
+
+	[ Revmob initWithAppId:[ NSString stringWithUTF8String:appID ] ];
+	[ Revmob setDelegate:MOAIRevMobIOS::Get ().mRevMobDelegate ];
 
 	return 0;
 }
 
 //----------------------------------------------------------------//
 int MOAIRevMobIOS::_initBannerWithParams ( lua_State* L ) {
-	
+
 	MOAILuaState state ( L );
-	
-	u32		margin		= lua_tonumber ( state, 1 );
-	u32		bannerWidth	= lua_tonumber ( state, 2 );
-	BOOL	atBottom	= lua_toboolean ( state, 3 );
-	
+
+	u32		margin			= lua_tonumber ( state, 1 );
+	u32		bannerWidth		= lua_tonumber ( state, 2 );
+	u32		bannerHeight 	= lua_tonumber ( state, 3 );
+	BOOL	atBottom		= lua_toboolean ( state, 4 );
+
 	// root view controller
 	UIWindow* window = [ [ UIApplication sharedApplication ] keyWindow ];
 	UIViewController* rootVC = [ window rootViewController ];
-	
+
 	// wrapper bounds
 	CGRect screenRect	= [ [ UIScreen mainScreen ] bounds ];
 	CGFloat scale		= [ [ UIScreen mainScreen ] scale ];
-	
+
 	if ( bannerWidth < 1 ) bannerWidth = screenRect.size.width * scale;
-	
+	if ( bannerHeight < 1 ) bannerHeight = bannerWidth / 3;
+
 	CGFloat left_margin = ( screenRect.size.width - bannerWidth / scale );
-	
-	CGRect containerRect = CGRectMake ( left_margin, margin / scale, screenRect.size.width - left_margin * 2, screenRect.size.height - margin / scale * 2 );
-	
+
+	CGFloat top_margin;
+	if ( atBottom ) {
+		top_margin = screenRect.size.height - bannerHeight / scale - margin / scale;
+	} else {
+		top_margin = margin / scale;
+	}
+
+	CGRect containerRect = CGRectMake ( left_margin, top_margin, screenRect.size.width - left_margin * 2, bannerHeight / scale );
+
 	MoaiRevMobContainerView* container = [ MOAIRevMobIOS::Get ().mContainerView initWithFrame:containerRect ];
-	
-	container.atBottom = atBottom;
-	container.margin = margin;
+
 	[ rootVC.view addSubview:container ];
-	
+
 	return 0;
 }
 
@@ -197,8 +140,8 @@ int MOAIRevMobIOS::_showBanner ( lua_State* L ) {
 
 	if ( MOAIRevMobIOS::Get ().mHasBanner ) {
 
+		MOAIRevMobIOS::Get ().mBannerView.hidden = NO;
 		MOAIRevMobIOS::Get ().mHasBanner = NO;
-		MOAIRevMobIOS::Get ().mBanner.hidden = NO;
 	}
 
 	return 0;
@@ -209,10 +152,9 @@ int MOAIRevMobIOS::_showInterstitial ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
-	if ( MOAIRevMobIOS::Get ().mHasInterstitial ) {
-		
-		MOAIRevMobIOS::Get ().mHasInterstitial = NO;
-		[ MOAIRevMobIOS::Get ().mInterstitial showAd ];
+	if ( [ Revmob hasAdCachedOnAdUnit:RMInterstitial withPlacement:nil ] ) {
+
+		[ Revmob showInterstitial ];
 	}
 
 	return 0;
@@ -223,10 +165,9 @@ int MOAIRevMobIOS::_showRewardedVideo ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
-	if ( MOAIRevMobIOS::Get ().mHasRewardedVideo ) {
-		
-		MOAIRevMobIOS::Get ().mHasRewardedVideo = NO;
-		[ MOAIRevMobIOS::Get ().mRewardedVideo showRewardedVideo ];
+	if ( [ Revmob hasAdCachedOnAdUnit:RMRewardedVideo withPlacement:nil ] ) {
+
+		[ Revmob showRewardedVideo ];
 	}
 
 	return 0;
@@ -242,26 +183,19 @@ MOAIRevMobIOS::MOAIRevMobIOS () {
 	RTTI_SINGLE ( MOAILuaObject )
 
 	mContainerView = [ MoaiRevMobContainerView alloc ];
-	mInterstitialDelegate = [[ MoaiRevMobDelegate alloc ] init ];
-	mRewardedVideoDelegate = [[ MoaiRevMobDelegate alloc ] init ];
-	
-	mInterstitialDelegate.adType = FULLSCREEN_INTERSTITIAL;
-	mRewardedVideoDelegate.adType = FULLSCREEN_REWARDED_VIDEO;
+	mRevMobDelegate = [[ MoaiRevMobDelegate alloc ] init ];
 }
 
 //----------------------------------------------------------------//
 MOAIRevMobIOS::~MOAIRevMobIOS () {
 
 	[ mContainerView release ];
-	[ mInterstitialDelegate release ];
-	[ mRewardedVideoDelegate release ];
+	[ mRevMobDelegate release ];
 }
 
 //----------------------------------------------------------------//
 void MOAIRevMobIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "REVMOB_ADS_INITALIZED",		( u32 )REVMOB_ADS_INITALIZED );
-	state.SetField ( -1, "REVMOB_ADS_FAILED",			( u32 )REVMOB_ADS_FAILED );
 	state.SetField ( -1, "REWARDED_VIDEO_COMPLETED", 	( u32 )REWARDED_VIDEO_COMPLETED );
 
 	luaL_Reg regTable [] = {
@@ -299,30 +233,28 @@ void MOAIRevMobIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
 	//================================================================//
 	#pragma mark -
-	#pragma mark Protocol RevMobAdsDelegate
+	#pragma mark Protocol RevMobDelegate
 	//================================================================//
 
 	//----------------------------------------------------------------//
-	- ( void )revmobAdDidReceive {
-		
-		if ( self.adType == MOAIRevMobIOS::Get ().FULLSCREEN_INTERSTITIAL ) {
-			
-			MOAIRevMobIOS::Get ().mHasInterstitial = YES;
+	- (void)revmobDidCacheAd:(RMAdUnits)adUnit withPlacement:(NSString *)placement {
+		if ( adUnit == RMBanner ) {
+
+			MOAIRevMobIOS::Get ().mHasBanner = YES;
+
+			MoaiRevMobContainerView* container = MOAIRevMobIOS::Get ().mContainerView;
+
+			MOAIRevMobIOS::Get ().mBannerView = [ Revmob getBanner ];
+			[ MOAIRevMobIOS::Get ().mBannerView setFrame:CGRectMake ( 0, 0, container.bounds.size.width, container.bounds.size.height ) ];
+			MOAIRevMobIOS::Get ().mBannerView.hidden = YES;
+
+			[ container addSubview:MOAIRevMobIOS::Get ().mBannerView ];
 		}
 	}
 
 	//----------------------------------------------------------------//
-	- ( void )revmobRewardedVideoDidLoad {
-		
-		if ( self.adType == MOAIRevMobIOS::Get ().FULLSCREEN_REWARDED_VIDEO ) {
-			
-			MOAIRevMobIOS::Get ().mHasRewardedVideo = YES;
-		}
-	}
+	- ( void )revmobRewardedVideoActionDidCompleteOnPlacement:(NSString *)placement {
 
-	//----------------------------------------------------------------//
-	- ( void )revmobRewardedVideoDidFinish {
-		
 		MOAIRevMobIOS::Get ().InvokeListener ( MOAIRevMobIOS::REWARDED_VIDEO_COMPLETED );
 	}
 

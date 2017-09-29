@@ -10,7 +10,7 @@
 #include <moai-core/headers.h>
 #include <moai-ios/MOAILucidViewIOS.h>
 
-#import <RevMobAds/RevMobAds.h>
+#import <RevMob/RevMob.h>
 
 @class MoaiRevMobContainerView;
 @class MoaiRevMobDelegate;
@@ -21,13 +21,8 @@
 class MOAIRevMobIOS :
 	public MOAIGlobalClass < MOAIRevMobIOS, MOAIGlobalEventSource > {
 private:
-		
-	RevMobBannerView*			mBanner;
-	MoaiRevMobContainerView*	mContainerView;
-	RevMobFullscreen*			mInterstitial;
-	MoaiRevMobDelegate*			mInterstitialDelegate;
-	RevMobFullscreen*			mRewardedVideo;
-	MoaiRevMobDelegate*			mRewardedVideoDelegate;
+
+	MoaiRevMobDelegate*			mRevMobDelegate;
 
 	//----------------------------------------------------------------//
 	static int		_cacheBanner					( lua_State* L );
@@ -46,22 +41,15 @@ private:
 public:
 
 	DECL_LUA_SINGLETON ( MOAIRevMobIOS );
-		
+
 	enum {
-		FULLSCREEN_INTERSTITIAL,
-		FULLSCREEN_REWARDED_VIDEO
-	};
-		
-	enum {
-		REVMOB_ADS_INITALIZED,
-		REVMOB_ADS_FAILED,
 		REWARDED_VIDEO_COMPLETED,
 		TOTAL
 	};
-		
-	BOOL mHasBanner = NO;
-	BOOL mHasInterstitial = NO;
-	BOOL mHasRewardedVideo = NO;
+
+	RMBannerView*				mBannerView;
+	MoaiRevMobContainerView*	mContainerView;
+	BOOL 						mHasBanner = NO;
 
 	//----------------------------------------------------------------//
 					MOAIRevMobIOS					();
@@ -73,24 +61,19 @@ public:
 // MoaiRevMobContainerView
 //================================================================//
 @interface MoaiRevMobContainerView : MOAILucidViewIOS {
-	
+
 	@private
 }
-
-@property BOOL atBottom;
-@property u32 margin;
 
 @end
 
 //================================================================//
 // MoaiRevMobDelegate
 //================================================================//
-@interface MoaiRevMobDelegate : NSObject < RevMobAdsDelegate > {
-	
+@interface MoaiRevMobDelegate : NSObject < RevmobDelegate > {
+
 	@private
 }
-
-@property u32 adType;
 
 @end
 

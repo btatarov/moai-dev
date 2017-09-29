@@ -25,6 +25,10 @@ void AKUModulesIosAppFinalize () {
 		AKUIosAdMobAppFinalize ();
 	#endif
 
+	#if AKU_WITH_IOS_APPLOVIN
+		AKUIosAppLovinAppFinalize ();
+	#endif
+
 	#if AKU_WITH_IOS_BILLING
 		AKUIosBillingAppFinalize ();
 	#endif
@@ -105,6 +109,10 @@ void AKUModulesIosAppInitialize () {
 		AKUIosAdMobAppInitialize ();
 	#endif
 
+	#if AKU_WITH_IOS_APPLOVIN
+		AKUIosAppLovinAppInitialize ();
+	#endif
+
 	#if AKU_WITH_IOS_BILLING
 		AKUIosBillingAppInitialize ();
 	#endif
@@ -172,9 +180,9 @@ void AKUModulesIosAppInitialize () {
 
 //----------------------------------------------------------------//
 BOOL AKUModulesIosApplicationDidFinishLaunchingWithOptions ( UIApplication* application, NSDictionary* launchOptions ) {
-    
+
     BOOL status = YES;
-    
+
 #ifdef AKU_WITH_IOS_FACEBOOK
     status = [ [ FBSDKApplicationDelegate sharedInstance ] application:application
                                 didFinishLaunchingWithOptions:launchOptions ];
@@ -184,7 +192,7 @@ BOOL AKUModulesIosApplicationDidFinishLaunchingWithOptions ( UIApplication* appl
 
 //----------------------------------------------------------------//
 BOOL AKUModulesIosApplicationOpenURL ( UIApplication* application,  NSURL* url, NSString* sourceApplication, id annotation ) {
-    
+
 #ifdef AKU_WITH_IOS_FACEBOOK
     return [ [ FBSDKApplicationDelegate sharedInstance ] application:application
                                                              openURL:url
@@ -192,7 +200,7 @@ BOOL AKUModulesIosApplicationOpenURL ( UIApplication* application,  NSURL* url, 
                                                           annotation:annotation
             ];
 #endif
-    
+
     return NO;
 }
 
@@ -209,6 +217,10 @@ void AKUModulesIosContextInitialize () {
 
 	#if AKU_WITH_IOS_ADMOB
 		AKUIosAdMobContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_APPLOVIN
+		AKUIosAppLovinContextInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_BILLING

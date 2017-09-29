@@ -28,25 +28,36 @@ thread:run( function ()
     coroutine:yield ()
 
     MOAIRevMobAndroid.setListener (
-        MOAIRevMobAndroid.REWARDEDVIDEOAD_COMPLETED,
+        MOAIRevMobAndroid.REWARDED_VIDEO_COMPLETED,
         function ()
             print ( "Rewarded video successfully completed." )
         end
     )
 
-    MOAIRevMobAndroid.init ()
+    MOAIRevMobAndroid.init ( '< YOUR APP ID >' )
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 
-    MOAIRevMobAndroid.cacheRewardedVideo ()
+    MOAIRevMobAndroid.cacheInterstitial ( '< YOUR PLACEMENT ID >' )
+    MOAIRevMobAndroid.cacheRewardedVideo ( '< YOUR PLACEMENT ID >' )
 
     MOAICoroutine.blockOnAction ( delay_timer:start () )
     coroutine:yield ()
 
-    if MOAIRevMobAndroid.hasCachedRewardedVideo () then
+    if MOAIRevMobAndroid.hasCachedInterstitial ( '< YOUR PLACEMENT ID >' ) then
+    	print ( "Showing RevMob interstitial." )
+        MOAIRevMobAndroid.showInterstitial ( '< YOUR PLACEMENT ID >' )
+    else
+    	print ( "There is no cached interstitial." )
+    end
+
+    MOAICoroutine.blockOnAction ( delay_timer:start () )
+    coroutine:yield ()
+
+    if MOAIRevMobAndroid.hasCachedRewardedVideo ( '< YOUR PLACEMENT ID >' ) then
     	print ( "Showing RevMob rewarded video." )
-        MOAIRevMobAndroid.showRewardedVideo ()
+        MOAIRevMobAndroid.showRewardedVideo ( '< YOUR PLACEMENT ID >' )
     else
     	print ( "There is no cached rewarded video." )
     end
