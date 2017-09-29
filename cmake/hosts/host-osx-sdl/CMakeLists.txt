@@ -72,8 +72,8 @@ set_target_properties ( moai PROPERTIES
     if( ${FRAMEWORK_${fwname}} STREQUAL FRAMEWORK_${fwname}-NOTFOUND)
         MESSAGE(ERROR ": Framework ${fwname} not found")
     else()
-        TARGET_LINK_LIBRARIES(${appname} "${FRAMEWORK_${fwname}}/${fwname}")
-        MESSAGE(STATUS "Framework ${fwname} found at ${FRAMEWORK_${fwname}.tbd}")
+        TARGET_LINK_LIBRARIES(${appname} "${FRAMEWORK_${fwname}}/${fwname}.tbd")
+        MESSAGE(STATUS "Framework ${fwname} found at ${FRAMEWORK_${fwname}}")
     endif()
   endmacro(ADD_FRAMEWORK)
 
