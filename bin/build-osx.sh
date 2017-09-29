@@ -25,7 +25,7 @@ moai_root=$(pwd)
 # HACK: get fmod lib from Vavius' branch
 mkdir -p $moai_root/3rdparty/fmod/lib/osx/
 pushd $moai_root/3rdparty/fmod/lib/osx/
-#wget --quiet https://github.com/Vavius/moai-fmod-studio/raw/master/fmod/lib/osx/libfmod.dylib
+wget --quiet https://github.com/Vavius/moai-fmod-studio/raw/master/fmod/lib/osx/libfmod.dylib
 popd
 
 if ! [ -d "build" ]
