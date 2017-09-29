@@ -28,9 +28,11 @@
 #include <limits.h>
 #endif
 
-#if !defined(MOAI_OS_LINUX)
+#ifdef MOAI_OS_OSX
     #include <OpenGL/gl.h>
     #include <OpenGL/glext.h>
+#else
+    #include <GL/glew.h>
 #endif
 
 #define UNUSED(p) (( void )p)
