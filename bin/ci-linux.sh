@@ -12,6 +12,7 @@ git config --global user.name "Travis Job"
 git fetch origin travis-osx:travis-osx
 git checkout travis-osx
 git merge -m 'Get latest changes from postmorph branch' postmorph
+git checkout HEAD -- .travis.yml
 git push https://${GH_TOKEN}@github.com/moaiforge/moai-sdk.git travis-osx:travis-osx > /dev/null
 git checkout postmorph
 
