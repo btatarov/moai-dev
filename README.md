@@ -5,6 +5,7 @@ Forked from: [moaiforge](https://github.com/moaiforge/moai-sdk).
 Original readme: [here](https://github.com/moaiforge/moai-sdk/blob/1.6-stable/README.md).
 
 Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?branch=postmorph)](https://travis-ci.org/btatarov/moai-sdk)
+OSX Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?branch=travis-osx)](https://travis-ci.org/btatarov/moai-sdk)
 
 ## New features
 
