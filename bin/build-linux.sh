@@ -51,5 +51,3 @@ $moai_root/cmake/hosts/host-linux-sdl
 cmake --build . --target install
 
 cp $libprefix/bin/moai $moai_root/util/moai
-
-exit 0
