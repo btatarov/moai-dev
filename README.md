@@ -15,6 +15,7 @@ OSX Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?bran
 * openssl 1.0.2g
 * libpng-1.4.19 (TODO: currently only for android)
 * luajit 2.0.4
+* MOAIColor::setColorHSL
 * MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
 * TODO: move loadDual in a separate module (loader)
 * TODO: facebook setToken and graphRequest (android and ios)
