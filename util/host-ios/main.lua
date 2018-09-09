@@ -64,10 +64,6 @@ configureHost = function ()
             [ 'setWorkingDirectory%(.-%)' ] = 'setWorkingDirectory("' .. luafolder .. '")'
         },
 
-        [ output..'main64.lua' ] = {
-            [ 'setWorkingDirectory%(.-%)' ] = 'setWorkingDirectory("' .. luafolder .. '")'
-        },
-
         [ output .. 'res/Info.plist' ] = {
             [ '@BUNDLE_ID@' ] = hostconfig[ 'BUNDLE_ID' ],
             [ '@VERSION@' ] = hostconfig[ 'VERSION' ],

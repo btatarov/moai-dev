@@ -44,7 +44,7 @@ FRAMEWORKS = {
 -- WARNING: these will always be copied to your host
 -- change to EXTRA_MODULES = {} to avoid this
 EXTRA_MODULES = {
-
+    MOAI_SDK_HOME .. '3rdparty-ios/facebook-4.26.0/Bolts.framework',
     MOAI_SDK_HOME .. '3rdparty/fmod/lib/ios/libfmod_iphoneos.a',
     MOAI_SDK_HOME .. '3rdparty/fmod/lib/ios/libfmod_iphonesimulator.a',
 }
