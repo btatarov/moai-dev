@@ -121,8 +121,7 @@
 	#--------------------------------------------------------------#
 	# TWITTER
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_TWITTER=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-twitter.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_TWITTER=0
 
 	#--------------------------------------------------------------#
 	# GOOGLE_PLAY_SERVICES
@@ -159,8 +158,7 @@
 	#--------------------------------------------------------------#
 	# FACEBOOK
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_FACEBOOK=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-facebook.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_FACEBOOK=0
 
 	#--------------------------------------------------------------#
 	# SIM
@@ -236,8 +234,7 @@
 	#--------------------------------------------------------------#
 	# VUNGLE
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_VUNGLE=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-vungle.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_VUNGLE=0
 
 	#--------------------------------------------------------------#
 	# UNTZ
@@ -278,8 +275,7 @@
 	#--------------------------------------------------------------#
 	# CRITTERCISM
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_CRITTERCISM=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-crittercism.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_CRITTERCISM=0
 
 
 #================================================================#
@@ -296,7 +292,7 @@
 	LOCAL_SRC_FILES 	+= src/aku_plugins.cpp
 
 	LOCAL_SHARED_LIBRARIES := fmod
-	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-admob libmoai-applovin libmoai-chartboost libmoai-crittercism libmoai-facebook libmoai-googleplayservices libmoai-heyzap libmoai-revmob libmoai-startapp libmoai-twitter libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
+	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-admob libmoai-applovin libmoai-chartboost libmoai-googleplayservices libmoai-heyzap libmoai-revmob libmoai-startapp libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
 	LOCAL_WHOLE_STATIC_LIBRARIES := libmoai-android libmoai-sim libmoai-core libcrypto
 
 #----------------------------------------------------------------#

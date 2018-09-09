@@ -65,11 +65,7 @@
     [ mMoaiView setWorkingDirectory:[[ NSBundle mainBundle ] resourcePath ]];
 
     // run scripts
-    #ifdef __LP64__
-        [ mMoaiView run:@"main64.lua" ];
-    #else
-        [ mMoaiView run:@"main.lua" ];
-    #endif
+    [ mMoaiView run:@"main.lua" ];
 
     // check to see if the app was lanuched from a remote notification
     // these keeps the old behavior, in which we 'fall back' on remote notifications

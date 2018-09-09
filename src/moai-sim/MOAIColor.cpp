@@ -13,7 +13,7 @@
 //----------------------------------------------------------------//
 /**	@lua	getColor
 	@text	Return the color.
-	
+
 	@in		MOAIProp self
 	@out	number rDelta
 	@out	number gDelta
@@ -27,7 +27,7 @@ int MOAIColor::_getColor ( lua_State* L ) {
 	state.Push ( self->mG );
 	state.Push ( self->mB );
 	state.Push ( self->mA );
-	
+
 	return 4;
 }
 
@@ -35,7 +35,7 @@ int MOAIColor::_getColor ( lua_State* L ) {
 /**	@lua	moveColor
 	@text	Animate the color by applying a delta. Creates and returns
 			a MOAIEaseDriver initialized to apply the delta.
-	
+
 	@in		MOAIColor self
 	@in		number rDelta		Delta to be added to r.
 	@in		number gDelta		Delta to be added to g.
@@ -51,27 +51,27 @@ int MOAIColor::_moveColor ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIColor, "UNNNNN" )
 
 	float delay		= state.GetValue < float >( 6, 0.0f );
-	
+
 	if ( delay > 0.0f ) {
-	
+
 		u32 mode = state.GetValue < u32 >( 7, ZLInterpolate::kSmooth );
-		
+
 		MOAIEaseDriver* action = new MOAIEaseDriver ();
-		
+
 		action->ParseForMove ( state, 2, self, 4, mode,
 			MOAIColorAttr::Pack ( ATTR_R_COL ), 0.0f,
 			MOAIColorAttr::Pack ( ATTR_G_COL ), 0.0f,
 			MOAIColorAttr::Pack ( ATTR_B_COL ), 0.0f,
 			MOAIColorAttr::Pack ( ATTR_A_COL ), 0.0f
 		);
-		
+
 		action->SetSpan ( delay );
 		action->Start ( MOAISim::Get ().GetActionMgr (), false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
 	}
-	
+
 	if ( !state.CheckVector ( 2, 4, 0, 0 )) {
 		self->mR += state.GetValue < float >( 2, 0.0f );
 		self->mG += state.GetValue < float >( 3, 0.0f );
@@ -79,7 +79,7 @@ int MOAIColor::_moveColor ( lua_State* L ) {
 		self->mA += state.GetValue < float >( 5, 0.0f );
 		self->ScheduleUpdate ();
 	}
-	
+
 	return 0;
 }
 
@@ -88,7 +88,7 @@ int MOAIColor::_moveColor ( lua_State* L ) {
 	@text	Animate the color by applying a delta. Delta is computed
 			given a target value. Creates and returns a MOAIEaseDriver
 			initialized to apply the delta.
-	
+
 	@in		MOAIColor self
 	@in		number rGoal		Desired resulting value for r.
 	@in		number gGoal		Desired resulting value for g.
@@ -104,41 +104,41 @@ int MOAIColor::_seekColor ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIColor, "UNNNNN" )
 
 	float delay		= state.GetValue < float >( 6, 0.0f );
-	
-	
+
+
 	if ( delay > 0.0f ) {
-	
+
 		u32 mode = state.GetValue < u32 >( 7, ZLInterpolate::kSmooth );
-		
+
 		MOAIEaseDriver* action = new MOAIEaseDriver ();
-		
+
 		action->ParseForSeek ( state, 2, self, 4, mode,
 			MOAIColorAttr::Pack ( ATTR_R_COL ), self->mR, 0.0f,
 			MOAIColorAttr::Pack ( ATTR_G_COL ), self->mG, 0.0f,
 			MOAIColorAttr::Pack ( ATTR_B_COL ), self->mB, 0.0f,
 			MOAIColorAttr::Pack ( ATTR_A_COL ), self->mA, 0.0f
 		);
-		
+
 		action->SetSpan ( delay );
 		action->Start ( MOAISim::Get ().GetActionMgr (), false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
 	}
-	
+
 	ZLColorVec color = state.GetColor ( 2, 0.0f, 0.0f, 0.0f, 0.0f );
 	if ( !color.Compare ( *self )) {
 		self->Set ( color.mR, color.mG, color.mB, color.mA );
 		self->ScheduleUpdate ();
 	}
-	
+
 	return 0;
 }
 
 //----------------------------------------------------------------//
 /**	@lua	setColor
 	@text	Initialize the color.
-	
+
 	@in		MOAIColor self
 	@in		number r	Default value is 0.
 	@in		number g	Default value is 0.
@@ -164,9 +164,80 @@ int MOAIColor::_setColor ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	setColorHSL
+	@text	Initialize the color.
+
+	@in		MOAIColor self
+	@in		number h	Default value is 0.
+	@in		number s	Default value is 0.
+	@in		number l	Default value is 0.
+	@opt	number a	Default value is 1.
+	@out	nil
+*/
+int MOAIColor::_setColorHSL ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIColor, "UNNN" )
+
+	float h = state.GetValue < float >( 2, 0.0f );
+	float s = state.GetValue < float >( 3, 0.0f );
+	float l = state.GetValue < float >( 4, 0.0f );
+	float a = state.GetValue < float >( 5, 1.0f );
+
+	float v = ( l <= 0.5 ) ? ( l * ( 1.0 + s ) ) : ( l + s - l * s );
+	float r, g, b;
+	r = g = b = l;
+
+    if ( v > 0 ) {
+          float m;
+          float sv;
+          int sextant;
+          float fract, vsf, mid1, mid2;
+
+          m = l + l - v;
+          sv = ( v - m ) / v;
+          h *= 6.0;
+          sextant = ( int ) h;
+          fract = h - sextant;
+          vsf = v * sv * fract;
+          mid1 = m + vsf;
+          mid2 = v - vsf;
+
+		  switch ( sextant ) {
+                case 0:
+                    r = v; g = mid1; b = m;
+                    break;
+
+                case 1:
+                    r = mid2; g = v; b = m;
+                    break;
+
+                case 2:
+                    r = m; g = v; b = mid1;
+                    break;
+
+                case 3:
+                    r = m; g = mid2; b = v;
+                    break;
+
+                case 4:
+                    r = mid1; g = m; b = v;
+                    break;
+
+                case 5:
+                    r = v; g = m; b = mid2;
+                    break;
+          }
+    }
+
+	self->Set ( r, g, b, a );
+	self->ScheduleUpdate ();
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	setParent
 	@text	This method has been deprecated. Use MOAINode setAttrLink instead.
-	
+
 	@in		MOAIColor self
 	@opt	MOAINode parent		Default value is nil.
 	@out	nil
@@ -175,11 +246,11 @@ int MOAIColor::_setParent ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIColor, "U" )
 
 	MOAINode* parent = state.GetLuaObject < MOAINode >( 2, true );
-	
+
 	self->SetAttrLink ( PACK_ATTR ( MOAIColor, INHERIT_COLOR ), parent, PACK_ATTR ( MOAIColor, COLOR_TRAIT ));
-	
+
 	//MOAILog ( state, MOAILogMessages::MOAI_FunctionDeprecated_S, "setParent" );
-	
+
 	return 0;
 }
 
@@ -191,12 +262,12 @@ int MOAIColor::_setParent ( lua_State* L ) {
 MOAIColor* MOAIColor::AffirmColor ( MOAILuaState& state, int idx ) {
 
 	MOAIColor* color = 0;
-	
+
 	if ( state.IsType ( idx, LUA_TUSERDATA )) {
 		color = state.GetLuaObject < MOAIColor >( idx, false );
 	}
 	else {
-	
+
 		float r = state.GetValue < float >( 2, 0.0f );
 		float g = state.GetValue < float >( 3, 0.0f );
 		float b = state.GetValue < float >( 4, 0.0f );
@@ -249,11 +320,11 @@ bool MOAIColor::IsClear () {
 
 //----------------------------------------------------------------//
 MOAIColor::MOAIColor () {
-	
+
 	RTTI_BEGIN
 		RTTI_EXTEND ( MOAINode )
 	RTTI_END
-	
+
 	this->Set ( 1.0f, 1.0f, 1.0f, 1.0f );
 	this->mColor.Set ( 1.0f, 1.0f, 1.0f, 1.0f );
 }
@@ -268,12 +339,12 @@ void MOAIColor::OnDepNodeUpdate () {
 	this->mColor = *this;
 
 	ZLColorVec* color = 0;
-	
+
 	color = this->GetLinkedValue < ZLColorVec* >( MOAIColorAttr::Pack ( INHERIT_COLOR ), 0 );
 	if ( color ) {
 		this->mColor.Modulate ( *color );
 	}
-	
+
 	color = this->GetLinkedValue < ZLColorVec* >( MOAIColorAttr::Pack ( ADD_COLOR ), 0 );
 	if ( color ) {
 		this->mColor.Add ( *color );
@@ -282,14 +353,14 @@ void MOAIColor::OnDepNodeUpdate () {
 
 //----------------------------------------------------------------//
 void MOAIColor::RegisterLuaClass ( MOAILuaState& state ) {
-	
+
 	MOAINode::RegisterLuaClass ( state );
-	
+
 	state.SetField ( -1, "ATTR_R_COL", MOAIColorAttr::Pack ( ATTR_R_COL ));
 	state.SetField ( -1, "ATTR_G_COL", MOAIColorAttr::Pack ( ATTR_G_COL ));
 	state.SetField ( -1, "ATTR_B_COL", MOAIColorAttr::Pack ( ATTR_B_COL ));
 	state.SetField ( -1, "ATTR_A_COL", MOAIColorAttr::Pack ( ATTR_A_COL ));
-	
+
 	state.SetField ( -1, "ADD_COLOR", MOAIColorAttr::Pack ( ADD_COLOR ));
 	state.SetField ( -1, "INHERIT_COLOR", MOAIColorAttr::Pack ( INHERIT_COLOR ));
 	state.SetField ( -1, "COLOR_TRAIT", MOAIColorAttr::Pack ( COLOR_TRAIT ));
@@ -297,17 +368,18 @@ void MOAIColor::RegisterLuaClass ( MOAILuaState& state ) {
 
 //----------------------------------------------------------------//
 void MOAIColor::RegisterLuaFuncs ( MOAILuaState& state ) {
-	
+
 	MOAINode::RegisterLuaFuncs ( state );
-	
+
 	luaL_Reg regTable [] = {
 		{ "getColor",				_getColor },
 		{ "moveColor",				_moveColor },
 		{ "seekColor",				_seekColor },
 		{ "setColor",				_setColor },
+		{ "setColorHSL",			_setColorHSL },
 		{ "setParent",				_setParent },
 		{ NULL, NULL }
 	};
-	
+
 	luaL_register ( state, 0, regTable );
 }

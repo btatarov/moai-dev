@@ -184,9 +184,10 @@ BOOL AKUModulesIosApplicationDidFinishLaunchingWithOptions ( UIApplication* appl
     BOOL status = YES;
 
 #ifdef AKU_WITH_IOS_FACEBOOK
-    status = [ [ FBSDKApplicationDelegate sharedInstance ] application:application
-                                didFinishLaunchingWithOptions:launchOptions ];
+    // status = [ [ FBSDKApplicationDelegate sharedInstance ] application:application
+    //                             didFinishLaunchingWithOptions:launchOptions ];
 #endif
+
     return status;
 }
 
@@ -194,11 +195,11 @@ BOOL AKUModulesIosApplicationDidFinishLaunchingWithOptions ( UIApplication* appl
 BOOL AKUModulesIosApplicationOpenURL ( UIApplication* application,  NSURL* url, NSString* sourceApplication, id annotation ) {
 
 #ifdef AKU_WITH_IOS_FACEBOOK
-    return [ [ FBSDKApplicationDelegate sharedInstance ] application:application
-                                                             openURL:url
-                                                   sourceApplication:sourceApplication
-                                                          annotation:annotation
-            ];
+    // return [ [ FBSDKApplicationDelegate sharedInstance ] application:application
+    //                                                          openURL:url
+    //                                                sourceApplication:sourceApplication
+    //                                                       annotation:annotation
+    //         ];
 #endif
 
     return NO;

@@ -16,6 +16,9 @@
 		android:hardwareAccelerated="true"
 		android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
+		<!-- Support for superwide screens -->
+		<meta-data android:name="android.max_aspect" android:value="2.1" />
+
 		<!-- Moai -->
 		<activity
 			android:name="MoaiActivity"
