@@ -17,7 +17,7 @@ done
 
 if [ x"$clean" == xtrue ]; then
 
-    xcodebuild -configuration Release -project libmoai.xcodeproj -target libmoai-ios-all -sdk iphonesimulator clean || exit 1
+  xcodebuild -configuration Release -project libmoai.xcodeproj -target libmoai-ios-all -sdk iphonesimulator clean || exit 1
 	xcodebuild -configuration Release -project libmoai.xcodeproj -target libmoai-ios-all -sdk iphoneos clean || exit 1
 fi
 

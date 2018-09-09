@@ -16,7 +16,6 @@
 		4365CBE61CC06A7E005B8159 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4365CBE51CC06A7E005B8159 /* libz.tbd */; };
 		4365CBE81CC06D81005B8159 /* libmoai-ios-startapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4365CBE71CC06D81005B8159 /* libmoai-ios-startapp.a */; };
 		4367958D1EA650FE00CD08C7 /* libmoai-ios-applovin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4367958C1EA650FE00CD08C7 /* libmoai-ios-applovin.a */; };
-		4367C4801D275B2D00F51100 /* main64.lua in Resources */ = {isa = PBXBuildFile; fileRef = 4367C47F1D275B2D00F51100 /* main64.lua */; };
 		4367C4841D277B5200F51100 /* libmoai-ios-apple.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4367C4831D277B5200F51100 /* libmoai-ios-apple.a */; };
 		43B3098F1CBD878800DF3017 /* libmoai-ios-3rdparty-core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B3097A1CBD878800DF3017 /* libmoai-ios-3rdparty-core.a */; };
 		43B309901CBD878800DF3017 /* libmoai-ios-3rdparty-crypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B3097B1CBD878800DF3017 /* libmoai-ios-3rdparty-crypto.a */; };
@@ -93,7 +92,6 @@
 		4365CBE51CC06A7E005B8159 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		4365CBE71CC06D81005B8159 /* libmoai-ios-startapp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios-startapp.a"; path = "libmoai/libmoai-ios-startapp.a"; sourceTree = "<group>"; };
 		4367958C1EA650FE00CD08C7 /* libmoai-ios-applovin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios-applovin.a"; path = "libmoai/libmoai-ios-applovin.a"; sourceTree = "<group>"; };
-		4367C47F1D275B2D00F51100 /* main64.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main64.lua; sourceTree = SOURCE_ROOT; };
 		4367C4831D277B5200F51100 /* libmoai-ios-apple.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios-apple.a"; path = "libmoai/libmoai-ios-apple.a"; sourceTree = "<group>"; };
 		43B3097A1CBD878800DF3017 /* libmoai-ios-3rdparty-core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios-3rdparty-core.a"; path = "libmoai/libmoai-ios-3rdparty-core.a"; sourceTree = "<group>"; };
 		43B3097B1CBD878800DF3017 /* libmoai-ios-3rdparty-crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-ios-3rdparty-crypto.a"; path = "libmoai/libmoai-ios-3rdparty-crypto.a"; sourceTree = "<group>"; };
@@ -265,7 +263,6 @@
 				63CF19C21A065B5400F731F1 /* Products */,
 				4365CBE01CC0696D005B8159 /* Resources */,
 				63CF1AF81A066B7C00F731F1 /* main.lua */,
-				4367C47F1D275B2D00F51100 /* main64.lua */,
 			);
 			sourceTree = "<group>";
 		};
@@ -440,7 +437,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63CF1AF91A066B7C00F731F1 /* main.lua in Resources */,
-				4367C4801D275B2D00F51100 /* main64.lua in Resources */,
 				633667A71A3C4C100020E6BF /* Images.xcassets in Resources */,
 				4365CBE21CC06994005B8159 /* StartApp.bundle in Resources */,
 				63D01EC11A38659C0097C3E8 /* hello-moai in Resources */,
@@ -513,7 +509,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				VALID_ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 			};
 			name = Debug;
 		};
@@ -558,7 +554,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				VALID_ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 			};
 			name = Release;
 		};
@@ -569,7 +565,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = @DEVELOPMENT_TEAM@;
+				DEVELOPMENT_TEAM = "@DEVELOPMENT_TEAM@";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -588,7 +584,7 @@
 					"$(SRCROOT)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/res/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = @IOS_TARGET@;
+				IPHONEOS_DEPLOYMENT_TARGET = "@IOS_TARGET@";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -606,7 +602,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = @DEVELOPMENT_TEAM@;
+				DEVELOPMENT_TEAM = "@DEVELOPMENT_TEAM@";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -624,7 +620,7 @@
 					"$(SRCROOT)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/res/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = @IOS_TARGET@;
+				IPHONEOS_DEPLOYMENT_TARGET = "@IOS_TARGET@";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
