@@ -102,7 +102,8 @@ class MoaiStartApp {
 	//----------------------------------------------------------------//
 	public static void init ( String appId ) {
 
-		StartAppSDK.init ( sActivity, appId, true );
+		StartAppSDK.init ( sActivity, appId, false );
+		StartAppAd.disableSplash ();
 
 		rewardedVideoAd = new StartAppAd ( sActivity );
 		rewardedVideoAd.setVideoListener ( new VideoListener () {
