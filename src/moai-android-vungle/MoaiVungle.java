@@ -7,9 +7,9 @@
 package com.ziplinegames.moai;
 
 import android.app.Activity;
-
-import com.vungle.publisher.EventListener;
-import com.vungle.publisher.VunglePub;
+import com.vungle.warren.InitCallback;
+import com.vungle.warren.PlayAdCallback;
+import com.vungle.warren.Vungle;
 
 //================================================================//
 // MoaiVungle
@@ -23,9 +23,26 @@ public class MoaiVungle {
 		REWARDED_VIDEO_COMPLETED,
     }
 
-	private static final VunglePub vunglePub = VunglePub.getInstance();
-
+	private static String sPlacementId;
 	private static Activity sActivity = null;
+
+	private static PlayAdCallback vunglePlayAdCallback = new PlayAdCallback () {
+
+      @Override
+      public void onAdStart ( final String placementReferenceID ) {
+
+					AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_STARTED.ordinal () );
+      }
+
+      @Override
+      public void onAdEnd ( final String placementReferenceID, final boolean completed, final boolean isCTAClicked ) {
+
+					AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_COMPLETED.ordinal () );
+      }
+
+      @Override
+      public void onError ( final String placementReferenceID, Throwable throwable ) {}
+  };
 
 	protected static native void AKUInvokeListener ( int eventID );
 
@@ -41,16 +58,12 @@ public class MoaiVungle {
 	public static void onPause ( ) {
 
 		MoaiLog.i ( "MoaiVungle: onPause" );
-
-		vunglePub.onPause ();
 	}
 
 	//----------------------------------------------------------------//
 	public static void onResume ( ) {
 
 		MoaiLog.i ( "MoaiVungle: onResume" );
-
-		vunglePub.onResume ();
 	}
 
 	//================================================================//
@@ -58,52 +71,47 @@ public class MoaiVungle {
 	//================================================================//
 
 	//----------------------------------------------------------------//
-	public static void showRewardedVideo () {
+	public static void cacheRewardedVideo () {
 
-		if ( vunglePub.isAdPlayable () ) {
+		if ( Vungle.isInitialized () ) {
 
-			vunglePub.playAd ();
+			Vungle.loadAd ( sPlacementId, null );
 		}
 	}
 
 	//----------------------------------------------------------------//
-	public static void init ( String appId ) {
+	public static void init ( String appId, String placementId ) {
 
-		vunglePub.init ( sActivity, appId );
+		sPlacementId = placementId;
 
-		vunglePub.setEventListeners ( new EventListener () {
+		Vungle.init ( appId, sActivity.getApplicationContext (), new InitCallback () {
 
-		    @Override
-		    public void onVideoView ( boolean isCompletedView, int watchedMillis, int videoDurationMillis ) {
+			@Override
+      public void onSuccess () {}
 
-				if ( isCompletedView ) {
-					AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_COMPLETED.ordinal () );
-				}
-		    }
+			@Override
+      public void onError ( Throwable throwable ) {
 
-		    @Override
-		    public void onAdStart () {
+				MoaiLog.i ( "MoaiVungle: onError - " + throwable.getLocalizedMessage() );
+			}
 
-				AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_STARTED.ordinal () );
-		    }
-
-		    @Override
-		    public void onAdEnd ( boolean wasCallToActionClicked ) {
-
-				AKUInvokeListener ( ListenerEvent.REWARDED_VIDEO_FINISH.ordinal () );
-		    }
-
-		    @Override
-		    public void onAdPlayableChanged ( boolean isAdPlayable ) {}
-
-		    @Override
-		    public void onAdUnavailable ( String reason ) {}
+			@Override
+      public void onAutoCacheAdAvailable ( final String placementReferenceID ) {}
 		} );
 	}
 
 	//----------------------------------------------------------------//
 	public static boolean hasCachedRewardedVideo () {
 
-		return vunglePub.isAdPlayable ();
+		return ( Vungle.isInitialized () && Vungle.canPlayAd ( sPlacementId ) );
+	}
+
+	//----------------------------------------------------------------//
+	public static void showRewardedVideo () {
+
+		if ( Vungle.isInitialized () && Vungle.canPlayAd ( sPlacementId ) ) {
+
+			Vungle.playAd ( sPlacementId, null, vunglePlayAdCallback );
+		}
 	}
 }
