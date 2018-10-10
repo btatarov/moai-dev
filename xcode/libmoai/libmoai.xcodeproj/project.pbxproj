@@ -19585,6 +19585,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-3rdparty-core";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -19623,6 +19624,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-3rdparty-core";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -19804,6 +19806,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios";
 				SDKROOT = iphoneos;
 			};
@@ -19836,6 +19839,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios";
 				SDKROOT = iphoneos;
 			};
@@ -19877,6 +19881,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos9.3;
 				VALID_ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -19887,6 +19892,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos9.3;
 				VALID_ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -19897,6 +19903,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos9.3;
 				VALID_ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -19907,6 +19914,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos9.3;
 				VALID_ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -19946,6 +19954,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-applovin";
 				SDKROOT = iphoneos;
 			};
@@ -19979,6 +19988,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-applovin";
 				SDKROOT = iphoneos;
 			};
@@ -20012,6 +20022,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-applovin";
 				SDKROOT = iphoneos;
 			};
@@ -20045,6 +20056,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-applovin";
 				SDKROOT = iphoneos;
 			};
@@ -20080,6 +20092,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-studio";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -20116,6 +20129,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-studio";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -20152,6 +20166,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-studio";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -20188,6 +20203,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-studio";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -20227,6 +20243,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-revmob";
 				SDKROOT = iphoneos;
 			};
@@ -20260,6 +20277,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-revmob";
 				SDKROOT = iphoneos;
 			};
@@ -20293,6 +20311,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-revmob";
 				SDKROOT = iphoneos;
 			};
@@ -20326,6 +20345,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-revmob";
 				SDKROOT = iphoneos;
 			};
@@ -20365,6 +20385,7 @@
 				);
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
 			};
@@ -20399,6 +20420,7 @@
 				);
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
 			};
@@ -20433,6 +20455,7 @@
 				);
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
 			};
@@ -20467,6 +20490,7 @@
 				);
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
 			};
@@ -20505,6 +20529,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-startapp";
 				SDKROOT = iphoneos;
 			};
@@ -20538,6 +20563,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-startapp";
 				SDKROOT = iphoneos;
 			};
@@ -20571,6 +20597,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-startapp";
 				SDKROOT = iphoneos;
 			};
@@ -20604,6 +20631,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-startapp";
 				SDKROOT = iphoneos;
 			};
@@ -20642,6 +20670,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-admob";
 				SDKROOT = iphoneos;
 			};
@@ -20675,6 +20704,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-admob";
 				SDKROOT = iphoneos;
 			};
@@ -20708,6 +20738,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-admob";
 				SDKROOT = iphoneos;
 			};
@@ -20741,6 +20772,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-admob";
 				SDKROOT = iphoneos;
 			};
@@ -20773,6 +20805,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-sim";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -20806,6 +20839,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-sim";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -20839,6 +20873,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-sim";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -20872,6 +20907,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-sim";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21200,6 +21236,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-box2d";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21232,6 +21269,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-box2d";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21264,6 +21302,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-box2d";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21296,6 +21335,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-box2d";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21472,6 +21512,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-http-client";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21504,6 +21545,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-http-client";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21536,6 +21578,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-http-client";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21568,6 +21611,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-http-client";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21600,6 +21644,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-http-server";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21632,6 +21677,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-http-server";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21664,6 +21710,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-http-server";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21696,6 +21743,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-http-server";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -21993,6 +22041,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-zl-core";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -22004,6 +22053,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-zl-core";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -22068,6 +22118,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-untz";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -22100,6 +22151,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-untz";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -22272,6 +22324,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-apple";
 				SDKROOT = iphoneos;
 			};
@@ -22304,6 +22357,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-apple";
 				SDKROOT = iphoneos;
 			};
@@ -22336,6 +22390,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-apple";
 				SDKROOT = iphoneos;
 			};
@@ -22368,6 +22423,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-apple";
 				SDKROOT = iphoneos;
 			};
@@ -22406,6 +22462,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-adcolony";
 				SDKROOT = iphoneos;
 			};
@@ -22439,6 +22496,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-adcolony";
 				SDKROOT = iphoneos;
 			};
@@ -22472,6 +22530,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-adcolony";
 				SDKROOT = iphoneos;
 			};
@@ -22505,6 +22564,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-adcolony";
 				SDKROOT = iphoneos;
 			};
@@ -22866,6 +22926,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -22898,6 +22959,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -22930,6 +22992,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -22962,6 +23025,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -23001,6 +23065,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-mobile-app-tracker";
 				SDKROOT = iphoneos;
 			};
@@ -23034,6 +23099,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-mobile-app-tracker";
 				SDKROOT = iphoneos;
 			};
@@ -23067,6 +23133,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-mobile-app-tracker";
 				SDKROOT = iphoneos;
 			};
@@ -23100,6 +23167,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-mobile-app-tracker";
 				SDKROOT = iphoneos;
 			};
@@ -23138,6 +23206,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-urban-airship";
 				SDKROOT = iphoneos;
 			};
@@ -23171,6 +23240,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-urban-airship";
 				SDKROOT = iphoneos;
 			};
@@ -23204,6 +23274,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-urban-airship";
 				SDKROOT = iphoneos;
 			};
@@ -23237,6 +23308,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-urban-airship";
 				SDKROOT = iphoneos;
 			};
@@ -23279,6 +23351,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-ex";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -23322,6 +23395,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-ex";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -23365,6 +23439,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-ex";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -23408,6 +23483,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-ex";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -23447,6 +23523,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-crittercism";
 				SDKROOT = iphoneos;
 			};
@@ -23480,6 +23557,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-crittercism";
 				SDKROOT = iphoneos;
 			};
@@ -23513,6 +23591,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-crittercism";
 				SDKROOT = iphoneos;
 			};
@@ -23546,6 +23625,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-crittercism";
 				SDKROOT = iphoneos;
 			};
@@ -23652,6 +23732,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-flurry";
 				SDKROOT = iphoneos;
 			};
@@ -23685,6 +23766,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-flurry";
 				SDKROOT = iphoneos;
 			};
@@ -23718,6 +23800,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-flurry";
 				SDKROOT = iphoneos;
 			};
@@ -23751,6 +23834,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-flurry";
 				SDKROOT = iphoneos;
 			};
@@ -23789,6 +23873,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-kontagent";
 				SDKROOT = iphoneos;
 			};
@@ -23822,6 +23907,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-kontagent";
 				SDKROOT = iphoneos;
 			};
@@ -23855,6 +23941,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-kontagent";
 				SDKROOT = iphoneos;
 			};
@@ -23888,6 +23975,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-kontagent";
 				SDKROOT = iphoneos;
 			};
@@ -24324,6 +24412,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-audio-sampler";
 				SDKROOT = iphoneos;
 			};
@@ -24357,6 +24446,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-audio-sampler";
 				SDKROOT = iphoneos;
 			};
@@ -24390,6 +24480,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-audio-sampler";
 				SDKROOT = iphoneos;
 			};
@@ -24423,6 +24514,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-audio-sampler";
 				SDKROOT = iphoneos;
 			};
@@ -24613,6 +24705,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-billing";
 				SDKROOT = iphoneos;
 			};
@@ -24646,6 +24739,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-billing";
 				SDKROOT = iphoneos;
 			};
@@ -24679,6 +24773,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-billing";
 				SDKROOT = iphoneos;
 			};
@@ -24712,6 +24807,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-billing";
 				SDKROOT = iphoneos;
 			};
@@ -24750,6 +24846,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-chartboost";
 				SDKROOT = iphoneos;
 			};
@@ -24783,6 +24880,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-chartboost";
 				SDKROOT = iphoneos;
 			};
@@ -24816,6 +24914,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-chartboost";
 				SDKROOT = iphoneos;
 			};
@@ -24849,6 +24948,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-chartboost";
 				SDKROOT = iphoneos;
 			};
@@ -24887,6 +24987,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-facebook";
 				SDKROOT = iphoneos;
 			};
@@ -24920,6 +25021,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-facebook";
 				SDKROOT = iphoneos;
 			};
@@ -24953,6 +25055,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-facebook";
 				SDKROOT = iphoneos;
 			};
@@ -24986,6 +25089,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-facebook";
 				SDKROOT = iphoneos;
 			};
@@ -25024,6 +25128,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-gamecenter";
 				SDKROOT = iphoneos;
 			};
@@ -25057,6 +25162,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-gamecenter";
 				SDKROOT = iphoneos;
 			};
@@ -25090,6 +25196,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-gamecenter";
 				SDKROOT = iphoneos;
 			};
@@ -25123,6 +25230,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-gamecenter";
 				SDKROOT = iphoneos;
 			};
@@ -25161,6 +25269,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-tapjoy";
 				SDKROOT = iphoneos;
 			};
@@ -25194,6 +25303,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-tapjoy";
 				SDKROOT = iphoneos;
 			};
@@ -25227,6 +25337,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-tapjoy";
 				SDKROOT = iphoneos;
 			};
@@ -25260,6 +25371,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-tapjoy";
 				SDKROOT = iphoneos;
 			};
@@ -25298,6 +25410,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-vungle";
 				SDKROOT = iphoneos;
 			};
@@ -25331,6 +25444,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-vungle";
 				SDKROOT = iphoneos;
 			};
@@ -25364,6 +25478,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-vungle";
 				SDKROOT = iphoneos;
 			};
@@ -25397,6 +25512,7 @@
 					OPENSSL_NO_STORE,
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-vungle";
 				SDKROOT = iphoneos;
 			};
@@ -25407,6 +25523,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-zl-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25418,6 +25535,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-zl-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25429,6 +25547,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-zl-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25440,6 +25559,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-zl-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25472,6 +25592,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-luaext";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25504,6 +25625,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-luaext";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25612,6 +25734,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-3rdparty-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25646,6 +25769,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-3rdparty-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25680,6 +25804,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-3rdparty-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25714,6 +25839,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-3rdparty-crypto";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25752,6 +25878,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-motion";
 				SDKROOT = iphoneos;
 			};
@@ -25784,6 +25911,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-motion";
 				SDKROOT = iphoneos;
 			};
@@ -25816,6 +25944,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-motion";
 				SDKROOT = iphoneos;
 			};
@@ -25848,6 +25977,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-motion";
 				SDKROOT = iphoneos;
 			};
@@ -25883,6 +26013,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/fmoddesignerapi/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-designer";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25919,6 +26050,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/fmoddesignerapi/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-designer";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25955,6 +26087,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/fmoddesignerapi/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-designer";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -25991,6 +26124,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/fmoddesignerapi/api/inc",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-fmod-designer";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -26323,6 +26457,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-ios-zl-vfs";
 				SDKROOT = iphoneos;
@@ -26336,6 +26471,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-ios-zl-vfs";
 				SDKROOT = iphoneos;
@@ -26349,6 +26485,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-ios-zl-vfs";
 				SDKROOT = iphoneos;
@@ -26362,6 +26499,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-ios-zl-vfs";
 				SDKROOT = iphoneos;
@@ -26539,6 +26677,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios";
 				SDKROOT = iphoneos;
 			};
@@ -26576,6 +26715,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-3rdparty-core";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -26608,6 +26748,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-luaext";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -26640,6 +26781,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-untz";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -26651,6 +26793,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-zl-core";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -26978,6 +27121,7 @@
 					OPENSSL_NO_RFC3779,
 					OPENSSL_NO_STORE,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios";
 				SDKROOT = iphoneos;
 			};
@@ -27015,6 +27159,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-3rdparty-core";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -27047,6 +27192,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-luaext";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -27079,6 +27225,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-untz";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
@@ -27090,6 +27237,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "moai-ios-zl-core";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
