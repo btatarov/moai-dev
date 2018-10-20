@@ -39,7 +39,7 @@ OSX Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?bran
 * revmob-10.0.0 (interstitial and rewarded video)
 * startapp-3.6.6 (interstitial, rewarded video, return ad and exit ad)
 * twitter4j-4.0.4
-* vungle-3.3.4 (rewarded video)
+* vungle-6.3.17 (rewarded video)
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
 * no multi-dex build (via stripped google play services, see strip.sh)
 * TODO: remove support for Chartboost and Vungle

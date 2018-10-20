@@ -15,21 +15,10 @@
 //================================================================//
 
 //----------------------------------------------------------------//
-int MOAIVungleAndroid::_showRewardedVideo ( lua_State* L ) {
+int	MOAIVungleAndroid::_cacheRewardedVideo ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
 
-	self->CallStaticVoidMethod ( self->mJava_ShowRewardedVideo );
-
-	return 0;
-}
-
-//----------------------------------------------------------------//
-int	MOAIVungleAndroid::_init ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
-
-	jstring jappID = self->GetJString ( lua_tostring ( state, 1 ));
-
-	self->CallStaticVoidMethod ( self->mJava_Init, jappID );
+	self->CallStaticVoidMethod ( self->mJava_cacheRewardedVideo );
 
 	return 0;
 }
@@ -43,6 +32,27 @@ int	MOAIVungleAndroid::_hasCachedRewardedVideo ( lua_State* L ) {
 	return 1;
 }
 
+//----------------------------------------------------------------//
+int	MOAIVungleAndroid::_init ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
+
+	jstring jappID = self->GetJString ( lua_tostring ( state, 1 ));
+	jstring jplacementId = self->GetJString ( lua_tostring ( state, 2 ));
+
+	self->CallStaticVoidMethod ( self->mJava_Init, jappID, jplacementId );
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
+int MOAIVungleAndroid::_showRewardedVideo ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
+
+	self->CallStaticVoidMethod ( self->mJava_ShowRewardedVideo );
+
+	return 0;
+}
+
 //================================================================//
 // MOAIVungleAndroid
 //================================================================//
@@ -54,9 +64,10 @@ MOAIVungleAndroid::MOAIVungleAndroid () {
 
 	this->SetClass ( "com/ziplinegames/moai/MoaiVungle" );
 
-	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
+	this->mJava_cacheRewardedVideo			= this->GetStaticMethod ( "cacheRewardedVideo", "()V" );
 	this->mJava_HasCachedRewardedVideo	= this->GetStaticMethod ( "hasCachedRewardedVideo", "()Z" );
-	this->mJava_ShowRewardedVideo		= this->GetStaticMethod ( "showRewardedVideo", "()V" );
+	this->mJava_Init										= this->GetStaticMethod ( "init", "(Ljava/lang/String;Ljava/lang/String;)V" );
+	this->mJava_ShowRewardedVideo				= this->GetStaticMethod ( "showRewardedVideo", "()V" );
 }
 
 //----------------------------------------------------------------//
@@ -71,10 +82,11 @@ void MOAIVungleAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "REWARDED_VIDEO_COMPLETED", 	( u32 )REWARDED_VIDEO_COMPLETED );
 
 	luaL_Reg regTable [] = {
-		{ "showRewardedVideo",			_showRewardedVideo },
+		{ "cacheRewardedVideo",		_cacheRewardedVideo },
 		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIVungleAndroid > },
-		{ "init",						_init },
 		{ "hasCachedRewardedVideo",		_hasCachedRewardedVideo },
+		{ "init",						_init },
+		{ "showRewardedVideo",			_showRewardedVideo },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIVungleAndroid > },
 		{ NULL, NULL }
 	};

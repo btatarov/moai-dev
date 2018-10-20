@@ -15,14 +15,16 @@ class MOAIVungleAndroid :
 	public JniUtils {
 private:
 
-	jmethodID	mJava_Init;
+	jmethodID	mJava_cacheRewardedVideo;
 	jmethodID	mJava_HasCachedRewardedVideo;
+	jmethodID	mJava_Init;
 	jmethodID	mJava_ShowRewardedVideo;
 
 	//----------------------------------------------------------------//
-	static int	_showRewardedVideo			( lua_State* L );
-	static int	_init						( lua_State* L );
+	static int	_cacheRewardedVideo				( lua_State* L );
 	static int	_hasCachedRewardedVideo		( lua_State* L );
+	static int	_init											( lua_State* L );
+	static int	_showRewardedVideo				( lua_State* L );
 
 public:
 
@@ -35,7 +37,7 @@ public:
 	};
 
 	//----------------------------------------------------------------//
-			MOAIVungleAndroid		();
+			MOAIVungleAndroid			();
 			~MOAIVungleAndroid		();
 	void	RegisterLuaClass		( MOAILuaState& state );
 };

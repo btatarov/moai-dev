@@ -44,7 +44,7 @@ public class MoaiPlayServicesUtils {
                 errorString = fallbackErrorMessage;
             }
 
-            Moai.showDialog ( null, errorString, null, neutralButton, null, false );
+            MoaiLog.i ( "MoaiPlayServices error: " + errorString );
 
             return false;
         }
@@ -85,7 +85,7 @@ public class MoaiPlayServicesUtils {
                 }
         }
 
-        Moai.showDialog ( null, message, null, neutralButton, null, false );
+        MoaiLog.i ( "MoaiPlayServices result: " + message );
     }
 
 }

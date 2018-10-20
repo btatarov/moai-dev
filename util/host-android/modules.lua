@@ -103,7 +103,7 @@ MODULES = {
 	},
 
     vungle = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/vungle-3.3.4',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/vungle-6.3.17',
         src		= MOAI_SDK_HOME .. 'src/moai-android-vungle',
     },
 
