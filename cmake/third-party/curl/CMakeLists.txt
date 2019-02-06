@@ -4,7 +4,7 @@ project ( curl )
 
   set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DCURL_STATICLIB -DBUILDING_LIBCURL -DCURL_DISABLE_LDAP" )
   set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCURL_STATICLIB -DBUILDING_LIBCURL -DCURL_DISABLE_LDAP" )
-  
+
   if ( BUILD_ANDROID OR BUILD_IOS )
     set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DUSE_ARES" )
     set ( USE_ARES true )
@@ -16,20 +16,20 @@ project ( curl )
 
 
   if (BUILD_LINUX)
-      set ( CURL_INCLUDES 
-        "${MOAI_ROOT}/3rdparty/curl-7.19.7/include/" 
+      set ( CURL_INCLUDES
+        "${MOAI_ROOT}/3rdparty/curl-7.19.7/include/"
        )
       set ( RUN_CURL_CONFIGURE true )
   endif (BUILD_LINUX)
 
 
   if (BUILD_WINDOWS)
-      set ( CURL_INCLUDES 
-        "${MOAI_ROOT}/3rdparty/curl-7.19.7/include/" 
-     
+      set ( CURL_INCLUDES
+        "${MOAI_ROOT}/3rdparty/curl-7.19.7/include/"
+
       )
   endif (BUILD_WINDOWS)
-  
+
   if (BUILD_OSX)
         set ( CURL_INCLUDES
           "${MOAI_ROOT}/3rdparty/curl-7.19.7/include-osx/"
@@ -44,13 +44,13 @@ project ( curl )
 
 
   if (BUILD_ANDROID)
-    set ( CURL_INCLUDES 
-        "${MOAI_ROOT}/3rdparty/curl-7.19.7/include-android/" 
+    set ( CURL_INCLUDES
+        "${MOAI_ROOT}/3rdparty/curl-7.19.7/include-android/"
        )
   endif (BUILD_ANDROID)
 
   if (BUILD_IOS)
-    set ( CURL_INCLUDES 
+    set ( CURL_INCLUDES
         "${MOAI_ROOT}/3rdparty/curl-7.19.7/include-iphone/"
        )
   endif (BUILD_IOS)
@@ -58,26 +58,28 @@ project ( curl )
   set (CURL_HEADERS "")
   if (RUN_CURL_CONFIGURE)
 
-      
+
       set (SSL_PARAMS "--without-ssl")
+      set (SSL_DEPENDS "")
 
       if (MOAI_OPENSSL)
          get_target_property(SSLDIR ssl ARCHIVE_OUTPUT_DIRECTORY )
-         
+
          set(SSL_PARAMS "--with-ssl=$<TARGET_FILE_DIR:ssl> --with-ca-path=/etc/ssl/certs/")
+         set (SSL_DEPENDS "DEPENDS ssl")
       endif (MOAI_OPENSSL)
 
       add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/config.status"
                        COMMAND "/bin/sh"
                        "${MOAI_ROOT}/3rdparty/curl-7.19.7/configure"
                        "--no-create" "--disable-shared" "--disable-optimize" ${SSL_PARAMS} "--disable-ldap"
-                       "--without-libidn" "--without-libssh2" 
+                       "--without-libidn" "--without-libssh2"
                        "CC=${CMAKE_C_COMPILER}"
                        "CFLAGS=${CMAKE_C_FLAGS} -DZL_REPLACE_H"
-                       DEPENDS ssl
+                       ${SSL_DEPENDS}
                        WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
                       )
-      
+
 
       add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/include/curl/curlbuild.h"
                                 "${CMAKE_CURRENT_BINARY_DIR}/include/curl/curl_config.h"
@@ -87,7 +89,7 @@ project ( curl )
                        DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/config.status"
                        WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
 
-    
+
 
     set ( CURL_INCLUDES
           "${CMAKE_CURRENT_BINARY_DIR}/include/curl"
@@ -100,8 +102,8 @@ project ( curl )
 
 
   set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/3rdparty/curl-7.19.7/lib" )
-  set ( CURL_SOURCES 
-   
+  set ( CURL_SOURCES
+
     #${CMAKE_CURRENT_SOURCE_DIR}/amigaos.c
     ${CMAKE_CURRENT_SOURCE_DIR}/base64.c
     ${CMAKE_CURRENT_SOURCE_DIR}/connect.c
@@ -181,20 +183,20 @@ project ( curl )
    )
 
 
- 
+
   add_library(curl STATIC ${CURL_SOURCES} ${CURL_HEADERS})
   target_include_directories (curl PUBLIC "$<BUILD_INTERFACE:${CURL_INCLUDES}>" PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
   target_link_libraries( curl zlib )
   set_target_properties( curl PROPERTIES FOLDER Third-Party )
 
-  if (USE_ARES)  
+  if (USE_ARES)
     target_link_libraries( curl cares )
   endif (USE_ARES)
 
   if (MOAI_OPENSSL)
      target_link_libraries( curl ssl )
   endif (MOAI_OPENSSL)
- 
+
   if (BUILD_WINDOWS)
     target_link_libraries( curl ws2_32 )
   endif (BUILD_WINDOWS)
