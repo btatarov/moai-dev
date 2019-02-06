@@ -1,6 +1,6 @@
 //----------------------------------------------------------------//
-// Copyright (c) 2010-2011 Zipline Games, Inc. 
-// All Rights Reserved. 
+// Copyright (c) 2010-2011 Zipline Games, Inc.
+// All Rights Reserved.
 // http://getmoai.com
 //----------------------------------------------------------------//
 
@@ -16,6 +16,7 @@ enum {
 };
 
 // Callbacks
+typedef void ( *AKUExitAppFunc )	();
 typedef void ( *AKUEnterFullscreenModeFunc )	();
 typedef void ( *AKUExitFullscreenModeFunc )		();
 typedef void ( *AKUHideCursorFunc )				();
@@ -43,6 +44,7 @@ AKU_API void			AKUSetViewSize					( int width, int height );
 AKU_API void			AKUUpdate						();
 
 // callback management
+AKU_API void			AKUSetFunc_ExitApp				( AKUExitAppFunc func );
 AKU_API void			AKUSetFunc_EnterFullscreenMode	( AKUEnterFullscreenModeFunc func );
 AKU_API void			AKUSetFunc_ExitFullscreenMode	( AKUExitFullscreenModeFunc func );
 AKU_API void			AKUSetFunc_ShowCursor			( AKUShowCursorFunc func );

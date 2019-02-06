@@ -14,6 +14,10 @@
 #include <float.h>
 #include <contrib/edtaa3func.h>
 
+#if defined( _WIN32 )
+	#define strcasecmp(str1, str2) ( stricmp ( str1,str2 ))
+#endif
+
 //================================================================//
 // local
 //================================================================//

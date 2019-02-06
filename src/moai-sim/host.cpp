@@ -37,7 +37,7 @@ void AKUSimContextInitialize () {
 	MOAINodeMgr::Affirm ();
 	MOAISim::Affirm ();
 	MOAIRenderMgr::Affirm ();
-	
+
 	// MOAI
 	REGISTER_LUA_CLASS ( MOAIAction )
 	REGISTER_LUA_CLASS ( MOAIActionTree )
@@ -124,7 +124,7 @@ void AKUSimContextInitialize () {
 	REGISTER_LUA_CLASS ( MOAIVertexFormatMgr )
 	REGISTER_LUA_CLASS ( MOAIViewport )
 	REGISTER_LUA_CLASS ( MOAIWheelSensor )
-	
+
 	// text stuff here for now
 	REGISTER_LUA_CLASS ( MOAIBitmapFontReader )
 	REGISTER_LUA_CLASS ( MOAIDynamicGlyphCache )
@@ -133,11 +133,11 @@ void AKUSimContextInitialize () {
 	REGISTER_LUA_CLASS ( MOAITextBundle )
 	REGISTER_LUA_CLASS ( MOAITextLabel )
 	REGISTER_LUA_CLASS ( MOAITextStyle )
-	
+
 	#if MOAI_WITH_TINYXML
 		REGISTER_LUA_CLASS ( MOAIParticlePexPlugin )
 	#endif
-	
+
 	#if MOAI_WITH_FREETYPE
 		REGISTER_LUA_CLASS ( MOAIFreeTypeFontReader )
 	#endif
@@ -181,7 +181,7 @@ void AKUEnqueueKeyboardCharEvent ( int deviceID, int sensorID, int unicodeChar )
 
 //----------------------------------------------------------------//
 void AKUEnqueueKeyboardEditEvent ( int deviceID, int sensorID, char const* text, int start, int editLength, int maxLength) {
-	
+
 	MOAIKeyboardSensor::EnqueueKeyboardEditEvent ( MOAISim::Get ().GetInputMgr (), ( u8 )deviceID, ( u8 )sensorID, text, ( u32 )start, ( u32 )editLength, ( u32 )maxLength );
 }
 
@@ -284,6 +284,12 @@ void AKUReserveInputDevices ( int total ) {
 void AKUReserveInputDeviceSensors ( int deviceID, int total ) {
 
 	MOAISim::Get ().GetInputMgr ().ReserveSensors (( u8 )deviceID, ( u8 )total );
+}
+
+//----------------------------------------------------------------//
+void AKUSetFunc_ExitApp ( AKUExitAppFunc func ) {
+
+	MOAISim::Get ().SetExitAppFunc ( func );
 }
 
 //----------------------------------------------------------------//
@@ -412,7 +418,7 @@ void AKUSetOrientation ( int orientation ) {
 	MOAIGfxDevice::Get ().GetDefaultBuffer ()->SetLandscape ( orientation == AKU_ORIENTATION_LANDSCAPE );
 }
 
-//----------------------------------------------------------------//	
+//----------------------------------------------------------------//
 void AKUSetScreenDpi ( int dpi ) {
 
 	MOAIEnvironment::Get ().SetValue ( MOAI_ENV_screenDpi, dpi );
@@ -427,16 +433,16 @@ void AKUSetScreenSize ( int width, int height ) {
 
 //----------------------------------------------------------------//
 void AKUSetViewSize ( int width, int height ) {
-	
+
 	MOAIGfxDevice& device = MOAIGfxDevice::Get ();
-	
+
 	u32 currentWidth = device.GetWidth ();
 	u32 currentHeight = device.GetHeight ();
-	
+
 	if (( currentWidth != ( u32 )width ) || ( currentHeight != ( u32 )height )) {
-	
+
 		MOAIGfxDevice::Get ().SetBufferSize ( width, height );
-		
+
 		MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 		if ( device.PushListener ( MOAIGfxDevice::EVENT_RESIZE, state )) {
 			lua_pushnumber ( state, width );
@@ -454,7 +460,7 @@ void AKUSetFunc_ShowCursor ( AKUShowCursorFunc func ) {
 
 //----------------------------------------------------------------//
 void AKUSetFunc_SetTextInputRect ( AKUSetTextInputRectFunc func ) {
-	
+
 	MOAISim::Get ().SetSetTextInputRectFunc ( func );
 }
 

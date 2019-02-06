@@ -29,7 +29,11 @@ echo Creating Release Libs
 cmake -G "%generator%" ^
 -DBUILD_WINDOWS=true ^
 -DMOAI_SDL=true ^
--DMOAI_HTTP_SERVER=true ^
+-DMOAI_HTTP_CLIENT=false ^
+-DMOAI_HTTP_SERVER=false ^
+-DMOAI_LIBCRYPTO=false ^
+-DMOAI_CRYPTO=false ^
+-DMOAI_OPENSSL=false ^
 -DCMAKE_INSTALL_PREFIX=%libprefix%\Release ^
 %rootpath%\cmake\hosts\host-win-sdl || exit /b 1
 
@@ -37,21 +41,21 @@ cmake --build . --target INSTALL --config Release || exit /b 1
 
 erase  libmoai\third-party\luajit\luajit\src\lua51.lib
 
-echo Creating Debug Libs
-cmake -DCMAKE_INSTALL_PREFIX=%libprefix%\Debug %rootpath%\cmake\hosts\host-win-sdl || exit /b 1
+rem echo Creating Debug Libs
+rem cmake -DCMAKE_INSTALL_PREFIX=%libprefix%\Debug %rootpath%\cmake\hosts\host-win-sdl || exit /b 1
 
 
-if "%CI%"=="TRUE" goto skipdebug
-cmake --build . --target INSTALL --config Debug  || exit /b 1
+rem if "%CI%"=="TRUE" goto skipdebug
+rem cmake --build . --target INSTALL --config Debug  || exit /b 1
 
-:skipdebug
+rem :skipdebug
 echo Creating Distribute Libs
 rmdir /S/Q %libprefix%\Distribute\lib
 
 md %libprefix%\Distribute\lib
 lib /OUT:%libprefix%\Distribute\lib\moai.LIB %libprefix%\Release\lib\*.lib || exit /b 1
 
-lib /OUT:%libprefix%\Distribute\lib\moai_d.LIB %libprefix%\Debug\lib\*.lib || exit /b 1
+rem lib /OUT:%libprefix%\Distribute\lib\moai_d.LIB %libprefix%\Debug\lib\*.lib || exit /b 1
 xcopy /S/I/Y %libprefix%\Release\include %libprefix%\Distribute\include  || exit /b 1
 mkdir %libprefix%\Distribute\bin
 copy /Y %libprefix%\Release\bin\moai.exe %libprefix%\Distribute\bin\moai.exe
@@ -60,6 +64,6 @@ copy /Y %libprefix%\Release\bin\moai.exe %libprefix%\Distribute\bin\moai.exe
 if NOT EXIST %rootpath%\util\moai.exe copy /Y %libprefix%\Release\bin\moai.exe %rootpath%\util\moai.exe
 
 rd /S/Q %libprefix%\Release
-rd /S/Q %libprefix%\Debug
+rem rd /S/Q %libprefix%\Debug
 
 echo "Build complete"

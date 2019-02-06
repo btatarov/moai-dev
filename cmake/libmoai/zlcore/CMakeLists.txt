@@ -2,7 +2,11 @@ cmake_minimum_required ( VERSION 2.8.5 )
 project ( zlcore )
 
 add_subdirectory ( zlvfs )
-add_subdirectory ( zlcrypto )
+
+if ( MOAI_CRYPTO )
+  add_subdirectory ( zlcrypto )
+endif ( MOAI_CRYPTO )
+
 # Define source directory
 set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/src/" )
 
@@ -22,12 +26,12 @@ file ( GLOB ZLGFX_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/zl-gfx/*.h" )
 file ( GLOB ZLCOMMON_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/zl-common/*.h")
 
 
-if (BUILD_WINDOWS)   
+if (BUILD_WINDOWS)
   list(REMOVE_ITEM ZLUTIL_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/zl-util/zl_usocket.cpp")
 else (BUILD_WINDOWS)
  list(REMOVE_ITEM ZLUTIL_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/zl-util/zl_wsocket.cpp")
 endif (BUILD_WINDOWS)
- 
+
 
 
 include_directories ( ${ZLCORE_INCLUDES} )
@@ -70,4 +74,3 @@ install(TARGETS zlcore EXPORT libmoai ARCHIVE DESTINATION lib)
 install(FILES ${ZLUTIL_HEADERS} DESTINATION include/zl-util)
 install(FILES ${ZLGFX_HEADERS} DESTINATION include/zl-gfx)
 install(FILES ${ZLCOMMON_HEADERS} DESTINATION include/zl-common)
-

@@ -65,15 +65,27 @@ typedef int ( *DisplayModeFunc ) (int, SDL_DisplayMode *);
 static void SetScreenSize ( DisplayModeFunc func);
 
 //================================================================//
+// helpers
+//================================================================//
+
+static void SDL_LoadWindowIcon      ();
+static void	Finalize			();
+static void	Init				( int argc, char** argv );
+static void	MainLoop			();
+static void	PrintMoaiVersion	();
+static void SetScreenDpi        ();
+
+//================================================================//
 // aku callbacks
 //================================================================//
 
 void	_AKUEnterFullscreenModeFunc		();
 void	_AKUExitFullscreenModeFunc		();
-void	_AKUOpenWindowFunc				( const char* title, int width, int height );
-void    _AKUShowCursor					();
-void    _AKUHideCursor					();
-void	_AKUSetTextInputRectFunc		( int xMin, int yMin, int xMax, int yMax );
+void  _AKUExitApp					          ();
+void	_AKUOpenWindowFunc				    ( const char* title, int width, int height );
+void  _AKUShowCursor					      ();
+void  _AKUHideCursor					      ();
+void	_AKUSetTextInputRectFunc		  ( int xMin, int yMin, int xMax, int yMax );
 
 //----------------------------------------------------------------//
 void _AKUShowCursor () {
@@ -102,10 +114,16 @@ void _AKUExitFullscreenModeFunc () {
 }
 
 //----------------------------------------------------------------//
+void _AKUExitApp () {
+	Finalize ();
+}
+
+//----------------------------------------------------------------//
 void _AKUOpenWindowFunc ( const char* title, int width, int height ) {
 
 	if ( !sWindow ) {
 		sWindow = SDL_CreateWindow ( title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
+        SDL_LoadWindowIcon ();
 		SDL_GL_CreateContext ( sWindow );
 		SDL_GL_SetSwapInterval ( 1 );
 
@@ -134,16 +152,64 @@ void _AKUSetTextInputRectFunc ( int xMin, int yMin, int xMax, int yMax ) {
 	SDL_SetTextInputRect ( &sdlRect );
 }
 
+//----------------------------------------------------------------//
+void SDL_LoadWindowIcon () {
+    #ifdef MOAI_OS_WINDOWS
+    	const unsigned int mask_r = 0x00ff0000;
+    	const unsigned int mask_g = 0x0000ff00;
+    	const unsigned int mask_b = 0x000000ff;
+    	const unsigned int mask_a = 0xff000000;
+    	const int res_id = 101;
+    	const int size = 32;
+    	const int bpp = 32;
 
-//================================================================//
-// helpers
-//================================================================//
+    	HICON icon = ( HICON ) LoadImage (
+    		GetModuleHandle ( NULL ),
+    		MAKEINTRESOURCE ( res_id ),
+    		IMAGE_ICON,
+    		size, size,
+    		LR_SHARED
+    	);
 
-static void	Finalize			();
-static void	Init				( int argc, char** argv );
-static void	MainLoop			();
-static void	PrintMoaiVersion	();
-static void SetScreenDpi        ();
+    	if ( icon ) {
+
+    		ICONINFO ici;
+
+    		if ( GetIconInfo ( icon, &ici ) ) {
+
+    			HDC dc = CreateCompatibleDC ( NULL );
+
+    			if ( dc ) {
+
+    				SDL_Surface* surface = SDL_CreateRGBSurface ( 0, size, size, bpp, mask_r, mask_g, mask_b, mask_a );
+
+    				if ( surface ) {
+    					BITMAPINFO bmi;
+    					bmi.bmiHeader.biSize = sizeof ( BITMAPINFOHEADER );
+    					bmi.bmiHeader.biWidth = size;
+    					bmi.bmiHeader.biHeight = -size;
+    					bmi.bmiHeader.biPlanes = 1;
+    					bmi.bmiHeader.biBitCount = bpp;
+    					bmi.bmiHeader.biCompression = BI_RGB;
+    					bmi.bmiHeader.biSizeImage = 0;
+
+    					SelectObject ( dc, ici.hbmColor );
+    					GetDIBits ( dc, ici.hbmColor, 0, size, surface->pixels, &bmi, DIB_RGB_COLORS );
+    					SDL_SetWindowIcon ( sWindow, surface );
+    					SDL_FreeSurface ( surface );
+    				}
+
+    				DeleteDC ( dc );
+    			}
+
+    			DeleteObject ( ici.hbmColor );
+    			DeleteObject ( ici.hbmMask );
+    		}
+
+    		DestroyIcon ( icon );
+    	}
+    #endif
+}
 
 //----------------------------------------------------------------//
 void Finalize () {
@@ -158,9 +224,14 @@ void Finalize () {
 void Init ( int argc, char** argv ) {
 
 	SDL_Init ( SDL_INIT_EVERYTHING );
-	PrintMoaiVersion ();
+
+  #ifdef MOAI_OS_WINDOWS
+    ShowWindow(GetConsoleWindow(),SW_HIDE);
+
+  #endif
 
 	#ifdef _DEBUG
+    PrintMoaiVersion ();
 		printf ( "DEBUG BUILD\n" );
 	#endif
 
@@ -194,6 +265,8 @@ void Init ( int argc, char** argv ) {
 	AKUSetFunc_ShowCursor ( _AKUShowCursor );
 	AKUSetFunc_HideCursor ( _AKUHideCursor );
 
+    AKUSetFunc_ExitApp ( _AKUExitApp );
+
 	AKUSetFunc_OpenWindow ( _AKUOpenWindowFunc );
 
 	AKUSetFunc_SetTextInputRect( _AKUSetTextInputRectFunc );
@@ -202,7 +275,7 @@ void Init ( int argc, char** argv ) {
 			//are we a bundle?
 			CFBundleRef bref = CFBundleGetMainBundle();
 			if (bref == NULL || CFBundleGetIdentifier(bref) == NULL) {
-	AKUModulesParseArgs ( argc, argv );
+	               AKUModulesParseArgs ( argc, argv );
 
 			} else {
 

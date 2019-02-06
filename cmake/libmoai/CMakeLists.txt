@@ -12,11 +12,21 @@ add_subdirectory ( zlcore )
 add_subdirectory ( moai-core )
 add_subdirectory ( moai-util )
 add_subdirectory ( moai-sim )
-add_subdirectory ( moai-crypto )
+
+if ( MOAI_CRYPTO )
+  add_subdirectory ( moai-crypto )
+endif ( MOAI_CRYPTO )
 
 add_subdirectory ( moai-box2d )
-add_subdirectory ( moai-http-client )
-add_subdirectory ( moai-http-server )
+
+if ( MOAI_HTTP_CLIENT )
+  add_subdirectory ( moai-http-client )
+endif ( MOAI_HTTP_CLIENT )
+
+if ( MOAI_HTTP_SERVER )
+  add_subdirectory ( moai-http-server )
+endif ( MOAI_HTTP_SERVER )
+
 add_subdirectory ( moai-luaext )
 
 if ( MOAI_FMOD_STUDIO )

@@ -15,6 +15,9 @@ DerivedData/
 *.pbxuser
 *.perspectivev3
 
+*.sdf
+*.suo
+
 # Artifacts when building with CMake
 flascc/build
 /src/moai/moai
