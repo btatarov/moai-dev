@@ -34,6 +34,7 @@ docs/api-reference
 /lib/
 /bin/env-local.bat
 /util/moai
+/util/moai.exe
 
 # Third party
 /3rdparty/fmod/lib
