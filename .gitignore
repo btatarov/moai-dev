@@ -1,8 +1,12 @@
 Thumbs.db
 .DS_Store
+._
+
 /vs2010/ipch
 /vs2010/bin
 /vs2008/bin
+*.sdf
+*.suo
 
 /ide/bin
 /ide/obj
@@ -14,9 +18,6 @@ xcuserdata/
 DerivedData/
 *.pbxuser
 *.perspectivev3
-
-*.sdf
-*.suo
 
 # Artifacts when building with CMake
 flascc/build
