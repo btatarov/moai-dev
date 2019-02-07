@@ -68,7 +68,7 @@ static void SetScreenSize ( DisplayModeFunc func);
 // helpers
 //================================================================//
 
-static void SDL_LoadWindowIcon      ();
+static void SDL_LoadWindowIcon  ();
 static void	Finalize			();
 static void	Init				( int argc, char** argv );
 static void	MainLoop			();
@@ -81,11 +81,11 @@ static void SetScreenDpi        ();
 
 void	_AKUEnterFullscreenModeFunc		();
 void	_AKUExitFullscreenModeFunc		();
-void  _AKUExitApp					          ();
-void	_AKUOpenWindowFunc				    ( const char* title, int width, int height );
-void  _AKUShowCursor					      ();
-void  _AKUHideCursor					      ();
-void	_AKUSetTextInputRectFunc		  ( int xMin, int yMin, int xMax, int yMax );
+void    _AKUExitApp					    ();
+void	_AKUOpenWindowFunc				( const char* title, int width, int height );
+void    _AKUShowCursor					();
+void    _AKUHideCursor					();
+void	_AKUSetTextInputRectFunc		( int xMin, int yMin, int xMax, int yMax );
 
 //----------------------------------------------------------------//
 void _AKUShowCursor () {
@@ -115,7 +115,10 @@ void _AKUExitFullscreenModeFunc () {
 
 //----------------------------------------------------------------//
 void _AKUExitApp () {
-	Finalize ();
+
+    SDL_Event sdlevent;
+    sdlevent.type = SDL_QUIT;
+    SDL_PushEvent ( &sdlevent );
 }
 
 //----------------------------------------------------------------//
@@ -367,7 +370,9 @@ void MainLoop () {
 
 	if ( SDL_NumJoysticks() < 1 ) {
 
-		std::cerr << "No Joysticks connected." << std::endl;
+        #ifdef _DEBUG
+		      std::cerr << "No Joysticks connected." << std::endl;
+        #endif
 
 	} else {
 

@@ -46,7 +46,7 @@ public:
 
 	typedef void ( *EnterFullscreenModeFunc )		();
 	typedef void ( *ExitFullscreenModeFunc )		();
-	typedef void ( *ExitAppFunc )				();
+	typedef void ( *ExitAppFunc )					();
 	typedef void ( *ShowCursorFunc )				();
 	typedef void ( *HideCursorFunc )				();
 	typedef void ( *OpenWindowFunc )				( const char* title, int width, int height );

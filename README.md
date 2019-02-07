@@ -18,6 +18,7 @@ OSX Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?bran
 * MOAIColor::setColorHSL
 * MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
 * MOAIParticlePexPlugin::loadFromString
+* MOAISim.exitApp (desktop hosts)
 * TODO: move loadDual in a separate module (loader)
 * TODO: facebook setToken and graphRequest (android and ios)
 
