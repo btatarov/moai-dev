@@ -25,7 +25,7 @@ moai_root=$(pwd)
 
 BUILD_DIR="build/build-linux"
 
-if ! [ -d ${BUILD_DIR%/*} ]; then
+if ! [ -d ${BUILD_DIR} ]; then
 	mkdir -p $BUILD_DIR
 fi
 
@@ -42,12 +42,15 @@ set -e
 cmake \
 -DBUILD_LINUX=TRUE \
 -DMOAI_SDL=TRUE \
--DMOAI_HTTP_SERVER=TRUE \
--DMOAI_FMOD_STUDIO=FALSE \
+-DMOAI_HTTP_CLIENT=FALSE \
+-DMOAI_HTTP_SERVER=FALSE \
+-DMOAI_LIBCRYPTO=FALSE \
+-DMOAI_CRYPTO=FALSE \
+-DMOAI_OPENSSL=FALSE \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_INSTALL_PREFIX=$libprefix \
 $moai_root/cmake/hosts/host-linux-sdl
 
-cmake --build . --target install
+cmake --build . --target install -- -j 4
 
 cp $libprefix/bin/moai $moai_root/util/moai

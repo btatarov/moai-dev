@@ -1,9 +1,16 @@
 Thumbs.db
 .DS_Store
+<<<<<<< HEAD
 ._*
+=======
+._
+
+>>>>>>> postmorph
 /vs2010/ipch
 /vs2010/bin
 /vs2008/bin
+*.sdf
+*.suo
 
 /ide/bin
 /ide/obj
@@ -32,6 +39,7 @@ docs/api-reference
 /lib/
 /bin/env-local.bat
 /util/moai
+/util/moai.exe
 
 # Third party
 /3rdparty/fmod/lib

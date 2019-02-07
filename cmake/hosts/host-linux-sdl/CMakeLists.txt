@@ -20,7 +20,7 @@ else (HOST_ROOT)
   set (HOST_ROOT ${MOAI_ROOT}/src)
 endif(HOST_ROOT)
 
-  
+
 
 include(platform-linux)
 include(platform-common)
@@ -52,16 +52,17 @@ if (NOT (XCB_XCB_FOUND AND XCB_RANDR_FOUND AND XCB_UTIL_FOUND))
 endif (NOT (XCB_XCB_FOUND AND XCB_RANDR_FOUND AND XCB_UTIL_FOUND))
 
 find_package(X11)
-   
+
 FIND_LIBRARY(X11_Xxf86vm_LIB Xxf86vm ${X11_LIB_SEARCH_PATH})
 FIND_LIBRARY(XI_LIBRARY Xi ${X11_LIB_SEARCH_PATH})
 MARK_AS_ADVANCED(X11_Xxf86vm_LIB XI_LIBRARY)
 
 include_directories ( ${OPENGL_INCLUDE_DIRS} ${HOST_ROOT} )
 
-#fix lua lib path
-if (NOT LIB_PATH)
-  link_directories(${LUA_LIB_DIR})
+#fix lua and fmod lib path
+if  ( NOT LIB_PATH )
+  link_directories ( ${LUA_LIB_DIR} )
+  link_directories ( ${FMOD_LIB_DIR} )
 endif (NOT LIB_PATH)
 
 
@@ -73,7 +74,7 @@ file ( GLOB HOST_SDL_SRC "${HOST_ROOT}/host-sdl/*.cpp" "${HOST_ROOT}/host-sdl/*.
 add_executable ( moai ${HOST_SDL_SRC} )
 install(TARGETS moai DESTINATION bin)
 
-target_link_libraries ( moai 
+target_link_libraries ( moai
   host-modules
   moai-sim
   moai-util
@@ -81,7 +82,7 @@ target_link_libraries ( moai
   moai-sdl
   zlcore
   SDL2-static
-  pthread 
+  pthread
   rt
   ${XI_LIBRARY}
   ${OPENGL_LIBRARIES}
@@ -89,7 +90,8 @@ target_link_libraries ( moai
   ${XCB_XCB_LIBRARIES}
   ${XCB_RANDR_LIBRARIES}
   ${XCB_UTIL_LIBRARIES}
-  
 )
 
-
+set_target_properties ( moai PROPERTIES
+    INSTALL_RPATH "$ORIGIN/../lib"
+)

@@ -15,7 +15,11 @@ endif ( BUILD_ANDROID )
 
 add_subdirectory ( box2d )
 add_subdirectory ( contrib )
-add_subdirectory ( crypto )
+
+if ( MOAI_CRYPTO )
+  add_subdirectory ( crypto )
+endif ( MOAI_CRYPTO )
+
 add_subdirectory ( curl )
 
 if ( BUILD_IOS OR BUILD_ANDROID )
@@ -67,7 +71,11 @@ add_subdirectory ( pvr )
 add_subdirectory ( sfmt )
 add_subdirectory ( spine )
 add_subdirectory ( sqlite3 )
-add_subdirectory ( ssl )
+
+if ( MOAI_OPENSSL )
+  add_subdirectory ( ssl )
+endif ( MOAI_OPENSSL )
+
 add_subdirectory ( tess )
 add_subdirectory ( tinyxml )
 add_subdirectory ( tlsf )
