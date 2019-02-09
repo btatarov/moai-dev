@@ -5,7 +5,8 @@ Forked from: [moaiforge](https://github.com/moaiforge/moai-sdk).
 Original readme: [here](https://github.com/moaiforge/moai-sdk/blob/1.6-stable/README.md).
 
 Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?branch=postmorph)](https://travis-ci.org/btatarov/moai-sdk)
-OSX Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?branch=travis-osx)](https://travis-ci.org/btatarov/moai-sdk)
+macOS Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?branch=travis-osx)](https://travis-ci.org/btatarov/moai-sdk)
+Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkhw3sjopdkj5vy?svg=true)](https://ci.appveyor.com/project/btatarov/moai-sdk)
 
 ## New features
 
@@ -13,7 +14,7 @@ OSX Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?bran
 * fmod as module (from [moai-fmod-studio](https://github.com/Vavius/moai-fmod-studio))
 * spine as module (from [plugin-moai-spine](https://github.com/Vavius/plugin-moai-spine))
 * openssl 1.0.2g
-* libpng-1.4.19 (TODO: currently only for android)
+* libpng 1.4.19
 * luajit 2.0.4
 * MOAIColor::setColorHSL
 * MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
