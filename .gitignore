@@ -1,10 +1,6 @@
 Thumbs.db
 .DS_Store
 ._
-
-/vs2010/ipch
-/vs2010/bin
-/vs2008/bin
 *.sdf
 *.suo
 
@@ -14,6 +10,7 @@ Thumbs.db
 /src/config
 
 /build/
+/hosts/
 xcuserdata/
 DerivedData/
 *.pbxuser
