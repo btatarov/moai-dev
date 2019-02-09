@@ -1,4 +1,6 @@
 os: osx
+env: TARGET=i686-apple-darwin
+  MACOSX_DEPLOYMENT_TARGET=10.9
 language: c
 install: true
 script: bash ./bin/ci-osx.sh
