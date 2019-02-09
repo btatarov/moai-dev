@@ -17,7 +17,7 @@ popd
 
 
 echo Compiling Windows Libs
-call bin\build-windows.bat
+call bin\build-windows-untz.bat
 
 echo Creating Windows Host
 mkdir hosttest
