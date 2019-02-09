@@ -67,4 +67,4 @@ if NOT EXIST %rootpath%\util\moai.exe copy /Y %libprefix%\Release\bin\moai.exe %
 rd /S/Q %libprefix%\Release
 rem rd /S/Q %libprefix%\Debug
 
-echo "Build complete"
+echo "Windows Build Successful"
