@@ -30,6 +30,14 @@ popd
 
 
 pushd `dirname $0`
-bash build-linux.sh
-echo Linux Build Successful
+bash build-linux-untz.sh
+EXIT_CODE=$?
 popd
+
+if [ "$EXIT_CODE" -gt 0 ]
+then
+    exit $EXIT_CODE
+fi
+
+echo Linux Build Successful
+exit 0
