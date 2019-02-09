@@ -2,5 +2,9 @@ os: osx
 env: TARGET=i686-apple-darwin
   MACOSX_DEPLOYMENT_TARGET=10.9
 language: c
+before-install:
+  - wget --quiet https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX10.9.sdk.tar.xz
+  - tar xf MacOSX10.9.sdk.tar.xz
+  - sudo mv MacOSX10.9.sdk /Applications/Xcode-9.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/
 install: true
 script: bash ./bin/ci-osx.sh
