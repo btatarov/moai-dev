@@ -6,6 +6,7 @@ Original readme: [here](https://github.com/moaiforge/moai-sdk/blob/1.6-stable/RE
 
 Linux Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?branch=postmorph)](https://travis-ci.org/btatarov/moai-sdk)
 macOS Build: [![Build Status](https://api.travis-ci.org/btatarov/moai-sdk.svg?branch=travis-osx)](https://travis-ci.org/btatarov/moai-sdk)
+Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkhw3sjopdkj5vy?svg=true)](https://ci.appveyor.com/project/btatarov/moai-sdk)
 
 ## New features
 
