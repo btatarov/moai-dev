@@ -12,21 +12,21 @@
 	LOCAL_CFLAGS		+= -fvisibility=hidden
 
 	LOCAL_C_INCLUDES 	:= $(MY_HEADER_SEARCH_PATHS)
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/png.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngerror.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngget.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngmem.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngpread.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngread.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngrio.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngrtran.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngrutil.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngset.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngtest.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngtrans.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngwio.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngwrite.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngwtran.c
-	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/lpng1419/pngwutil.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/png.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngerror.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngget.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngmem.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngpread.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngread.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngrio.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngrtran.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngrutil.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngset.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngtest.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngtrans.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngwio.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngwrite.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngwtran.c
+	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19/pngwutil.c
 
 	include $(BUILD_STATIC_LIBRARY)

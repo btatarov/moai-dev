@@ -291,7 +291,7 @@ MODULES = {
 			'$(MOAI_SDK_HOME)/3rdparty/freetype-2.4.4/config',
 			'$(MOAI_SDK_HOME)/3rdparty/libtess2/Include',
 			'$(MOAI_SDK_HOME)/3rdparty/jpeg-8c',
-			'$(MOAI_SDK_HOME)/3rdparty/lpng1419',
+			'$(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19',
 			},
 
 		INCLUDES = {

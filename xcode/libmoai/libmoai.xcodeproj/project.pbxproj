@@ -4925,24 +4925,24 @@
 		03240B5513564CB0000ADC60 /* ftstroke.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftstroke.c; path = "../../3rdparty/freetype-2.4.4/src/base/ftstroke.c"; sourceTree = SOURCE_ROOT; };
 		03240B5613564CB0000ADC60 /* ftsystem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftsystem.c; path = "../../3rdparty/freetype-2.4.4/src/base/ftsystem.c"; sourceTree = SOURCE_ROOT; };
 		03240B5713564CB0000ADC60 /* smooth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = smooth.c; path = "../../3rdparty/freetype-2.4.4/src/smooth/smooth.c"; sourceTree = SOURCE_ROOT; };
-		03240B5913564CB0000ADC60 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = png.c; path = ../../3rdparty/lpng140/png.c; sourceTree = SOURCE_ROOT; };
-		03240B5A13564CB0000ADC60 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = png.h; path = ../../3rdparty/lpng140/png.h; sourceTree = SOURCE_ROOT; };
-		03240B5B13564CB0000ADC60 /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pngconf.h; path = ../../3rdparty/lpng140/pngconf.h; sourceTree = SOURCE_ROOT; };
-		03240B5C13564CB0000ADC60 /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngerror.c; path = ../../3rdparty/lpng140/pngerror.c; sourceTree = SOURCE_ROOT; };
-		03240B5D13564CB0000ADC60 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngget.c; path = ../../3rdparty/lpng140/pngget.c; sourceTree = SOURCE_ROOT; };
-		03240B5E13564CB0000ADC60 /* pngmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngmem.c; path = ../../3rdparty/lpng140/pngmem.c; sourceTree = SOURCE_ROOT; };
-		03240B5F13564CB0000ADC60 /* pngpread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngpread.c; path = ../../3rdparty/lpng140/pngpread.c; sourceTree = SOURCE_ROOT; };
-		03240B6013564CB0000ADC60 /* pngpriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pngpriv.h; path = ../../3rdparty/lpng140/pngpriv.h; sourceTree = SOURCE_ROOT; };
-		03240B6113564CB0000ADC60 /* pngread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngread.c; path = ../../3rdparty/lpng140/pngread.c; sourceTree = SOURCE_ROOT; };
-		03240B6213564CB0000ADC60 /* pngrio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrio.c; path = ../../3rdparty/lpng140/pngrio.c; sourceTree = SOURCE_ROOT; };
-		03240B6313564CB0000ADC60 /* pngrtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrtran.c; path = ../../3rdparty/lpng140/pngrtran.c; sourceTree = SOURCE_ROOT; };
-		03240B6413564CB0000ADC60 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrutil.c; path = ../../3rdparty/lpng140/pngrutil.c; sourceTree = SOURCE_ROOT; };
-		03240B6513564CB0000ADC60 /* pngset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngset.c; path = ../../3rdparty/lpng140/pngset.c; sourceTree = SOURCE_ROOT; };
-		03240B6713564CB0000ADC60 /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngtrans.c; path = ../../3rdparty/lpng140/pngtrans.c; sourceTree = SOURCE_ROOT; };
-		03240B6813564CB0000ADC60 /* pngwio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwio.c; path = ../../3rdparty/lpng140/pngwio.c; sourceTree = SOURCE_ROOT; };
-		03240B6913564CB0000ADC60 /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwrite.c; path = ../../3rdparty/lpng140/pngwrite.c; sourceTree = SOURCE_ROOT; };
-		03240B6A13564CB0000ADC60 /* pngwtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwtran.c; path = ../../3rdparty/lpng140/pngwtran.c; sourceTree = SOURCE_ROOT; };
-		03240B6B13564CB0000ADC60 /* pngwutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwutil.c; path = ../../3rdparty/lpng140/pngwutil.c; sourceTree = SOURCE_ROOT; };
+		03240B5913564CB0000ADC60 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = png.c; path = ../../3rdparty/libpng-1.4.19/png.c; sourceTree = SOURCE_ROOT; };
+		03240B5A13564CB0000ADC60 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = png.h; path = ../../3rdparty/libpng-1.4.19/png.h; sourceTree = SOURCE_ROOT; };
+		03240B5B13564CB0000ADC60 /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pngconf.h; path = ../../3rdparty/libpng-1.4.19/pngconf.h; sourceTree = SOURCE_ROOT; };
+		03240B5C13564CB0000ADC60 /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngerror.c; path = ../../3rdparty/libpng-1.4.19/pngerror.c; sourceTree = SOURCE_ROOT; };
+		03240B5D13564CB0000ADC60 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngget.c; path = ../../3rdparty/libpng-1.4.19/pngget.c; sourceTree = SOURCE_ROOT; };
+		03240B5E13564CB0000ADC60 /* pngmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngmem.c; path = ../../3rdparty/libpng-1.4.19/pngmem.c; sourceTree = SOURCE_ROOT; };
+		03240B5F13564CB0000ADC60 /* pngpread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngpread.c; path = ../../3rdparty/libpng-1.4.19/pngpread.c; sourceTree = SOURCE_ROOT; };
+		03240B6013564CB0000ADC60 /* pngpriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pngpriv.h; path = ../../3rdparty/libpng-1.4.19/pngpriv.h; sourceTree = SOURCE_ROOT; };
+		03240B6113564CB0000ADC60 /* pngread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngread.c; path = ../../3rdparty/libpng-1.4.19/pngread.c; sourceTree = SOURCE_ROOT; };
+		03240B6213564CB0000ADC60 /* pngrio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrio.c; path = ../../3rdparty/libpng-1.4.19/pngrio.c; sourceTree = SOURCE_ROOT; };
+		03240B6313564CB0000ADC60 /* pngrtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrtran.c; path = ../../3rdparty/libpng-1.4.19/pngrtran.c; sourceTree = SOURCE_ROOT; };
+		03240B6413564CB0000ADC60 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrutil.c; path = ../../3rdparty/libpng-1.4.19/pngrutil.c; sourceTree = SOURCE_ROOT; };
+		03240B6513564CB0000ADC60 /* pngset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngset.c; path = ../../3rdparty/libpng-1.4.19/pngset.c; sourceTree = SOURCE_ROOT; };
+		03240B6713564CB0000ADC60 /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngtrans.c; path = ../../3rdparty/libpng-1.4.19/pngtrans.c; sourceTree = SOURCE_ROOT; };
+		03240B6813564CB0000ADC60 /* pngwio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwio.c; path = ../../3rdparty/libpng-1.4.19/pngwio.c; sourceTree = SOURCE_ROOT; };
+		03240B6913564CB0000ADC60 /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwrite.c; path = ../../3rdparty/libpng-1.4.19/pngwrite.c; sourceTree = SOURCE_ROOT; };
+		03240B6A13564CB0000ADC60 /* pngwtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwtran.c; path = ../../3rdparty/libpng-1.4.19/pngwtran.c; sourceTree = SOURCE_ROOT; };
+		03240B6B13564CB0000ADC60 /* pngwutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwutil.c; path = ../../3rdparty/libpng-1.4.19/pngwutil.c; sourceTree = SOURCE_ROOT; };
 		03240BA313564CB0000ADC60 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sqlite3.c; path = "../../3rdparty/sqlite-3.6.16/sqlite3.c"; sourceTree = SOURCE_ROOT; };
 		03240BA413564CB0000ADC60 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "../../3rdparty/sqlite-3.6.16/sqlite3.h"; sourceTree = SOURCE_ROOT; };
 		03240BA513564CB0000ADC60 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = "../../3rdparty/sqlite-3.6.16/sqlite3ext.h"; sourceTree = SOURCE_ROOT; };
@@ -19727,7 +19727,7 @@
 					"\"../../3rdparty/libogg-1.2.2/include\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/libtess2/include\"",
-					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/libpng-1.4.19\"",
 					"\"../../3rdparty/lua-5.1.3/src\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
@@ -21989,7 +21989,7 @@
 					"\"../../3rdparty/libogg-1.2.2/include\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/libtess2/include\"",
-					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/libpng-1.4.19\"",
 					"\"../../3rdparty/lua-5.1.3/src\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
@@ -26603,7 +26603,7 @@
 					"\"../../3rdparty/libogg-1.2.2/include\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/libtess2/include\"",
-					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/libpng-1.4.19\"",
 					"\"../../3rdparty/lua-5.1.3/src\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
@@ -27047,7 +27047,7 @@
 					"\"../../3rdparty/libogg-1.2.2/include\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/libtess2/include\"",
-					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/libpng-1.4.19\"",
 					"\"../../3rdparty/lua-5.1.3/src\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",

@@ -1,9 +1,9 @@
 cmake_minimum_required ( VERSION 2.8.5 )
 project ( png )
 
-set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/3rdparty/lpng140/" )
+set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/3rdparty/libpng-1.4.19/" )
 
-set ( PNG_INCLUDES "${MOAI_ROOT}/3rdparty/lpng140/" )
+set ( PNG_INCLUDES "${MOAI_ROOT}/3rdparty/libpng-1.4.19/" )
 
 file ( GLOB PNG_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.c" )
 file ( GLOB PNG_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/*.h" )
