@@ -365,6 +365,9 @@ void SetScreenDpi() {
 //----------------------------------------------------------------//
 void MainLoop () {
 
+    SDL_GL_SetAttribute ( SDL_GL_MULTISAMPLEBUFFERS, 1 );
+	SDL_GL_SetAttribute ( SDL_GL_MULTISAMPLESAMPLES, 16 );
+
 	// TODO: array's of Joysticks
 	Joystick * joystick0 = NULL;
 
