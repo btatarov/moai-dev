@@ -98,8 +98,8 @@ public class MoaiGoogleBilling {
 					}
 
 					// subscriptions
-					response = sService.isBillingSupported (3, packageName, PURCHASE_TYPE_SUBSCRIPTION );
-	                if ( response == BILLING_RESPONSE_RESULT_OK)  {
+					response = sService.isBillingSupported ( 3, packageName, PURCHASE_TYPE_SUBSCRIPTION );
+	                if ( response == BILLING_RESPONSE_RESULT_OK )  {
 						MoaiLog.i ( "MoaiGoogleBilling : Subscriptions supported" );
 						sSubscriptionSupported = true;
 	                }
@@ -110,12 +110,16 @@ public class MoaiGoogleBilling {
 
 				} catch ( RemoteException e ) {
 
+					MoaiLog.i ( "MoaiGoogleBilling : RemoteException" );
                     e.printStackTrace ();
                 }
 			}
 		};
 
-		sActivity.bindService ( new Intent ( "com.android.vending.billing.InAppBillingService.BIND" ), sServiceConn, Context.BIND_AUTO_CREATE );
+		Intent serviceIntent = new Intent ( "com.android.vending.billing.InAppBillingService.BIND" );
+        serviceIntent.setPackage ( "com.android.vending" );
+
+		sActivity.bindService ( serviceIntent, sServiceConn, Context.BIND_AUTO_CREATE );
 	}
 
 	//----------------------------------------------------------------//
