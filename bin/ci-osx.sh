@@ -6,6 +6,11 @@ UTIL_PATH=$(dirname "${BASH_SOURCE[0]}")
 UTIL_PATH=$(cd $UTIL_PATH/../util; pwd)
 export PATH=$PATH:$UTIL_PATH
 
+echo "getting MacOSX10.9.sdk"
+wget --quiet https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX10.9.sdk.tar.xz
+tar xf MacOSX10.9.sdk.tar.xz
+sudo mv MacOSX10.9.sdk /Applications/Xcode-9.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
+
 echo "getting latest cmake"
 pushd ~
 wget --quiet http://www.cmake.org/files/v3.1/cmake-3.1.3-Darwin-x86_64.tar.gz
