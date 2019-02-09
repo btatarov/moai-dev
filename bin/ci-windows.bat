@@ -19,10 +19,4 @@ popd
 echo Compiling Windows Libs
 call bin\build-windows-untz.bat
 
-echo Creating Windows Host
-mkdir hosttest
-cd hosttest
-moaiutil host init
-moaiutil host build windows
-
 popd
