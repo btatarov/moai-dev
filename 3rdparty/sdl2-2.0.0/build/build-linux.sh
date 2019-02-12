@@ -10,7 +10,7 @@ mkdir -p "$sdl_root/lib/linux"
 mkdir -p "$sdl_root/lib/build"
 cd $sdl_root/lib/build
 
-../../configure --prefix=$sdl_root/lib/build --disable-x11-shared --enable-sdl-dlopen
+bash ../../configure --prefix=$sdl_root/lib/build --disable-x11-shared --enable-sdl-dlopen
 make
 make install
 

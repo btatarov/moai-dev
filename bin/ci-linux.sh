@@ -28,6 +28,13 @@ cd cmake-3.1.3-Linux-x86_64/bin
 export PATH=$(pwd):$PATH
 popd
 
+echo "building sdl"
+pushd `dirname $0`
+cd ../3rdparty/sdl2-2.0.0
+bash build/build-linux.sh
+EXIT_CODE=$?
+popd
+
 
 pushd `dirname $0`
 bash build-linux-untz.sh
