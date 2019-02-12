@@ -11,7 +11,11 @@ mkdir -p "$sdl_root/lib/build"
 cd $sdl_root/lib/build
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bash ../../configure --prefix=$sdl_root/lib/build --disable-x11-shared --enable-sdl-dlopen
+=======
+sh ../../configure --prefix=$sdl_root/lib/build --disable-x11-shared --enable-sdl-dlopen
+>>>>>>> postmorph
 =======
 sh ../../configure --prefix=$sdl_root/lib/build --disable-x11-shared --enable-sdl-dlopen
 >>>>>>> postmorph
