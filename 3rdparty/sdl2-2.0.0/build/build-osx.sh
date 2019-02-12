@@ -2,7 +2,6 @@
 
 cd `dirname $0`/..
 sdl_root=$(pwd)
-echo "sdl root: $sdl_root"
 
 rm -rf "$sdl_root/lib/osx"
 rm -rf "$sdl_root/lib/build"
