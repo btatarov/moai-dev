@@ -4,6 +4,7 @@ project(host-sdl)
 
 set (LUA_LIB_DIR  "")
 set (FMOD_LIB_DIR  "")
+set (SDL_LIB_DIR "")
 set (MOAI_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../..")
 #normalizes slashes to forward slashes for windows
 if (LIB_PATH)
@@ -34,8 +35,9 @@ include_directories ( ${OPENGL_INCLUDE_DIRS} ${HOST_ROOT} )
 
 #fix lua and fmod lib path
 if (NOT LIB_PATH)
-	link_directories(${LUA_LIB_DIR})
-  link_directories (${FMOD_LIB_DIR})
+    link_directories(${LUA_LIB_DIR})
+    link_directories (${FMOD_LIB_DIR})
+    link_directories (${SDL_LIB_DIR})
 endif (NOT LIB_PATH)
 
 # Use all cpp files in directory as source code
@@ -55,7 +57,8 @@ target_link_libraries ( moai
   moai-core
   moai-sdl
   zlcore
-  SDL2-static
+  ${SDL_LIB}
   ${OPENGL_LIBRARIES}
-  winmm
+  user32 gdi32 winmm imm32 ole32 oleaut32 version uuid
 )
+add_dependencies ( moai SDL2 )

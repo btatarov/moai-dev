@@ -5,6 +5,8 @@ get_filename_component(MY_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/../../cmake-module
 set (CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${MY_SOURCE}")
 
 set (LUA_LIB_DIR  "")
+set (FMOD_LIB_DIR  "")
+set (SDL_LIB_DIR "")
 set (MOAI_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../..")
 
 
@@ -61,6 +63,7 @@ include_directories ( ${OPENGL_INCLUDE_DIRS} ${HOST_ROOT} )
 
 #fix lua and fmod lib path
 if  ( NOT LIB_PATH )
+  link_directories ( ${SDL_LIB_DIR} )
   link_directories ( ${LUA_LIB_DIR} )
   link_directories ( ${FMOD_LIB_DIR} )
 endif (NOT LIB_PATH)
@@ -81,7 +84,7 @@ target_link_libraries ( moai
   moai-core
   moai-sdl
   zlcore
-  SDL2-static
+  ${SDL_LIB}
   pthread
   rt
   ${XI_LIBRARY}
@@ -91,6 +94,7 @@ target_link_libraries ( moai
   ${XCB_RANDR_LIBRARIES}
   ${XCB_UTIL_LIBRARIES}
 )
+add_dependencies ( moai SDL2 )
 
 set_target_properties ( moai PROPERTIES
     INSTALL_RPATH "$ORIGIN/../lib"

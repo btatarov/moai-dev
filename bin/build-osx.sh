@@ -42,7 +42,11 @@ cmake -G "Xcode" \
 -DBUILD_OSX=TRUE \
 -DMOAI_APPLE=TRUE \
 -DMOAI_SDL=TRUE \
--DMOAI_HTTP_SERVER=TRUE \
+-DMOAI_HTTP_CLIENT=FALSE \
+-DMOAI_HTTP_SERVER=FALSE \
+-DMOAI_LIBCRYPTO=FALSE \
+-DMOAI_CRYPTO=FALSE \
+-DMOAI_OPENSSL=FALSE \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_INSTALL_PREFIX=$libprefix \
 $moai_root/cmake/hosts/host-osx-sdl
@@ -52,4 +56,3 @@ cmake --build . --target install --config Release
 if [ ! -e "$moai_root/util/moai" ]; then
    cp $libprefix/bin/moai $moai_root/util/moai
 fi
-

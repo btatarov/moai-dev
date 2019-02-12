@@ -37,3 +37,4 @@ docs/api-reference
 # Third party
 /3rdparty/fmod/lib
 /3rdparty/LuaJIT-2.0.4/lib
+/3rdparty/sdl2-2.0.0/lib

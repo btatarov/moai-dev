@@ -7,7 +7,7 @@ set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -DSQLITE_ENABLE_COLUMN_METADATA -Dfdatasy
 
 set ( SQLITE3_INCLUDES "${MOAI_ROOT}/3rdparty/sqlite-3.6.16/"  )
 
-set ( SQLITE3_SOURCES 
+set ( SQLITE3_SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/sqlite3.c
 )
 set ( SQLITE3_HEADERS
@@ -16,6 +16,10 @@ set ( SQLITE3_HEADERS
 )
 
 add_library ( sqlite3 STATIC ${SQLITE3_SOURCES} ${SQLITE3_HEADERS} )
+
+if ( CMAKE_DL_LIBS )
+    target_link_libraries ( sqlite3 ${CMAKE_DL_LIBS} )
+endif ( CMAKE_DL_LIBS )
 
 target_include_directories ( sqlite3 PUBLIC "$<BUILD_INTERFACE:${SQLITE3_INCLUDES}>" )
 set_target_properties( sqlite3 PROPERTIES FOLDER Third-Party )
