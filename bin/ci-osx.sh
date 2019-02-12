@@ -20,8 +20,8 @@ export PATH=$(pwd):$PATH
 popd
 
 echo "building sdl"
-pushd ~
-cd 3rdparty/sdl2-2.0.0/
+pushd `dirname $0`
+cd ../3rdparty/sdl2-2.0.0/
 ./build/build-osx.sh
 popd
 
