@@ -5,11 +5,11 @@ set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/3rdparty/untz/src/" )
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__SDL__")
 set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__SDL__")
 
-set ( UNTZ_INCLUDES 
-  ${SDL_INCLUDES}
+set ( UNTZ_INCLUDES
+  ${SDL_HEADERS}
   "${MOAI_ROOT}/3rdparty/untz/include/"
   "${MOAI_ROOT}/3rdparty/untz/src/"
-  "${MOAI_ROOT}/3rdparty/untz/src/native/sdl/" 
+  "${MOAI_ROOT}/3rdparty/untz/src/native/sdl/"
 )
 file ( GLOB UNTZ_SOURCES
   "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
@@ -26,7 +26,9 @@ endif ( NOT MOAI_VORBIS )
 
 add_library ( untz STATIC ${UNTZ_SOURCES} ${UNTZ_HEADERS} )
 
-target_link_libraries( untz SDL2-static )
+link_directories ( "${SDL_LIB_DIR}" )
+target_link_libraries( untz ${SDL_LIB} )
+add_dependencies ( untz SDL2 )
 
 if (MOAI_VORBIS)
   target_link_libraries ( untz vorbis )

@@ -5,6 +5,7 @@ set ( CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../cmake-modules" )
 
 set ( LUA_LIB_DIR  "" )
 set ( FMOD_LIB_DIR  "" )
+set ( SDL_LIB_DIR "" )
 set ( MOAI_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../.." )
 
 find_library ( APPLICATION_SERVICES_LIBRARY ApplicationServices )
@@ -33,6 +34,7 @@ include_directories ( ${OPENGL_INCLUDE_DIRS} ${HOST_ROOT} )
 
 #fix lua and fmod lib path
 if  ( NOT LIB_PATH )
+  link_directories ( ${SDL_LIB_DIR} )
   link_directories ( ${LUA_LIB_DIR} )
   link_directories ( ${FMOD_LIB_DIR} )
 endif (NOT LIB_PATH)
@@ -53,11 +55,13 @@ target_link_libraries ( moai
   moai-apple
   moai-sdl
   zlcore
-  SDL2-static
-    ${APPLICATION_SERVICES_LIBRARY}
-    ${CORE_SERVICES_LIBRARY}
-    ${OPENGL_LIBRARIES}
+  ${SDL_LIB}
+  ${APPLICATION_SERVICES_LIBRARY}
+  ${CORE_SERVICES_LIBRARY}
+  ${OPENGL_LIBRARIES}
 )
+add_dependencies ( moai SDL2 )
+
 set_target_properties ( moai PROPERTIES
    XCODE_ATTRIBUTE_INSTALL_PATH "$(LOCAL_APPS_DIR)"
    XCODE_ATTRIBUTE_SKIP_INSTALL "NO"

@@ -19,6 +19,12 @@ cd cmake-3.1.3-Darwin-x86_64/CMake.app/Contents/bin/
 export PATH=$(pwd):$PATH
 popd
 
+echo "building sdl"
+pushd ~
+cd 3rdparty/sdl2-2.0.0/
+./build/build-osx.sh
+popd
+
 pushd `dirname $0`
 bash build-osx.sh
 EXIT_CODE=$?

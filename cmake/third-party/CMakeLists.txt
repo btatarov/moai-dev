@@ -84,15 +84,19 @@ add_subdirectory ( webp )
 add_subdirectory ( zlib )
 
 #SDL is for pc only
-if (BUILD_LINUX OR BUILD_OSX OR BUILD_WINDOWS)
-  set(DIRECTX OFF CACHE BOOL "SDL DirectX")
-  set (SDL_SHARED OFF)
-  add_subdirectory(sdl2)
-  if (BUILD_LINUX OR BUILD_WINDOWS)
-    set(X11_SHARED OFF CACHE BOOL "ENABLE X11_SHARED")
-  endif (BUILD_LINUX OR BUILD_WINDOWS)
+if ( BUILD_LINUX OR BUILD_OSX OR BUILD_WINDOWS )
+  set ( SDL_HEADERS "" )
+  set ( SDL_LIB "" )
+  set ( SDL_LIB_DIR "" )
+
+  add_subdirectory ( sdl2 )
+
+  set ( SDL_HEADERS ${SDL_HEADERS} PARENT_SCOPE )
+  set ( SDL_LIB ${SDL_LIB} PARENT_SCOPE )
+  set ( SDL_LIB_DIR ${SDL_LIB_DIR} PARENT_SCOPE )
+
   add_subdirectory ( glew )
-endif (BUILD_LINUX OR BUILD_OSX OR BUILD_WINDOWS)
+endif ()
 
 #Build platform specific untz
 if (BUILD_ANDROID)

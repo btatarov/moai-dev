@@ -1,9 +1,11 @@
 project (libmoai)
 
 add_subdirectory ( config )
+set ( SDL_LIB_DIR "" )
 set ( LUA_LIB_DIR "" )
 set ( FMOD_LIB_DIR "" )
 add_subdirectory ( ../third-party third-party )
+set ( SDL_LIB_DIR ${SDL_LIB_DIR} PARENT_SCOPE )
 set ( LUA_LIB_DIR ${LUA_LIB_DIR} PARENT_SCOPE )
 set ( FMOD_LIB_DIR ${FMOD_LIB_DIR} PARENT_SCOPE )
 
