@@ -22,7 +22,7 @@ popd
 echo "building sdl"
 pushd `dirname $0`
 cd ../3rdparty/sdl2-2.0.0/
-./build/build-osx.sh
+bash build/build-osx.sh
 popd
 
 pushd `dirname $0`
