@@ -12,3 +12,6 @@ build_script: bin\ci-windows.bat
 build_script: bin\ci-windows.bat
 >>>>>>> postmorph
 test: off
+branches:
+  only:
+    - postmorph
