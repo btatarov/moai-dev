@@ -11,7 +11,7 @@
 
 	MOAI_SDK_HOME	:= ../../../
 	MY_ARM_MODE		:= arm
-	MY_ARM_ARCH		:= armeabi-v7a x86
+	MY_ARM_ARCH		:= armeabi-v7a arm64-v8a x86 x86_64
 	MOAI_MODULES	:= ../../../util/ant-libmoai/
 
 	#----------------------------------------------------------------#
@@ -102,8 +102,7 @@
 	#--------------------------------------------------------------#
 	# ADCOLONY
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_ADCOLONY=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-adcolony.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_ADCOLONY=0
 
 	#--------------------------------------------------------------#
 	# LUAEXT
@@ -131,8 +130,7 @@
 	#--------------------------------------------------------------#
 	# ADMOB
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_ADMOB=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-admob.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_ADMOB=0
 
 	#--------------------------------------------------------------#
 	# HEYZAP
@@ -170,7 +168,7 @@
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/freetype-2.4.4/config
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/libtess2/Include
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/jpeg-8c
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/lpng1419
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/libpng-1.4.19
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-freetype.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-jpg.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-png.mk
@@ -268,8 +266,7 @@
 	#--------------------------------------------------------------#
 	# STARTAPP
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_STARTAPP=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-startapp.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_STARTAPP=0
 
 	#--------------------------------------------------------------#
 	# CRITTERCISM
@@ -291,7 +288,7 @@
 	LOCAL_SRC_FILES 	+= src/aku_plugins.cpp
 
 	LOCAL_SHARED_LIBRARIES := fmod
-	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-admob libmoai-applovin libmoai-chartboost libmoai-googleplayservices libmoai-startapp libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
+	LOCAL_STATIC_LIBRARIES := libmoai-applovin libmoai-chartboost libmoai-googleplayservices libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
 	LOCAL_WHOLE_STATIC_LIBRARIES := libmoai-android libmoai-sim libmoai-core libcrypto
 
 #----------------------------------------------------------------#

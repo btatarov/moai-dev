@@ -1,10 +1,11 @@
 <!-- Amazon GameCircle -->
 <activity android:name="com.amazon.ags.html5.overlay.GameCircleUserInterface"
-	android:theme="@style/GCOverlay" android:hardwareAccelerated="false"></activity>
+	android:theme="@style/GCOverlay" android:hardwareAccelerated="true"></activity>
 <activity
 	android:name="com.amazon.identity.auth.device.authorization.AuthorizationActivity"
 	android:theme="@android:style/Theme.NoDisplay"
 	android:allowTaskReparenting="true"
+	android:hardwareAccelerated="true"
 	android:launchMode="singleTask">
 	<intent-filter>
     	<action android:name="android.intent.action.VIEW" />
@@ -14,7 +15,7 @@
   	</intent-filter>
 </activity>
 <activity android:name="com.amazon.ags.html5.overlay.GameCircleAlertUserInterface"
-android:theme="@style/GCAlert" android:hardwareAccelerated="false"></activity>
+android:theme="@style/GCAlert" android:hardwareAccelerated="true"></activity>
 <receiver
 	android:name="com.amazon.identity.auth.device.authorization.PackageIntentReceiver"
 	android:enabled="true">

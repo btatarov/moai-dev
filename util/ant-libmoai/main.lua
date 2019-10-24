@@ -6,7 +6,7 @@ OUTPUT_DIR			= INVOKE_DIR .. 'libmoai/'
 
 LIB_NAME			= 'moai'
 MY_ARM_MODE			= 'arm'
-MY_ARM_ARCH			= 'armeabi-v7a x86'
+MY_ARM_ARCH			= 'armeabi-v7a arm64-v8a x86 x86_64'
 MY_APP_PLATFORM		= 'android-15'
 
 -- Modules

@@ -4,11 +4,12 @@
     android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
     android:launchMode="singleTop"
     android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+    android:hardwareAccelerated="true"
 />
 <activity
     android:name="com.vungle.warren.ui.VungleFlexViewActivity"
     android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
-    android:hardwareAccelerated="true"
     android:launchMode="singleTop"
     android:theme="@android:style/Theme.Translucent.NoTitleBar"
+    android:hardwareAccelerated="true"
 />

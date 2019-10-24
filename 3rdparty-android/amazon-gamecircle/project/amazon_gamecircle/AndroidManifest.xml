@@ -4,11 +4,11 @@
     android:versionCode="1"
     android:versionName="2.4.3" >
 
-    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="26" />
+    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="28" />
 
     <application android:label="GameCircleSDK" >
-        <activity android:name="com.amazon.ags.html5.overlay.GameCircleUserInterface" android:theme="@style/GCOverlay" android:hardwareAccelerated="false"></activity>
-        <activity android:name="com.amazon.ags.html5.overlay.GameCircleAlertUserInterface" android:theme="@style/GCAlert" android:hardwareAccelerated="false"></activity>
+        <activity android:name="com.amazon.ags.html5.overlay.GameCircleUserInterface" android:theme="@style/GCOverlay" android:hardwareAccelerated="true"></activity>
+        <activity android:name="com.amazon.ags.html5.overlay.GameCircleAlertUserInterface" android:theme="@style/GCAlert" android:hardwareAccelerated="true"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

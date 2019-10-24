@@ -2,16 +2,19 @@
 <activity
     android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
     android:theme="@android:style/Theme"
+    android:hardwareAccelerated="true"
 />
 <activity
     android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
     android:theme="@android:style/Theme.Translucent"
     android:configChanges="orientation|keyboardHidden|screenSize"
+    android:hardwareAccelerated="true"
 />
 <activity
     android:name="com.startapp.android.publish.adsCommon.activities.FullScreenActivity"
     android:theme="@android:style/Theme"
     android:configChanges="orientation|keyboardHidden|screenSize"
+    android:hardwareAccelerated="true"
 />
 
 <service android:name="com.startapp.android.publish.common.metaData.PeriodicMetaDataService" />

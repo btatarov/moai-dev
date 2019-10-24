@@ -5,6 +5,10 @@
 #include <moai_config.h>
 #include <zl-vfs/headers.h>
 
+#ifndef MOAI_COMPILER_MSVC
+#pragma GCC diagnostic ignored "-Wformat-security"
+#endif
+
 using namespace std;
 
 // poor man's vfscanf
@@ -22,7 +26,7 @@ typedef struct FormatSpecifier {
 	int		mIgnore;
 	int		mWidth;
 	int		mType;
-	
+
 	size_t mFormatLength;
 	char const*	mSpecStr;
 	char const*	mMatch;
@@ -75,9 +79,9 @@ void buffer_float ( string& buffer, ZLFILE* file ) {
 
 	int backup = 1;
 	char c;
-	
+
 	c = read_char ( buffer, file );
-	
+
 	// sign and digits
 	if ( is_sign ( c )) {
 		c = read_char ( buffer, file );
@@ -91,12 +95,12 @@ void buffer_float ( string& buffer, ZLFILE* file ) {
 	else {
 		goto finish;
 	}
-	
+
 	// decimal point and digits
 	if ( c == '.' ) {
 		c = read_char ( buffer, file );
 		backup++;
-		
+
 		if ( is_digit ( c )) {
 			backup = 1;
 			while ( is_digit ( c = read_char ( buffer, file )));
@@ -105,14 +109,14 @@ void buffer_float ( string& buffer, ZLFILE* file ) {
 			goto finish;
 		}
 	}
-	
+
 	// exponent
 	if ( !( c == 'e' ) || ( c == 'E' )) goto finish;
 	backup++;
 
 	// sign or first digit
 	c = read_char ( buffer, file );
-	
+
 	// sign and digits
 	if ( is_sign ( c )) {
 		backup++;
@@ -122,12 +126,12 @@ void buffer_float ( string& buffer, ZLFILE* file ) {
 	if ( is_digit ( c )) {
 		while ( is_digit ( c = read_char ( buffer, file )));
 		backup = 1;
-	}	
+	}
 
 finish:
 
 	buffer [ buffer.length () - backup ] = 0;
-	
+
 	if ( c == 0 ) {
 		backup--;
 	}
@@ -138,16 +142,16 @@ finish:
 void buffer_hex ( string& buffer, ZLFILE* file ) {
 
 	char c;
-	
+
 	c = read_char ( buffer, file );
 	if ( !is_hex_digit ( c )) goto finish;
-	
+
 	if ( c == '0' ) {
-	
+
 		c = read_char ( buffer, file );
 		if ( !( is_hex_digit ( c ) || ( c == 'x' ) || ( c == 'X' ))) goto finish;
 	}
-	
+
 	while ( is_hex_digit ( read_char ( buffer, file )));
 
 finish:
@@ -160,7 +164,7 @@ finish:
 void buffer_int ( string& buffer, ZLFILE* file ) {
 
 	while ( is_sign_or_digit ( read_char ( buffer, file )));
-	
+
 	buffer [ buffer.length () - 1 ] = 0;
 	zl_fseek ( file, -1, SEEK_CUR );
 }
@@ -206,7 +210,7 @@ char read_char ( string& buffer, ZLFILE* file ) {
 
 	int result = zl_fgetc ( file );
 	char c = result == EOF ? 0 : ( char )result;
-	
+
 	buffer.push_back ( c );
 	return c;
 }
@@ -217,24 +221,24 @@ int read_format_specifier ( const char* format, FormatSpecifier* specifier ) {
 	size_t i = 0;
 
 	if ( !format [ i ]) return 0;
-	
+
 	specifier->mIgnore = 0;
 	specifier->mWidth = -1;
 	specifier->mType = INPUT_TYPE_MATCH;
 	specifier->mSpecStr = 0;
 	specifier->mFormatLength = 0;
-	
+
 	// check for a specifier
 	if ( format [ i ] == '%' ) {
-		
+
 		specifier->mSpecStr = &format [ i++ ];
-		
+
 		// ignore flag
 		if ( format [ i ] == '*' ) {
 			specifier->mIgnore = 1;
 			i++;
 		}
-		
+
 		// width
 		if ( is_digit ( format [ i ])) {
 			specifier->mWidth = 0;
@@ -243,7 +247,7 @@ int read_format_specifier ( const char* format, FormatSpecifier* specifier ) {
 				specifier->mWidth += format [ i ] - '0';
 			}
 		}
-		
+
 		// type
 		switch ( format [ i++ ]) {
 			case 'c':
@@ -280,13 +284,13 @@ int read_format_specifier ( const char* format, FormatSpecifier* specifier ) {
 			return 1;
 		}
 	}
-	
+
 	// check to see how many characters to match
 	specifier->mSpecStr = 0;
 	specifier->mMatch = format;
 	for ( i = 0; format [ i ] && ( format [ i ] != '%' ); i++ );
 	specifier->mFormatLength = i;
-	
+
 	return 1;
 }
 
@@ -305,20 +309,20 @@ int zl_vfscanf ( ZLFILE* file, const char* format, va_list arg ) {
 	int result;
 	int count = 0;
 	FormatSpecifier specifier;
-	
-	string buffer;	
+
+	string buffer;
 	buffer.reserve ( SCAN_BUFFER_SIZE );
-	
+
 	while ( read_format_specifier ( format, &specifier ) && !zl_feof ( file )) {
 		format = &format [ specifier.mFormatLength ];
 		result = 0;
-		
+
 		if ( specifier.mSpecStr ) {
-			
+
 			void* out = specifier.mIgnore ? 0 : va_arg ( arg, void* );
-			
+
 			switch ( specifier.mType ) {
-				
+
 				case INPUT_TYPE_CHAR: {
 					buffer_char ( buffer, file );
 					break;
@@ -343,17 +347,17 @@ int zl_vfscanf ( ZLFILE* file, const char* format, va_list arg ) {
 				default:
 					goto finish;
 			}
-			
+
 			result = out ? sscanf ( buffer.c_str (), specifier.mSpecStr, out ) : sscanf ( buffer.c_str (), specifier.mSpecStr );
-			
+
 			if ( result == EOF ) goto finish;
 		}
 		else {
-		
+
 			switch ( specifier.mType ) {
-				
+
 				case INPUT_TYPE_STRING: {
-				
+
 					if ( specifier.mIgnore ) {
 						int c = zl_getc ( file );
 						while ( c && !(( c == EOF ) || is_whitespace ( c ))) {
@@ -362,13 +366,13 @@ int zl_vfscanf ( ZLFILE* file, const char* format, va_list arg ) {
 					}
 					else {
 						char* out = specifier.mIgnore ? 0 : va_arg ( arg, char* );
-						
+
 						int c = zl_getc ( file );
 						while ( c && !(( c == EOF ) || is_whitespace ( c ))) {
 							( *out++ ) = ( char )c;
 							c = zl_getc ( file );
 							result = 1;
-						}	
+						}
 					}
 					break;
 				}
@@ -376,20 +380,20 @@ int zl_vfscanf ( ZLFILE* file, const char* format, va_list arg ) {
 					char c;
 					size_t i = 0;
 					for ( ; i < specifier.mFormatLength; ++i ) {
-						
+
 						c = ( char )zl_getc ( file );
 						if ( c != specifier.mMatch [ i ]) goto finish;
 					}
 					break;
 				}
-			}	
+			}
 		}
-		
+
 		if ( result ) {
 			++count;
 		}
 	}
-	
+
 finish:
 
 	return count;

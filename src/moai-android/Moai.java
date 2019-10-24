@@ -160,6 +160,9 @@ public class Moai {
 		"com.ziplinegames.moai.MoaiVungle",
 	};
 
+	public static Handler sTicker;
+	public static Runnable sTick;
+
 	private static Activity 				sActivity = null;
 	private static ApplicationState 		sApplicationState = ApplicationState.APPLICATION_UNINITIALIZED;
 	private static ArrayList < Class < ? >>	sAvailableClasses = new ArrayList < Class < ? >> ();
@@ -172,6 +175,7 @@ public class Moai {
 	protected static native boolean		AKUAppInvokeListener			( int eventID );
 	protected static native void		AKUAppOpenedFromURL				( String url );
 	protected static native int	 		AKUCreateContext 				();
+	protected static native void 		AKUDetectFramebuffer			();
 	protected static native void 		AKUDetectGfxContext 			();
 	protected static native void 		AKUEnqueueLevelEvent 			( int deviceId, int sensorId, float x, float y, float z );
 	protected static native void 		AKUEnqueueLocationEvent			( int deviceId, int sensorId, double longitude, double latitude, double altitude, float hAccuracy, float vAccuracy, float speed );
@@ -257,10 +261,17 @@ public class Moai {
 		int contextId;
 		synchronized ( sAkuLock ) {
 			contextId = AKUCreateContext ();
-			AKUSetContext ( contextId );
 		}
 
 		return contextId;
+	}
+
+	//----------------------------------------------------------------//
+	public static void detectFramebuffer () {
+
+		synchronized ( sAkuLock ) {
+			AKUDetectFramebuffer ();
+		}
 	}
 
 	//----------------------------------------------------------------//
@@ -515,6 +526,14 @@ public class Moai {
 			AKUSetConnectionType ( connectionType );
 		}
 	}
+
+	//----------------------------------------------------------------//
+    public static void setContext ( int context ) {
+
+        synchronized ( sAkuLock ) {
+            AKUSetContext ( context );
+        }
+    }
 
 	//----------------------------------------------------------------//
 	public static void setDocumentDirectory ( String path ) {

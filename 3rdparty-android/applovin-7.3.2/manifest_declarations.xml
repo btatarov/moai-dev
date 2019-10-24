@@ -2,7 +2,9 @@
 <meta-data android:name="applovin.sdk.key" android:value="@APPLOVIN_APP_ID@"  />
 <activity
 	android:name="com.applovin.adview.AppLovinInterstitialActivity"
-	android:configChanges="keyboardHidden|orientation|screenSize" />
+	android:configChanges="keyboardHidden|orientation|screenSize"
+	android:hardwareAccelerated="true" />
 <activity
 	android:name="com.applovin.adview.AppLovinConfirmationActivity"
-	android:configChanges="keyboardHidden|orientation|screenSize" />
+	android:configChanges="keyboardHidden|orientation|screenSize"
+	android:hardwareAccelerated="true" />

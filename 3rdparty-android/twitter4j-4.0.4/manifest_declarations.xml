@@ -1,4 +1,5 @@
 <!-- Twitter -->
 <activity android:name="com.ziplinegames.moai.TwitterOAuthActivity"
     android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-    android:configChanges="keyboardHidden|orientation|screenSize" android:screenOrientation="behind" />
+    android:configChanges="keyboardHidden|orientation|screenSize" android:screenOrientation="behind"
+    android:hardwareAccelerated="true" />

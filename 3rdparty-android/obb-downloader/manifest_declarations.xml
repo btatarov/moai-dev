@@ -1,4 +1,4 @@
 <!-- Google Downloader -->
-<activity android:name="com.ziplinegames.moai.MoaiObbDownloader" />
+<activity android:name="com.ziplinegames.moai.MoaiObbDownloader" android:hardwareAccelerated="true" />
 <service android:name="com.ziplinegames.moai.MoaiObbDownloaderService" />
 <receiver android:name="com.ziplinegames.moai.MoaiObbDownloaderAlarmReceiver" />

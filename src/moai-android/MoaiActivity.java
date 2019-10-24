@@ -36,8 +36,8 @@ import android.view.WindowManager;
 // Moai
 import com.ziplinegames.moai.*;
 
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+// import org.apache.http.client.methods.HttpGet;
+// import org.apache.http.impl.client.DefaultHttpClient;
 import java.net.URI;
 import android.os.AsyncTask;
 import android.net.Uri;
@@ -67,6 +67,9 @@ public class MoaiActivity extends Activity {
 
 		MoaiLog.i ( "Loading libgnustl_shared.so" );
 		System.loadLibrary ( "gnustl_shared" );
+
+		// MoaiLog.i ( "Loading libc++_shared.so" );
+		// System.loadLibrary ( "c++_shared" );
 
 		// load fmod only if exists
 		try {
@@ -114,7 +117,7 @@ public class MoaiActivity extends Activity {
 
 		Moai.onCreate ( this );
 
-		Moai.createContext ();
+		int moaiContext = Moai.createContext ();
 
 		Moai.init ();
 
@@ -123,28 +126,35 @@ public class MoaiActivity extends Activity {
 
 		int apiVersion = android.os.Build.VERSION.SDK_INT;
 
-		// Immersive mode
-		if ( apiVersion >= 19 ) {
+		if ( apiVersion >= 28 ) { // Full screen for newer devices with notches
+
+				// getWindow ().addFlags ( WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS );
+				// getWindow ().addFlags ( WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION );
+				getWindow ().setFlags ( WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS );
+				getWindow ().getAttributes ().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+				getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN );
+
+		} else if ( apiVersion >= 19 ) {  // Immersive mode
 
 			final Handler mHideSystemUiHandler = new Handler ();
 			final Runnable mHideSystemUiCallback = new Runnable () {
 				@Override
 				public void run () {
-					getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+					getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN );
 	    		}
 			};
 
 			getWindow ().getDecorView ().setOnSystemUiVisibilityChangeListener ( new View.OnSystemUiVisibilityChangeListener () {
 				@Override
 				public void onSystemUiVisibilityChange ( int visibility ) {
-					if ( ( visibility & ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION ) ) == 0 ) {
+					if ( ( visibility & ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN ) ) == 0 ) {
 	            		mHideSystemUiHandler.removeCallbacks ( mHideSystemUiCallback );
 	            		mHideSystemUiHandler.postDelayed ( mHideSystemUiCallback, 3000 );
 	        		}
 	    		}
 			} );
 
-			getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+			getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN );
 		}
 
 		try {
@@ -182,7 +192,7 @@ public class MoaiActivity extends Activity {
 		Point size = new Point ();
 		display.getSize ( size );
 
-	    mMoaiView = new MoaiView ( this, size.x, size.y, info.reqGlEsVersion );
+	  mMoaiView = new MoaiView ( this, moaiContext, size.x, size.y, info.reqGlEsVersion );
 		mSensorManager = ( SensorManager ) getSystemService ( Context.SENSOR_SERVICE );
 		mLocationManager = (LocationManager) getSystemService ( Context.LOCATION_SERVICE );
 
