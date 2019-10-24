@@ -26,7 +26,7 @@ fi
 if [ "x$2" != "x" ]; then
     SRCDIR="$2"
 else
-    SRCDIR=$MOAI_ROOT/3rdparty/LuaJIT-2.0.4
+    SRCDIR=$MOAI_ROOT/3rdparty/LuaJIT-2.1.0-beta3
 fi
 
 if [ "x$3" != "x" ]; then

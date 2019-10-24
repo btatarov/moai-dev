@@ -12,6 +12,6 @@
 	LOCAL_CFLAGS		+= -fvisibility=hidden
 
 	LOCAL_C_INCLUDES    := $(MY_HEADER_SEARCH_PATHS)
-	LOCAL_SRC_FILES     := $(MOAI_SDK_HOME)/3rdparty/LuaJIT-2.0.4/lib/android/$(TARGET_ARCH_ABI)/libluajit.a
+	LOCAL_SRC_FILES     := $(MOAI_SDK_HOME)/3rdparty/LuaJIT-2.1.0-beta3/lib/android/$(TARGET_ARCH_ABI)/libluajit.a
 
 	include $(PREBUILT_STATIC_LIBRARY)
