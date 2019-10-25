@@ -73,7 +73,7 @@
 
 	ifeq ($(MOAI_WITH_LUAJIT),true)
 		MY_LOCAL_CFLAGS += -DMOAI_WITH_LUAJIT=1
-		MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/LuaJIT-2.1.0-beta3/include
+		MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/LuaJIT-2.1.0-beta3/src
 		MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-luajit.mk
 	else
 		MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/lua-5.1.3/src

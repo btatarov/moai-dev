@@ -158,4 +158,6 @@ LUALIB_API void (luaL_pushresult) (luaL_Buffer *B);
 
 /* }====================================================== */
 
+#define luaL_reg	luaL_Reg
+
 #endif

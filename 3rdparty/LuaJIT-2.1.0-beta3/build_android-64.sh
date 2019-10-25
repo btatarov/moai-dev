@@ -27,12 +27,14 @@ if [ -f src/libluajit.a ]; then
 fi;
 
 # Android/x86_64, x86_64
+# TODO: broken zl-vfs, no  TARGET_CONLY_FLAGS="$CFLAGS"
 NDKABI=21
 NDKVER=$NDK/toolchains/x86_64-4.9
 NDKP=$NDKVER/prebuilt/${HOST_OS}-x86_64/bin/x86_64-linux-android-
-NDKF="-w --sysroot $NDK/platforms/android-$NDKABI/arch-x86_64"
+NDKARCH="-w -DLUAJIT_ENABLE_GC64=1"
+NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-x86_64"
 make clean
-make -o2 HOST_CC="gcc -m64" CROSS=$NDKP TARGET_CONLY_FLAGS="$CFLAGS" TARGET_SYS=android TARGET_FLAGS="$NDKF" clean all
+make -o2 HOST_CC="gcc -m64" CROSS=$NDKP TARGET_SYS=android TARGET_FLAGS="$NDKF $NDKARCH" clean all
 
 DESTDIR=lib/android/x86_64
 if [ -f src/libluajit.a ]; then

@@ -8,7 +8,7 @@ SETTINGS = {
 }
 
 OPTIONAL_COMPONENTS = {
-	MOAI_WITH_LUAJIT = false,
+	MOAI_WITH_LUAJIT = true,
 }
 
 MODULES = {
