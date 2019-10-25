@@ -8,7 +8,7 @@ SETTINGS = {
 }
 
 OPTIONAL_COMPONENTS = {
-	MOAI_WITH_LUAJIT = true,
+	MOAI_WITH_LUAJIT = false,
 }
 
 MODULES = {
@@ -115,19 +115,16 @@ MODULES = {
 		MODULE_DEFINE = 'AKU_WITH_CRYPTO',
 
 		HEADER_SEARCH_PATHS = {
-			'$(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include-android',
-			'$(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include',
-			'$(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g',
-			'$(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/crypto',
+			'$(MOAI_SDK_HOME)/3rdparty/mbedtls-2.16.3/include',
 		},
 
 		INCLUDES = {
-			'$(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-crypto.mk',
+			'$(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-mbedtls.mk',
 			'$(MOAI_SDK_HOME)/ant/libmoai/modules/zl-crypto.mk',
 			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-crypto.mk',
 		},
 
-		STATIC_LIBRARIES = 'libmoai-crypto libzl-crypto libcrypto',
+		STATIC_LIBRARIES = 'libmoai-crypto libzl-crypto libmbedtls',
 	},
 
 	----------------------------------------------------------------
@@ -205,34 +202,23 @@ MODULES = {
 		HEADER_SEARCH_PATHS = {
 			'$(MOAI_SDK_HOME)/3rdparty/c-ares-1.7.5',
 			'$(MOAI_SDK_HOME)/3rdparty/c-ares-1.7.5/include-android',
-			'$(MOAI_SDK_HOME)/3rdparty/curl-7.19.7/include-android',
-			'$(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include-android',
-			'$(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include',
+			'$(MOAI_SDK_HOME)/3rdparty/curl-7.66.0/include',
+			'$(MOAI_SDK_HOME)/3rdparty/curl-7.66.0/include-android',
 		},
 
 		INCLUDES = {
 			'$(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-c-ares.mk',
 			'$(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-curl.mk',
-			'$(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-ssl.mk',
 			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-http-client.mk',
 		},
 
-		STATIC_LIBRARIES = 'libcares libcurl libssl libmoai-http-client',
+		STATIC_LIBRARIES = 'libcares libcurl libmbedtls libmoai-http-client',
 	},
 
 	----------------------------------------------------------------
 	LUAEXT = {
 
 		MODULE_DEFINE = 'AKU_WITH_LUAEXT',
-
-		HEADER_SEARCH_PATHS = {
-			'$(MOAI_SDK_HOME)/3rdparty/luacrypto-0.2.0/src',
-			'$(MOAI_SDK_HOME)/3rdparty/luacurl-1.2.1',
-			'$(MOAI_SDK_HOME)/3rdparty/luafilesystem-1.5.0/src',
-			'$(MOAI_SDK_HOME)/3rdparty/luasocket-2.0.2/src',
-			'$(MOAI_SDK_HOME)/3rdparty/luasocket-2.0.2-embed/src',
-			'$(MOAI_SDK_HOME)/3rdparty/luasql-2.2.0/src',
-		},
 
 		INCLUDES = {
 			'$(MOAI_SDK_HOME)/ant/libmoai/modules/moai-luaext.mk',
@@ -475,8 +461,7 @@ STATIC_LIBRARIES = {
 
 	'libcurl',
 	'libcares',
-	'libssl',
-	'libcrypto',
+	'libmbedtls',
 
 	--vfs
 	'libzl-vfs',
@@ -487,7 +472,6 @@ WHOLE_STATIC_LIBRARIES = {
 	'libmoai-android',
 	'libmoai-sim',
 	'libmoai-core',
-	'libcrypto',
 }
 
 SHARED_LIBRARIES = {

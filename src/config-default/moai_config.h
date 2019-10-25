@@ -56,10 +56,6 @@
 		#define MOAI_WITH_JANSSON 1
 	#endif
 
-	#ifndef MOAI_WITH_LIBCRYPTO
-		#define MOAI_WITH_LIBCRYPTO 1
-	#endif
-
 	#ifndef MOAI_WITH_LIBCURL
 		#define MOAI_WITH_LIBCURL 1
 	#endif

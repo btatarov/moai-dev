@@ -31,8 +31,6 @@ public class MoaiView extends GLSurfaceView {
 		private Context		mAppContext;
 		private int 		mWidth;
 		private int 		mHeight;
-		// private Handler		mHandler;
-		// private Runnable	mUpdateRunnable;
 
     //----------------------------------------------------------------//
 		public MoaiView ( Context context, int moaiContext, int width, int height, int glesVersion ) {
@@ -50,17 +48,7 @@ public class MoaiView extends GLSurfaceView {
 				// NOTE: Must be set before the renderer is set.
 				setEGLContextClientVersion ( 2 );
 
-				// Create a handler that we can use to post to the main thread and a pseudo-
-				// periodic runnable that will handle calling Moai.update on the main thread.
-				// mHandler = new Handler ( Looper.getMainLooper ());
-				// mUpdateRunnable = new Runnable () {
-				//
-				// 	public void run () {
-				// 		// Moai.update ();
-				// 		mHandler.postDelayed ( mUpdateRunnable , AKU_UPDATE_FREQUENCY );
-				// 	}
-				// };
-
+				// Create the frame update ticker
 				Moai.sTicker = new Handler ( Looper.getMainLooper () );
 				Moai.sTick = new Runnable () {
 						public void run () {
@@ -69,7 +57,7 @@ public class MoaiView extends GLSurfaceView {
 				};
 
 				setEGLConfigChooser(8 , 8, 8, 8, 16, 0);
-		    setRenderer ( new MoaiRenderer ( moaiContext ));
+		    	setRenderer ( new MoaiRenderer ( moaiContext ));
 				onPause (); // Pause rendering until restarted by the activity lifecycle.
 		}
 
@@ -90,7 +78,6 @@ public class MoaiView extends GLSurfaceView {
 
 			if ( paused ) {
 
-					// mHandler.removeCallbacks ( mUpdateRunnable );
 					Moai.pause ( true );
 					setRenderMode ( GLSurfaceView.RENDERMODE_WHEN_DIRTY );
 					onPause ();
@@ -99,7 +86,6 @@ public class MoaiView extends GLSurfaceView {
 
 					setRenderMode ( GLSurfaceView.RENDERMODE_CONTINUOUSLY );
 					Moai.pause ( false );
-					// mHandler.postDelayed ( mUpdateRunnable , AKU_UPDATE_FREQUENCY );
 					onResume ();
 			}
 		}
@@ -208,7 +194,6 @@ public class MoaiView extends GLSurfaceView {
 				public void onDrawFrame ( GL10 gl ) {
 
 						Moai.sTicker.post ( Moai.sTick );
-						// Moai.update ();
 						Moai.render ();
 				}
 

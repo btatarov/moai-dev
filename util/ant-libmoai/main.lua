@@ -10,7 +10,7 @@ MY_ARM_ARCH			= 'armeabi-v7a arm64-v8a x86 x86_64'
 MY_APP_PLATFORM		= 'android-15'
 
 -- Modules
-MOAI_WITH_LUAJIT	= true
+MOAI_WITH_LUAJIT	= false
 
 CONFIGS				= {}
 

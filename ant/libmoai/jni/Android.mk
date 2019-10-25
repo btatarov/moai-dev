@@ -11,7 +11,7 @@
 
 	MOAI_SDK_HOME	:= ../../../
 	MY_ARM_MODE		:= arm
-	MY_ARM_ARCH		:= x86_64
+	MY_ARM_ARCH		:= armeabi-v7a arm64-v8a x86 x86_64
 	MOAI_MODULES	:= ../../../util/ant-libmoai/
 
 	#----------------------------------------------------------------#
@@ -108,12 +108,6 @@
 	# LUAEXT
 
 	MY_LOCAL_CFLAGS += -DAKU_WITH_LUAEXT=1
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luacrypto-0.2.0/src
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luacurl-1.2.1
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luafilesystem-1.5.0/src
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luasocket-2.0.2/src
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luasocket-2.0.2-embed/src
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/luasql-2.2.0/src
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-luaext.mk
 
 	#--------------------------------------------------------------#
@@ -181,12 +175,10 @@
 	MY_LOCAL_CFLAGS += -DAKU_WITH_HTTP_CLIENT=1
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/c-ares-1.7.5
 	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/c-ares-1.7.5/include-android
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/curl-7.19.7/include-android
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include-android
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/curl-7.66.0/include
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/curl-7.66.0/include-android
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-c-ares.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-curl.mk
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-ssl.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-http-client.mk
 
 	#--------------------------------------------------------------#
@@ -219,11 +211,8 @@
 	# CRYPTO
 
 	MY_LOCAL_CFLAGS += -DAKU_WITH_CRYPTO=1
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include-android
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/include
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/openssl-1.0.2g/crypto
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-crypto.mk
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/mbedtls-2.16.3/include
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/3rdparty-mbedtls.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/zl-crypto.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-crypto.mk
 
@@ -288,8 +277,8 @@
 	LOCAL_SRC_FILES 	+= src/aku_plugins.cpp
 
 	LOCAL_SHARED_LIBRARIES := fmod
-	LOCAL_STATIC_LIBRARIES := libmoai-applovin libmoai-chartboost libmoai-googleplayservices libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libssl libcrypto libzl-vfs libzlib
-	LOCAL_WHOLE_STATIC_LIBRARIES := libmoai-android libmoai-sim libmoai-core libcrypto
+	LOCAL_STATIC_LIBRARIES := libmoai-applovin libmoai-chartboost libmoai-googleplayservices libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libmbedtls libzl-vfs libzlib
+	LOCAL_WHOLE_STATIC_LIBRARIES := libmoai-android libmoai-sim libmoai-core
 
 #----------------------------------------------------------------#
 # build shared library

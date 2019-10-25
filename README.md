@@ -13,18 +13,19 @@ Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkh
 ### Core (libmoai)
 * fmod as module (from [moai-fmod-studio](https://github.com/Vavius/moai-fmod-studio))
 * spine as module (from [plugin-moai-spine](https://github.com/Vavius/plugin-moai-spine))
-* openssl 1.0.2g
+* curl 7.66.0
 * libpng 1.4.19
-* luajit 2.0.4
+* LuaJIT 2.1.0-beta3
+* mbedtls 2.16.3 (openssl and crypto replacement)
 * MOAIColor::setColorHSL
 * MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
 * MOAIParticlePexPlugin::loadFromString
 * MOAISim.exitApp (desktop hosts)
 * TODO: move loadDual in a separate module (loader)
-* TODO: facebook setToken and graphRequest (android and ios)
 
 ### Android
-* immersive mode
+* Full screen mode with cutout (notch) support
+* 64bit support
 * CHANGE: LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
 * MOAIAppAndroid::closeApp ()
 * MOAIObbDownloaderAndroid (downloading extension files for googleplay)

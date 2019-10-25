@@ -38,3 +38,5 @@ docs/api-reference
 /3rdparty/fmod/lib
 /3rdparty/LuaJIT-2.1.0-beta3/lib
 /3rdparty/sdl2-2.0.0/lib
+
+/TODO.txt

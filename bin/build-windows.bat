@@ -31,7 +31,6 @@ cmake -G "%generator%" ^
 -DMOAI_SDL=true ^
 -DMOAI_HTTP_CLIENT=false ^
 -DMOAI_HTTP_SERVER=false ^
--DMOAI_LIBCRYPTO=false ^
 -DMOAI_CRYPTO=false ^
 -DMOAI_OPENSSL=false ^
 -DCMAKE_INSTALL_PREFIX=%libprefix%\Release ^

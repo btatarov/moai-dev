@@ -19,7 +19,7 @@ NDKP=$NDKVER/prebuilt/${HOST_OS}-x86_64/bin/aarch64-linux-android-
 NDKARCH="-w -DLJ_ABI_SOFTFP=0 -DLJ_ARCH_HASFPU=1 -DLUAJIT_ENABLE_GC64=1"
 NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-arm64"
 make clean
-make -o2 HOST_CC="gcc -m64" CROSS=$NDKP TARGET_CONLY_FLAGS="$CFLAGS" TARGET_SYS=android TARGET_FLAGS="$NDKF $NDKARCH" clean all
+make -o2 HOST_CC="gcc -m64" CROSS=$NDKP TARGET_CONLY_FLAGS="$CFLAGS" TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH" clean all
 
 DESTDIR=lib/android/arm64-v8a
 if [ -f src/libluajit.a ]; then
@@ -27,14 +27,13 @@ if [ -f src/libluajit.a ]; then
 fi;
 
 # Android/x86_64, x86_64
-# TODO: broken zl-vfs, no  TARGET_CONLY_FLAGS="$CFLAGS"
 NDKABI=21
 NDKVER=$NDK/toolchains/x86_64-4.9
 NDKP=$NDKVER/prebuilt/${HOST_OS}-x86_64/bin/x86_64-linux-android-
 NDKARCH="-w -DLUAJIT_ENABLE_GC64=1"
 NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-x86_64"
 make clean
-make -o2 HOST_CC="gcc -m64" CROSS=$NDKP TARGET_SYS=android TARGET_FLAGS="$NDKF $NDKARCH" clean all
+make -o2 HOST_CC="gcc -m64" CROSS=$NDKP TARGET_CONLY_FLAGS="$CFLAGS" TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH" clean all
 
 DESTDIR=lib/android/x86_64
 if [ -f src/libluajit.a ]; then

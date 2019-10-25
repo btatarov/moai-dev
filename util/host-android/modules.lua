@@ -42,8 +42,7 @@ MODULES = {
 
     contrib = {
 		lib		= MOAI_SDK_HOME .. '3rdparty-android/contrib',
-    bin   = MOAI_SDK_HOME .. 'ant/libmoai/libs/<arch>/libgnustl_shared.so', -- HACK: import gnustl
-    -- bin   = MOAI_SDK_HOME .. 'ant/libmoai/libs/<arch>/libc++_shared.so', -- HACK: import c++
+    -- bin   = MOAI_SDK_HOME .. 'ant/libmoai/libs/<arch>/libgnustl_shared.so', -- HACK: import gnustl
 	},
 
     crittercism = {

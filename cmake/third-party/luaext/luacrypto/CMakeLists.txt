@@ -1,6 +1,6 @@
 project( luacrypto )
 
-set ( LUAEXT_SOURCES 
+set ( LUAEXT_SOURCES
   ${MOAI_ROOT}/3rdparty/luacrypto-0.3.2/src/lcrypto.c
 )
 

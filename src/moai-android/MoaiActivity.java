@@ -65,12 +65,6 @@ public class MoaiActivity extends Activity {
 	//----------------------------------------------------------------//
 	static {
 
-		MoaiLog.i ( "Loading libgnustl_shared.so" );
-		System.loadLibrary ( "gnustl_shared" );
-
-		// MoaiLog.i ( "Loading libc++_shared.so" );
-		// System.loadLibrary ( "c++_shared" );
-
 		// load fmod only if exists
 		try {
 
@@ -87,10 +81,7 @@ public class MoaiActivity extends Activity {
 			MoaiLog.i ( "Loading libadcolony.so" );
 			System.loadLibrary ( "js" );
 			System.loadLibrary ( "adcolony" );
-		} catch ( UnsatisfiedLinkError e ) {
-
-			MoaiLog.i ( "AdColony is disabled." );
-		}
+		} catch ( UnsatisfiedLinkError e ) {}
 
 		MoaiLog.i ( "Loading libmoai.so" );
 		System.loadLibrary ( "moai" );
@@ -128,8 +119,6 @@ public class MoaiActivity extends Activity {
 
 		if ( apiVersion >= 28 ) { // Full screen for newer devices with notches
 
-				// getWindow ().addFlags ( WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS );
-				// getWindow ().addFlags ( WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION );
 				getWindow ().setFlags ( WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS );
 				getWindow ().getAttributes ().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
 				getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN );
@@ -207,8 +196,12 @@ public class MoaiActivity extends Activity {
 
 		MoaiLog.i ( "MoaiActivity onCreate: Running game scripts" );
 
-		// Moai.runScript ( "../init.lua" );
-		Moai.runScript ( "bootstrap.lua" );
+		// Load either 32bit or 64bit init script
+		if ( ( apiVersion >= 21 ) && ( android.os.Build.SUPPORTED_64_BIT_ABIS.length > 0 ) ) {
+			Moai.runScript ( "bootstrap64.lua" );
+		} else {
+			Moai.runScript ( "bootstrap32.lua" );
+		}
 
 		Moai.invokeListener ( Moai.ListenerEvent.ACTIVITY_ON_CREATE );
     }
