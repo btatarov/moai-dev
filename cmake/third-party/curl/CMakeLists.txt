@@ -17,7 +17,7 @@ project ( curl )
 
   if (BUILD_LINUX)
       set ( CURL_INCLUDES
-        "${MOAI_ROOT}/3rdparty/curl-7.19.7/include/"
+        "${MOAI_ROOT}/3rdparty/curl-7.66.0/include/"
        )
       set ( RUN_CURL_CONFIGURE true )
   endif (BUILD_LINUX)
@@ -25,33 +25,33 @@ project ( curl )
 
   if (BUILD_WINDOWS)
       set ( CURL_INCLUDES
-        "${MOAI_ROOT}/3rdparty/curl-7.19.7/include/"
+        "${MOAI_ROOT}/3rdparty/curl-7.66.0/include/"
 
       )
   endif (BUILD_WINDOWS)
 
   if (BUILD_OSX)
         set ( CURL_INCLUDES
-          "${MOAI_ROOT}/3rdparty/curl-7.19.7/include-osx/"
+          "${MOAI_ROOT}/3rdparty/curl-7.66.0/include-osx/"
         )
     endif (BUILD_OSX)
 
   if (BUILD_HTML)
         set ( CURL_INCLUDES
-          "${MOAI_ROOT}/3rdparty/curl-7.19.7/include/"
+          "${MOAI_ROOT}/3rdparty/curl-7.66.0/include/"
         )
     endif (BUILD_HTML)
 
 
   if (BUILD_ANDROID)
     set ( CURL_INCLUDES
-        "${MOAI_ROOT}/3rdparty/curl-7.19.7/include-android/"
+        "${MOAI_ROOT}/3rdparty/curl-7.66.0/include-android/"
        )
   endif (BUILD_ANDROID)
 
   if (BUILD_IOS)
     set ( CURL_INCLUDES
-        "${MOAI_ROOT}/3rdparty/curl-7.19.7/include-iphone/"
+        "${MOAI_ROOT}/3rdparty/curl-7.66.0/include-ios/"
        )
   endif (BUILD_IOS)
 
@@ -71,7 +71,7 @@ project ( curl )
 
       add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/config.status"
                        COMMAND "/bin/sh"
-                       "${MOAI_ROOT}/3rdparty/curl-7.19.7/configure"
+                       "${MOAI_ROOT}/3rdparty/curl-7.66.0/configure"
                        "--no-create" "--disable-shared" "--disable-optimize" ${SSL_PARAMS} "--disable-ldap"
                        "--without-libidn" "--without-libssh2"
                        "CC=${CMAKE_C_COMPILER}"
@@ -101,7 +101,7 @@ project ( curl )
 
 
 
-  set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/3rdparty/curl-7.19.7/lib" )
+  set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/3rdparty/curl-7.66.0/lib" )
   set ( CURL_SOURCES
 
     #${CMAKE_CURRENT_SOURCE_DIR}/amigaos.c
