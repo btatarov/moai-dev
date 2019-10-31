@@ -39,6 +39,7 @@ private:
 
 	//----------------------------------------------------------------//
 	static int	_closeApp				( lua_State* L );
+	static int	_getCutouts				( lua_State* L );
 	static int	_getPictureCode			( lua_State* L );
 	static int	_getPicturePath			( lua_State* L );
 	static int	_getUTCTime				( lua_State* L );

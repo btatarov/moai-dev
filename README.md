@@ -28,6 +28,7 @@ Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkh
 * 64bit support
 * CHANGE: LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
 * MOAIAppAndroid::closeApp ()
+* MOAIAppAndroid::getCutouts ()
 * MOAIObbDownloaderAndroid (downloading extension files for googleplay)
 * adcolony-3.2.1 (rewarded video)
 * amazon ads (interstitial and banner)

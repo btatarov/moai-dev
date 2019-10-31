@@ -13,11 +13,15 @@ import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Context;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings.Secure;
 import android.util.DisplayMetrics;
+import android.view.DisplayCutout;
+import android.view.View;
+import android.view.WindowInsets;
 
 import java.lang.reflect.Method;
 import java.lang.Runtime;
@@ -25,6 +29,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 //================================================================//
@@ -253,6 +258,41 @@ public class Moai {
 				System.exit ( 0 );
 			}
 		} );
+	}
+
+	//----------------------------------------------------------------//
+	public static int[] getCutouts () {
+
+		List < Integer > boundsList = new ArrayList < Integer > ();
+
+		if ( Build.VERSION.SDK_INT >= 28 ) {
+
+			if ( sActivity != null ) {
+
+				final View view = sActivity.getWindow ().getDecorView ();
+
+				if ( view != null ) {
+
+					WindowInsets windowInsets = view.getRootWindowInsets ();
+					DisplayCutout displayCutout = view.getRootWindowInsets ().getDisplayCutout ();
+					List < Rect > rects = displayCutout.getBoundingRects ();
+					for ( int i = 0; i < rects.size (); i++ ) {
+
+						boundsList.add ( rects.get ( i ).left );
+						boundsList.add ( rects.get ( i ).top );
+						boundsList.add ( rects.get ( i ).right );
+						boundsList.add ( rects.get ( i ).bottom );
+					}
+				}
+			}
+		}
+
+		int [] bounds = new int [ boundsList.size () ];
+		for ( int i = 0; i < boundsList.size (); i++ ) {
+
+		    bounds[i] = boundsList.get ( i );
+		}
+		return bounds;
 	}
 
 	//----------------------------------------------------------------//
