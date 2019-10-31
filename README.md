@@ -36,7 +36,7 @@ Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkh
 * amazon gamecircle
 * admob-8.4.0 (interstitial and banner)
 * applovin-7.3.2 (interstitial and rewarded video)
-* chartboost-6.4.1 (interstitial)
+* chartboost-7.5.0 (image/video/interactive interstitial)
 * crittercism-5.5.5
 * facebook-4.5.1 (TODO: update to latest version)
 * heyzap-9.13.3 (interstitial and rewarded video)
