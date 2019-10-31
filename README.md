@@ -40,14 +40,12 @@ Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkh
 * crittercism-5.5.5
 * facebook-4.5.1 (TODO: update to latest version)
 * heyzap-9.13.3 (interstitial and rewarded video)
-* google-play-services-r29 (also see [strip.sh](https://github.com/btatarov/moai-sdk/blob/postmorph/3rdparty-android/google-play-services-r29/lib/strip.sh))
+* google-play-services-r29 (for no multi-dex build, see [strip.sh](https://github.com/btatarov/moai-sdk/blob/postmorph/3rdparty-android/google-play-services-r29/lib/strip.sh))
 * revmob-10.0.0 (interstitial and rewarded video)
 * startapp-3.6.6 (interstitial, rewarded video, return ad and exit ad)
 * twitter4j-4.0.4
-* vungle-6.3.17 (rewarded video)
+* vungle-6.4.11 (rewarded video)
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
-* no multi-dex build (via stripped google play services, see strip.sh)
-* TODO: remove support for Chartboost and Vungle
 
 ### iOS
 * CHANGE: framework directory separation (moved from 3rdparty to 3rdparty-ios)

@@ -6,6 +6,7 @@
     android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
     android:hardwareAccelerated="true"
 />
+
 <activity
     android:name="com.vungle.warren.ui.VungleFlexViewActivity"
     android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
@@ -13,3 +14,19 @@
     android:theme="@android:style/Theme.Translucent.NoTitleBar"
     android:hardwareAccelerated="true"
 />
+
+<activity
+    android:name="com.vungle.warren.ui.VungleWebViewActivity"
+    android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+    android:launchMode="singleTop"
+    android:hardwareAccelerated="true"
+/>
+
+<receiver
+    android:name="com.vungle.warren.NetworkProviderReceiver"
+    android:enabled="false">
+    <intent-filter>
+        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+</receiver>
