@@ -40,3 +40,7 @@ docs/api-reference
 /3rdparty/sdl2-2.0.0/lib
 
 /TODO.txt
+
+# stripped versions of google play services
+3rdparty-android/google-play-services-r29/lib/amazon/
+3rdparty-android/google-play-services-r29/lib/googleplay/
