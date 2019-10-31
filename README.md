@@ -30,7 +30,7 @@ Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkh
 * MOAIAppAndroid::closeApp ()
 * MOAIAppAndroid::getCutouts ()
 * MOAIObbDownloaderAndroid (downloading extension files for googleplay)
-* adcolony-3.2.1 (rewarded video)
+* adcolony-4.1.0 (rewarded video)
 * amazon ads (interstitial and banner)
 * amazon billing v2
 * amazon gamecircle
