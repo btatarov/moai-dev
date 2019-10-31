@@ -6,7 +6,7 @@ MODULES = {
     },
 
     admob = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/admob', -- same as gps 8.4.0
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/admob',
         src		= MOAI_SDK_HOME .. 'src/moai-android-admob',
     },
 
