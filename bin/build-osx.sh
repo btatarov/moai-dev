@@ -45,7 +45,7 @@ cmake -G "Xcode" \
 -DMOAI_HTTP_CLIENT=TRUE \
 -DMOAI_HTTP_SERVER=TRUE \
 -DMOAI_CRYPTO=TRUE \
--DMOAI_OPENSSL=TRUE \
+-DMOAI_LIBCRYPTO=TRUE \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_INSTALL_PREFIX=$libprefix \
 $moai_root/cmake/hosts/host-osx-sdl

@@ -65,6 +65,10 @@
 		#define MOAI_WITH_JANSSON ${MOAI_WITH_JANSSON}
 	#endif
 
+	#ifndef MOAI_WITH_LIBCRYPTO
+		#define MOAI_WITH_LIBCRYPTO ${MOAI_WITH_LIBCRYPTO}
+	#endif
+
 	#ifndef MOAI_WITH_LIBCURL
 		#define MOAI_WITH_LIBCURL ${MOAI_WITH_LIBCURL}
 	#endif
@@ -87,10 +91,6 @@
 
 	#ifndef MOAI_WITH_OGG
 		#define MOAI_WITH_OGG ${MOAI_WITH_OGG}
-	#endif
-
-	#ifndef MOAI_WITH_OPENSSL
-		#define MOAI_WITH_OPENSSL ${MOAI_WITH_OPENSSL}
 	#endif
 
 	#ifndef MOAI_WITH_SFMT

@@ -60,6 +60,10 @@
 		#define MOAI_WITH_LIBCURL 1
 	#endif
 
+	#ifndef MOAI_WITH_LIBCRYPTO
+		#define MOAI_WITH_LIBCRYPTO 1
+	#endif
+
 	#ifndef MOAI_WITH_LIBJPG
 		#define MOAI_WITH_LIBJPG 1
 	#endif
@@ -94,10 +98,6 @@
 
 	#ifndef MOAI_WITH_OGG
 		#define MOAI_WITH_OGG 1
-	#endif
-
-	#ifndef MOAI_WITH_OPENSSL
-		#define MOAI_WITH_OPENSSL 1
 	#endif
 
 	#ifndef MOAI_WITH_SFMT

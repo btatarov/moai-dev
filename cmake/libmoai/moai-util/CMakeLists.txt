@@ -6,13 +6,13 @@ if ( BUILD_ANDROID )
    set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${MOAI_ROOT}/src/zl-vfs/zl_replace.h" )
 endif ( BUILD_ANDROID )
 
-set ( MOAI_UTIL_INCLUDES 
+set ( MOAI_UTIL_INCLUDES
   "${MOAI_ROOT}/src/"
   "${CMAKE_BINARY_DIR}/libmoai/config"
   )
 
-include_directories ( 
-  ${MOAI_UTIL_INCLUDES} 
+include_directories (
+  ${MOAI_UTIL_INCLUDES}
 )
 
 set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/src/moai-util/" )
@@ -26,7 +26,7 @@ add_library ( moai-util STATIC ${MOAI_UTIL_SRC} )
 target_link_libraries ( moai-util moai-core zlcore  )
 
 
-target_include_directories (moai-util PUBLIC 
+target_include_directories (moai-util PUBLIC
     "$<BUILD_INTERFACE:${MOAI_UTIL_INCLUDES}>"
     "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include/moai-util>"
     "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include/expat>"
@@ -41,18 +41,13 @@ endif (MOAI_SFMT)
 
 if ( MOAI_JSON )
 	target_link_libraries( moai-util jansson )
-endif (MOAI_JSON ) 
+endif (MOAI_JSON )
 
 if ( MOAI_TINYXML )
    target_link_libraries( moai-util tinyxml )
 endif ( MOAI_TINYXML )
 
-if (MOAI_OPENSSL)
-  target_link_libraries( moai-util ssl )
-endif (MOAI_OPENSSL)
-
 install(TARGETS moai-util EXPORT libmoai ARCHIVE DESTINATION lib)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include/moai-util
           FILES_MATCHING PATTERN "*.h")
-

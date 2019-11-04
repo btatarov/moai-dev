@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <zl-vfs/assert.h>
+
 #include <zl-vfs/zl_replace_stdio.h>
 #include <zl-vfs/zl_replace_stdlib.h>
 

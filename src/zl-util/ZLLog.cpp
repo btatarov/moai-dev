@@ -7,7 +7,10 @@
 #include <assert.h>
 
 #include <zl-util/ZLLog.h>
-#include <android/log.h>
+
+#ifdef ANDROID
+	#include <android/log.h>
+#endif
 
 //================================================================//
 // ZLLog
