@@ -10,6 +10,7 @@ import android.app.Activity;
 
 import com.applovin.adview.AppLovinIncentivizedInterstitial;
 import com.applovin.adview.AppLovinInterstitialAd;
+import com.applovin.adview.AppLovinInterstitialAdDialog;
 import com.applovin.sdk.AppLovinAd;
 import com.applovin.sdk.AppLovinAdVideoPlaybackListener;
 import com.applovin.sdk.AppLovinSdk;
@@ -21,9 +22,10 @@ class MoaiAppLovin {
     }
 
 	private static Activity sActivity = null;
+	private static AppLovinInterstitialAdDialog sInterstitial;
 	private static AppLovinIncentivizedInterstitial sRewardedVideo;
 
-	private static AppLovinAdVideoPlaybackListener sAppLovinListener = new AppLovinAdVideoPlaybackListener () {
+	private static AppLovinAdVideoPlaybackListener sAppLovinAdVideoListener = new AppLovinAdVideoPlaybackListener () {
 
 		@Override
 		public void videoPlaybackBegan ( AppLovinAd ad ) {}
@@ -62,7 +64,7 @@ class MoaiAppLovin {
 	//----------------------------------------------------------------//
 	public static boolean hasCachedInterstitial () {
 
-		return AppLovinInterstitialAd.isAdReadyToDisplay ( sActivity );
+		return sInterstitial.isAdReadyToDisplay ();
 	}
 
 	//----------------------------------------------------------------//
@@ -75,15 +77,16 @@ class MoaiAppLovin {
 	public static void init () {
 
 		AppLovinSdk.initializeSdk ( sActivity );
+		sInterstitial = AppLovinInterstitialAd.create ( AppLovinSdk.getInstance ( sActivity ), sActivity );
 		sRewardedVideo = AppLovinIncentivizedInterstitial.create ( sActivity );
 	}
 
 	//----------------------------------------------------------------//
 	public static void showInterstitial () {
 
-		if ( AppLovinInterstitialAd.isAdReadyToDisplay ( sActivity ) ) {
+		if ( sInterstitial.isAdReadyToDisplay () ) {
 
-			AppLovinInterstitialAd.show ( sActivity );
+			sInterstitial.show ();
 		}
 	}
 
@@ -92,7 +95,7 @@ class MoaiAppLovin {
 
 		if ( sRewardedVideo.isAdReadyToDisplay () ) {
 
-			sRewardedVideo.show ( sActivity, null, sAppLovinListener, null, null );
+			sRewardedVideo.show ( sActivity, null, sAppLovinAdVideoListener );
 		}
 	}
 }

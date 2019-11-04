@@ -27,8 +27,9 @@ MODULES = {
 	},
 
     applovin = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/applovin-7.3.2',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/applovin-9.9.2',
         src		= MOAI_SDK_HOME .. 'src/moai-android-applovin',
+        project = true,
     },
 
     chartboost = {
