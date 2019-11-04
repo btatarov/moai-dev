@@ -9,7 +9,14 @@ package com.ziplinegames.moai;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.adcolony.sdk.*;
+import com.adcolony.sdk.AdColony;
+import com.adcolony.sdk.AdColonyAdOptions;
+import com.adcolony.sdk.AdColonyAppOptions;
+import com.adcolony.sdk.AdColonyInterstitial;
+import com.adcolony.sdk.AdColonyInterstitialListener;
+import com.adcolony.sdk.AdColonyReward;
+import com.adcolony.sdk.AdColonyRewardListener;
+import com.adcolony.sdk.AdColonyZone;
 
 //================================================================//
 // MoaiAdColony

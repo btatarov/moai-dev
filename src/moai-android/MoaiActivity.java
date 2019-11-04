@@ -36,8 +36,6 @@ import android.view.WindowManager;
 // Moai
 import com.ziplinegames.moai.*;
 
-// import org.apache.http.client.methods.HttpGet;
-// import org.apache.http.impl.client.DefaultHttpClient;
 import java.net.URI;
 import android.os.AsyncTask;
 import android.net.Uri;

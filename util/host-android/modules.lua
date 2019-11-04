@@ -55,6 +55,7 @@ MODULES = {
     google_play_services = {
 		lib		= MOAI_SDK_HOME .. '3rdparty-android/google-play-services-r29',
 		src		= MOAI_SDK_HOME .. 'src/moai-android-google-play-services',
+        project = true,
 	},
 
     facebook = {
