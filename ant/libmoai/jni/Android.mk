@@ -144,7 +144,8 @@
 	#--------------------------------------------------------------#
 	# GAMECIRCLE
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_GAMECIRCLE=0
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_GAMECIRCLE=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-gamecircle.mk
 
 	#--------------------------------------------------------------#
 	# FACEBOOK
@@ -185,13 +186,13 @@
 	#--------------------------------------------------------------#
 	# APPLOVIN
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_APPLOVIN=1
-	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-applovin.mk
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_APPLOVIN=0
 
 	#--------------------------------------------------------------#
 	# AMAZON_ADS
 
-	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_AMAZON_ADS=0
+	MY_LOCAL_CFLAGS += -DAKU_WITH_ANDROID_AMAZON_ADS=1
+	MY_INCLUDES += $(MOAI_SDK_HOME)/ant/libmoai/modules/moai-amazonads.mk
 
 	#--------------------------------------------------------------#
 	# BOX2D
@@ -278,7 +279,7 @@
 	LOCAL_SRC_FILES 	+= src/aku_plugins.cpp
 
 	LOCAL_SHARED_LIBRARIES := fmod
-	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-applovin libmoai-chartboost libmoai-googleplayservices libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libmbedtls libzl-vfs libzlib
+	LOCAL_STATIC_LIBRARIES := libmoai-adcolony libmoai-amazonads libmoai-chartboost libmoai-gamecircle libmoai-googleplayservices libmoai-vungle libmoai-box2d libmoai-http-client libmoai-fmod-studio libmoai-luaext libmoai-sim libmoai-spine libmoai-crypto libmoai-util libmoai-core libzl-gfx libzl-crypto libzl-core libcontrib libbox2d libexpat libjson liblua libpvr libsfmt libspine libsqlite libtinyxml libfreetype libjpg libpng libtess libcurl libcares libmbedtls libzl-vfs libzlib
 	LOCAL_WHOLE_STATIC_LIBRARIES := libmoai-android libmoai-sim libmoai-core
 
 #----------------------------------------------------------------#
