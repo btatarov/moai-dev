@@ -269,21 +269,23 @@ public class Moai {
 
 			if ( sActivity != null ) {
 
-				final View view = sActivity.getWindow ().getDecorView ();
+				try {
+					final View view = sActivity.getWindow ().getDecorView ();
 
-				if ( view != null ) {
+					if ( view != null ) {
 
-					WindowInsets windowInsets = view.getRootWindowInsets ();
-					DisplayCutout displayCutout = view.getRootWindowInsets ().getDisplayCutout ();
-					List < Rect > rects = displayCutout.getBoundingRects ();
-					for ( int i = 0; i < rects.size (); i++ ) {
+						WindowInsets windowInsets = view.getRootWindowInsets ();
+						DisplayCutout displayCutout = view.getRootWindowInsets ().getDisplayCutout ();
+						List < Rect > rects = displayCutout.getBoundingRects ();
+						for ( int i = 0; i < rects.size (); i++ ) {
 
-						boundsList.add ( rects.get ( i ).left );
-						boundsList.add ( rects.get ( i ).top );
-						boundsList.add ( rects.get ( i ).right );
-						boundsList.add ( rects.get ( i ).bottom );
+							boundsList.add ( rects.get ( i ).left );
+							boundsList.add ( rects.get ( i ).top );
+							boundsList.add ( rects.get ( i ).right );
+							boundsList.add ( rects.get ( i ).bottom );
+						}
 					}
-				}
+				} catch ( Exception e ) {} // TODO: fix this
 			}
 		}
 
