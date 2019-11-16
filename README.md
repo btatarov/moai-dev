@@ -17,6 +17,7 @@ Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkh
 * libpng 1.4.19
 * LuaJIT 2.1.0-beta3
 * mbedtls 2.16.3 (openssl and crypto replacement)
+* SDL2-2.0.10
 * MOAIColor::setColorHSL
 * MOAIImage::loadDual (based on [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
 * MOAIParticlePexPlugin::loadFromString

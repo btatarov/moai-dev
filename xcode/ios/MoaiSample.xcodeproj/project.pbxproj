@@ -1806,7 +1806,7 @@
 					"\"../../3rdparty/vungle-1.5.0/lib\"",
 					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
-					"\"../../3rdparty/sdl2-2.0.0\"",
+					"\"../../3rdparty/sdl2-2.0.10\"",
 					"\"../../3rdparty/libtess2/include\"",
 					"\"../../3rdparty/sfmt-1.4\"",
 				);
@@ -1885,7 +1885,7 @@
 					"\"../../3rdparty/vungle-1.5.0/lib\"",
 					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
-					"\"../../3rdparty/sdl2-2.0.0\"",
+					"\"../../3rdparty/sdl2-2.0.10\"",
 					"\"../../3rdparty/libtess2/include\"",
 					"\"../../3rdparty/sfmt-1.4\"",
 				);
