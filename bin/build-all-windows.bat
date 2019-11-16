@@ -4,13 +4,13 @@ setlocal
 
 echo "Building windows libs"
 
-call bin\build-windows.bat vs2013 || goto :error
+call bin\build-windows.bat vs2015 || goto :error
 
 echo "windows lib complete"
 
 echo "Creating windows host"
 
-call moaiutil.bat host-windows-vs2013 || goto :error
+call moaiutil.bat host-windows-vs2015 || goto :error
 
 echo "Windows host Complete"
 
