@@ -3,17 +3,17 @@ COMMON = {
 	['util'] = true,
 	['samples'] = true,
 	['src/host-modules'] = true,
-	
-	
+
+
 	--android host files are common to all
-	
+
 	['host-templates/android'] = true,
 	['host-templates/html'] = true,
 	['src/moai-android/moai.cpp'] = true,
 	['src/moai-android/MoaiActivity.java'] = true,
 	['src/moai-android/MoaiView.java'] = true,
-	
-	
+
+
 	--sdl host files are common to all
 	['src/host-sdl'] = true,
 }
@@ -28,8 +28,8 @@ MAC = {
 }
 
 WINDOWS = {
-	['host-templates/windows/vs2013'] = true,
-  ['lib/windows/vs2013/Distribute/bin/moai.exe'] = 'util/moai.exe'
+	['host-templates/windows/vs2015'] = true,
+    ['lib/windows/vs2015/Distribute/bin/moai.exe'] = 'util/moai.exe'
 }
 
 LINUX = {
@@ -39,5 +39,5 @@ LINUX = {
 
 
 CLEAN_DIRS = {
-	
+
 }

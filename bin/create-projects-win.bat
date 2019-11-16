@@ -8,14 +8,15 @@ cd "%~dp0%..\cmake"
 
 :: Determine target directory and cmake generator
 set arg1=%1
-if "%arg1%"=="" set arg1=vs2012
+if "%arg1%"=="" set arg1=vs2015
 set generator=
 if "%arg1%"=="vs2008" set generator=Visual Studio 9 2008
 if "%arg1%"=="vs2010" set generator=Visual Studio 10
 if "%arg1%"=="vs2012" set generator=Visual Studio 11
 if "%arg1%"=="vs2013" set generator=Visual Studio 12
+if "%arg1%"=="vs2015" set generator=Visual Studio 14
 if "%generator%"=="" (
-	@echo Unknown argument "%1". Valid values are vs2008, vs2010, vs2012, vs2013. Exiting.
+	@echo Unknown argument "%1". Valid values are vs2008, vs2010, vs2012, vs2013, vs2015. Exiting.
 	goto end
 )
 set targetDir=projects\%arg1%
