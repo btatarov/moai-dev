@@ -59,6 +59,6 @@ target_link_libraries ( moai
   zlcore
   ${SDL_LIB}
   ${OPENGL_LIBRARIES}
-  user32 gdi32 winmm imm32 ole32 oleaut32 version uuid
+  user32 gdi32 winmm msimg32 Imm32 ole32 oleaut32 version uuid
 )
 add_dependencies ( moai SDL2 )

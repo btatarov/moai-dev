@@ -16,7 +16,6 @@ if NOT EXIST "%VS_TOOLS%\VsDevCmd.bat" (
 	exit /b 1
 )
 call "%VS_TOOLS%\VsDevCmd.bat"
-call "%VS_TOOLS%\Vsvars32.bat"
 popd
 
 pushd .
