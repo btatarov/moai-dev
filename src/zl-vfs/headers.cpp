@@ -79,7 +79,7 @@ void zl_cleanup ( void ) {
 	ZLVfsFileSystem::Get ().Cleanup ();
 
 	ZLVfsFile* file;
-	
+
 	file = ( ZLVfsFile* )zl_stderr;
 	file->SetFile ( 0 );
 	delete file;
@@ -91,7 +91,7 @@ void zl_cleanup ( void ) {
 	file = ( ZLVfsFile* )zl_stdout;
 	file->SetFile ( 0 );
 	delete file;
-	
+
 	zl_stderr = 0;
 	zl_stdin = 0;
 	zl_stdout = 0;
@@ -131,7 +131,7 @@ ZLDIR* zl_dir_open ( void ) {
 
 	ZLVfsDirectoryItr* itr = new ZLVfsDirectoryItr ();
 	int result = itr->Open ();
-	
+
 	if ( result ) {
 		delete itr;
 		return 0;
@@ -157,9 +157,9 @@ int zl_get_stat ( char const* path, zl_stat* filestat ) {
 	#ifdef NACL
 		#define stat stat
 	#endif
-	
+
 	struct stat s;
-	
+
 	#ifdef NACL
 		#define stat nacl_stat
 	#endif
@@ -177,9 +177,9 @@ int zl_get_stat ( char const* path, zl_stat* filestat ) {
 	if ( mount ) {
 
 		const char* localpath = mount->GetLocalPath ( abspath.c_str ());
-		
+
 		if ( abspath.size () && localpath ) {
-		
+
 			ZLVfsZipFileDir* parentDir = mount->mArchive->FindDir ( localpath );
 			ZLVfsZipFileDir* dir;
 			ZLVfsZipFileEntry* entry;
@@ -228,7 +228,7 @@ int zl_get_stat ( char const* path, zl_stat* filestat ) {
 					return 0;
 				}
 			}
-			
+
 			filestat->mExists		    = 1;
 			filestat->mTimeCreated		= s.st_ctime;
 			filestat->mTimeModified		= s.st_mtime;
@@ -236,16 +236,16 @@ int zl_get_stat ( char const* path, zl_stat* filestat ) {
 		}
 	}
 	else {
-		
+
 		while ( abspath.size () && ( abspath [ abspath.length () - 1 ] == '/' )) {
 			abspath [ abspath.length () - 1 ] = 0;
 		}
-		
+
 		result = stat ( abspath.c_str (), &s );
 		if ( result ) return -1;
 
 		filestat->mExists = 1;
-		
+
 		filestat->mIsDir			= S_ISDIR ( s.st_mode );
 		filestat->mSize				= ( size_t )s.st_size;
 		filestat->mTimeCreated		= s.st_ctime;
@@ -276,11 +276,11 @@ void zl_init () {
 	file = new ZLVfsFile ();
 	file->SetFile ( stderr );
 	zl_stderr = ( ZLFILE* )file;
-	
+
 	file = new ZLVfsFile ();
 	file->SetFile ( stdin );
 	zl_stdin = ( ZLFILE* )file;
-	
+
 	file = new ZLVfsFile ();
 	file->SetFile ( stdout );
 	zl_stdout = ( ZLFILE* )file;
@@ -352,12 +352,12 @@ void* zl_realloc ( void* ptr, size_t size ) {
 
 //----------------------------------------------------------------//
 ZL_TLSF_POOL* zl_tlsf_create_pool ( size_t bytes ) {
-	
+
 	ZLTlsfPool* pool = ( ZLTlsfPool* )malloc ( sizeof ( ZLTlsfPool ));
-	
+
 	pool->mBuffer = malloc ( bytes );
 	pool->mPool = tlsf_create ( pool->mBuffer, bytes );
-	
+
 	return ( ZL_TLSF_POOL* )pool;
 }
 
@@ -433,7 +433,7 @@ int zl_ferror ( ZLFILE* fp ) {
 
 //----------------------------------------------------------------//
 int	zl_fflush ( ZLFILE* fp ) {
-	
+
 	ZLVfsFile* file = ( ZLVfsFile* )fp;
 	if ( file ) {
 		return file->Flush ();
@@ -443,7 +443,7 @@ int	zl_fflush ( ZLFILE* fp ) {
 
 //----------------------------------------------------------------//
 int zl_fgetc ( ZLFILE* fp ) {
-	
+
 	ZLVfsFile* file = ( ZLVfsFile* )fp;
 	if ( file ) {
 		return file->GetChar ();
@@ -462,7 +462,7 @@ int zl_fgetpos ( ZLFILE* fp, fpos_t* position ) {
 
 //----------------------------------------------------------------//
 char* zl_fgets ( char* string, int length, ZLFILE* fp ) {
-	
+
 	ZLVfsFile* file = ( ZLVfsFile* )fp;
 	if ( file ) {
 		return file->GetString ( string, length );
@@ -471,8 +471,15 @@ char* zl_fgets ( char* string, int length, ZLFILE* fp ) {
 }
 
 //----------------------------------------------------------------//
+wchar_t zl_fgetwc(ZLFILE* fp) {
+	UNUSED(fp);
+	assert(0); // TODO:
+	return -1;
+}
+
+//----------------------------------------------------------------//
 int	zl_fileno ( ZLFILE* fp ) {
-	
+
 	// TODO:
 	ZLVfsFile* file = ( ZLVfsFile* )fp;
 	if ( file ) {
@@ -483,10 +490,10 @@ int	zl_fileno ( ZLFILE* fp ) {
 
 //----------------------------------------------------------------//
 ZLFILE* zl_fopen ( const char* filename, const char* mode ) {
-	
+
 	ZLVfsFile* file = new ZLVfsFile ();
 	int result = file->Open ( filename, mode );
-	
+
 	if ( result ) {
 		delete file;
 		return 0;
@@ -558,8 +565,17 @@ int zl_fputs ( const char* string, ZLFILE* fp ) {
 }
 
 //----------------------------------------------------------------//
+int zl_fputwc(wchar_t c,  ZLFILE* fp) {
+	UNUSED(fp);
+	UNUSED(c);
+
+	assert(0); // TODO:
+	return -1;
+}
+
+//----------------------------------------------------------------//
 size_t zl_fread ( void* buffer, size_t size, size_t count, ZLFILE* fp ) {
-	
+
 	ZLVfsFile* file = ( ZLVfsFile* )fp;
 	if ( file ) {
 		return file->Read ( buffer, size, count );
@@ -584,20 +600,20 @@ ZLFILE* zl_freopen ( const char* filename, const char* mode, ZLFILE* fp ) {
 
 //----------------------------------------------------------------//
 int zl_fscanf ( ZLFILE* fp, const char * format, ... ) {
-	
+
 	int result;
 	va_list args;
-	
+
 	va_start ( args, format );
 	result = zl_vfscanf ( fp, format, args );
 	va_end ( args );
-	
+
 	return result;
 }
 
 //----------------------------------------------------------------//
 int	zl_fseek ( ZLFILE* fp, long offset, int origin ) {
-	
+
 	ZLVfsFile* file = ( ZLVfsFile* )fp;
 	if ( file ) {
 		return file->Seek ( offset, origin );
@@ -658,7 +674,7 @@ off_t zl_ftello ( ZLFILE* fp ) {
 
 //----------------------------------------------------------------//
 size_t zl_fwrite ( const void* data, size_t size, size_t count, ZLFILE* fp ) {
-	
+
 	ZLVfsFile* file = ( ZLVfsFile* )fp;
 	if ( file ) {
 		return file->Write ( data, size, count );
@@ -695,7 +711,7 @@ ZLFILE* zl_popen ( const char* command, const char *mode ) {
 
 	ZLVfsFile* file = new ZLVfsFile ();
 	int result = file->OpenProcess ( command, mode );
-	
+
 	if ( result ) {
 		delete file;
 		return 0;
@@ -765,7 +781,7 @@ ZLFILE* zl_tmpfile ( void ) {
 
 	ZLVfsFile* file = new ZLVfsFile ();
 	int result = file->OpenTemp ();
-	
+
 	if ( result ) {
 		delete file;
 		return 0;
@@ -785,17 +801,25 @@ char* zl_tmpnam ( char* str ) {
     return str;
 #else
 	return tmpnam ( str );
-#endif 
+#endif
 }
 
 //----------------------------------------------------------------//
 int zl_ungetc ( int character, ZLFILE* fp ) {
-	
+
 	ZLVfsFile* file = ( ZLVfsFile* )fp;
 	if ( file ) {
 		return file->UnGetChar ( character );
 	}
 	return EOF;
+}
+
+//----------------------------------------------------------------//
+wchar_t	zl_ungetwc(wchar_t character, ZLFILE* fp) {
+	UNUSED(character);
+	UNUSED(fp);
+	assert(0);
+	return -1;
 }
 
 //----------------------------------------------------------------//
@@ -812,7 +836,7 @@ int zl_vfprintf ( ZLFILE* fp, const char* format, va_list arg ) {
 int zl_vprintf ( const char * format, va_list arg ) {
 
 	int result;
-	
+
 	#ifdef ANDROID
 		result = __android_log_vprint ( ANDROID_LOG_INFO, "MoaiLog", format, arg );
 	#else
