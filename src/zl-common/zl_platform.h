@@ -7,7 +7,7 @@
 	#include "TargetConditionals.h"
 
 	#if TARGET_OS_IPHONE
-	
+
 		#define MOAI_PHONE
 		#define MOAI_OS_IPHONE
 
@@ -65,7 +65,7 @@
 	#ifndef _CRTDBG_MAP_ALLOC
 		#define _CRTDBG_MAP_ALLOC
 	#endif
-	
+
 	#ifndef _CRT_SECURE_NO_WARNINGS
 		#define _CRT_SECURE_NO_WARNINGS
 	#endif
@@ -77,11 +77,12 @@
 	#ifdef MOAI_COMPILER_GCC
 		#include <malloc.h>
 	#endif
-	
+
 	#ifdef MOAI_COMPILER_MSVC
 		#include <crtdbg.h>
     #endif
-	
+
+	#include <io.h>
 	#include <direct.h>
 
 	#ifndef PATH_MAX
