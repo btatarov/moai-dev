@@ -18,7 +18,7 @@ Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkh
 * LuaJIT 2.1.0-beta3
 * mbedtls 2.16.3 (openssl and crypto replacement)
 * MOAIColor::setColorHSL
-* MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
+* MOAIImage::loadDual (based on [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
 * MOAIParticlePexPlugin::loadFromString
 * MOAISim.exitApp (desktop hosts)
 * TODO: move loadDual in a separate module (loader)
@@ -27,8 +27,8 @@ Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkh
 * Full screen mode with cutout (notch) support
 * 64bit support
 * CHANGE: LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
-* MOAIAppAndroid::closeApp ()
-* MOAIAppAndroid::getCutouts ()
+* MOAIAppAndroid::closeApp
+* MOAIAppAndroid::getCutouts
 * MOAIObbDownloaderAndroid (downloading extension files for googleplay)
 * adcolony-4.1.0 (rewarded video)
 * amazon ads (interstitial and banner)

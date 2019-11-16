@@ -97,6 +97,7 @@ private:
 	static int		_init						( lua_State* L );
 	static int		_load						( lua_State* L );
 	static int		_loadAsync					( lua_State* L );
+	static int		_loadDual					( lua_State* L );
 	static int		_loadFromBuffer				( lua_State* L );
 	static int		_mix						( lua_State* L );
 	static int		_padToPow2					( lua_State* L );
@@ -176,7 +177,8 @@ public:
 	static bool				IsPow2						( u32 n );
 	bool					Load						( cc8* filename, u32 transform = 0 );
 	bool					Load						( ZLStream& stream, u32 transform = 0 );
-	void					LoadDual					( ZLStream& rgb, ZLStream& alpha, u32 transform );
+	bool					LoadDual					( cc8* filename, u32 transform = 0 );
+	void					LoadDualCall				( ZLStream& rgb, ZLStream& alpha, u32 transform );
 	bool					IsOK						();
 	bool					MipReduce					();
 	void					Mix							( const MOAIImage& image, const ZLMatrix4x4& mtx, float K );

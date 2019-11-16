@@ -615,6 +615,26 @@ int MOAIImage::_loadAsync ( lua_State *L ) {
 }
 
 //----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIImage::_loadDual ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIImage, "U" )
+
+	MOAIImage* srcImage	= state.GetLuaObject < MOAIImage >( 2, false );
+	if  ( srcImage ) {
+
+		self->Copy ( *srcImage );
+	}
+	else {
+
+		cc8* filename	= state.GetValue < cc8* >( 2, "" );
+		u32 transform	= state.GetValue < u32 >( 3, 0 );
+
+		self->LoadDual ( filename, transform );
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	loadFromBuffer
 	@text	Loads an image from a buffer.
 
@@ -2330,9 +2350,41 @@ bool MOAIImage::IsPow2 ( u32 n ) {
 
 //----------------------------------------------------------------//
 bool MOAIImage::Load ( cc8* filename, u32 transform ) {
-    UNUSED ( transform );
 
 	this->Clear ();
+
+	ZLFileStream stream;
+	if ( stream.OpenRead ( filename )) {
+		this->Load ( stream, transform );
+		stream.Close ();
+		this->OnImageStatusChanged ( this->IsOK ());
+	}
+	else {
+		MOAILog ( NULL, MOAILogMessages::MOAI_FileOpenError_S, filename );
+	}
+	return this->IsOK ();
+}
+
+//----------------------------------------------------------------//
+bool MOAIImage::Load ( ZLStream& stream, u32 transform ) {
+	UNUSED ( stream );
+	UNUSED ( transform );
+
+	this->Clear ();
+
+	MOAIImageFormat* format = MOAIImageFormatMgr::Get ().FindFormat ( stream );
+	if ( format ) {
+		format->ReadImage ( *this, stream, transform );
+		this->OnImageStatusChanged ( this->IsOK ());
+		return this->IsOK ();
+	}
+
+	return false;
+}
+
+//----------------------------------------------------------------//
+bool MOAIImage::LoadDual ( cc8* filename, u32 transform ) {
+    UNUSED ( transform );
 
 	// is this a dual file load?
 	char* extension = ( char* ) malloc ( sizeof ( char ) * 5 );
@@ -2388,10 +2440,12 @@ bool MOAIImage::Load ( cc8* filename, u32 transform ) {
 	}
 
 	if ( ( alpha != NULL ) && ( rgb != NULL ) ) {
+        this->Clear ();
+
 		ZLFileStream alphaStream, RGBStream;
 
 		if ( alphaStream.OpenRead ( alpha ) && RGBStream.OpenRead ( rgb ) ) {
-			this->LoadDual ( RGBStream, alphaStream, transform );
+			this->LoadDualCall ( RGBStream, alphaStream, transform );
 			RGBStream.Close ();
 			alphaStream.Close ();
             this->OnImageStatusChanged ( this->IsOK ());
@@ -2401,38 +2455,14 @@ bool MOAIImage::Load ( cc8* filename, u32 transform ) {
 		}
 
 	} else {
-		ZLFileStream stream;
-		if ( stream.OpenRead ( filename ) ) {
-			this->Load ( stream, transform );
-			stream.Close ();
-            this->OnImageStatusChanged ( this->IsOK () );
-		} else {
-			MOAILog ( NULL, MOAILogMessages::MOAI_FileOpenError_S, filename );
-		}
+		return this->Load ( filename, transform );
 	}
 
     return this->IsOK ();
 }
 
 //----------------------------------------------------------------//
-bool MOAIImage::Load ( ZLStream& stream, u32 transform ) {
-	UNUSED ( stream );
-	UNUSED ( transform );
-
-	this->Clear ();
-
-	MOAIImageFormat* format = MOAIImageFormatMgr::Get ().FindFormat ( stream );
-	if ( format ) {
-		format->ReadImage ( *this, stream, transform );
-		this->OnImageStatusChanged ( this->IsOK ());
-		return this->IsOK ();
-	}
-
-	return false;
-}
-
-//----------------------------------------------------------------//
-void MOAIImage::LoadDual ( ZLStream& rgb, ZLStream& alpha, u32 transform ) {
+void MOAIImage::LoadDualCall ( ZLStream& rgb, ZLStream& alpha, u32 transform ) {
     UNUSED ( transform );
 
 	this->Clear ();
@@ -2681,6 +2711,7 @@ void MOAIImage::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "init",						_init },
 		{ "load",						_load },
         { "loadAsync",					_loadAsync },
+        { "loadDual",					_loadDual },
 		{ "loadFromBuffer",				_loadFromBuffer },
 		{ "mix",						_mix },
 		{ "padToPow2",					_padToPow2 },
