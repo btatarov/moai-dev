@@ -13,9 +13,9 @@ if (MSVC)
      set(CMAKE_CXX_FLAGS_RELEASE "-Os -DNDEBUG")
      set(CMAKE_C_FLAGS_RELEASE "-Os -DNDEBUG")
      set ( GCC_FORCE_32_BIT TRUE) #lets have 32bit for windows (for luajits sake)
-     
+
      set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32 -std=gnu99 -static -Werror-implicit-function-declaration -DHAVE_MEMMOVE" )
      set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32 -static" )
   endif(MSVC)
-  set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -DWINVER=0x0501 -D_WIN32_WINNT=0x0501 -D_WIN32_IE=0x0500 " )
-  SET ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DWINVER=0x0501 -D_WIN32_WINNT=0x0501 -D_WIN32_IE=0x0500"  )
+  set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -DWINVER=0x0600 -D_WIN32_WINNT=0x0600 -D_WIN32_IE=0x0500 " )
+  set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DWINVER=0x0600 -D_WIN32_WINNT=0x0600 -D_WIN32_IE=0x0500" )
