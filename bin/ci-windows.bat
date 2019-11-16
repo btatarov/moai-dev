@@ -20,7 +20,7 @@ popd
 
 pushd .
 echo "Building SDL"
-cd %~dp0%\..\3rdparty\sdl2-2.0.0
+cd %~dp0%\..\3rdparty\sdl2-2.0.10
 call build\build-windows.bat
 popd
 

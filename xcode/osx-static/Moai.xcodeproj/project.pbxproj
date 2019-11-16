@@ -387,7 +387,7 @@
 					"\"../../src/config\"",
 					"\"../../src/config-default\"",
 					"\"../../src\"",
-					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty/sdl2-2.0.10/include\"",
 				);
 				LIBRARY_SEARCH_PATHS = ../../lib/osx;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
@@ -445,7 +445,7 @@
 					"\"../../src/config\"",
 					"\"../../src/config-default\"",
 					"\"../../src\"",
-					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty/sdl2-2.0.10/include\"",
 				);
 				LIBRARY_SEARCH_PATHS = ../../lib/osx;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;

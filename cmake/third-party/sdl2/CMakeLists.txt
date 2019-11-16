@@ -1,9 +1,9 @@
 cmake_minimum_required ( VERSION 2.8.5 )
 project ( sdl2 )
 
-set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/3rdparty/sdl2-2.0.0/" )
+set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/3rdparty/sdl2-2.0.10/" )
 
-set ( SDL_LIB_ROOT "${MOAI_ROOT}/3rdparty/sdl2-2.0.0/lib" )
+set ( SDL_LIB_ROOT "${MOAI_ROOT}/3rdparty/sdl2-2.0.10/lib" )
 set ( SDL_LIB_RPATH "" )
 
 if ( BUILD_WINDOWS )
@@ -30,7 +30,7 @@ endif ()
 
 
 set ( SDL_INCLUDES
-  "${MOAI_ROOT}/3rdparty/sdl2-2.0.0/include/"
+  "${MOAI_ROOT}/3rdparty/sdl2-2.0.10/include/"
 )
 
 set ( SDL_HEADERS "${SDL_INCLUDES}" PARENT_SCOPE )

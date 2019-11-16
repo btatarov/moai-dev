@@ -30,7 +30,7 @@ popd
 
 echo "building sdl"
 pushd `dirname $0`
-cd ../3rdparty/sdl2-2.0.0
+cd ../3rdparty/sdl2-2.0.10
 bash build/build-linux.sh
 EXIT_CODE=$?
 popd

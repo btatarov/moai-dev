@@ -1445,7 +1445,7 @@
 					"\"$(MOAI_SDK)/src\"",
 					"\"$(MOAI_SDK)/src/config\"",
 					"\"$(MOAI_SDK)/src/config-default\"",
-					"\"$(MOAI_SDK)/3rdparty/sdl2-2.0.0/include\"",
+					"\"$(MOAI_SDK)/3rdparty/sdl2-2.0.10/include\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
@@ -1504,7 +1504,7 @@
 					"\"$(MOAI_SDK)/src\"",
 					"\"$(MOAI_SDK)/src/config\"",
 					"\"$(MOAI_SDK)/src/config-default\"",
-					"\"$(MOAI_SDK)/3rdparty/sdl2-2.0.0/include\"",
+					"\"$(MOAI_SDK)/3rdparty/sdl2-2.0.10/include\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
