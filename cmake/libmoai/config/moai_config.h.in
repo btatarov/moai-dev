@@ -93,10 +93,6 @@
 		#define MOAI_WITH_OGG ${MOAI_WITH_OGG}
 	#endif
 
-	#ifndef MOAI_WITH_OPENSSL
-		#define MOAI_WITH_OPENSSL ${MOAI_WITH_OPENSSL}
-	#endif
-
 	#ifndef MOAI_WITH_SFMT
 		#define MOAI_WITH_SFMT ${MOAI_WITH_SFMT}
 	#endif

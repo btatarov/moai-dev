@@ -36,8 +36,6 @@ import android.view.WindowManager;
 // Moai
 import com.ziplinegames.moai.*;
 
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import java.net.URI;
 import android.os.AsyncTask;
 import android.net.Uri;
@@ -65,9 +63,6 @@ public class MoaiActivity extends Activity {
 	//----------------------------------------------------------------//
 	static {
 
-		MoaiLog.i ( "Loading libgnustl_shared.so" );
-		System.loadLibrary ( "gnustl_shared" );
-
 		// load fmod only if exists
 		try {
 
@@ -76,17 +71,6 @@ public class MoaiActivity extends Activity {
 		} catch ( UnsatisfiedLinkError e ) {
 
 			MoaiLog.i ( "FMod is disabled." );
-		}
-
-		// load adcolony only if exists
-		try {
-
-			MoaiLog.i ( "Loading libadcolony.so" );
-			System.loadLibrary ( "js" );
-			System.loadLibrary ( "adcolony" );
-		} catch ( UnsatisfiedLinkError e ) {
-
-			MoaiLog.i ( "AdColony is disabled." );
 		}
 
 		MoaiLog.i ( "Loading libmoai.so" );
@@ -114,7 +98,7 @@ public class MoaiActivity extends Activity {
 
 		Moai.onCreate ( this );
 
-		Moai.createContext ();
+		int moaiContext = Moai.createContext ();
 
 		Moai.init ();
 
@@ -123,28 +107,33 @@ public class MoaiActivity extends Activity {
 
 		int apiVersion = android.os.Build.VERSION.SDK_INT;
 
-		// Immersive mode
-		if ( apiVersion >= 19 ) {
+		if ( apiVersion >= 28 ) { // Full screen for newer devices with notches
+
+				getWindow ().setFlags ( WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS );
+				getWindow ().getAttributes ().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+				getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN );
+
+		} else if ( apiVersion >= 19 ) {  // Immersive mode
 
 			final Handler mHideSystemUiHandler = new Handler ();
 			final Runnable mHideSystemUiCallback = new Runnable () {
 				@Override
 				public void run () {
-					getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+					getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN );
 	    		}
 			};
 
 			getWindow ().getDecorView ().setOnSystemUiVisibilityChangeListener ( new View.OnSystemUiVisibilityChangeListener () {
 				@Override
 				public void onSystemUiVisibilityChange ( int visibility ) {
-					if ( ( visibility & ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION ) ) == 0 ) {
+					if ( ( visibility & ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN ) ) == 0 ) {
 	            		mHideSystemUiHandler.removeCallbacks ( mHideSystemUiCallback );
 	            		mHideSystemUiHandler.postDelayed ( mHideSystemUiCallback, 3000 );
 	        		}
 	    		}
 			} );
 
-			getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+			getWindow ().getDecorView ().setSystemUiVisibility ( View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN );
 		}
 
 		try {
@@ -182,7 +171,7 @@ public class MoaiActivity extends Activity {
 		Point size = new Point ();
 		display.getSize ( size );
 
-	    mMoaiView = new MoaiView ( this, size.x, size.y, info.reqGlEsVersion );
+	  mMoaiView = new MoaiView ( this, moaiContext, size.x, size.y, info.reqGlEsVersion );
 		mSensorManager = ( SensorManager ) getSystemService ( Context.SENSOR_SERVICE );
 		mLocationManager = (LocationManager) getSystemService ( Context.LOCATION_SERVICE );
 
@@ -197,8 +186,12 @@ public class MoaiActivity extends Activity {
 
 		MoaiLog.i ( "MoaiActivity onCreate: Running game scripts" );
 
-		// Moai.runScript ( "../init.lua" );
-		Moai.runScript ( "bootstrap.lua" );
+		// Load either 32bit or 64bit init script
+		if ( ( apiVersion >= 21 ) && ( android.os.Build.SUPPORTED_64_BIT_ABIS.length > 0 ) ) {
+			Moai.runScript ( "bootstrap64.lua" );
+		} else {
+			Moai.runScript ( "bootstrap32.lua" );
+		}
 
 		Moai.invokeListener ( Moai.ListenerEvent.ACTIVITY_ON_CREATE );
     }

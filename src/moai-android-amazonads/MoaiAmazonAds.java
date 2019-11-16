@@ -7,10 +7,16 @@
 package com.ziplinegames.moai;
 
 import android.app.Activity;
-import android.view.*;
+import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.amazon.device.ads.*;
+import com.amazon.device.ads.Ad;
+import com.amazon.device.ads.AdError;
+import com.amazon.device.ads.AdLayout;
+import com.amazon.device.ads.AdProperties;
+import com.amazon.device.ads.AdRegistration;
+import com.amazon.device.ads.DefaultAdListener;
+import com.amazon.device.ads.InterstitialAd;
 
 //================================================================//
 // MoaiAmazonAds

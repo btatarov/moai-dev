@@ -4,7 +4,7 @@
 //
 // This file implements the MOAIKeyboardAndroid object
 // for user-input from the soft keyboard on Android
-// 
+//
 // http://getmoai.com
 //
 
@@ -21,7 +21,7 @@ extern JavaVM* jvm;
 //================================================================//
 // MOAIKeyboardAndroid
 //================================================================//
-  
+
 //----------------------------------------------------------------//
 // The listeners need to be called on the event
 extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiKeyboard_AKUNotifyKeyEvent ( JNIEnv* env, jclass cls ) {
@@ -78,20 +78,20 @@ int MOAIKeyboardAndroid::_setListener ( lua_State* L ) {
 	return 0;
 }
 
-int MOAIKeyboardAndroid::_setText ( lua_State* L ) { 
+int MOAIKeyboardAndroid::_setText ( lua_State* L ) {
 
-	MOAILuaState state ( L ); 
+	MOAILuaState state ( L );
 
 	cc8* text = lua_tostring ( state, 1 );
 
-	JNI_GET_ENV ( jvm, env ); 
+	JNI_GET_ENV ( jvm, env );
 	JNI_GET_JSTRING ( text, jtext );
 
 	jclass moai = env->FindClass ( "com/ziplinegames/moai/MoaiKeyboard" );
 	if ( moai ) {
 		jmethodID setText = env->GetStaticMethodID ( moai, "setText", "(Ljava/lang/String;)V" );
 		if ( setText ) {
-			env->CallStaticVoidMethod ( moai, setText, jtext ); 
+			env->CallStaticVoidMethod ( moai, setText, jtext );
 			return 1;
 		}
 	}
@@ -141,7 +141,7 @@ void MOAIKeyboardAndroid::Finish () {
 
 //----------------------------------------------------------------//
 MOAIKeyboardAndroid::MOAIKeyboardAndroid () {
-	RTTI_SINGLE ( MOAILuaObject ) 
+	RTTI_SINGLE ( MOAILuaObject )
 }
 
 //----------------------------------------------------------------//
@@ -155,19 +155,19 @@ void MOAIKeyboardAndroid::NotifyKeyEvent ( ) {
 
 	MOAILuaRef& callback = this->mListeners [ EVENT_INPUT ];
 	if ( callback ) {
-		
+
 		jclass moai = env->FindClass ( "com/ziplinegames/moai/MoaiKeyboard" );
 		if ( moai ) {
 			jmethodID getString = env->GetStaticMethodID ( moai, "getString", "()Ljava/lang/String;" );
 			if ( getString ) {
 				jstring jkeystring = ( jstring )env->CallStaticObjectMethod ( moai, getString );
 				JNI_GET_CSTRING ( jkeystring, ckeystring );
-				
-				MOAIScopedLuaState state = callback.GetSelf ();  
+
+				MOAIScopedLuaState state = callback.GetSelf ();
 
 				// push the start, length and string
 				state.Push ( 0 );
-				state.Push ( strlen(ckeystring) );
+				state.Push ( ( u32 ) strlen ( ckeystring ) );
 				state.Push( ckeystring );
 
 				state.DebugCall ( 3, 0 );
@@ -205,7 +205,7 @@ void MOAIKeyboardAndroid::PushText ( MOAILuaState& state ) {
 			state.Push(keystring);
 			JNI_RELEASE_CSTRING ( jkeystring, keystring );
 		}
-	}  
+	}
 }
 
 //----------------------------------------------------------------//
@@ -231,4 +231,3 @@ void MOAIKeyboardAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
 	luaL_register ( state, 0, regTable );
 }
-

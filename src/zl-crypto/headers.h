@@ -6,6 +6,7 @@
 
 #include <zl-crypto/pch.h>
 
+#include <zl-crypto/ZLHashWriterMbedTLS.h>
 #include <zl-crypto/ZLHashWriterMD5.h>
 #include <zl-crypto/ZLHashWriterSHA1.h>
 #include <zl-crypto/ZLHashWriterSHA224.h>

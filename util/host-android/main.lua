@@ -29,7 +29,7 @@ config.LUA_MAIN						= 'main.lua'
 
 config.MANIFEST_DEBUGGABLE			= 'false'
 config.ANDROID_PLATFORM_TARGET		= 'android-15'
-config.VALID_ARCHITECTURES			= { 'armeabi-v7a', 'x86' }
+config.VALID_ARCHITECTURES			= { 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64' }
 
 config.COPY							= {}
 
@@ -239,15 +239,9 @@ MOAIFileSystem.deleteDirectory(OUTPUT_DIR, true)
 MOAIFileSystem.affirmPath(ANT_DIR)
 
 
-MOAIFileSystem.copy(
-	MOAI_SDK_HOME .. '/host-templates/android/studio/MoaiTemplate/app/bootstrap/bootstrap.lua',
-	MOAI_PROJECT_PATH .. '/assets/lua/bootstrap.lua'
-)
-
-MOAIFileSystem.copy(
-	MOAI_SDK_HOME .. '/host-templates/android/studio/MoaiTemplate/app/bootstrap/init.lua',
-	MOAI_PROJECT_PATH .. '/assets/lua/init.lua'
-)
+MOAIFileSystem.copy('bootstrap/bootstrap32.lua', MOAI_PROJECT_PATH .. '/assets/lua/bootstrap32.lua')
+MOAIFileSystem.copy('bootstrap/bootstrap64.lua', MOAI_PROJECT_PATH .. '/assets/lua/bootstrap64.lua')
+MOAIFileSystem.copy('bootstrap/init.lua', MOAI_PROJECT_PATH .. '/assets/lua/init.lua')
 
 if config.KEYSTORE_NAME then
 	local keystore_path = MOAIFileSystem.getAbsoluteFilePath(config.KEYSTORE_PATH .. config.KEYSTORE_NAME)

@@ -1,16 +1,12 @@
 MODULES = {
 
     adcolony = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/adcolony-3.2.1',
-        bin     = {
-                MOAI_SDK_HOME .. '3rdparty-android/adcolony-3.2.1/bin/<arch>/libadcolony.so',
-                MOAI_SDK_HOME .. '3rdparty-android/adcolony-3.2.1/bin/<arch>/libjs.so',
-        },
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/adcolony-4.1.0',
         src		= MOAI_SDK_HOME .. 'src/moai-android-adcolony',
     },
 
     admob = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/admob', -- same as gps 8.4.0
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/admob',
         src		= MOAI_SDK_HOME .. 'src/moai-android-admob',
     },
 
@@ -31,18 +27,19 @@ MODULES = {
 	},
 
     applovin = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/applovin-7.3.2',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/applovin-9.9.2',
         src		= MOAI_SDK_HOME .. 'src/moai-android-applovin',
+        project = true,
     },
 
     chartboost = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost-6.4.1',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/chartboost-7.5.0',
         src		= MOAI_SDK_HOME .. 'src/moai-android-chartboost',
     },
 
     contrib = {
 		lib		= MOAI_SDK_HOME .. '3rdparty-android/contrib',
-        bin     = MOAI_SDK_HOME .. 'ant/libmoai/libs/<arch>/libgnustl_shared.so' -- HACK: import gnustl
+    -- bin   = MOAI_SDK_HOME .. 'ant/libmoai/libs/<arch>/libgnustl_shared.so', -- HACK: import gnustl
 	},
 
     crittercism = {
@@ -56,8 +53,9 @@ MODULES = {
     },
 
     google_play_services = {
-		lib		= MOAI_SDK_HOME .. '3rdparty-android/google-play-services-8.4.0',
+		lib		= MOAI_SDK_HOME .. '3rdparty-android/google-play-services-r29',
 		src		= MOAI_SDK_HOME .. 'src/moai-android-google-play-services',
+        project = true,
 	},
 
     facebook = {
@@ -68,7 +66,7 @@ MODULES = {
 
     fmod = {
         lib     = MOAI_SDK_HOME .. '3rdparty-android/fmod',
-        bin     = MOAI_SDK_HOME .. 'ant/libmoai/libs/<arch>/libfmod.so'
+        bin     = MOAI_SDK_HOME .. 'ant/libmoai/libs/<arch>/libfmod.so',
     },
 
     heyzap = {
@@ -103,7 +101,7 @@ MODULES = {
 	},
 
     vungle = {
-        lib		= MOAI_SDK_HOME .. '3rdparty-android/vungle-6.3.17',
+        lib		= MOAI_SDK_HOME .. '3rdparty-android/vungle-6.4.11',
         src		= MOAI_SDK_HOME .. 'src/moai-android-vungle',
     },
 

@@ -11,8 +11,8 @@
 
 	LOCAL_C_INCLUDES 	:= $(MY_HEADER_SEARCH_PATHS)
 	LOCAL_CFLAGS		:= -fvisibility=hidden
-	
+
 	LOCAL_SRC_FILES 	+= $(wildcard $(MOAI_SDK_HOME)/src/zl-vfs/*.cpp)
 	LOCAL_SRC_FILES 	+= $(MOAI_SDK_HOME)/3rdparty/tlsf-2.0/tlsf.c
-	
+
 	include $(BUILD_STATIC_LIBRARY)

@@ -15,11 +15,6 @@ endif ( BUILD_ANDROID )
 
 add_subdirectory ( box2d )
 add_subdirectory ( contrib )
-
-if ( MOAI_CRYPTO )
-  add_subdirectory ( crypto )
-endif ( MOAI_CRYPTO )
-
 add_subdirectory ( curl )
 
 if ( BUILD_IOS OR BUILD_ANDROID )
@@ -64,6 +59,7 @@ set ( LUA_LIB ${LUA_LIB} PARENT_SCOPE )
 set ( LUA_LIB_DIR ${LUA_LIB_DIR} PARENT_SCOPE )
 
 add_subdirectory ( luaext )
+add_subdirectory ( mbedtls )
 add_subdirectory ( mongoose )
 add_subdirectory ( ogg )
 add_subdirectory ( png )
@@ -71,11 +67,6 @@ add_subdirectory ( pvr )
 add_subdirectory ( sfmt )
 add_subdirectory ( spine )
 add_subdirectory ( sqlite3 )
-
-if ( MOAI_OPENSSL )
-  add_subdirectory ( ssl )
-endif ( MOAI_OPENSSL )
-
 add_subdirectory ( tess )
 add_subdirectory ( tinyxml )
 add_subdirectory ( tlsf )

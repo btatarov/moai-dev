@@ -26,123 +26,95 @@ import com.ziplinegames.moai.*;
 //================================================================//
 public class MoaiView extends GLSurfaceView {
 
-	private static final long	AKU_UPDATE_FREQUENCY = 1000 / 60; // 60 Hz, in milliseconds
+		private static final long	AKU_UPDATE_FREQUENCY = 1000 / 60; // 60 Hz, in milliseconds
 
-	private Context		mAppContext;
-	private Handler		mHandler;
-	private int 		mHeight;
-	private Runnable	mUpdateRunnable;
-	private int 		mWidth;
+		private Context		mAppContext;
+		private int 		mWidth;
+		private int 		mHeight;
 
     //----------------------------------------------------------------//
-	public MoaiView ( Context context, int width, int height, int glesVersion ) {
+		public MoaiView ( Context context, int moaiContext, int width, int height, int glesVersion ) {
 
-		super ( context );
+				super ( context );
 
-		mAppContext = context.getApplicationContext();
+				mAppContext = context.getApplicationContext();
 
-		setScreenDimensions ( width, height );
-		Moai.setScreenSize ( mWidth, mHeight );
+				setScreenDimensions ( width, height );
+				Moai.setScreenSize ( mWidth, mHeight );
 
-		DisplayMetrics metrics = getResources().getDisplayMetrics ();
-		Moai.setScreenDpi ( metrics.densityDpi );
+				DisplayMetrics metrics = getResources().getDisplayMetrics ();
+				Moai.setScreenDpi ( metrics.densityDpi );
 
-		if ( glesVersion >= 0x20000 ) {
+				// NOTE: Must be set before the renderer is set.
+				setEGLContextClientVersion ( 2 );
 
-			// NOTE: Must be set before the renderer is set.
-			setEGLContextClientVersion ( 2 );
+				// Create the frame update ticker
+				Moai.sTicker = new Handler ( Looper.getMainLooper () );
+				Moai.sTick = new Runnable () {
+						public void run () {
+								Moai.update ();
+						}
+				};
+
+				setEGLConfigChooser(8 , 8, 8, 8, 16, 0);
+		    	setRenderer ( new MoaiRenderer ( moaiContext ));
+				onPause (); // Pause rendering until restarted by the activity lifecycle.
 		}
 
-		// Create a handler that we can use to post to the main thread and a pseudo-
-		// periodic runnable that will handle calling Moai.update on the main thread.
-		mHandler = new Handler ( Looper.getMainLooper ());
-		mUpdateRunnable = new Runnable () {
+		//================================================================//
+		// Public methods
+		//================================================================//
 
-			public void run () {
-				Moai.update ();
-				mHandler.postDelayed ( mUpdateRunnable , AKU_UPDATE_FREQUENCY );
+		//----------------------------------------------------------------//
+		@Override
+		public void onSizeChanged ( int newWidth, int newHeight, int oldWidth, int oldHeight ) {
+
+				setScreenDimensions ( newWidth, newHeight );
+				Moai.setViewSize ( mWidth, mHeight );
+		}
+
+		//----------------------------------------------------------------//
+		public void pause ( boolean paused ) {
+
+			if ( paused ) {
+
+					Moai.pause ( true );
+					setRenderMode ( GLSurfaceView.RENDERMODE_WHEN_DIRTY );
+					onPause ();
 			}
-		};
+			else {
 
-		setEGLConfigChooser(8 , 8, 8, 8, 16, 0);
-        setRenderer ( new MoaiRenderer ());
-		onPause (); // Pause rendering until restarted by the activity lifecycle.
-	}
-
-	//================================================================//
-	// Public methods
-	//================================================================//
-
-	//----------------------------------------------------------------//
-	@Override
-	public void onSizeChanged ( int newWidth, int newHeight, int oldWidth, int oldHeight ) {
-
-		setScreenDimensions ( newWidth, newHeight );
-		Moai.setViewSize ( mWidth, mHeight );
-	}
-
-	//----------------------------------------------------------------//
-	public void pause ( boolean paused ) {
-
-		if ( paused ) {
-
-			mHandler.removeCallbacks ( mUpdateRunnable );
-			Moai.pause ( true );
-			setRenderMode ( GLSurfaceView.RENDERMODE_WHEN_DIRTY );
-			onPause ();
+					setRenderMode ( GLSurfaceView.RENDERMODE_CONTINUOUSLY );
+					Moai.pause ( false );
+					onResume ();
+			}
 		}
-		else {
 
-			setRenderMode ( GLSurfaceView.RENDERMODE_CONTINUOUSLY );
-			Moai.pause ( false );
-			mHandler.postDelayed ( mUpdateRunnable , AKU_UPDATE_FREQUENCY );
-			onResume ();
-		}
-	}
-
-	//================================================================//
-	// MotionEvent methods
-	//================================================================//
+		//================================================================//
+		// MotionEvent methods
+		//================================================================//
 
     //----------------------------------------------------------------//
-	@Override
-	public boolean onTouchEvent ( MotionEvent event ) {
+		@Override
+		public boolean onTouchEvent ( MotionEvent event ) {
 
-		boolean isDown = true;
+			boolean isDown = true;
 
-		switch( event.getActionMasked() )
-		{
-			case MotionEvent.ACTION_CANCEL:
-				/*Moai.enqueueTouchEventCancel(
-					Moai.InputDevice.INPUT_DEVICE.ordinal (),
-					Moai.InputSensor.SENSOR_TOUCH.ordinal ()
-				);*/
-				break;
-			case MotionEvent.ACTION_UP:
-			case MotionEvent.ACTION_POINTER_UP:
-				isDown = false;
-			case MotionEvent.ACTION_DOWN:
-			case MotionEvent.ACTION_POINTER_DOWN:
+			switch( event.getActionMasked() )
 			{
-				final int pointerIndex = event.getActionIndex();
-				int pointerId = event.getPointerId ( pointerIndex );
-				Moai.enqueueTouchEvent (
-					Moai.InputDevice.INPUT_DEVICE.ordinal (),
-					Moai.InputSensor.SENSOR_TOUCH.ordinal (),
-					pointerId,
-					isDown,
-					Math.round ( event.getX ( pointerIndex )),
-					Math.round ( event.getY ( pointerIndex )),
-					1
-				);
-				break;
-			}
-			case MotionEvent.ACTION_MOVE:
-			default:
-			{
-				final int pointerCount = event.getPointerCount ();
-				for ( int pointerIndex = 0; pointerIndex < pointerCount; ++pointerIndex ) {
-
+				case MotionEvent.ACTION_CANCEL:
+					/*Moai.enqueueTouchEventCancel(
+						Moai.InputDevice.INPUT_DEVICE.ordinal (),
+						Moai.InputSensor.SENSOR_TOUCH.ordinal ()
+					);*/
+					break;
+				case MotionEvent.ACTION_UP:
+				case MotionEvent.ACTION_POINTER_UP:
+					isDown = false;
+				case MotionEvent.ACTION_DOWN:
+				case MotionEvent.ACTION_POINTER_DOWN:
+				{
+					final int pointerIndex = event.getActionIndex();
 					int pointerId = event.getPointerId ( pointerIndex );
 					Moai.enqueueTouchEvent (
 						Moai.InputDevice.INPUT_DEVICE.ordinal (),
@@ -153,68 +125,97 @@ public class MoaiView extends GLSurfaceView {
 						Math.round ( event.getY ( pointerIndex )),
 						1
 					);
+					break;
 				}
-				break;
+				case MotionEvent.ACTION_MOVE:
+				default:
+				{
+					final int pointerCount = event.getPointerCount ();
+					for ( int pointerIndex = 0; pointerIndex < pointerCount; ++pointerIndex ) {
+
+						int pointerId = event.getPointerId ( pointerIndex );
+						Moai.enqueueTouchEvent (
+							Moai.InputDevice.INPUT_DEVICE.ordinal (),
+							Moai.InputSensor.SENSOR_TOUCH.ordinal (),
+							pointerId,
+							isDown,
+							Math.round ( event.getX ( pointerIndex )),
+							Math.round ( event.getY ( pointerIndex )),
+							1
+						);
+					}
+					break;
+				}
 			}
+
+			return true;
 		}
 
-		return true;
-	}
+		//================================================================//
+		// Private methods
+		//================================================================//
 
-	//================================================================//
-	// Private methods
-	//================================================================//
+		//----------------------------------------------------------------//
+		public void setScreenDimensions ( int width, int height ) {
 
-	//----------------------------------------------------------------//
-	public void setScreenDimensions ( int width, int height ) {
+				Resources resources = mAppContext.getResources();
+				Configuration config = resources.getConfiguration();
 
-		Resources resources = mAppContext.getResources();
-		Configuration config = resources.getConfiguration();
-
-		if ( config.orientation == Configuration.ORIENTATION_PORTRAIT ) {
-			mWidth = Math.min ( width, height );
-			mHeight = Math.max ( width, height );
-		}
-		else if ( config.orientation == Configuration.ORIENTATION_LANDSCAPE ) {
-			mWidth = Math.max ( width, height );
-			mHeight = Math.min ( width, height );
-		}
-		else {
-			mWidth = width;
-			mHeight = height;
-		}
-	}
-
-	//================================================================//
-	// MoaiRenderer
-	//================================================================//
-
-	private class MoaiRenderer implements GLSurfaceView.Renderer {
-
-	    //----------------------------------------------------------------//
-		@Override
-		public void onDrawFrame ( GL10 gl ) {
-
-			Moai.render ();
+				if ( config.orientation == Configuration.ORIENTATION_PORTRAIT ) {
+						mWidth = Math.min ( width, height );
+						mHeight = Math.max ( width, height );
+				}
+				else if ( config.orientation == Configuration.ORIENTATION_LANDSCAPE ) {
+						mWidth = Math.max ( width, height );
+						mHeight = Math.min ( width, height );
+				}
+				else {
+						mWidth = width;
+						mHeight = height;
+				}
 		}
 
-	    //----------------------------------------------------------------//
-		@Override
-		public void onSurfaceChanged ( GL10 gl, int width, int height ) {
+		//================================================================//
+		// MoaiRenderer
+		//================================================================//
+		private class MoaiRenderer implements GLSurfaceView.Renderer {
 
-			MoaiLog.i ( "MoaiRenderer onSurfaceChanged: surface CHANGED" );
+				private int     mMoaiContext;
 
-			setScreenDimensions ( width, height );
-			Moai.setViewSize ( mWidth, mHeight );
+				//----------------------------------------------------------------//
+		    public MoaiRenderer ( int moaiContext ) {
+
+		        super ();
+		        mMoaiContext = moaiContext;
+		    }
+
+			  //----------------------------------------------------------------//
+				@Override
+				public void onDrawFrame ( GL10 gl ) {
+
+						Moai.sTicker.post ( Moai.sTick );
+						Moai.render ();
+				}
+
+			  //----------------------------------------------------------------//
+				@Override
+				public void onSurfaceChanged ( GL10 gl, int width, int height ) {
+
+						MoaiLog.i ( "MoaiRenderer onSurfaceChanged: surface CHANGED" );
+
+						setScreenDimensions ( width, height );
+						Moai.setViewSize ( mWidth, mHeight );
+						Moai.detectFramebuffer ();
+				}
+
+			  //----------------------------------------------------------------//
+				@Override
+				public void onSurfaceCreated ( GL10 gl, EGLConfig config ) {
+
+						MoaiLog.i ( "MoaiRenderer onSurfaceCreated: surface CREATED" );
+
+						Moai.setContext ( mMoaiContext );
+						Moai.detectGraphicsContext ();
+				}
 		}
-
-	    //----------------------------------------------------------------//
-		@Override
-		public void onSurfaceCreated ( GL10 gl, EGLConfig config ) {
-
-			MoaiLog.i ( "MoaiRenderer onSurfaceCreated: surface CREATED" );
-
-			Moai.detectGraphicsContext ();
-		}
-	}
 }

@@ -13,39 +13,39 @@ Windows Build: [![Build status](https://ci.appveyor.com/api/projects/status/skkh
 ### Core (libmoai)
 * fmod as module (from [moai-fmod-studio](https://github.com/Vavius/moai-fmod-studio))
 * spine as module (from [plugin-moai-spine](https://github.com/Vavius/plugin-moai-spine))
-* openssl 1.0.2g
+* curl 7.66.0
 * libpng 1.4.19
-* luajit 2.0.4
+* LuaJIT 2.1.0-beta3
+* mbedtls 2.16.3 (openssl and crypto replacement)
 * MOAIColor::setColorHSL
-* MOAIImage::loadDual (from [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
+* MOAIImage::loadDual (based on [Stirfire Studios](https://github.com/StirfireStudios/moai-dev))
 * MOAIParticlePexPlugin::loadFromString
 * MOAISim.exitApp (desktop hosts)
 * TODO: move loadDual in a separate module (loader)
-* TODO: facebook setToken and graphRequest (android and ios)
 
 ### Android
-* immersive mode
+* Full screen mode with cutout (notch) support
+* 64bit support
 * CHANGE: LinearLayoutIMETrap -> RelativeLayoutIMETrap (for banner ad support)
-* MOAIAppAndroid::closeApp ()
+* MOAIAppAndroid::closeApp
+* MOAIAppAndroid::getCutouts
 * MOAIObbDownloaderAndroid (downloading extension files for googleplay)
-* adcolony-3.2.1 (rewarded video)
+* adcolony-4.1.0 (rewarded video)
 * amazon ads (interstitial and banner)
 * amazon billing v2
 * amazon gamecircle
 * admob-8.4.0 (interstitial and banner)
-* applovin-7.3.2 (interstitial and rewarded video)
-* chartboost-6.4.1 (interstitial)
+* applovin-9.9.2 (interstitial and rewarded video)
+* chartboost-7.5.0 (image/video/interactive interstitial)
 * crittercism-5.5.5
 * facebook-4.5.1 (TODO: update to latest version)
 * heyzap-9.13.3 (interstitial and rewarded video)
-* google-play-services-8.4.0 (stripped)
+* google-play-services-r29
 * revmob-10.0.0 (interstitial and rewarded video)
 * startapp-3.6.6 (interstitial, rewarded video, return ad and exit ad)
 * twitter4j-4.0.4
-* vungle-6.3.17 (rewarded video)
+* vungle-6.4.11 (rewarded video)
 * util/host-android ([hosts.lua sample](https://github.com/btatarov/moai-sdk/blob/postmorph/util/host-android/hosts.lua.sample))
-* no multi-dex build (via stripped google play services, see strip.sh)
-* TODO: remove support for Chartboost and Vungle
 
 ### iOS
 * CHANGE: framework directory separation (moved from 3rdparty to 3rdparty-ios)

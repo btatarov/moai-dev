@@ -1,16 +1,20 @@
 <!-- Tapjoy -->
 <activity
     android:name="com.tapjoy.TJCOffersWebView"
-    android:configChanges="orientation|keyboardHidden|screenSize" />
+    android:configChanges="orientation|keyboardHidden|screenSize"
+    android:hardwareAccelerated="true" />
 <activity
     android:name="com.tapjoy.TapjoyFullScreenAdWebView"
-    android:configChanges="orientation|keyboardHidden|screenSize" />
+    android:configChanges="orientation|keyboardHidden|screenSize"
+    android:hardwareAccelerated="true" />
 <activity
     android:name="com.tapjoy.TapjoyDailyRewardAdWebView"
-    android:configChanges="orientation|keyboardHidden|screenSize" />
+    android:configChanges="orientation|keyboardHidden|screenSize"
+    android:hardwareAccelerated="true" />
 <activity
     android:name="com.tapjoy.TapjoyVideoView"
-    android:configChanges="orientation|keyboardHidden|screenSize" />
+    android:configChanges="orientation|keyboardHidden|screenSize"
+    android:hardwareAccelerated="true" />
 <activity
     android:name="com.tapjoy.TJAdUnitView"
     android:configChanges="orientation|keyboardHidden|screenSize"
@@ -18,8 +22,9 @@
     android:hardwareAccelerated="true" />
 <activity
     android:name="com.tapjoy.mraid.view.ActionHandler"
-    android:configChanges="orientation|keyboardHidden|screenSize" />
+    android:configChanges="orientation|keyboardHidden|screenSize"
+    android:hardwareAccelerated="true" />
 <activity
     android:name="com.tapjoy.mraid.view.Browser"
-    android:configChanges="orientation|keyboardHidden|screenSize" />
-
+    android:configChanges="orientation|keyboardHidden|screenSize"
+    android:hardwareAccelerated="true" />

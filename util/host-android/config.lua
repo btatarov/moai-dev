@@ -1,4 +1,4 @@
-ANDROID_PLATFORM_TARGET     = 'android-19'
+ANDROID_PLATFORM_TARGET     = 'android-28'
 
 -- Globals for every project
 MODULES = {

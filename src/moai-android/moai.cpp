@@ -150,6 +150,12 @@
 	}
 
 	//----------------------------------------------------------------//
+	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUDetectFramebuffer ( JNIEnv* env, jclass obj ) {
+
+		AKUDetectFramebuffer ();
+	}
+
+	//----------------------------------------------------------------//
 	extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUDetectGfxContext ( JNIEnv* env, jclass obj ) {
 
 		AKUDetectGfxContext ();

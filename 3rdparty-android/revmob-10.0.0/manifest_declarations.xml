@@ -2,5 +2,6 @@
 <activity
 	android:name="rm.com.android.sdk.RmInterstitial"
 	android:configChanges="keyboardHidden|orientation|screenSize"
-	android:theme="@android:style/Theme.Translucent">
+	android:theme="@android:style/Theme.Translucent"
+	android:hardwareAccelerated="true">
 </activity>

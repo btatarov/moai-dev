@@ -4,31 +4,18 @@
 #ifndef ZLHASHWRITERSHA512_H
 #define ZLHASHWRITERSHA512_H
 
-#include <zl-util/ZLHashWriter.h>
+#include <zl-crypto/ZLHashWriterMbedTLS.h>
 
 //================================================================//
 // ZLHashWriterSHA512
 //================================================================//
 class ZLHashWriterSHA512 :
-	public ZLHashWriter {
-private:
-	
-	void*			mAlgorithm;
-	u8				mHash [ 64 ];
+	public ZLHashWriterMbedTLS {
 
-	//----------------------------------------------------------------//
-	void			FinalizeHash			();
-	void			InitHash				();
+	public:
+		size_t		GetBlockSize		();
+					ZLHashWriterSHA512	();
 
-public:
-
-	//----------------------------------------------------------------//
-	size_t			GetBlockSize			();
-	void*			GetHash					();
-	size_t			GetHashSize				();
-	void			HashBytes				( const void* buffer, size_t size );
-					~ZLHashWriterSHA512		();
-					ZLHashWriterSHA512		();
 };
 
 #endif

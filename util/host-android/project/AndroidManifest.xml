@@ -13,11 +13,9 @@
 		android:enabled="true"
 		android:persistent="false"
 		android:label="@string/app_name"
+		android:usesCleartextTraffic="true"
 		android:hardwareAccelerated="true"
 		android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-
-		<!-- Support for superwide screens -->
-		<meta-data android:name="android.max_aspect" android:value="2.1" />
 
 		<!-- Moai -->
 		<activity
@@ -27,6 +25,7 @@
 			android:launchMode="singleTask"
 			android:windowSoftInputMode="stateHidden|adjustResize"
 			android:hardwareAccelerated="true"
+			android:resizeableActivity="true"
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
 
 			<intent-filter>
@@ -40,7 +39,8 @@
 			android:label="@string/app_name"
 			android:screenOrientation="@DEFAULT_ORIENTATION@"
 			android:configChanges="keyboardHidden|orientation|screenSize"
-			android:theme="@android:style/Theme.NoTitleBar">
+			android:theme="@android:style/Theme.NoTitleBar"
+			android:hardwareAccelerated="true">
 		</activity>
 
 		<receiver android:name="com.ziplinegames.moai.MoaiLocalNotificationReceiver"></receiver>
@@ -50,7 +50,8 @@
 
 	</application>
 
-    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="26" />
+	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="28" />
+	<uses-library android:name="org.apache.http.legacy" android:required="false" />
 
 	<!-- Moai -->
  	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

@@ -8,39 +8,47 @@
 
 #include <zl-util/ZLLog.h>
 
+#ifdef ANDROID
+	#include <android/log.h>
+#endif
+
 //================================================================//
 // ZLLog
 //================================================================//
 
-FILE*			ZLLog::CONSOLE				= 0;
+void*			ZLLog::CONSOLE				= 0;
 ZLLog::LogFunc	ZLLog::sLogFunc				= 0;
 void*			ZLLog::sLogFuncUserdata		= 0;
 
 //----------------------------------------------------------------//
-void ZLLog::LogF ( FILE* file, cc8* format, ... ) {
+void ZLLog::LogF ( void* file, cc8* format, ... ) {
 
 	va_list args;
-	va_start ( args, format );	
-	
+	va_start ( args, format );
+
 	ZLLog::LogV ( file, format, args );
-	
+
 	va_end ( args );
 }
 
 //----------------------------------------------------------------//
-void ZLLog::LogV ( FILE* file, cc8* format, va_list args ) {
-	
+void ZLLog::LogV ( void* file, cc8* format, va_list args ) {
+
 	if ( sLogFunc ) {
-	
+
 		sLogFunc ( file, format, args, sLogFuncUserdata );
 	}
 	else {
-	
+
 		if ( file ) {
-			zl_vfprintf (( FILE* )file, format, args );
+			vfprintf (( FILE* )file, format, args );
 		}
 		else {
-			zl_vprintf ( format, args );
+			#ifdef ANDROID
+				__android_log_vprint ( ANDROID_LOG_INFO, "MoaiLog", format, args );
+			#else
+				vprintf ( format, args );
+			#endif
 		}
 	}
 }

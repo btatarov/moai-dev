@@ -9,7 +9,14 @@ package com.ziplinegames.moai;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.adcolony.sdk.*;
+import com.adcolony.sdk.AdColony;
+import com.adcolony.sdk.AdColonyAdOptions;
+import com.adcolony.sdk.AdColonyAppOptions;
+import com.adcolony.sdk.AdColonyInterstitial;
+import com.adcolony.sdk.AdColonyInterstitialListener;
+import com.adcolony.sdk.AdColonyReward;
+import com.adcolony.sdk.AdColonyRewardListener;
+import com.adcolony.sdk.AdColonyZone;
 
 //================================================================//
 // MoaiAdColony
@@ -24,6 +31,11 @@ public class MoaiAdColony {
 	private static Activity sActivity = null;
 
 	private static AdColonyInterstitial sInterstitial;
+	private static String sInterstitialZoneId;
+
+	private static AdColonyAdOptions sAdOptions = new AdColonyAdOptions ()
+                .enableConfirmationDialog ( false )
+                .enableResultsDialog ( false );
 
 	private static AdColonyInterstitialListener sListener = new AdColonyInterstitialListener () {
 
@@ -40,12 +52,11 @@ public class MoaiAdColony {
         public void onOpened ( AdColonyInterstitial ad ) {}
 
         @Override
-        public void onExpiring( AdColonyInterstitial ad ) {}
-	};
+        public void onExpiring( AdColonyInterstitial ad ) {
 
-	private static AdColonyAdOptions sAdOptions = new AdColonyAdOptions ()
-                .enableConfirmationDialog ( false )
-                .enableResultsDialog ( false );
+			AdColony.requestInterstitial ( sInterstitialZoneId, this, sAdOptions );
+		}
+	};
 
 	protected static native void AKUInvokeListener ( int eventID );
 
@@ -76,7 +87,8 @@ public class MoaiAdColony {
 	//----------------------------------------------------------------//
 	public static void cacheRewardedVideo ( String zoneId ) {
 
-		AdColony.requestInterstitial ( zoneId, sListener, sAdOptions );
+		sInterstitialZoneId = zoneId;
+		AdColony.requestInterstitial ( sInterstitialZoneId, sListener, sAdOptions );
 	}
 
 	//----------------------------------------------------------------//
@@ -89,6 +101,7 @@ public class MoaiAdColony {
 	public static void init ( String appId, boolean amazon_store, String [] zoneIds ) {
 
 		AdColonyAppOptions app_options = new AdColonyAppOptions ();
+		app_options.setKeepScreenOn ( true );
 
 		if ( amazon_store )
 			app_options.setOriginStore ( "amazon" );

@@ -13,11 +13,15 @@ import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Context;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings.Secure;
 import android.util.DisplayMetrics;
+import android.view.DisplayCutout;
+import android.view.View;
+import android.view.WindowInsets;
 
 import java.lang.reflect.Method;
 import java.lang.Runtime;
@@ -25,6 +29,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 //================================================================//
@@ -160,6 +165,9 @@ public class Moai {
 		"com.ziplinegames.moai.MoaiVungle",
 	};
 
+	public static Handler sTicker;
+	public static Runnable sTick;
+
 	private static Activity 				sActivity = null;
 	private static ApplicationState 		sApplicationState = ApplicationState.APPLICATION_UNINITIALIZED;
 	private static ArrayList < Class < ? >>	sAvailableClasses = new ArrayList < Class < ? >> ();
@@ -172,6 +180,7 @@ public class Moai {
 	protected static native boolean		AKUAppInvokeListener			( int eventID );
 	protected static native void		AKUAppOpenedFromURL				( String url );
 	protected static native int	 		AKUCreateContext 				();
+	protected static native void 		AKUDetectFramebuffer			();
 	protected static native void 		AKUDetectGfxContext 			();
 	protected static native void 		AKUEnqueueLevelEvent 			( int deviceId, int sensorId, float x, float y, float z );
 	protected static native void 		AKUEnqueueLocationEvent			( int deviceId, int sensorId, double longitude, double latitude, double altitude, float hAccuracy, float vAccuracy, float speed );
@@ -252,15 +261,59 @@ public class Moai {
 	}
 
 	//----------------------------------------------------------------//
+	public static int[] getCutouts () {
+
+		List < Integer > boundsList = new ArrayList < Integer > ();
+
+		if ( Build.VERSION.SDK_INT >= 28 ) {
+
+			if ( sActivity != null ) {
+
+				try {
+					final View view = sActivity.getWindow ().getDecorView ();
+
+					if ( view != null ) {
+
+						WindowInsets windowInsets = view.getRootWindowInsets ();
+						DisplayCutout displayCutout = view.getRootWindowInsets ().getDisplayCutout ();
+						List < Rect > rects = displayCutout.getBoundingRects ();
+						for ( int i = 0; i < rects.size (); i++ ) {
+
+							boundsList.add ( rects.get ( i ).left );
+							boundsList.add ( rects.get ( i ).top );
+							boundsList.add ( rects.get ( i ).right );
+							boundsList.add ( rects.get ( i ).bottom );
+						}
+					}
+				} catch ( Exception e ) {} // TODO: fix this
+			}
+		}
+
+		int [] bounds = new int [ boundsList.size () ];
+		for ( int i = 0; i < boundsList.size (); i++ ) {
+
+		    bounds[i] = boundsList.get ( i );
+		}
+		return bounds;
+	}
+
+	//----------------------------------------------------------------//
 	public static int createContext () {
 
 		int contextId;
 		synchronized ( sAkuLock ) {
 			contextId = AKUCreateContext ();
-			AKUSetContext ( contextId );
 		}
 
 		return contextId;
+	}
+
+	//----------------------------------------------------------------//
+	public static void detectFramebuffer () {
+
+		synchronized ( sAkuLock ) {
+			AKUDetectFramebuffer ();
+		}
 	}
 
 	//----------------------------------------------------------------//
@@ -515,6 +568,14 @@ public class Moai {
 			AKUSetConnectionType ( connectionType );
 		}
 	}
+
+	//----------------------------------------------------------------//
+    public static void setContext ( int context ) {
+
+        synchronized ( sAkuLock ) {
+            AKUSetContext ( context );
+        }
+    }
 
 	//----------------------------------------------------------------//
 	public static void setDocumentDirectory ( String path ) {

@@ -59,6 +59,54 @@ int MOAIAppAndroid::_closeApp ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIAppAndroid::_getCutouts ( lua_State* L ) {
+
+	MOAILuaState state ( L );
+
+	JNI_GET_ENV ( jvm, env );
+
+	jintArray boundArray;
+	jclass moai = env->FindClass ( "com/ziplinegames/moai/Moai" );
+    if ( moai == NULL ) {
+
+		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+    } else {
+
+    	jmethodID getCutouts = env->GetStaticMethodID ( moai, "getCutouts", "()[I" );
+    	if ( getCutouts == NULL ) {
+
+			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "getCutouts" );
+    	} else {
+
+			boundArray = ( jintArray ) env->CallStaticObjectMethod (  moai, getCutouts );
+		}
+	}
+
+	int size = env->GetArrayLength ( boundArray );
+	jint *bounds = env->GetIntArrayElements ( boundArray, JNI_FALSE );
+
+	lua_newtable ( state );
+
+	for ( int i = 0; i < size; i += 4 ) {
+
+		lua_pushnumber ( state, i + 1 );  // key
+		lua_newtable ( state );  // value
+
+		for ( int j = 0; j < 4; j++ ) {
+
+			lua_pushnumber ( state, j + 1 );
+			lua_pushnumber ( state, bounds [ i + j ] );
+			lua_rawset ( state, -3 );
+		}
+	}
+
+	env->ReleaseIntArrayElements ( boundArray, bounds, JNI_ABORT );
+
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	getUTCTime
 	@text	Gets the UTC time.
 
@@ -313,6 +361,7 @@ void MOAIAppAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
 	luaL_Reg regTable [] = {
 		{ "closeApp",				_closeApp },
+		{ "getCutouts",				_getCutouts },
         { "getPictureCode",			_getPictureCode },
         { "getPicturePath",			_getPicturePath },
 		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIAppAndroid > },

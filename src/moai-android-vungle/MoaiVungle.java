@@ -87,16 +87,16 @@ public class MoaiVungle {
 		Vungle.init ( appId, sActivity.getApplicationContext (), new InitCallback () {
 
 			@Override
-      public void onSuccess () {}
+      		public void onSuccess () {}
 
 			@Override
-      public void onError ( Throwable throwable ) {
+      		public void onError ( Throwable throwable ) {
 
 				MoaiLog.i ( "MoaiVungle: onError - " + throwable.getLocalizedMessage() );
 			}
 
 			@Override
-      public void onAutoCacheAdAvailable ( final String placementReferenceID ) {}
+      		public void onAutoCacheAdAvailable ( final String placementReferenceID ) {}
 		} );
 	}
 

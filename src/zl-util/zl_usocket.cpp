@@ -50,7 +50,7 @@ typedef struct hostent zl_hostent;
 int zl_inet_aton ( cc8* cp, zl_inaddr* inp ) {
 
 	#ifndef inet_aton
-	
+
 		unsigned int a = 0, b = 0, c = 0, d = 0;
 		int n = 0, r;
 		unsigned long int addr = 0;
@@ -68,7 +68,7 @@ int zl_inet_aton ( cc8* cp, zl_inaddr* inp ) {
 		}
 		return 1;
 	#else
-	
+
 		return inet_aton ( cp, inp );
 	#endif
 }
@@ -79,12 +79,12 @@ int zl_inet_bind ( zl_socket* ps, cc8* address, unsigned short port ) {
     struct sockaddr_in local;
     int err;
     memset(&local, 0, sizeof(local));
-	
+
     /* address is either wildcard or a valid ip address */
     local.sin_addr.s_addr = htonl ( INADDR_ANY );
     local.sin_port = htons ( port );
     local.sin_family = AF_INET;
-	
+
     if ( strcmp ( address, "*" ) && !inet_aton ( address, &local.sin_addr )) {
         struct hostent *hp = NULL;
         struct in_addr **addr;
@@ -135,7 +135,7 @@ cc8* zl_io_strerror( int err ) {
         case IO_DONE: return NULL;
         case IO_CLOSED: return "closed";
         case IO_TIMEOUT: return "timeout";
-        default: return "unknown error"; 
+        default: return "unknown error";
     }
 }
 
@@ -143,7 +143,7 @@ cc8* zl_io_strerror( int err ) {
 int zl_socket_accept(zl_socket* ps, zl_socket* pa, zl_sockaddr *addr, socklen_t *len, double tm) {
     zl_sockaddr daddr;
     socklen_t dlen = sizeof(daddr);
-    if (*ps == SOCKET_INVALID) return IO_CLOSED; 
+    if (*ps == SOCKET_INVALID) return IO_CLOSED;
     if (!addr) addr = &daddr;
     if (!len) len = &dlen;
     for ( ;; ) {
@@ -162,7 +162,7 @@ int zl_socket_accept(zl_socket* ps, zl_socket* pa, zl_sockaddr *addr, socklen_t 
 int zl_socket_bind(zl_socket* ps, zl_sockaddr *addr, socklen_t len) {
     int err = IO_DONE;
     zl_socket_setblocking(ps);
-    if (bind(*ps, addr, len) < 0) err = errno; 
+    if (::bind(*ps, addr, len) < 0) err = errno; 
     zl_socket_setnonblocking(ps);
     return err;
 }
@@ -176,7 +176,7 @@ int zl_socket_connect(zl_socket* ps, zl_sockaddr *addr, socklen_t len, double tm
     do if (connect(*ps, addr, len) == 0) return IO_DONE;
     while ((err = errno) == EINTR);
     /* if connection failed immediately, return error code */
-    if (err != EINPROGRESS && err != EAGAIN) return err; 
+    if (err != EINPROGRESS && err != EAGAIN) return err;
     /* zero timeout case optimization */
     if ( tm == 0.0 ) return IO_TIMEOUT;
     /* wait until we have the result of the connection attempt or timeout */
@@ -193,8 +193,8 @@ int zl_socket_create ( zl_socket* ps, int domain, int type, int protocol ) {
 	zl_socket_disable_sigpipe ();
 
     *ps = socket(domain, type, protocol);
-    if (*ps != SOCKET_INVALID) return IO_DONE; 
-    else return errno; 
+    if (*ps != SOCKET_INVALID) return IO_DONE;
+    else return errno;
 }
 
 //----------------------------------------------------------------//
@@ -248,9 +248,9 @@ cc8* zl_socket_ioerror(zl_socket* ps, int err) {
 
 //----------------------------------------------------------------//
 int zl_socket_listen(zl_socket* ps, int backlog) {
-    int err = IO_DONE; 
+    int err = IO_DONE;
     zl_socket_setblocking(ps);
-    if (listen(*ps, backlog)) err = errno; 
+    if (listen(*ps, backlog)) err = errno;
     zl_socket_setnonblocking(ps);
     return err;
 }
@@ -269,7 +269,7 @@ int zl_socket_recv(zl_socket* ps, char *data, size_t count, size_t *got, double 
         err = errno;
         if (taken == 0) return IO_CLOSED;
         if (err == EINTR) continue;
-        if (err != EAGAIN) return err; 
+        if (err != EAGAIN) return err;
         if ((err = zl_socket_waitfd(*ps, WAITFD_R, tm)) != IO_DONE) return err;
     }
     return IO_UNKNOWN;
@@ -290,7 +290,7 @@ int zl_socket_recvfrom(zl_socket* ps, char *data, size_t count, size_t *got,
         err = errno;
         if (taken == 0) return IO_CLOSED;
         if (err == EINTR) continue;
-        if (err != EAGAIN) return err; 
+        if (err != EAGAIN) return err;
         if ((err = zl_socket_waitfd(*ps, WAITFD_R, tm)) != IO_DONE) return err;
     }
     return IO_UNKNOWN;
@@ -313,7 +313,7 @@ int zl_socket_select ( zl_socket n, fd_set *rfds, fd_set *wfds, fd_set *efds, do
 		if ( tp ) {
 			tv.tv_sec = 0;
 			tv.tv_usec = 0;
-			
+
 			double t = tm - ZLDeviceTime::GetTimeInSeconds ();
 			if ( t > 0.0 ) {
 				tv.tv_sec = ( int )t;
@@ -323,7 +323,7 @@ int zl_socket_select ( zl_socket n, fd_set *rfds, fd_set *wfds, fd_set *efds, do
         ret = select ( n, rfds, wfds, efds, tp );
     }
 	while ( ret < 0 && errno == EINTR );
-	
+
 	return ret;
 }
 
@@ -335,25 +335,25 @@ int zl_socket_send ( zl_socket n, cc8*data, size_t count, size_t *sent, double t
 
 //----------------------------------------------------------------//
 int zl_socket_sendto ( zl_socket n, cc8*data, size_t count, size_t *sent, zl_sockaddr *addr, socklen_t len, double tm ) {
-	
+
     *sent = 0;
-	
+
     // avoid making system calls on closed sockets
     if ( n == SOCKET_INVALID ) return IO_CLOSED;
-	
+
     // loop until we send something or we give up on error
     for ( ;; ) {
-		
+
 		long put = ( long )sendto ( n, data, count, 0, addr, len );
-		
+
 		// if we sent anything, we are done
         if ( put > 0 ) {
             *sent = put;
             return IO_DONE;
         }
-		
+
         int err = errno;
-		
+
 		if ( put == 0 || err == EPIPE ) return IO_CLOSED; // send can't really return 0, but EPIPE means the connection was closed
         if ( err == EINTR ) continue; // we call was interrupted, just try again
         if ( err != EAGAIN ) return err; // if failed fatal reason, report error
@@ -412,23 +412,23 @@ int zl_socket_waitfd ( zl_socket n, int sw, double tm ) {
 		tm += ZLDeviceTime::GetTimeInSeconds ();
 		tp = &tv;
 	}
-	
+
 	int ret;
-	
+
 	fd_set rfds, wfds, *rp, *wp;
-	
+
 	do {
-	
+
 		// must set bits within loop, because select may have modifed them
 		rp = wp = NULL;
 		if ( sw & WAITFD_R ) { FD_ZERO ( &rfds ); FD_SET ( n, &rfds ); rp = &rfds; }
 		if ( sw & WAITFD_W ) { FD_ZERO ( &wfds ); FD_SET ( n, &wfds ); wp = &wfds; }
 		tp = NULL;
-		
+
 		if ( tp ) {
 			tv.tv_sec = 0;
 			tv.tv_usec = 0;
-			
+
 			double t = tm - ZLDeviceTime::GetTimeInSeconds ();
 			if ( t > 0.0 ) {
 				tv.tv_sec = ( int )t;

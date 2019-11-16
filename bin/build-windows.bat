@@ -29,11 +29,10 @@ echo Creating Release Libs
 cmake -G "%generator%" ^
 -DBUILD_WINDOWS=true ^
 -DMOAI_SDL=true ^
--DMOAI_HTTP_CLIENT=false ^
--DMOAI_HTTP_SERVER=false ^
--DMOAI_LIBCRYPTO=false ^
--DMOAI_CRYPTO=false ^
--DMOAI_OPENSSL=false ^
+-DMOAI_HTTP_CLIENT=true ^
+-DMOAI_HTTP_SERVER=true ^
+-DMOAI_CRYPTO=true ^
+-DMOAI_LIBCRYPTO=true ^
 -DCMAKE_INSTALL_PREFIX=%libprefix%\Release ^
 %rootpath%\cmake\hosts\host-win-sdl || exit /b 1
 

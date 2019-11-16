@@ -9,7 +9,7 @@ if ( BUILD_ANDROID )
   set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${MOAI_ROOT}/src/zl-vfs/zl_replace.h" )
 endif ( BUILD_ANDROID )
 
-include_directories ( 
+include_directories (
   ${MOAI_LUAEXT_INCLUDES}
 )
 
@@ -24,25 +24,21 @@ target_link_libraries ( moai-luaext
   luafilesystem
 )
 
-if (MOAI_CURL) 
+if (MOAI_CURL)
   target_link_libraries ( moai-luaext luacurl )
 endif (MOAI_CURL)
-
-if (MOAI_LIBCRYPTO) 
-  target_link_libraries ( moai-luaext luacrypto )
-endif (MOAI_LIBCRYPTO)
 
 if (MOAI_SQLITE3)
   target_link_libraries ( moai-luaext  luasql )
 endif (MOAI_SQLITE3)
-  
+
 
 target_include_directories (moai-luaext PUBLIC
     "$<BUILD_INTERFACE:${MOAI_LUAEXT_INCLUDES}>"
     "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include/moai-luaext>"
 )
 
-set_target_properties(moai-luaext PROPERTIES FOLDER Modules)  
+set_target_properties(moai-luaext PROPERTIES FOLDER Modules)
 install(TARGETS moai-luaext EXPORT libmoai ARCHIVE DESTINATION lib)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include/moai-luaext
