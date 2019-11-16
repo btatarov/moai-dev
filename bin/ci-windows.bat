@@ -8,11 +8,15 @@ set UTIL_PATH=%cd%\util
 
 set PATH=%PATH%;%UTIL_PATH%
 
-if "%VS120COMNTOOLS%"=="" echo Visual Studio not found
-echo "Setting Visual Studio path..."
-
 pushd .
-call "%VS120COMNTOOLS%\VsDevCmd.bat"
+set "VS_TOOLS=%VS140COMNTOOLS%"
+if NOT EXIST "%VS_TOOLS%\VsDevCmd.bat"  set "VS_TOOLS=%VS120COMNTOOLS%"
+if NOT EXIST "%VS_TOOLS%\VsDevCmd.bat" (
+	@echo Visual Studio not found.
+	exit /b 1
+)
+call "%VS_TOOLS%\VsDevCmd.bat"
+call "%VS_TOOLS%\Vsvars32.bat"
 popd
 
 pushd .
