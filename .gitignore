@@ -1,21 +1,6 @@
 Thumbs.db
 .DS_Store
-<<<<<<< HEAD
-<<<<<<< HEAD
 ._*
-=======
-._
-<<<<<<< HEAD
-
->>>>>>> postmorph
-/vs2010/ipch
-/vs2010/bin
-/vs2008/bin
-=======
->>>>>>> postmorph
-=======
-._*
->>>>>>> postmorph
 *.sdf
 *.suo
 
